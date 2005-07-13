@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -50,7 +51,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -72,6 +73,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM /ARMPADCODE"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -129,7 +131,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -151,6 +153,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM /ARMPADCODE"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -208,11 +211,12 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
+				ExceptionHandling="1"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -230,6 +234,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -287,7 +292,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -309,6 +314,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -366,7 +372,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -387,6 +393,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM /ARMPADCODE"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -446,7 +453,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -467,6 +474,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM /ARMPADCODE"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -526,7 +534,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -547,6 +555,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -606,7 +615,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -627,6 +636,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
+				AdditionalDependencies="ws2.lib"
 				OutputFile="$(OutDir)/InfoMan.exe"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -745,6 +755,74 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Tests.cpp"
+				>
+			</File>
+			<Filter
+				Name="Framework"
+				>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Debug.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\DynStr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\FieldPayloadProtocolConnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\IncrementalProcessor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\LineBufferedPayloadHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Logging.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Resolver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\SimpleSocketConnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\SocketAddress.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\SocketConnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\StringListPayloadHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Text.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\UTF8_Processor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinNetLibrary.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

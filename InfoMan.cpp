@@ -1,8 +1,12 @@
 #include "stdafx.h"
+
+#include <Debug.hpp>
+
 #include <windows.h>
 
 #include "InfoMan.h"
 #include "MainWindow.h"
+#include "Tests.h"
 
 #include <commctrl.h>
 
@@ -23,6 +27,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 	{
 		return FALSE;
 	}
+	
+	RunTests();
 
 #ifndef WIN32_PLATFORM_WFSP
 	HACCEL hAccelTable;

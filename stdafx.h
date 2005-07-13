@@ -5,7 +5,10 @@
 
 #pragma once
 
-#if _MSC_VER > 1200 // VC 2005 B2
+#define VC2005 1400
+#define EVC30  1200
+
+#if _MSC_VER == 1400 // VC 2005 B2
 
 #ifdef _X86_
 	#pragma comment(linker, "/nodefaultlib:libc.lib")
@@ -16,7 +19,9 @@
 // NOTE - this value is not strongly correlated to the Windows CE OS version being targeted
 #define WINVER _WIN32_WCE
 
-#else // eVC++ 3.0
+#endif // _MSC_VER == VC2005
+
+#if _MSC_VER == 1200 // eVC++ 3.0
 
 #define WINVER 0x400
 
@@ -42,7 +47,7 @@
 #include <memory.h>
 #include <tchar.h>
 
-#if _MSC_VER > 1200 // VC 2005 B2
+#if _MSC_VER == 1400 // VC 2005 B2
 
 #if defined(WIN32_PLATFORM_PSPC) || defined(WIN32_PLATFORM_WFSP)
 #ifndef _DEVICE_RESOLUTION_AWARE
@@ -81,7 +86,7 @@
 	#endif
 #endif
 
-#endif // _MSC_VER
+#endif // _MSC_VER == VC2005
 
 #if defined(SHELL_AYGSHELL) && !defined(WIN32_PLATFORM_WFSP)
 #define SHELL_SAI

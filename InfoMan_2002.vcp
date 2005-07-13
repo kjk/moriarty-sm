@@ -1,0 +1,2451 @@
+# Microsoft eMbedded Visual Tools Project File - Name="InfoMan_2002" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE x86) Application" 0x8301
+# TARGTYPE "Win32 (WCE ARM) Application" 0x8501
+
+CFG=InfoMan_2002 - Win32 (WCE ARM) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "InfoMan_2002.vcn".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "InfoMan_2002.vcn" CFG="InfoMan_2002 - Win32 (WCE ARM) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "InfoMan_2002 - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE x86) Release" (based on "Win32 (WCE x86) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE x86) Debug" (based on "Win32 (WCE x86) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug" (based on "Win32 (WCE x86) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE x86) Smartphone Release" (based on "Win32 (WCE x86) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug" (based on "Win32 (WCE ARM) Application")
+!MESSAGE "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release" (based on "Win32 (WCE ARM) Application")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMRel"
+# PROP BASE Intermediate_Dir "ARMRel"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "PPC2002_ARMRel"
+# PROP Intermediate_Dir "PPC2002_ARMRel"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /YX /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMDbg"
+# PROP BASE Intermediate_Dir "ARMDbg"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "PPC2002_ARMDbg"
+# PROP Intermediate_Dir "PPC2002_ARMDbg"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /M$(CECrtMTDebug) /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "X86Rel"
+# PROP BASE Intermediate_Dir "X86Rel"
+# PROP BASE CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "PPC2002_X86Rel"
+# PROP Intermediate_Dir "PPC2002_X86Rel"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "i_386_" /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /YX /Gs8192 /GF /Oxs /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib $(CEx86Corelibc) aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+# ADD LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "X86Dbg"
+# PROP BASE Intermediate_Dir "X86Dbg"
+# PROP BASE CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "PPC2002_X86Dbg"
+# PROP Intermediate_Dir "PPC2002_X86Dbg"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "_i386_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "i_386_" /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /YX /Gs8192 /GF /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Gs8192 /GF /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib $(CEx86Corelibc) aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+# ADD LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "X86Smartphone Debug"
+# PROP BASE Intermediate_Dir "X86Smartphone Debug"
+# PROP BASE CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Ignore_Export_Lib 0
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "X86Smartphone_Debug"
+# PROP Intermediate_Dir "X86Smartphone_Debug"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Gs8192 /GF /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Gs8192 /GF /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+# ADD LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "X86Smartphone Release"
+# PROP BASE Intermediate_Dir "X86Smartphone Release"
+# PROP BASE CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Ignore_Export_Lib 0
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "X86Smartphone_Release"
+# PROP Intermediate_Dir "X86Smartphone_Release"
+# PROP CPU_ID "{D6518FF3-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+# ADD LINK32 $(CEx86Corelibc) commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /subsystem:$(CESubsystem) /MACHINE:IX86
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMSmartphone Debug"
+# PROP BASE Intermediate_Dir "ARMSmartphone Debug"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Ignore_Export_Lib 0
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMSmartphone_Debug"
+# PROP Intermediate_Dir "ARMSmartphone_Debug"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /M$(CECrtMTDebug) /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMSmartphone Release"
+# PROP BASE Intermediate_Dir "ARMSmartphone Release"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Ignore_Export_Lib 0
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMSmartphone_Release"
+# PROP Intermediate_Dir "ARMSmartphone_Release"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ENDIF 
+
+# Begin Target
+
+# Name "InfoMan_2002 - Win32 (WCE ARM) Release"
+# Name "InfoMan_2002 - Win32 (WCE ARM) Debug"
+# Name "InfoMan_2002 - Win32 (WCE x86) Release"
+# Name "InfoMan_2002 - Win32 (WCE x86) Debug"
+# Name "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+# Name "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+# Name "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+# Name "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Group "Framework"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\Debug.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_DEBUG=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\DynStr.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_DYNST=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\IncrementalProcessor.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_INCRE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\LineBufferedPayloadHandler.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_LINEB=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\Logging.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_LOGGI=\
+	"..\ars_framework_utf8\src\Application.hpp"\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\Resolver.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_RESOL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\SimpleSocketConnection.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_SIMPL=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\SimpleSocketConnection.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\Socket.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_SOCKE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\SocketAddress.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_SOCKET=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\SocketConnection.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_SOCKETC=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\DeviceInfo.hpp"\
+	"..\ars_framework_utf8\src\DynStr.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\Logging.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmSysUtils.hpp"\
+	"..\ars_framework_utf8\src\Resolver.hpp"\
+	"..\ars_framework_utf8\src\Socket.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\SocketConnection.hpp"\
+	"..\ars_framework_utf8\src\SysUtils.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\StringListPayloadHandler.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_STRIN=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\Text.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_TEXT_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Text.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\UTF8_Processor.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_UTF8_=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\WindowsCE\WinNetLibrary.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_WINNE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Library.hpp"\
+	"..\ars_framework_utf8\src\NativeSocks.hpp"\
+	"..\ars_framework_utf8\src\NetLibrary.hpp"\
+	"..\ars_framework_utf8\src\SocketAddress.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	
+
+!ENDIF 
+
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=.\InfoMan.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_INFOM=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_INFOM=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\Tests.h"\
+	
+NODEP_CPP_INFOM=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\MainWindow.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_MAINW=\
+	".\InfoMan.h"\
+	".\MainWindow.h"\
+	".\stdafx.h"\
+	".\utility.h"\
+	
+NODEP_CPP_MAINW=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\stdafx.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_STDAF=\
+	".\stdafx.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\Tests.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_TESTS=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	".\Tests.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\InfoMan.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MainWindow.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\resourceppc.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\stdafx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Tests.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\utility.h
+# End Source File
+# End Group
+# Begin Group "Resource Files"
+
+# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\InfoManppc.rc
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+# PROP Exclude_From_Build 1
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\InfoMansp.rc
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+# PROP Exclude_From_Build 1
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+!ENDIF 
+
+# End Source File
+# End Group
+# End Target
+# End Project
