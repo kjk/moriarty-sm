@@ -9,6 +9,7 @@ void RunTests()
 #ifndef NDEBUG
 	test_TextUnitTestAll();
 	test_UTF8_ToNative();
+//	test_UTF8_FromNative();
 
 #endif
 }

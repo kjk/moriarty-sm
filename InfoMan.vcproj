@@ -680,7 +680,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\moriarty_palm\Src\HyperlinkHandler.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\InfoMan.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManStyles.cpp"
 				>
 			</File>
 			<File
@@ -763,6 +779,30 @@
 				Name="Framework"
 				>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\BufferedReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\ByteFormatParser.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\CommonFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\CommonGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\CommonGraphics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\DataStore.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\Debug.cpp"
 					>
 				</File>
@@ -779,6 +819,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\LangNames.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\LineBufferedPayloadHandler.cpp"
 					>
 				</File>
@@ -787,7 +831,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\Reader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Rendering.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\Resolver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Serializer.cpp"
 					>
 				</File>
 				<File
@@ -815,13 +871,85 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\UniversalDataFormat.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\UniversalDataHandler.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\UTF8_Processor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinFont.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinGeometry.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinGraphics.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinNetLibrary.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Writer.cpp"
+					>
+				</File>
+				<Filter
+					Name="Display Engine"
+					>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\BulletElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\Definition.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\DefinitionElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\DefinitionParser.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\DefinitionStyle.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\HorizontalLineElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\LineBreakElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\ListNumberElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\TextElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinDefinitionStyle.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

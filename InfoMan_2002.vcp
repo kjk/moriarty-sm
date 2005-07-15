@@ -56,7 +56,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /YX /Oxs /M$(CECrtMT) /c
-# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
@@ -89,7 +89,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /D "DEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "_DEBUG" /YX"stdafx.h" /M$(CECrtMTDebug) /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -122,7 +122,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
 CPP=cl.exe
 # ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "i_386_" /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /YX /Gs8192 /GF /Oxs /c
-# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
@@ -155,7 +155,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
 CPP=cl.exe
 # ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "_i386_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "i_386_" /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /YX /Gs8192 /GF /c
-# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /YX"stdafx.h" /Gs8192 /GF /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "POCKETPC2003_UI_MODEL" /D "WIN32_PLATFORM_PSPC" /D "DEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "_DEBUG" /YX"stdafx.h" /Gs8192 /GF /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -189,7 +189,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
 CPP=cl.exe
 # ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Gs8192 /GF /c
-# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Gs8192 /GF /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /D "DEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "_DEBUG" /YX"stdafx.h" /Gs8192 /GF /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -223,7 +223,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "_i386_" /r
 CPP=cl.exe
 # ADD BASE CPP /nologo /W3 /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
-# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "_i386_" /D "i_386_" /D "_X86_" /D "x86" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX"stdafx.h" /Gs8192 /GF /Oxs /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
@@ -257,7 +257,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /D "DEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "_DEBUG" /YX"stdafx.h" /M$(CECrtMTDebug) /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -291,7 +291,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC2003_UI_MODEL" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
-# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "../STLport/STLport" /I "../ars_framework_utf8/src" /D "ARM" /D "_ARM_" /D "SMARTPHONE2003_UI_MODEL" /D "WIN32_PLATFORM_WFSP" /D "NDEBUG" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX"stdafx.h" /Oxs /M$(CECrtMT) /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
@@ -602,6 +602,7 @@ DEP_CPP_LINEB=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
 	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	
 
@@ -907,7 +908,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -931,7 +934,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -955,7 +960,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -1003,7 +1010,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1027,7 +1036,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -1051,7 +1062,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -1075,7 +1088,9 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\ipapi.h"\
 	
 
 !ENDIF 
@@ -1344,7 +1359,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -1368,7 +1385,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -1392,7 +1411,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -1440,7 +1461,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1464,7 +1487,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -1488,7 +1513,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -1512,7 +1539,9 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\ipapi.h"\
 	
 
 !ENDIF 
@@ -1744,6 +1773,7 @@ DEP_CPP_UTF8_=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	
@@ -2296,6 +2326,7 @@ DEP_CPP_TESTS=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
+	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	".\Tests.h"\
