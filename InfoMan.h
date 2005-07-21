@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INFOMAN_H__
+#define INFOMAN_H__
 
 #ifdef POCKETPC2003_UI_MODEL
 #include "resourceppc.h"
@@ -8,3 +9,5 @@
 #endif
 
 HINSTANCE GetInstance();
+
+#endif

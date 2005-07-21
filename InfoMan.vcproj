@@ -811,6 +811,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\ExtendedEvent.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\FieldPayloadProtocolConnection.cpp"
 					>
 				</File>
@@ -828,6 +832,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\Logging.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\LookupManagerBase.cpp"
 					>
 				</File>
 				<File
@@ -903,6 +911,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinSysUtils.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\Writer.cpp"
 					>
 				</File>
@@ -959,6 +971,10 @@
 			>
 			<File
 				RelativePath=".\InfoMan.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManGlobals.h"
 				>
 			</File>
 			<File

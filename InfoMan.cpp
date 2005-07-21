@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <Debug.hpp>
+#include <ExtendedEvent.hpp>
 
 #include <windows.h>
 
@@ -29,6 +30,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 	}
 	
 	RunTests();
+#ifndef NDEBUG
+	test_ExtEventSend();
+#endif	
 
 #ifndef WIN32_PLATFORM_WFSP
 	HACCEL hAccelTable;
@@ -36,14 +40,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 #endif // !WIN32_PLATFORM_WFSP
 
 	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0)) 
+	BOOL res;
+	while (0 != (res = GetMessage(&msg, NULL, 0, 0))) 
 	{
+		if (-1 == res)
+			return GetLastError();
+			
 #ifndef WIN32_PLATFORM_WFSP
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 #endif // !WIN32_PLATFORM_WFSP
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+		}
+		if (extEvent == msg.message)
+		{
+#ifndef NDEBUG
+			test_ExtEventReceive(msg.lParam);
+#endif	
+			ExtEventFree(msg.lParam);
 		}
 	}
 
