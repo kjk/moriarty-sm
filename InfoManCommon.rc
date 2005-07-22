@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resourcesp.h"
+#include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -23,16 +23,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_INFOMAN             ICON                    "InfoMan.ico"
-
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -41,7 +31,7 @@ IDI_INFOMAN             ICON                    "InfoMan.ico"
 
 1 TEXTINCLUDE 
 BEGIN
-    "resourcesp.h\0"
+    "resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -58,7 +48,6 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""InfoMansp.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -73,13 +62,27 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_APP_TITLE           "InfoMan"
-    IDC_INFOMAN             "INFOMAN"
+    IDS_ALERT_UNKNOWN_SERVER_ERROR "Unknown server error."
+    IDS_ALERT_SERVER_FAILURE "Unable to complete request due to server error."
+    IDS_ALERT_DEVICE_UNSUPPORTED "Your hardware configuration is unsupported."
+    IDS_ALERT_MALFORMED_REQUEST "Server rejected your query."
+    IDS_ALERT_LOOKUP_LIMIT_REACHED 
+                            "Your unregistered version expired. Please register by purchasing registration code and entering it using menu 'Options/Register'."
+    IDS_ALERT_INVALID_PROTOCOL_VERSION "Invalid protocol version."
+    IDS_ALERT_REQUEST_ARGUMENT_MISSING "Request argument missing."
+    IDS_ALERT_UNEXPECTED_REQUEST_ARGUMENT "Unexpected request argument."
+    IDS_ALERT_INVALID_COOKIE "Your registration info is invalid."
+    IDS_ALERT_USER_DISABLED "Your login has been disabled. Contact support@arslexis.com for more information."
+    IDS_ALERT_INVALID_REG_CODE "Invalid registration code."
 END
 
 STRINGTABLE 
 BEGIN
-    IDS_OK                  "OK"
+    IDS_ALERT_FORCE_UPGRADE "Please upgrade to new version of InfoMan. This one is no longer supported."
+    IDS_ALERT_INVALID_REQUEST "Invalid request."
+    IDS_ALERT_MODULE_DOWN   "This module is temporarily unavailable. Contact support@arslexis.com if problem persists."
+    IDS_ALERT_REG_CODE_EXPIRED 
+                            "Your subscription expired. Contact support@arslexis.com for more information."
 END
 
 #endif    // English (U.S.) resources
@@ -96,7 +99,6 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-#include "InfoMansp.rc2"  // non-Microsoft Visual C++ edited resources
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,10 @@ enum InfoManExtEvents {
 	extEventLookupFirst // This should be always last one
 };
 	
+class Preferences;
+class LookupManager;
 
-
+Preferences* GetPreferences();
+LookupManager* GetLookupManager();
 
 #endif // INFOMAN_GLOBALS_H__

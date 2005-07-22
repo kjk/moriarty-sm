@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -51,11 +50,11 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -131,11 +130,11 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -211,7 +210,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				ExceptionHandling="1"
@@ -292,11 +291,11 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -372,10 +371,10 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -453,10 +452,10 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -534,10 +533,10 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -615,10 +614,10 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm/src"
+				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -680,23 +679,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\moriarty_palm\Src\HyperlinkHandler.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\InfoMan.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\InfoManStyles.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LookupManager.cpp"
 				>
 			</File>
 			<File
@@ -819,6 +810,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\HistoryCache.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\IncrementalProcessor.cpp"
 					>
 				</File>
@@ -836,6 +831,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\LookupManagerBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\PopupMenu.cpp"
 					>
 				</File>
 				<File
@@ -978,7 +977,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\InfoManLookupManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MainWindow.h"
+				>
+			</File>
+			<File
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
@@ -987,6 +994,10 @@
 			</File>
 			<File
 				RelativePath=".\resourcesp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Src\ServerErrors.hpp"
 				>
 			</File>
 			<File
@@ -1005,6 +1016,10 @@
 			>
 			<File
 				RelativePath=".\InfoMan.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManCommon.rc"
 				>
 			</File>
 			<File

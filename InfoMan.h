@@ -8,6 +8,8 @@
 #include "resourcesp.h"
 #endif
 
+#include "resource.h"
+
 HINSTANCE GetInstance();
 
 #endif

@@ -29,7 +29,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		return FALSE;
 	}
 	
-	RunTests();
 #ifndef NDEBUG
 	test_ExtEventSend();
 #endif	
@@ -112,6 +111,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
+
+	RunTests(hWnd);
 
     return TRUE;
 }

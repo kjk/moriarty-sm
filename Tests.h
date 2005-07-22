@@ -1,4 +1,8 @@
-#pragma once
+#ifndef INFOMAN_TESTS_H__
+#define INFOMAN_TESTS_H__
 
-void RunTests();
+#include <Debug.hpp>
 
+void RunTests(HWND wnd);
+
+#endif
