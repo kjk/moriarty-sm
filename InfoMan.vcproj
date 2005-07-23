@@ -798,6 +798,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Dialog.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\DynStr.cpp"
 					>
 				</File>
@@ -811,6 +815,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\HistoryCache.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\HistorySupport.cpp"
 					>
 				</File>
 				<File
@@ -831,6 +839,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\LookupManagerBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Messages.cpp"
 					>
 				</File>
 				<File
@@ -887,6 +899,14 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\UTF8_Processor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Widget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Window.cpp"
 					>
 				</File>
 				<File
@@ -968,6 +988,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\ars_framework_utf8\Src\WindowsCE\Config.hpp"
+				>
+			</File>
 			<File
 				RelativePath=".\InfoMan.h"
 				>
