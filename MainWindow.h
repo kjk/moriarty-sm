@@ -4,6 +4,7 @@
 #include <WindowsCE/Window.hpp>
 #include <WindowsCE/CommandBar.hpp>
 #include <WindowsCE/Controls.hpp>
+#include <WindowsCE/WinTextRenderer.hpp>
 
 class MainWindow: public Window
 {
@@ -13,7 +14,7 @@ class MainWindow: public Window
 	CommandBar menuBar_;
 #endif
 	
-	ScrollBar scrollBar_;
+	TextRenderer renderer_;
 	
 public:
 

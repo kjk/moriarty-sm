@@ -7,6 +7,7 @@
 
 #include "InfoMan.h"
 #include "MainWindow.h"
+#include <DefinitionStyle.hpp>
 #include "Tests.h"
 
 #include <commctrl.h>
@@ -43,7 +44,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 	while (0 != (res = GetMessage(&msg, NULL, 0, 0))) 
 	{
 		if (-1 == res)
+		{
+			StyleDisposeStaticStyles();
 			return GetLastError();
+		}
 			
 #ifndef WIN32_PLATFORM_WFSP
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
@@ -60,7 +64,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 			ExtEventFree(msg.lParam);
 		}
 	}
-
+	StyleDisposeStaticStyles();
 	return (int) msg.wParam;
 }
 
@@ -104,9 +108,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 #if 1
 
+	StylePrepareStaticStyles();
 	MainWindow* w = MainWindow::create(szTitle, szWindowClass);
     if (NULL == w)
+	{
+		StyleDisposeStaticStyles(); 
         return FALSE;
+    }
 
 	w->show(nCmdShow);
 	w->update();

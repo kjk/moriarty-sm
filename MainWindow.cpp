@@ -98,8 +98,9 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 		return createFailed;
 #endif
 
-	
-	bool res = scrollBar_.create(SBS_VERT|WS_VISIBLE, 0, SCALEY(2), GetSystemMetrics(SM_CXVSCROLL), cs.cy - SCALEY(4), handle(), GetInstance());
+	Rect r;
+	bounds(r);
+	bool res = renderer_.create(WS_VISIBLE, SCALEX(2), SCALEY(2), r.width() - SCALEX(4), r.height() - SCALEY(4), handle(), GetInstance());
 	 
 	return Window::handleCreate(cs);
 }
@@ -139,6 +140,6 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	scrollBar_.anchor(anchorLeft, SCALEX(2) + GetSystemMetrics(SM_CXVSCROLL), anchorBottom, SCALEY(4), repaintWidget);
+	renderer_.anchor(anchorRight, SCALEX(4), anchorBottom, SCALEY(4), repaintWidget);
 	return Window::handleResize(sizeType, width, height);
 }
