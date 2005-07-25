@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -778,6 +779,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\CommandBar.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\CommonFile.cpp"
 					>
 				</File>
@@ -787,6 +792,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\CommonGraphics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Controls.cpp"
 					>
 				</File>
 				<File
@@ -839,6 +848,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\LookupManagerBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Menu.cpp"
 					>
 				</File>
 				<File
@@ -989,10 +1002,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\ars_framework_utf8\Src\WindowsCE\Config.hpp"
-				>
-			</File>
-			<File
 				RelativePath=".\InfoMan.h"
 				>
 			</File>
@@ -1032,6 +1041,22 @@
 				RelativePath=".\utility.h"
 				>
 			</File>
+			<Filter
+				Name="Framework"
+				>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Config.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Controls.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinTextRenderer.hpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

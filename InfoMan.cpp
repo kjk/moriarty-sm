@@ -77,7 +77,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     g_hInst = hInstance; // Store instance handle in our global variable
-	HWND hWnd = NULL;
 
     TCHAR szTitle[MAX_LOADSTRING];		// title bar text
     TCHAR szWindowClass[MAX_LOADSTRING];	// main window class name
@@ -92,9 +91,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING); 
     LoadString(hInstance, IDC_INFOMAN, szWindowClass, MAX_LOADSTRING);
 
-#if defined(WIN32_PLATFORM_PSPC) || defined(WIN32_PLATFORM_WFSP)
     //If it is already running, then focus on the window, and exit
-    hWnd = FindWindow(szWindowClass, szTitle);	
+    HWND hWnd = FindWindow(szWindowClass, szTitle);	
     if (hWnd) 
     {
         // set focus to foremost child window
@@ -103,17 +101,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         SetForegroundWindow((HWND)((ULONG) hWnd | 0x00000001));
         return 0;
     } 
-#endif // WIN32_PLATFORM_PSPC || WIN32_PLATFORM_WFSP
 
-	hWnd = MainWindow_Create(szTitle, szWindowClass);
-    if (NULL == hWnd)
+#if 1
+
+	MainWindow* w = MainWindow::create(szTitle, szWindowClass);
+    if (NULL == w)
         return FALSE;
 
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
+	w->show(nCmdShow);
+	w->update();
 
-	RunTests(hWnd);
+	RunTests(w->handle());
 
+#else
+ 
+	HWND wnd = MainWindow_Create(szTitle, szWindowClass);
+	ShowWindow(wnd, nCmdShow);
+	UpdateWindow(wnd);
+	 	
+	RunTests(wnd);
+
+#endif
+	
     return TRUE;
 }
 
