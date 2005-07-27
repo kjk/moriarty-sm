@@ -9,6 +9,9 @@
 #include "MainWindow.h"
 #include <DefinitionStyle.hpp>
 #include "Tests.h"
+#include "LookupManager.h"
+
+#include <SysUtils.hpp>
 
 #include <commctrl.h>
 
@@ -22,8 +25,6 @@ static BOOL InitInstance(HINSTANCE hInstance, int nCmdShow);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmdLine, int nCmdShow)
 {
-	MSG msg;
-
 	// Perform application initialization:
 	if (!InitInstance(hInstance, nCmdShow)) 
 	{
@@ -40,15 +41,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 #endif // !WIN32_PLATFORM_WFSP
 
 	// Main message loop:
-	BOOL res;
-	while (0 != (res = GetMessage(&msg, NULL, 0, 0))) 
+	LookupManager* lm = GetLookupManager();
+	if (NULL == lm)
 	{
-		if (-1 == res)
-		{
-			StyleDisposeStaticStyles();
-			return GetLastError();
-		}
+		Alert(NULL, IDS_ALERT_NOT_ENOUGH_MEMORY);
+		StyleDisposeStaticStyles();
+		return memErrNotEnoughSpace;
+	}
+	MSG msg;
+	status_t err;
+	while (true) 
+	{
+		err = lm->connectionManager().waitForMessage(msg, 15000);
+		if (errNone != err)
+			break;
 			
+		if (WM_QUIT == msg.message)
+		{
+			err = msg.wParam;
+			break;
+		}
+					
 #ifndef WIN32_PLATFORM_WFSP
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 #endif // !WIN32_PLATFORM_WFSP
@@ -61,11 +74,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 #ifndef NDEBUG
 			test_ExtEventReceive(msg.lParam);
 #endif	
+			lm->handleLookupEvent(msg.lParam);
 			ExtEventFree(msg.lParam);
 		}
 	}
 	StyleDisposeStaticStyles();
-	return (int) msg.wParam;
+	return err;
 }
 
 //
@@ -106,8 +120,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         return 0;
     } 
 
-#if 1
-
 	StylePrepareStaticStyles();
 	MainWindow* w = MainWindow::create(szTitle, szWindowClass);
     if (NULL == w)
@@ -121,16 +133,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	RunTests(w->handle());
 
-#else
- 
-	HWND wnd = MainWindow_Create(szTitle, szWindowClass);
-	ShowWindow(wnd, nCmdShow);
-	UpdateWindow(wnd);
-	 	
-	RunTests(wnd);
-
-#endif
-	
     return TRUE;
 }
 

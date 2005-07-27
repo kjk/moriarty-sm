@@ -1005,15 +1005,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\FieldMetaData.h"
+				>
+			</File>
+			<File
 				RelativePath=".\InfoMan.h"
 				>
 			</File>
 			<File
-				RelativePath=".\InfoManGlobals.h"
+				RelativePath=".\InfoManConnection.h"
 				>
 			</File>
 			<File
-				RelativePath=".\InfoManLookupManager.h"
+				RelativePath=".\InfoManGlobals.h"
 				>
 			</File>
 			<File
@@ -1040,10 +1044,6 @@
 				RelativePath=".\stdafx.h"
 				>
 			</File>
-			<File
-				RelativePath=".\utility.h"
-				>
-			</File>
 			<Filter
 				Name="Framework"
 				>
@@ -1053,6 +1053,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Controls.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Utility.hpp"
 					>
 				</File>
 				<File

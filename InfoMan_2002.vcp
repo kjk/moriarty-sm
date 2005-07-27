@@ -378,7 +378,9 @@ DEP_CPP_BUFFE=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Reader.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_BUFFE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -535,7 +537,9 @@ DEP_CPP_BULLE=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_BULLE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -768,7 +772,9 @@ DEP_CPP_BYTEF=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_BYTEF=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -884,11 +890,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -904,11 +912,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -924,11 +934,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -964,11 +976,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -984,11 +998,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -1004,11 +1020,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -1024,11 +1042,13 @@ DEP_CPP_COMMA=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_COMMA=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ENDIF 
@@ -1087,7 +1107,9 @@ DEP_CPP_COMMO=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_COMMO=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1169,7 +1191,9 @@ DEP_CPP_COMMON=\
 	"..\ars_framework_utf8\src\Geometry.hpp"\
 	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_COMMON=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1279,7 +1303,9 @@ DEP_CPP_COMMONG=\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_COMMONG=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1349,11 +1375,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -1368,11 +1396,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -1387,11 +1417,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -1424,11 +1456,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1443,11 +1477,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -1462,11 +1498,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -1481,11 +1519,13 @@ DEP_CPP_CONTR=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_CONTR=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ENDIF 
@@ -1569,7 +1609,9 @@ DEP_CPP_DATAS=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DATAS=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1663,7 +1705,9 @@ DEP_CPP_DEBUG=\
 	"..\ars_framework_utf8\src\BaseTypes.hpp"\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DEBUG=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -1821,7 +1865,9 @@ DEP_CPP_DEFIN=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DEFIN=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2015,7 +2061,9 @@ DEP_CPP_DEFINI=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DEFINI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2261,7 +2309,9 @@ DEP_CPP_DEFINIT=\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
 	"..\moriarty_palm_utf8\src\HyperlinkHandler.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DEFINIT=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2440,7 +2490,9 @@ DEP_CPP_DEFINITI=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DEFINITI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2581,11 +2633,13 @@ DEP_CPP_DIALO=\
 	"..\ars_framework_utf8\src\WindowsCE\Dialog.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Window.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_DIALO=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2699,7 +2753,9 @@ DEP_CPP_DYNST=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\DynStr.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_DYNST=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2805,7 +2861,9 @@ DEP_CPP_EXTEN=\
 	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_EXTEN=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -2966,7 +3024,9 @@ DEP_CPP_FIELD=\
 	"..\ars_framework_utf8\src\SocketConnection.hpp"\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_FIELD=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3091,7 +3151,9 @@ DEP_CPP_FONTE=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\FontEffects.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_FONTE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3245,8 +3307,10 @@ DEP_CPP_HISTO=\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_HISTO=\
+	".\bgapi.h"\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3482,7 +3546,9 @@ DEP_CPP_HISTOR=\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_HISTOR=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3694,7 +3760,9 @@ DEP_CPP_HORIZ=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_HORIZ=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3819,7 +3887,9 @@ DEP_CPP_INCRE=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\IncrementalProcessor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INCRE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -3908,7 +3978,9 @@ DEP_CPP_LANGN=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\LangNames.hpp"\
 	"..\ars_framework_utf8\src\Text.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_LANGN=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4057,7 +4129,9 @@ DEP_CPP_LINEB=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_LINEB=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4189,7 +4263,9 @@ DEP_CPP_LINEBU=\
 	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_LINEBU=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4346,7 +4422,9 @@ DEP_CPP_LISTN=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_LISTN=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4484,7 +4562,9 @@ DEP_CPP_LOGGI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Logging.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_LOGGI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4689,8 +4769,10 @@ DEP_CPP_LOOKU=\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_LOOKU=\
+	".\bgapi.h"\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4807,7 +4889,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -4818,7 +4902,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -4829,7 +4915,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -4851,7 +4939,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -4862,7 +4952,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -4873,7 +4965,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -4884,7 +4978,9 @@ DEP_CPP_MENU_=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_MENU_=\
+	".\bgapi.h"\
 	
 
 !ENDIF 
@@ -5051,7 +5147,9 @@ DEP_CPP_POPUP=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_POPUP=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5191,7 +5289,9 @@ DEP_CPP_READE=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Reader.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_READE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5310,7 +5410,9 @@ DEP_CPP_RENDE=\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_RENDE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5442,7 +5544,9 @@ DEP_CPP_RESOL=\
 	"..\ars_framework_utf8\src\SocketAddress.hpp"\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_RESOL=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5511,7 +5615,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -5528,7 +5634,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -5545,7 +5653,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -5579,7 +5689,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5596,7 +5708,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -5613,7 +5727,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -5630,7 +5746,9 @@ DEP_CPP_SERIA=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SERIA=\
+	".\bgapi.h"\
 	
 
 !ENDIF 
@@ -5764,8 +5882,10 @@ DEP_CPP_SIMPL=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SIMPL=\
+	".\bgapi.h"\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -5932,7 +6052,9 @@ DEP_CPP_SOCKE=\
 	"..\ars_framework_utf8\src\Socket.hpp"\
 	"..\ars_framework_utf8\src\SocketAddress.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6049,7 +6171,9 @@ DEP_CPP_SOCKET=\
 	"..\ars_framework_utf8\src\NativeSocks.hpp"\
 	"..\ars_framework_utf8\src\SocketAddress.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_SOCKET=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6219,8 +6343,10 @@ DEP_CPP_SOCKETC=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_SOCKETC=\
+	".\bgapi.h"\
+	".\ipapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6367,7 +6493,9 @@ DEP_CPP_STRIN=\
 	"..\ars_framework_utf8\src\LineBufferedPayloadHandler.hpp"\
 	"..\ars_framework_utf8\src\StringListPayloadHandler.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_STRIN=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6457,7 +6585,9 @@ DEP_CPP_TEXT_=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Text.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_TEXT_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6608,7 +6738,9 @@ DEP_CPP_TEXTE=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_TEXTE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6751,7 +6883,9 @@ DEP_CPP_UNIVE=\
 	"..\ars_framework_utf8\src\UniversalDataFormat.hpp"\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_UNIVE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -6934,7 +7068,9 @@ DEP_CPP_UNIVER=\
 	"..\ars_framework_utf8\src\UniversalDataHandler.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_UNIVER=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7081,7 +7217,9 @@ DEP_CPP_UTF8_=\
 	"..\ars_framework_utf8\src\Text.hpp"\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_UTF8_=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7168,7 +7306,9 @@ DEP_CPP_UTILI=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_UTILI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7296,11 +7436,13 @@ DEP_CPP_WIDGE=\
 	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Window.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_WIDGE=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7480,10 +7622,12 @@ DEP_CPP_WINDE=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_WINDE=\
+	".\bgapi.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7652,11 +7796,13 @@ DEP_CPP_WINDO=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Window.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_WINDO=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7731,7 +7877,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -7742,7 +7890,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -7753,7 +7903,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -7775,7 +7927,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -7786,7 +7940,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -7797,7 +7953,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -7808,7 +7966,9 @@ DEP_CPP_WINFI=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\File.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFI=\
+	".\bgapi.h"\
 	
 
 !ENDIF 
@@ -7862,7 +8022,9 @@ DEP_CPP_WINFO=\
 	"..\ars_framework_utf8\src\Debug.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINFO=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8046,7 +8208,9 @@ DEP_CPP_WINGR=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINGR=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8171,7 +8335,9 @@ DEP_CPP_WINNE=\
 	"..\ars_framework_utf8\src\NetLibrary.hpp"\
 	"..\ars_framework_utf8\src\SocketAddress.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WINNE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8312,13 +8478,15 @@ DEP_CPP_WINSY=\
 	"..\ars_framework_utf8\Src\UTF8_Processor.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinSysUtils.hpp"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"connmgr.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"tpcshell.h"\
-	{$(INCLUDE)}"vibrate.h"\
-	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_WINSY=\
+	".\bgapi.h"\
+	".\ibrate.h"\
+	".\inuserm.h"\
+	".\ipapi.h"\
+	".\onnmgr.h"\
+	".\pcshell.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8386,6 +8554,276 @@ NODEP_CPP_WINSY=\
 # End Source File
 # Begin Source File
 
+SOURCE=..\ars_framework_utf8\Src\WindowsCE\WinTextRenderer.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_WINTE=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionElement.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
+	"..\ars_framework_utf8\Src\LineBreakElement.hpp"\
+	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
+	"..\ars_framework_utf8\src\TextElement.hpp"\
+	"..\ars_framework_utf8\src\Utility.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
+	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"ceconfig.h"\
+	{$(INCLUDE)}"dbgapi.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"vibrate.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=..\ars_framework_utf8\Src\Writer.cpp
 
 !IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
@@ -8437,7 +8875,9 @@ DEP_CPP_WRITE=\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_WRITE=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8526,17 +8966,27 @@ DEP_CPP_INFOM=\
 	"..\ars_framework_utf8\src\Application.hpp"\
 	"..\ars_framework_utf8\src\BaseTypes.hpp"\
 	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\ExtendedEvent.hpp"\
 	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
 	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\CommandBar.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Window.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
 	".\InfoMan.h"\
 	".\MainWindow.h"\
 	".\stdafx.h"\
@@ -8568,11 +9018,13 @@ DEP_CPP_INFOM=\
 	".\MainWindow.h"\
 	".\stdafx.h"\
 	".\Tests.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_INFOM=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8638,7 +9090,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
@@ -8652,7 +9106,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
@@ -8666,7 +9122,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
@@ -8694,7 +9152,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8708,7 +9168,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
@@ -8722,7 +9184,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
@@ -8736,7 +9200,9 @@ DEP_CPP_INFOMA=\
 	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
 	"..\moriarty_palm_utf8\src\MoriartyStyles.hpp"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_INFOMA=\
+	".\bgapi.h"\
 	
 
 !ENDIF 
@@ -8793,16 +9259,26 @@ NODEP_CPP_MAINW=\
 DEP_CPP_MAINW=\
 	"..\ars_framework_utf8\src\BaseTypes.hpp"\
 	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\Definition.hpp"\
+	"..\ars_framework_utf8\src\DefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\ErrBase.h"\
 	"..\ars_framework_utf8\src\Geometry.hpp"\
+	"..\ars_framework_utf8\src\Graphics.hpp"\
 	"..\ars_framework_utf8\src\NativeGeometry.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmDefinitionStyle.hpp"\
+	"..\ars_framework_utf8\src\PalmOS\PalmGraphics.hpp"\
+	"..\ars_framework_utf8\src\Rendering.hpp"\
 	"..\ars_framework_utf8\src\Utility.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\CommandBar.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Controls.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Menu.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Widget.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinDefinitionStyle.hpp"\
 	"..\ars_framework_utf8\src\WindowsCE\Window.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinFont.h"\
+	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
+	"..\ars_framework_utf8\src\WindowsCE\WinTextRenderer.hpp"\
 	".\InfoMan.h"\
 	".\MainWindow.h"\
 	".\stdafx.h"\
@@ -8832,11 +9308,13 @@ DEP_CPP_MAINW=\
 	".\MainWindow.h"\
 	".\stdafx.h"\
 	".\utility.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"dbgapi.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_MAINW=\
+	".\bgapi.h"\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -8882,6 +9360,93 @@ NODEP_CPP_MAINW=\
 	".\ibrate.h"\
 	".\ipapi.h"\
 	".\ygshell.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\ars_framework_utf8\Src\WindowsCE\Messages.cpp
+
+!IF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Release"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Debug"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Release"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Debug"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Debug"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Debug"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE ARM) Smartphone Release"
+
+DEP_CPP_MESSA=\
+	"..\ars_framework_utf8\src\BaseTypes.hpp"\
+	"..\ars_framework_utf8\src\Debug.hpp"\
+	"..\ars_framework_utf8\src\ErrBase.h"\
+	"..\ars_framework_utf8\src\WindowsCE\Messages.hpp"\
+	{$(INCLUDE)}"dbgapi.h"\
 	
 
 !ENDIF 
@@ -8939,10 +9504,12 @@ DEP_CPP_STDAF=\
 DEP_CPP_STDAF=\
 	"..\ars_framework_utf8\src\WindowsCE\Config.hpp"\
 	".\stdafx.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"ceconfig.h"\
-	{$(INCLUDE)}"sipapi.h"\
-	{$(INCLUDE)}"vibrate.h"\
+	
+NODEP_CPP_STDAF=\
+	".\econfig.h"\
+	".\ibrate.h"\
+	".\ipapi.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"
@@ -9089,7 +9656,9 @@ DEP_CPP_TESTS=\
 	"..\ars_framework_utf8\src\WindowsCE\WinGraphics.hpp"\
 	"..\ars_framework_utf8\src\Writer.hpp"\
 	".\Tests.h"\
-	{$(INCLUDE)}"dbgapi.h"\
+	
+NODEP_CPP_TESTS=\
+	".\bgapi.h"\
 	
 
 !ELSEIF  "$(CFG)" == "InfoMan_2002 - Win32 (WCE x86) Smartphone Release"

@@ -17,6 +17,8 @@
 #define IDS_ALERT_INVALID_REQUEST       513
 #define IDS_ALERT_MODULE_DOWN           514
 #define IDS_ALERT_REG_CODE_EXPIRED      515
+#define IDS_ALERT_NOT_ENOUGH_MEMORY     516
+#define IDS_ALERT_MALFORMED_RESPONSE    517
 
 // Next default values for new objects
 // 

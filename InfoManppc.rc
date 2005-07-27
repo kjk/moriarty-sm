@@ -23,7 +23,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // Icon
@@ -73,6 +72,8 @@ BEGIN
     ICON            IDI_INFOMAN,IDC_STATIC_1,12,12,20,20,SS_REALSIZEIMAGE
     LTEXT           "InfoMan Version 1.0",IDC_STATIC_2,12,36,70,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2005 ArsLexis",IDC_STATIC_3,12,48,100,8
+    EDITTEXT        IDC_EDIT1,5,5,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,5,22,40,14,ES_AUTOHSCROLL
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -85,33 +86,6 @@ BEGIN
     LTEXT           "InfoMan Version 1.0",IDC_STATIC_2,48,12,66,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2005 ArsLexis",IDC_STATIC_3,48,24,104,8
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_ABOUTBOX, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 149
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 122
-    END
-
-    IDD_ABOUTBOX_WIDE, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 203
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 122
-    END
-END
-#endif    // APSTUDIO_INVOKED
 
 
 #ifdef APSTUDIO_INVOKED

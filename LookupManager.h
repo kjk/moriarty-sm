@@ -101,7 +101,6 @@ enum LookupResult {
     lookupResultEBookHome,
 };
 
-#undef DEF_SERVER_ERR
 #define DEF_SERVER_ERR(error, code, alert, stringId) \
     error = code,
 
@@ -115,7 +114,37 @@ struct LookupFinishedEventData: public ExtEventObject {
 	ServerError serverError;	
 };
 
-class LookupManager: public LookupManagerBase<extEventLookupFirst, LookupFinishedEventData> {
+class DefinitionModel;
+struct UniversalDataFormat;
+
+class LookupManager: public LookupManagerBase {
+public:
+	
+	LookupManager();
+
+	~LookupManager();
+	
+	bool crossModuleLookup;
+	const char_t* historyCacheName;
+	const char_t* moduleName;
+	
+	
+	DefinitionModel* definitionModel;
+	UniversalDataFormat* udf;
+	char_t** strings;
+	ulong_t stringCount;
+
+	void setDefinitionModel(DefinitionModel* model);
+	void setUDF(UniversalDataFormat* udf);
+	void setStrings(char_t** strings, ulong_t stringsCount);
+
+private:
+
+    void handleConnectionError(status_t error);
+
+    void handleServerError(ServerError serverError);
 };
+
+void DestroyLookupManager();
 
 #endif

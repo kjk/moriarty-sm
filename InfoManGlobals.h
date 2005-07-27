@@ -2,8 +2,9 @@
 #define INFOMAN_GLOBALS_H__
 
 enum InfoManExtEvents {
-	extEventText,
-	extEventLookupFirst // This should be always last one
+	extEventLookupStarted,
+	extEventLookupProgress,
+	extEventLookupFinished
 };
 	
 class Preferences;

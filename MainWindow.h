@@ -15,6 +15,8 @@ class MainWindow: public Window
 #endif
 	
 	TextRenderer renderer_;
+	EditBox field_;
+	EditBox field2_;
 	
 public:
 

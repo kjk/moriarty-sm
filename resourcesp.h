@@ -3,8 +3,6 @@
 // Used by InfoMansp.rc
 //
 
-#include <aygshell.h>
-
 #define IDS_APP_TITLE			1
 #define IDC_INFOMAN	2
 #define IDI_INFOMAN	101

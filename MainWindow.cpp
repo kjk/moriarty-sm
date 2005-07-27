@@ -3,8 +3,9 @@
 #include <commctrl.h>
 
 #include "InfoMan.h"
+#include "InfoManGlobals.h"
 #include "MainWindow.h"
-#include "Utility.h"
+#include <SysUtils.hpp>
 
 using namespace DRA;
 
@@ -25,7 +26,10 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
                 SHInitDialog(&shidi);
             }
 #endif // SHELL_AYGSHELL
-
+			{
+				TextRenderer* r = new_nt TextRenderer(Widget::autoDelete);
+				r->create(WS_VISIBLE|WS_TABSTOP, 10, 40, 220, 160, hDlg, GetInstance());
+			}
             return (INT_PTR)TRUE;
 
         case WM_COMMAND:
@@ -100,8 +104,15 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 	Rect r;
 	bounds(r);
-	bool res = renderer_.create(WS_VISIBLE, SCALEX(2), SCALEY(2), r.width() - SCALEX(4), r.height() - SCALEY(4), handle(), GetInstance());
+	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(55), handle(), cs.hInstance))
+		return createFailed;
+	
+	if (!field_.create(WS_VISIBLE|WS_TABSTOP|ES_LEFT|WS_BORDER, SCALEX(1), r.height() - SCALEY(52), r.width() - SCALEX(2), SCALEY(20), handle(), cs.hInstance, TEXT("Some text")))
+		return createFailed;	
 	 
+	if (!field2_.create(WS_VISIBLE|WS_TABSTOP|ES_LEFT|WS_BORDER, SCALEX(1), r.height() - SCALEY(30), r.width() - SCALEX(2), SCALEY(20), handle(), cs.hInstance, TEXT("Some text")))
+		return createFailed;	
+		
 	return Window::handleCreate(cs);
 }
 
@@ -118,6 +129,8 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 
 #ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT:
+			Alert(handle(), IDS_ALERT_NOT_ENOUGH_MEMORY);
+			
             DialogBox(GetInstance(), (LPCTSTR)IDD_ABOUTBOX, handle(), About);
             return 0;
 #endif // !WIN32_PLATFORM_WFSP
@@ -138,8 +151,11 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
     return Window::handleCommand(notify_code, id, sender);
 }
 
+
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	renderer_.anchor(anchorRight, SCALEX(4), anchorBottom, SCALEY(4), repaintWidget);
+	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(55), repaintWidget);
+	field_.anchor(anchorRight, SCALEX(2), anchorTop, SCALEY(52), repaintWidget);
+	field2_.anchor(anchorRight, SCALEX(2), anchorTop, SCALEY(30), repaintWidget);
 	return Window::handleResize(sizeType, width, height);
 }
