@@ -5,9 +5,7 @@
 
 enum ResponseFieldType {
 	fieldTypeValue,
-	fieldTypeStringsList,
-	fieldTypeDefinitionModel,
-	fieldTypeUDF,
+	fieldTypePayload,
 };
 
 class BinaryIncrementalProcessor;

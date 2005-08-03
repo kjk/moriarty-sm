@@ -43,14 +43,14 @@ LookupManager::LookupManager():
 	definitionModel(NULL),
 	udf(NULL),
 	strings(NULL),
-	stringCount(0)
+	stringsCount(0)
 {}
 
 LookupManager::~LookupManager()
 {
 	delete definitionModel;
 	delete udf;
-	StrArrFree(strings, stringCount);
+	StrArrFree(strings, stringsCount);
 }
 
 void LookupManager::setDefinitionModel(DefinitionModel* model)
@@ -67,9 +67,9 @@ void LookupManager::setUDF(UniversalDataFormat* udff)
 
 void LookupManager::setStrings(char_t** ss, ulong_t sc)
 {
-	StrArrFree(strings, stringCount);
+	StrArrFree(strings, stringsCount);
 	strings = ss;
-	stringCount = sc;
+	stringsCount = sc;
 }
 
 void LookupManager::handleServerError(ServerError serverError)

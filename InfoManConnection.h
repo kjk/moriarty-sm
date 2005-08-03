@@ -27,6 +27,8 @@ public:
 	
 	ulong_t transactionId;
 	const char* url() const {return url_;}
+	
+	status_t setUrl(const char* url);
 
 protected:
 
@@ -53,6 +55,14 @@ private:
 	status_t prepareRequest();
 
 public:
+
+	status_t handleUdfField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
+	status_t handleDefinitionModelField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
+	status_t handleStringListField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
+	
+	status_t completeUdfField(BinaryIncrementalProcessor& processor);
+	status_t completeDefinitionModelField(BinaryIncrementalProcessor& processor);
+	status_t completeStringListField(BinaryIncrementalProcessor& processor);
 
 	status_t handleTransactionIdField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
 	

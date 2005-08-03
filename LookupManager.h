@@ -132,7 +132,7 @@ public:
 	DefinitionModel* definitionModel;
 	UniversalDataFormat* udf;
 	char_t** strings;
-	ulong_t stringCount;
+	ulong_t stringsCount;
 
 	void setDefinitionModel(DefinitionModel* model);
 	void setUDF(UniversalDataFormat* udf);
