@@ -43,7 +43,10 @@ LookupManager::LookupManager():
 	definitionModel(NULL),
 	udf(NULL),
 	strings(NULL),
-	stringsCount(0)
+	stringsCount(0),
+	
+	regCodeDaysToExpire(regCodeDaysNotSet),
+	clientVersionChecked(false)
 {}
 
 LookupManager::~LookupManager()

@@ -1,18 +1,20 @@
 #include "stdafx.h"
 
-#include <Debug.hpp>
-#include <ExtendedEvent.hpp>
 
-#include <windows.h>
 
 #include "InfoMan.h"
+#include "InfoManPreferences.h"
 #include "MainWindow.h"
-#include <DefinitionStyle.hpp>
 #include "Tests.h"
 #include "LookupManager.h"
 
+#include <Text.hpp>
 #include <SysUtils.hpp>
+#include <DataStore.hpp>
+#include <ExtendedEvent.hpp>
+#include <DefinitionStyle.hpp>
 
+#include <windows.h>
 #include <commctrl.h>
 
 #define MAX_LOADSTRING 100
@@ -23,13 +25,46 @@ HINSTANCE GetInstance() {return g_hInst;}
 
 static BOOL InitInstance(HINSTANCE hInstance, int nCmdShow);
 
+void CleanUp()
+{
+	DestroyLookupManager();
+	StyleDisposeStaticStyles();
+	PrefsDispose();
+	DataStore::dispose();
+	DeinitLogging();
+}
+
+status_t DataStoreInit()
+{
+	char_t* path = GetAppDataPath();
+	if (NULL == path)
+		return memErrNotEnoughSpace;
+		
+	path = StrAppend(path, -1, TEXT("\\InfoMan"), -1);
+	if (NULL == path)
+		return memErrNotEnoughSpace;
+	
+	BOOL res = CreateDirectory(path, NULL);
+	if (!res && ERROR_ALREADY_EXISTS != GetLastError())
+	{
+		free(path);
+		return GetLastError();
+	}
+	
+	path = StrAppend(path, -1, TEXT("\\AppData.dat"), -1);
+	if (NULL == path)
+		return memErrNotEnoughSpace;
+	
+	status_t err = DataStore::initialize(path);
+	free(path);
+	return err;
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmdLine, int nCmdShow)
 {
 	// Perform application initialization:
 	if (!InitInstance(hInstance, nCmdShow)) 
-	{
 		return FALSE;
-	}
 	
 #ifndef NDEBUG
 	test_ExtEventSend();
@@ -44,8 +79,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 	LookupManager* lm = GetLookupManager();
 	if (NULL == lm)
 	{
-		Alert(NULL, IDS_ALERT_NOT_ENOUGH_MEMORY);
-		StyleDisposeStaticStyles();
+		Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+		CleanUp();
 		return memErrNotEnoughSpace;
 	}
 	MSG msg;
@@ -78,7 +113,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 			ExtEventFree(msg.lParam);
 		}
 	}
-	StyleDisposeStaticStyles();
+	PrefsSave();
+	CleanUp();
 	return err;
 }
 
@@ -119,12 +155,31 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         SetForegroundWindow((HWND)((ULONG) hWnd | 0x00000001));
         return 0;
     } 
+   
+	LogAddDebuggerLog(eLogAlways);
 
+	status_t err = DataStoreInit();
+	if (errNone != err)
+	{
+		if (memErrNotEnoughSpace == err)
+			Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+		CleanUp();
+		return FALSE;
+	}
+   
+	if (NULL == GetPreferences())
+	{
+		Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+		CleanUp();
+		return FALSE;
+	}
+	
 	StylePrepareStaticStyles();
 	MainWindow* w = MainWindow::create(szTitle, szWindowClass);
     if (NULL == w)
 	{
-		StyleDisposeStaticStyles(); 
+		// TODO: show some alert
+		CleanUp();
         return FALSE;
     }
 

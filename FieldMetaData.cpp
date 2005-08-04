@@ -3,11 +3,22 @@
 #include <algorithm>
 #include <Text.hpp>
 
+/*
+#define transactionIdField      "Transaction-ID"
+#define protocolVersionField    "Protocol-Version"
+#define clientInfoField         "Client-Info"
+#define getCookieField          "Get-Cookie"
+#define cookieField             "Cookie"
+#define regCodeField            "Registration-Code"
+#define formatVersionField      "Format-Version"
+#define errorField              "Error"
+ */
+
 #define FIELD_VALUE(name, handler) \
     {(name), fieldTypeValue, (handler), NULL, NULL, lookupResultNone, false} 
 
 static const ResponseFieldDescriptor descriptors[] = {
-	FIELD_VALUE(fieldTransactionId, &InfoManConnection::handleTransactionIdField),
+	FIELD_VALUE(transactionIdField, &InfoManConnection::handleTransactionIdField),
 };
 
 

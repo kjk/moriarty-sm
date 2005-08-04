@@ -1,5 +1,8 @@
 #include "InfoManConnection.h"
 #include "FieldMetaData.h"
+#include "InfoManGlobals.h"
+#include "InfoManPreferences.h"
+
 #include <SysUtils.hpp>
 #include <DataStore.hpp>
 #include <HistoryCache.hpp>
@@ -7,6 +10,7 @@
 #include <UniversalDataHandler.hpp>
 #include <ByteFormatParser.hpp>
 #include <StringListPayloadHandler.hpp>
+#include <DeviceInfo.hpp>
 
 InfoManConnection::InfoManConnection(LookupManager& lm):
 	FieldPayloadProtocolConnection(lm.connectionManager()),
@@ -352,16 +356,119 @@ status_t InfoManConnection::setUrl(const char* url)
 	return errNone;
 }
 
+bool StrAppendField(char*& req, ulong_t& length, const char* name, const char* value = NULL, long vlen = -1)
+{
+	assert(NULL != name);
+	ulong_t nlen = Len(name);
+	req = StrAppend(req, length, name, nlen);
+	if (NULL == req)
+		return false;
+	
+	length += nlen;
+	const char* sep = ": ";
+	if (NULL == value)
+		sep = ":\n";
+	
+	req = StrAppend(req, length, sep, 2);
+	if (NULL == req)
+		return false;
+	
+	length += 2;
+	if (NULL == value)
+		return true;
+	
+	if (-1 == vlen) 
+		vlen = Len(value);
+	req = StrAppend(req, length, value, vlen);
+	if (NULL == req)
+		return false;
+	
+	length += vlen;
+	req = StrAppend(req, length, "\n", 1);
+	if (NULL == req)
+		return false;
+	
+	length += 1;
+	return true;
+}
+
+bool StrAppendField(char*& req, ulong_t& length, const char* name, ulong_t value, bool hex = false)
+{
+	char buffer[12];
+	if (hex) 
+		StrPrintF(buffer, "%08x", value);
+	else
+		StrPrintF(buffer, "%lu", value);
+	return StrAppendField(req, length, name, buffer);
+}
+
+#define protocolVersion "1"
+
+#define verifyRegCodeField      "Verify-Registration-Code"
+#define getRegCodeDaysToExpireField "Get-Reg-Code-Days-To-Expire"
+#define getLatestClientVersionField "Get-Latest-Client-Version"
+#define getUrl "Get-Url"
+
 
 status_t InfoManConnection::prepareRequest()
 {
-	char buffer[12];
+	Preferences* prefs = GetPreferences();
 	
 	char* req = NULL;
 	ulong_t len = 0;
+
+	if (!StrAppendField(req, len, protocolVersionField, protocolVersion))
+		return memErrNotEnoughSpace;
+		
+	if (!StrAppendField(req, len, clientInfoField, clientInfo))
+		return memErrNotEnoughSpace;
+
+	if (!StrAppendField(req, len, transactionIdField, transactionId, true))
+		return memErrNotEnoughSpace;
+		
+	if (0 != Len(prefs->regCode))
+	{
+		if (!StrAppendField(req, len, regCodeField, prefs->regCode))
+			return memErrNotEnoughSpace;
+			
+		if (LookupManager::regCodeDaysNotSet == lookupManager_.regCodeDaysToExpire 
+		&& !StrAppendField(req, len, getRegCodeDaysToExpireField, (const char*)NULL))
+			return memErrNotEnoughSpace;
+	}
+	else if (0 == Len(prefs->cookie))
+	{
+		char* token = deviceInfoToken();
+		if (NULL == token)
+		{
+		    free(req);
+		    return memErrNotEnoughSpace;
+		}
+		bool res = StrAppendField(req, len, getCookieField, token);
+		free(token);
+		if (!res)
+		    return memErrNotEnoughSpace;
+	}
+	else 
+	{
+	    if (!StrAppendField(req, len, cookieField, prefs->cookie))
+	        return memErrNotEnoughSpace;
+	}
+
+	if (!lookupManager_.clientVersionChecked && !StrAppendField(req, len, getLatestClientVersionField))
+	    return memErrNotEnoughSpace;
+
 	// TODO: check db stats in case of Pedia
 	// TODO: send flickrPictureCount w/ 1st request
 	
-	
+    if (NULL != url_ && !StrAppendField(req, len, 	getUrl, url_))
+        return memErrNotEnoughSpace;
+        
+    req = StrAppend(req, len, "\n", 1);
+    if (NULL == req)
+        return memErrNotEnoughSpace;
+    
+    len += 1;
+    
+    setRequestOwn(req, len);       
 	return errNone;
 }

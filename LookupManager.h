@@ -137,6 +137,10 @@ public:
 	void setDefinitionModel(DefinitionModel* model);
 	void setUDF(UniversalDataFormat* udf);
 	void setStrings(char_t** strings, ulong_t stringsCount);
+	
+	ulong_t regCodeDaysToExpire;
+	enum {regCodeDaysNotSet = ulong_t(-1)};
+	bool clientVersionChecked;
 
 private:
 

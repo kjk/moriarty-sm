@@ -4,6 +4,7 @@
 #include <Text.hpp>
 #include <HistoryCache.hpp>
 #include <PopupMenu.hpp>
+#include <DeviceInfo.hpp>
 
 void RunTests(HWND wnd)
 {
@@ -13,6 +14,7 @@ void RunTests(HWND wnd)
 	test_UTF8_ToNative();
 	test_HistoryCache();
 //	test_UTF8_FromNative();
+	test_DeviceInfoToken();
 	test_PopupMenu(wnd);
 #endif
 }

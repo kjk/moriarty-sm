@@ -211,7 +211,7 @@
 				ExecutionBucket="7"
 				Optimization="0"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				ExceptionHandling="1"
 				RuntimeLibrary="1"
@@ -534,7 +534,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -688,6 +688,10 @@
 			</File>
 			<File
 				RelativePath=".\InfoManConnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManPreferences.cpp"
 				>
 			</File>
 			<File
@@ -926,6 +930,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\WinDeviceInfo.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Window.cpp"
 					>
 				</File>
@@ -1026,6 +1034,10 @@
 			</File>
 			<File
 				RelativePath=".\InfoManGlobals.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManPreferences.h"
 				>
 			</File>
 			<File

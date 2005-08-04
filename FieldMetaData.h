@@ -28,6 +28,4 @@ struct ResponseFieldDescriptor {
 
 const ResponseFieldDescriptor* ResponseFieldFind(const char* name);
 
-#define fieldTransactionId "Transaction-ID"
-
 #endif
