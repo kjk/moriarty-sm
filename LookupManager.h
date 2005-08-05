@@ -116,6 +116,7 @@ struct LookupFinishedEventData: public ExtEventObject {
 
 class DefinitionModel;
 struct UniversalDataFormat;
+class InfoManConnection;
 
 class LookupManager: public LookupManagerBase {
 public:
@@ -141,12 +142,20 @@ public:
 	ulong_t regCodeDaysToExpire;
 	enum {regCodeDaysNotSet = ulong_t(-1)};
 	bool clientVersionChecked;
+	
+	status_t fetchUrl(const char* url);
 
 private:
 
     void handleConnectionError(status_t error);
 
     void handleServerError(ServerError serverError);
+
+    InfoManConnection* createConnection();
+
+    status_t enqueueConnection(InfoManConnection* conn);
+
+
 };
 
 void DestroyLookupManager();

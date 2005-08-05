@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-
-
 #include "InfoMan.h"
 #include "InfoManPreferences.h"
 #include "MainWindow.h"

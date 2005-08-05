@@ -32,6 +32,8 @@ public:
 
 protected:
 
+    friend class LookupManager;
+    
     status_t enqueue();
     
     status_t handleField(const char* name, ulong_t nameLen, const char* value, ulong_t valueLen);

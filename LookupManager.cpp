@@ -1,4 +1,6 @@
 #include "LookupManager.h"
+#include "InfoManConnection.h"
+#include "InfoManPreferences.h"
 #include <Definition.hpp>
 #include <UniversalDataFormat.hpp>
 #include <SysUtils.hpp>
@@ -133,3 +135,46 @@ void LookupManager::handleConnectionError(status_t error)
 		Alert(alertId);
 }
 
+status_t LookupManager::fetchUrl(const char* url)
+{
+    InfoManConnection* conn = createConnection();
+    if (NULL == conn)
+        return memErrNotEnoughSpace;
+    
+    status_t err = conn->setUrl(url);
+    if (errNone != err)
+    {
+        delete conn;
+        return err; 
+    }
+    return enqueueConnection(conn); 
+}
+
+InfoManConnection* LookupManager::createConnection()
+{
+    InfoManConnection* conn = new_nt InfoManConnection(*this);
+    if (NULL == conn)
+        return NULL;
+    
+    Preferences* prefs = GetPreferences(); 
+    conn->serverAddress = prefs->serverAddress;    
+    conn->setTransferTimeout(ticksPerSecond() * 30L);
+    return conn;
+}
+
+status_t LookupManager::enqueueConnection(InfoManConnection* conn)
+{
+    assert(NULL != conn);
+    status_t error = conn->enqueue();
+    if (errNone != error)
+    { 
+        delete conn;
+        return error;
+    }
+#ifdef _PALM_OS
+    MoriartyApplication::popupForm(connectionProgressForm);
+#endif
+
+    // TODO: write WinCE version of popupForm 
+    return errNone; 
+}
