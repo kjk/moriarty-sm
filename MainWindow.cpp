@@ -7,6 +7,8 @@
 #include "MainWindow.h"
 #include <SysUtils.hpp>
 
+#include "ConnectionProgressDialog.h"
+
 using namespace DRA;
 
 #ifndef WIN32_PLATFORM_WFSP
@@ -128,11 +130,13 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
     {
 
 #ifndef WIN32_PLATFORM_WFSP
-        case IDM_HELP_ABOUT:
-			Alert(handle(), IDS_ALERT_NOT_ENOUGH_MEMORY);
-			
-            DialogBox(GetInstance(), (LPCTSTR)IDD_ABOUTBOX, handle(), About);
+        case IDM_HELP_ABOUT: 
+        {
+			ConnectionProgressDialog* dlg = ConnectionProgressDialog::create(handle());
+			dlg->show();
+            // DialogBox(GetInstance(), (LPCTSTR)IDD_ABOUTBOX, handle(), About);
             return 0;
+        }
 #endif // !WIN32_PLATFORM_WFSP
 
 #ifdef WIN32_PLATFORM_WFSP
