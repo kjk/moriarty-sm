@@ -3,6 +3,22 @@
 
 #include "LookupManager.h"
 
+
+#define fieldVerifyRegCode                     "Verify-Registration-Code"
+#define fieldGetRegCodeDaysToExpire    "Get-Reg-Code-Days-To-Expire"
+#define fieldGetLatestClientVersion          "Get-Latest-Client-Version"
+#define fieldGetUrl                                  "Get-Url"
+#define fieldClientInfo                             clientInfoField
+#define fieldRegistrationCode                  regCodeField
+#define fieldProtocolVersion                    protocolVersionField
+#define fieldGetCookie                           getCookieField
+
+#define fieldError                               "Error"
+#define fieldCookie                            cookieField
+#define fieldEBookVersion                  "eBook-Version"
+#define fieldLatestClientVersion           "Latest-Client-Version"
+#define fieldTransactionId                   transactionIdField
+
 enum ResponseFieldType {
 	fieldTypeValue,
 	fieldTypePayload,
@@ -27,5 +43,9 @@ struct ResponseFieldDescriptor {
 };
 
 const ResponseFieldDescriptor* ResponseFieldFind(const char* name);
+
+#ifndef NDEBUG
+void test_ResponseFieldsSorted();
+#endif
 
 #endif

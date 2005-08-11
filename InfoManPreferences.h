@@ -17,6 +17,7 @@ public:
     enum {regCodeLength=32};
 	char* cookie;
 	char* regCode;
+	char* lastClientVersion;
 	
 	status_t serialize(Serializer& ser);
 

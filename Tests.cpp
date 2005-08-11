@@ -6,10 +6,13 @@
 #include <PopupMenu.hpp>
 #include <DeviceInfo.hpp>
 
+#include "FieldMetaData.h"
+
 void RunTests(HWND wnd)
 {
 
 #ifndef NDEBUG
+	test_ResponseFieldsSorted();
 	test_TextUnitTestAll();
 	test_UTF8_ToNative();
 	test_HistoryCache();

@@ -87,7 +87,8 @@ void PrefsDispose()
 Preferences::Preferences():
 	serverAddress(StringCopy(SERVER_ADDRESS)),
 	cookie(StringCopy("")),
-	regCode(StringCopy(""))
+	regCode(StringCopy("")),
+	lastClientVersion(NULL)
 {}
 
 Preferences::~Preferences()
@@ -95,6 +96,7 @@ Preferences::~Preferences()
 	free(serverAddress);
 	free(cookie);
 	free(regCode);
+	free(lastClientVersion);
 }
 
 

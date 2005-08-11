@@ -13,7 +13,7 @@ class LookupManager;
 Preferences* GetPreferences();
 LookupManager* GetLookupManager();
 
-#define INFOMAN_VERSION "1.5"
+#define INFOMAN_VERSION "1.6"
 
 #ifdef _PALM_OS
 #define clientInfo "PalmOS " INFOMAN_VERSION

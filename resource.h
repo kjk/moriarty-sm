@@ -2,6 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by InfoManCommon.rc
 //
+#define IDD_CONNECTION_PROGRESS         102
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
@@ -19,6 +20,9 @@
 #define IDS_ALERT_REG_CODE_EXPIRED      515
 #define IDS_ALERT_NOT_ENOUGH_MEMORY     516
 #define IDS_ALERT_MALFORMED_RESPONSE    517
+#define IDC_PROGRESS1                   2002
+#define IDC_CONNECTION_PROGRESS         2002
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
@@ -26,7 +30,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        502
 #define _APS_NEXT_COMMAND_VALUE         50001
-#define _APS_NEXT_CONTROL_VALUE         2001
+#define _APS_NEXT_CONTROL_VALUE         2003
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

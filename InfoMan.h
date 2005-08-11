@@ -10,6 +10,4 @@
 
 #include "resource.h"
 
-HINSTANCE GetInstance();
-
 #endif

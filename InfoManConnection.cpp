@@ -12,6 +12,8 @@
 #include <StringListPayloadHandler.hpp>
 #include <DeviceInfo.hpp>
 
+#define FIELD_HANDLER(name) status_t InfoManConnection:: FIELD_HANDLER_NAME(name) (const char* name, ulong_t nlen, const char* value, ulong_t vlen)
+
 InfoManConnection::InfoManConnection(LookupManager& lm):
 	FieldPayloadProtocolConnection(lm.connectionManager()),
 	lookupManager_(lm),
@@ -29,16 +31,6 @@ InfoManConnection::~InfoManConnection()
 	free(url_);
 	delete writer_;
 	delete historyCache_;
-}
-
-status_t InfoManConnection::handleTransactionIdField(const char* name, ulong_t nlen, const char* value, ulong_t vlen)
-{
-	long val;
-	status_t err = numericValue(value, vlen, val, 16);
-	if (errNone != err || val != transactionId)
-		return errResponseMalformed;
-		
-	return errNone;
 }
 
 void InfoManConnection::prepareWriter()
@@ -230,7 +222,7 @@ status_t InfoManConnection::handleField(const char* name, ulong_t nameLen, const
     return errNone;
 }
 
-status_t InfoManConnection::handleUdfField(const char* name, ulong_t nlen, const char* value, ulong_t vlen)
+FIELD_HANDLER(Udf)
 {
 	long len;
 	if (errNone != numericValue(value, vlen, len))
@@ -245,7 +237,7 @@ status_t InfoManConnection::handleUdfField(const char* name, ulong_t nlen, const
 	return errNone;
 }
 
-status_t InfoManConnection::handleDefinitionModelField(const char* name, ulong_t nlen, const char* value, ulong_t vlen)
+FIELD_HANDLER(DefinitionModel)
 {
 	long len;
 	if (errNone != numericValue(value, vlen, len))
@@ -260,7 +252,7 @@ status_t InfoManConnection::handleDefinitionModelField(const char* name, ulong_t
 	return errNone;	
 }
 
-status_t InfoManConnection::handleStringListField(const char* name, ulong_t nlen, const char* value, ulong_t vlen)
+FIELD_HANDLER(StringList)
 {
 	long len;
 	if (errNone != numericValue(value, vlen, len))
@@ -404,12 +396,6 @@ bool StrAppendField(char*& req, ulong_t& length, const char* name, ulong_t value
 
 #define protocolVersion "1"
 
-#define verifyRegCodeField      "Verify-Registration-Code"
-#define getRegCodeDaysToExpireField "Get-Reg-Code-Days-To-Expire"
-#define getLatestClientVersionField "Get-Latest-Client-Version"
-#define getUrl "Get-Url"
-
-
 status_t InfoManConnection::prepareRequest()
 {
 	Preferences* prefs = GetPreferences();
@@ -417,22 +403,22 @@ status_t InfoManConnection::prepareRequest()
 	char* req = NULL;
 	ulong_t len = 0;
 
-	if (!StrAppendField(req, len, protocolVersionField, protocolVersion))
+	if (!StrAppendField(req, len, fieldProtocolVersion, protocolVersion))
 		return memErrNotEnoughSpace;
 		
-	if (!StrAppendField(req, len, clientInfoField, clientInfo))
+	if (!StrAppendField(req, len, fieldClientInfo, clientInfo))
 		return memErrNotEnoughSpace;
 
-	if (!StrAppendField(req, len, transactionIdField, transactionId, true))
+	if (!StrAppendField(req, len, fieldTransactionId, transactionId, true))
 		return memErrNotEnoughSpace;
 		
 	if (0 != Len(prefs->regCode))
 	{
-		if (!StrAppendField(req, len, regCodeField, prefs->regCode))
+		if (!StrAppendField(req, len, fieldRegistrationCode, prefs->regCode))
 			return memErrNotEnoughSpace;
 			
 		if (LookupManager::regCodeDaysNotSet == lookupManager_.regCodeDaysToExpire 
-		&& !StrAppendField(req, len, getRegCodeDaysToExpireField, (const char*)NULL))
+		&& !StrAppendField(req, len, fieldGetRegCodeDaysToExpire, (const char*)NULL))
 			return memErrNotEnoughSpace;
 	}
 	else if (0 == Len(prefs->cookie))
@@ -443,24 +429,27 @@ status_t InfoManConnection::prepareRequest()
 		    free(req);
 		    return memErrNotEnoughSpace;
 		}
-		bool res = StrAppendField(req, len, getCookieField, token);
+		bool res = StrAppendField(req, len, fieldGetCookie, token);
 		free(token);
 		if (!res)
 		    return memErrNotEnoughSpace;
 	}
 	else 
 	{
-	    if (!StrAppendField(req, len, cookieField, prefs->cookie))
+	    if (!StrAppendField(req, len, fieldCookie, prefs->cookie))
 	        return memErrNotEnoughSpace;
 	}
 
-	if (!lookupManager_.clientVersionChecked && !StrAppendField(req, len, getLatestClientVersionField))
+	if (!lookupManager_.clientVersionChecked && !StrAppendField(req, len, fieldGetLatestClientVersion))
 	    return memErrNotEnoughSpace;
+	    
+    if (-1 == lookupManager_.eBookVersion && !StrAppendField(req, len, fieldEBookVersion))
+        return memErrNotEnoughSpace; 
 
 	// TODO: check db stats in case of Pedia
 	// TODO: send flickrPictureCount w/ 1st request
 	
-    if (NULL != url_ && !StrAppendField(req, len, 	getUrl, url_))
+    if (NULL != url_ && !StrAppendField(req, len, fieldGetUrl, url_))
         return memErrNotEnoughSpace;
         
     req = StrAppend(req, len, "\n", 1);
@@ -471,4 +460,66 @@ status_t InfoManConnection::prepareRequest()
     
     setRequestOwn(req, len);       
 	return errNone;
+}
+
+FIELD_HANDLER(TransactionId)
+{
+	long val;
+	status_t err = numericValue(value, vlen, val, 16);
+	if (errNone != err || val != transactionId)
+		return errResponseMalformed;
+		
+	return errNone;
+}
+
+FIELD_HANDLER(Cookie)
+{
+    Preferences* prefs = GetPreferences();
+    if (vlen != prefs->cookieLength)
+        return errResponseMalformed;
+         
+    char* cookie = StringCopyN(value, vlen);
+    if (NULL == cookie)
+        return memErrNotEnoughSpace;
+        
+    free(prefs->cookie);
+    prefs->cookie = cookie; 
+    return errNone;
+}
+
+FIELD_HANDLER(LatestClientVersion)
+{
+    lookupManager_.clientVersionChecked = true; 
+    Preferences* prefs = GetPreferences();
+    char* ver = StringCopyN(value, vlen);
+    if (NULL == ver)
+        return memErrNotEnoughSpace;
+    
+    free(prefs->lastClientVersion);
+    prefs->lastClientVersion = ver;
+    return errNone;     
+}
+
+FIELD_HANDLER(EBookVersion)
+{
+    long val;
+    status_t err = numericValue(value, vlen, val);
+    if (errNone != err || val < 0)
+        return errResponseMalformed;
+        
+    lookupManager_.eBookVersion = val;
+    // TODO: port eBook_ExpireCache() to WinCE 
+    // eBook_ExpireCache(lookupManager_);
+    return errNone;   
+}
+
+FIELD_HANDLER(Error)
+{
+    long val;
+    status_t error=numericValue(value, vlen, val);
+    if (errNone != error || serverErrorNone == val)
+        return errResponseMalformed;
+        
+    serverError_ = ServerError(val);
+    return errNone;
 }

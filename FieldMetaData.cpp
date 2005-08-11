@@ -3,22 +3,24 @@
 #include <algorithm>
 #include <Text.hpp>
 
-/*
-#define transactionIdField      "Transaction-ID"
-#define protocolVersionField    "Protocol-Version"
-#define clientInfoField         "Client-Info"
-#define getCookieField          "Get-Cookie"
-#define cookieField             "Cookie"
-#define regCodeField            "Registration-Code"
-#define formatVersionField      "Format-Version"
-#define errorField              "Error"
- */
+#define FIELD_VALUE_RESULT(name, handler, result) \
+    {(name), fieldTypeValue, (handler), NULL, NULL, (result), false}
+#define FIELD_VALUE(name, handler) FIELD_VALUE_RESULT(name, handler, lookupResultNone)
 
-#define FIELD_VALUE(name, handler) \
-    {(name), fieldTypeValue, (handler), NULL, NULL, lookupResultNone, false} 
+#define FIELD_NAME(name) field##name
+#define FIELD_HANDLER(name) &InfoManConnection:: FIELD_HANDLER_NAME(name)
+  
+#define FVAL(name) \
+    FIELD_VALUE(FIELD_NAME(name), FIELD_HANDLER(name)) 
+#define FVRS(name, res) \
+    FIELD_VALUE_RESULT(FIELD_NAME(name), FIELD_HANDLER(name), (res))
 
 static const ResponseFieldDescriptor descriptors[] = {
-	FIELD_VALUE(transactionIdField, &InfoManConnection::handleTransactionIdField),
+    FVAL(Cookie),
+    FVRS(Error, lookupResultError), 
+    FVAL(LatestClientVersion),
+	FVAL(TransactionId),
+    FVAL(EBookVersion),
 };
 
 
@@ -41,3 +43,15 @@ const ResponseFieldDescriptor* ResponseFieldFind(const char* name)
 	
 	return res;
 }
+
+#ifndef NDEBUG
+void test_ResponseFieldsSorted()
+{
+    for (ulong_t i = 1; i < ARRAY_SIZE(descriptors); ++i)
+    {
+        const ResponseFieldDescriptor& prev = descriptors[i - 1];
+        const ResponseFieldDescriptor& curr = descriptors[i];
+        assert(prev < curr);
+    }  
+}
+#endif

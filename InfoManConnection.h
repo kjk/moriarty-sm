@@ -8,6 +8,9 @@ class DataStoreWriter;
 struct ResponseFieldDescriptor;
 class HistoryCache;
 
+#define FIELD_HANDLER_NAME(name) handle##name##Field
+#define FIELD_HANDLER(name) status_t FIELD_HANDLER_NAME(name) (const char* name, ulong_t nameLen, const char* value, ulong_t valueLen)
+
 class InfoManConnection: public FieldPayloadProtocolConnection
 {
 	LookupManager& lookupManager_;
@@ -58,16 +61,22 @@ private:
 
 public:
 
-	status_t handleUdfField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
-	status_t handleDefinitionModelField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
-	status_t handleStringListField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
+	FIELD_HANDLER(Udf);
+	FIELD_HANDLER(DefinitionModel);
+	FIELD_HANDLER(StringList);
 	
 	status_t completeUdfField(BinaryIncrementalProcessor& processor);
 	status_t completeDefinitionModelField(BinaryIncrementalProcessor& processor);
 	status_t completeStringListField(BinaryIncrementalProcessor& processor);
 
-	status_t handleTransactionIdField(const char* name, ulong_t nlen, const char* value, ulong_t vlen);
+    FIELD_HANDLER(Error);
+	FIELD_HANDLER(TransactionId);
+	FIELD_HANDLER(Cookie);
+	FIELD_HANDLER(LatestClientVersion);
+	FIELD_HANDLER(EBookVersion);
 	
 };
+
+ #undef FIELD_HANDLER
 
 #endif

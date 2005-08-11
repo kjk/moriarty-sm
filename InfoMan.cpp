@@ -17,15 +17,11 @@
 
 #define MAX_LOADSTRING 100
 
-HINSTANCE g_hInst = NULL;			// current instance
-
-HINSTANCE GetInstance() {return g_hInst;}
-
 static BOOL InitInstance(HINSTANCE hInstance, int nCmdShow);
 
 void CleanUp()
 {
-	DestroyLookupManager();
+	LookupManagerDispose();
 	StyleDisposeStaticStyles();
 	PrefsDispose();
 	DataStore::dispose();
@@ -128,7 +124,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-    g_hInst = hInstance; // Store instance handle in our global variable
+    assert(GetInstance() == hInstance);
 
     TCHAR szTitle[MAX_LOADSTRING];		// title bar text
     TCHAR szWindowClass[MAX_LOADSTRING];	// main window class name

@@ -34,7 +34,7 @@ LookupManager* GetLookupManager()
 	return lookupManager;
 }
 
-void DestroyLookupManager()
+void LookupManagerDispose()
 {
 	delete lookupManager;
 	lookupManager = NULL;
@@ -48,7 +48,8 @@ LookupManager::LookupManager():
 	stringsCount(0),
 	
 	regCodeDaysToExpire(regCodeDaysNotSet),
-	clientVersionChecked(false)
+	clientVersionChecked(false),
+	eBookVersion(-1)
 {}
 
 LookupManager::~LookupManager()
@@ -177,4 +178,11 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 
     // TODO: write WinCE version of popupForm 
     return errNone; 
+}
+
+const LookupFinishedEventData* LookupFinishedData(Event& event)
+{
+    assert(extEventLookupFinished == ExtEventGetID(event));
+    const LookupFinishedEventData* data = static_cast<const LookupFinishedEventData*>(ExtEventGetObject(event));
+    return data;    
 }

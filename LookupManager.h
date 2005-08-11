@@ -114,6 +114,8 @@ struct LookupFinishedEventData: public ExtEventObject {
 	ServerError serverError;	
 };
 
+const LookupFinishedEventData* LookupFinishedData(Event& event);
+
 class DefinitionModel;
 struct UniversalDataFormat;
 class InfoManConnection;
@@ -143,6 +145,9 @@ public:
 	enum {regCodeDaysNotSet = ulong_t(-1)};
 	bool clientVersionChecked;
 	
+	long eBookVersion;
+	
+	
 	status_t fetchUrl(const char* url);
 
 private:
@@ -155,9 +160,8 @@ private:
 
     status_t enqueueConnection(InfoManConnection* conn);
 
-
 };
 
-void DestroyLookupManager();
+void LookupManagerDispose();
 
 #endif
