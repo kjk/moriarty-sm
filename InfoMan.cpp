@@ -60,9 +60,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 	if (!InitInstance(hInstance, nCmdShow)) 
 		return FALSE;
 	
-#ifndef NDEBUG
-	test_ExtEventSend();
-#endif	
+//#ifndef NDEBUG
+//	test_ExtEventSend();
+//#endif	
 
 #ifndef WIN32_PLATFORM_WFSP
 	HACCEL hAccelTable;
@@ -77,11 +77,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		CleanUp();
 		return memErrNotEnoughSpace;
 	}
+
+#ifndef NDEBUG
+    lm->fetchUrl("s+eBook-browse:");
+#endif 	
+	
 	MSG msg;
 	status_t err;
 	while (true) 
 	{
-		err = lm->connectionManager().waitForMessage(msg, 15000);
+		err = lm->connectionManager().waitForMessage(msg, 20);
 		if (errNone != err)
 			break;
 			
@@ -100,9 +105,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		}
 		if (extEvent == msg.message)
 		{
-#ifndef NDEBUG
-			test_ExtEventReceive(msg.lParam);
-#endif	
+//#ifndef NDEBUG
+//			test_ExtEventReceive(msg.lParam);
+//#endif	
 			lm->handleLookupEvent(msg.lParam);
 			ExtEventFree(msg.lParam);
 		}

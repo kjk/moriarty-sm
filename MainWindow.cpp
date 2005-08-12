@@ -99,6 +99,8 @@ Error:
 
 long MainWindow::handleCreate(const CREATESTRUCT& cs)
 {
+    extEventHelper_.start(handle());
+    
 #ifdef SHELL_MENUBAR
 	if (!menuBar_.create(handle(), 0, IDR_MENU, GetInstance(), 0, 0, 0))
 		return createFailed;
@@ -109,12 +111,6 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(55), handle(), cs.hInstance))
 		return createFailed;
 	
-	if (!field_.create(WS_VISIBLE|WS_TABSTOP|ES_LEFT|WS_BORDER, SCALEX(1), r.height() - SCALEY(52), r.width() - SCALEX(2), SCALEY(20), handle(), cs.hInstance, TEXT("Some text")))
-		return createFailed;	
-	 
-	if (!field2_.create(WS_VISIBLE|WS_TABSTOP|ES_LEFT|WS_BORDER, SCALEX(1), r.height() - SCALEY(30), r.width() - SCALEX(2), SCALEY(20), handle(), cs.hInstance, TEXT("Some text")))
-		return createFailed;	
-		
 	return Window::handleCreate(cs);
 }
 
@@ -132,8 +128,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 #ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-			ConnectionProgressDialog* dlg = ConnectionProgressDialog::create(handle());
-			dlg->show();
+			ConnectionProgressDialog::create(handle());
             // DialogBox(GetInstance(), (LPCTSTR)IDD_ABOUTBOX, handle(), About);
             return 0;
         }
@@ -159,7 +154,5 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
 	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(55), repaintWidget);
-	field_.anchor(anchorRight, SCALEX(2), anchorTop, SCALEY(52), repaintWidget);
-	field2_.anchor(anchorRight, SCALEX(2), anchorTop, SCALEY(30), repaintWidget);
 	return Window::handleResize(sizeType, width, height);
 }

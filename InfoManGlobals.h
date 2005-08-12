@@ -9,6 +9,7 @@ enum InfoManExtEvents {
 	
 class Preferences;
 class LookupManager;
+class MainWindow;
 
 Preferences* GetPreferences();
 LookupManager* GetLookupManager();
@@ -16,19 +17,21 @@ LookupManager* GetLookupManager();
 #define INFOMAN_VERSION "1.6"
 
 #ifdef _PALM_OS
-#define clientInfo "PalmOS " INFOMAN_VERSION
+#define PLATFORM_NAME "PalmOS"
 #endif
 
 #ifdef _WIN32_WCE
 #ifdef WIN32_PLATFORM_PSPC
-#define clientInfo "PocketPC " INFOMAN_VERSION
+#define PLATFORM_NAME "PocketPC"
 #endif
 #ifdef WIN32_PLATFORM_WFSP
-#define clientInfo "Smartphone " INFOMAN_VERSION
+#define PLATFORM_NAME "Smartphone"
 #endif
 #endif
 
-#define SERVER_LOCALHOST "127.0.0.1:4000"
+#define clientInfo PLATFORM_NAME " " INFOMAN_VERSION
+
+#define SERVER_LOCALHOST "gizmo:4000"
 #define SERVER_ADDRESS SERVER_LOCALHOST
 
 

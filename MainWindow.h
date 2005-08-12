@@ -5,18 +5,18 @@
 #include <WindowsCE/CommandBar.hpp>
 #include <WindowsCE/Controls.hpp>
 #include <WindowsCE/WinTextRenderer.hpp>
+#include <ExtendedEvent.hpp>
 
 class MainWindow: public Window
 {
 	MainWindow();
-
+    ExtEventHelper extEventHelper_;
+    
 #ifdef SHELL_MENUBAR
 	CommandBar menuBar_;
 #endif
 	
 	TextRenderer renderer_;
-	EditBox field_;
-	EditBox field2_;
 	
 public:
 

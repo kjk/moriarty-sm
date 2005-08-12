@@ -2,13 +2,22 @@
 #define INFOMAN_CONNECTION_PROGRESS_DIALOG_H__
 
 #include <WindowsCE/Dialog.hpp>
+#include <WindowsCE/Controls.hpp>
+#include <ExtendedEvent.hpp>
+
+class LookupManager;
 
 class ConnectionProgressDialog: public Dialog {
-    Widget progressBar_;
+    ExtEventHelper extEventHelper_;
+    LookupManager& lookupManager_; 
+    ProgressBar progressBar_;
+    Widget progressBytesText_; 
     
     ConnectionProgressDialog(AutoDeleteOption ad);
 
     static long showModal(HWND owner); 
+   
+    void updateProgress(); 
     
 public:
 
@@ -21,6 +30,10 @@ protected:
 	long handleCommand(ushort notify_code, ushort id, HWND sender);
 
 	long handleResize(UINT sizeType, ushort width, ushort height);
+	
+	long handleExtendedEvent(LPARAM& event);
+	    
+	void handleScreenSizeChange(ulong_t w, ulong_t h);
 	
 };
 

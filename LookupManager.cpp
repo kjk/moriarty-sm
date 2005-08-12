@@ -6,6 +6,10 @@
 #include <SysUtils.hpp>
 #include <Text.hpp>
 
+#ifdef _WIN32
+#include "ConnectionProgressDialog.h"
+#endif
+
 struct ServerErrorMapping {
 	ServerError code;
 	uint_t alertId;
@@ -166,6 +170,7 @@ InfoManConnection* LookupManager::createConnection()
 status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 {
     assert(NULL != conn);
+
     status_t error = conn->enqueue();
     if (errNone != error)
     { 
@@ -176,7 +181,10 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
     MoriartyApplication::popupForm(connectionProgressForm);
 #endif
 
-    // TODO: write WinCE version of popupForm 
+#ifdef _WIN32
+    ConnectionProgressDialog::create(NULL);
+#endif
+    
     return errNone; 
 }
 

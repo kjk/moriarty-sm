@@ -3,12 +3,18 @@
 #include <algorithm>
 #include <Text.hpp>
 
+#define FIELD_NAME(name) field##name
+#define FIELD_HANDLER(name) &InfoManConnection:: FIELD_HANDLER_NAME(name)
+
 #define FIELD_VALUE_RESULT(name, handler, result) \
     {(name), fieldTypeValue, (handler), NULL, NULL, (result), false}
 #define FIELD_VALUE(name, handler) FIELD_VALUE_RESULT(name, handler, lookupResultNone)
 
-#define FIELD_NAME(name) field##name
-#define FIELD_HANDLER(name) &InfoManConnection:: FIELD_HANDLER_NAME(name)
+#define FIELD_BCF_RESULT(name, result, dataSink, sinkIsHistoryCache) \
+    {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (dataSink), (result), (sinkIsHistoryCache)}
+
+#define FBRS(name, result, dataSink, sinkIsHistoryCache) \
+    FIELD_BCF_RESULT(FIELD_NAME(name), result, dataSink, sinkIsHistoryCache)
   
 #define FVAL(name) \
     FIELD_VALUE(FIELD_NAME(name), FIELD_HANDLER(name)) 
@@ -18,6 +24,7 @@
 static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
     FVRS(Error, lookupResultError), 
+    FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, NULL, false), 
     FVAL(LatestClientVersion),
 	FVAL(TransactionId),
     FVAL(EBookVersion),

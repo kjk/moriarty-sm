@@ -20,9 +20,10 @@
 #define IDS_ALERT_REG_CODE_EXPIRED      515
 #define IDS_ALERT_NOT_ENOUGH_MEMORY     516
 #define IDS_ALERT_MALFORMED_RESPONSE    517
-#define IDC_PROGRESS1                   2002
 #define IDC_CONNECTION_PROGRESS         2002
+#define IDC_PROGRESS_TEXT               2003
 #define IDC_STATIC                      -1
+#define IDC_PROGRESS_BYTES              2004
 
 // Next default values for new objects
 // 
@@ -30,7 +31,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        502
 #define _APS_NEXT_COMMAND_VALUE         50001
-#define _APS_NEXT_CONTROL_VALUE         2003
+#define _APS_NEXT_CONTROL_VALUE         2005
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

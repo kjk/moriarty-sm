@@ -440,7 +440,7 @@ status_t InfoManConnection::prepareRequest()
 	        return memErrNotEnoughSpace;
 	}
 
-	if (!lookupManager_.clientVersionChecked && !StrAppendField(req, len, fieldGetLatestClientVersion))
+	if (!lookupManager_.clientVersionChecked && !StrAppendField(req, len, fieldGetLatestClientVersion, PLATFORM_NAME))
 	    return memErrNotEnoughSpace;
 	    
     if (-1 == lookupManager_.eBookVersion && !StrAppendField(req, len, fieldEBookVersion))

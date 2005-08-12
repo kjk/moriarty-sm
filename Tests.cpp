@@ -18,7 +18,7 @@ void RunTests(HWND wnd)
 	test_HistoryCache();
 //	test_UTF8_FromNative();
 	test_DeviceInfoToken();
-	test_PopupMenu(wnd);
+	//test_PopupMenu(wnd);
 #endif
 }
 

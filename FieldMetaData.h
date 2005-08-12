@@ -3,6 +3,7 @@
 
 #include "LookupManager.h"
 
+#define prefixFieldGetUrl                         "Get-Url-"
 
 #define fieldVerifyRegCode                     "Verify-Registration-Code"
 #define fieldGetRegCodeDaysToExpire    "Get-Reg-Code-Days-To-Expire"
@@ -18,6 +19,8 @@
 #define fieldEBookVersion                  "eBook-Version"
 #define fieldLatestClientVersion           "Latest-Client-Version"
 #define fieldTransactionId                   transactionIdField
+
+#define fieldGetUrlEBookBrowse          prefixFieldGetUrl "eBook-browse"
 
 enum ResponseFieldType {
 	fieldTypeValue,
