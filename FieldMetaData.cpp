@@ -3,15 +3,30 @@
 #include <algorithm>
 #include <Text.hpp>
 
+/* 
+static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldType fieldType, ResponseFieldValueHandler valueHandler, ResponsePayloadCompletionHandler payloadHandler, LookupResult result, const char* dataSinkName, bool sinkIsHistoryCache)
+{
+    ResponseFieldDescriptor desc;
+    desc.name = name;
+    desc.lookupResult = result;
+    desc.type = fieldType;
+    desc.valueHandler = valueHandler;
+    desc.payloadCompletionHandler = payloadHandler;
+    desc.dataSinkName = dataSinkName;
+    desc.dataSinkIsHistoryCache = sinkIsHistoryCache;
+    return desc;        
+}
+ */
+
 #define FIELD_NAME(name) field##name
 #define FIELD_HANDLER(name) &InfoManConnection:: FIELD_HANDLER_NAME(name)
 
 #define FIELD_VALUE_RESULT(name, handler, result) \
-    {(name), fieldTypeValue, (handler), NULL, NULL, (result), false}
+    {(name), fieldTypeValue, (handler), NULL, (result), NULL, false}
 #define FIELD_VALUE(name, handler) FIELD_VALUE_RESULT(name, handler, lookupResultNone)
 
 #define FIELD_BCF_RESULT(name, result, dataSink, sinkIsHistoryCache) \
-    {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (dataSink), (result), (sinkIsHistoryCache)}
+    {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (result), (dataSink), (sinkIsHistoryCache)}
 
 #define FBRS(name, result, dataSink, sinkIsHistoryCache) \
     FIELD_BCF_RESULT(FIELD_NAME(name), result, dataSink, sinkIsHistoryCache)

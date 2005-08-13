@@ -149,6 +149,8 @@ public:
 	
 	
 	status_t fetchUrl(const char* url);
+	
+	bool handleLookupFinishedInForm(Event& event);
 
 private:
 

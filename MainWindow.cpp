@@ -7,7 +7,7 @@
 #include "MainWindow.h"
 #include <SysUtils.hpp>
 
-#include "ConnectionProgressDialog.h"
+#include "LookupManager.h"
 
 using namespace DRA;
 
@@ -128,8 +128,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 #ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-			ConnectionProgressDialog::create(handle());
-            // DialogBox(GetInstance(), (LPCTSTR)IDD_ABOUTBOX, handle(), About);
+            GetLookupManager()->fetchUrl("s+eBook-browse:");
             return 0;
         }
 #endif // !WIN32_PLATFORM_WFSP

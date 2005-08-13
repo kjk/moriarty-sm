@@ -34,13 +34,55 @@ typedef status_t (InfoManConnection::* ResponseFieldValueHandler)(const char*, u
 typedef status_t (InfoManConnection::* ResponsePayloadCompletionHandler)(BinaryIncrementalProcessor&);
 
 struct ResponseFieldDescriptor {
+
+// WARNING: Visual C++ 2005 B2 seems to be broken when aligning poointers-to-member-functions.
+// That's why these ugly fillXxxx__ unions are used.
+#if _MSC_VER >= 1400
+
+    union {
+	    const char* name;
+	    ulong_t fillName__;
+    };
+
+    union {
+	    ResponseFieldType type;
+	    ulong_t fillType__;
+    };
+
+    union {
+        ResponseFieldValueHandler valueHandler;
+        ulong_t fillValueHandler__[4];
+    };
+    
+	union {
+	    ResponsePayloadCompletionHandler payloadCompletionHandler;
+	    ulong_t fillPayloadCompletionHandler__[4];
+	};
+
+    union {
+	    LookupResult lookupResult;
+	    ulong_t fillLookupResult__;
+    };
+
+    union {
+	    const char* dataSinkName;
+	    ulong_t fillDataSinkName__;
+	};
+	
+	union {
+	    bool dataSinkIsHistoryCache;
+	    ulong_t fillDataSinkIsHistoryCache__;
+    };
+    
+#else
 	const char* name;
 	ResponseFieldType type;
 	ResponseFieldValueHandler valueHandler;
 	ResponsePayloadCompletionHandler payloadCompletionHandler;
-	const char* dataSinkName;
 	LookupResult lookupResult;
+	const char* dataSinkName;
 	bool dataSinkIsHistoryCache;
+#endif
 	
 	bool operator<(const ResponseFieldDescriptor& other) const;
 };

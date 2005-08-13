@@ -214,7 +214,8 @@ status_t InfoManConnection::handleField(const char* name, ulong_t nameLen, const
 	
 	if (NULL != currentField_->valueHandler)
 	{
-		status_t err = (this->*(currentField_->valueHandler))(name, nameLen, value, valueLen);
+	    ResponseFieldValueHandler handler = currentField_->valueHandler;
+		status_t err = (this->*handler)(name, nameLen, value, valueLen);
 		if (errNone != err)
 			return err;
 	}
@@ -326,15 +327,16 @@ status_t InfoManConnection::notifyPayloadFinished()
         if (currentField_->dataSinkIsHistoryCache && NULL != historyCache_)
             historyCache_->close();
     }
-    if (NULL != currentField_->payloadCompletionHandler)
-    {
-		BinaryIncrementalProcessor* processor = releasePayloadHandler();
-		assert(NULL != processor);
-		status_t err = (this->*(currentField_->payloadCompletionHandler))(*processor);
-		delete processor;
-		if (errNone != err)
-			return err;		 
-    }
+	BinaryIncrementalProcessor* processor = releasePayloadHandler();
+	assert(NULL != processor);
+	status_t err = errNone;
+	ResponsePayloadCompletionHandler handler = currentField_->payloadCompletionHandler;
+    if (NULL != handler)
+        err = (this->*handler)(*processor);
+
+	delete processor;
+	if (errNone != err)
+		return err;		 
     return FieldPayloadProtocolConnection::notifyPayloadFinished();
 }
 

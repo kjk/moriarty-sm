@@ -78,10 +78,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		return memErrNotEnoughSpace;
 	}
 
-#ifndef NDEBUG
-    lm->fetchUrl("s+eBook-browse:");
-#endif 	
-	
 	MSG msg;
 	status_t err;
 	while (true) 

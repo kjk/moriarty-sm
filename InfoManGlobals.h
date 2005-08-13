@@ -31,7 +31,7 @@ LookupManager* GetLookupManager();
 
 #define clientInfo PLATFORM_NAME " " INFOMAN_VERSION
 
-#define SERVER_LOCALHOST "gizmo:4000"
+#define SERVER_LOCALHOST "192.168.1.2:4000"
 #define SERVER_ADDRESS SERVER_LOCALHOST
 
 

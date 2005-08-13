@@ -120,6 +120,7 @@ struct ErrorMapping {
 static const ErrorMapping errors[] = {
 	DEF_ERROR(SocketConnection::errResponseMalformed, malformedResponseAlert, IDS_ALERT_MALFORMED_RESPONSE)
 	DEF_ERROR(memErrNotEnoughSpace, notEnoughMemoryAlert, IDS_ALERT_NOT_ENOUGH_MEMORY)
+	DEF_ERROR(netErrTimeout, connectionTimedOutAlert, IDS_ALERT_CONNECTION_TIMEOUT)
 };
 
 void LookupManager::handleConnectionError(status_t error)
@@ -182,7 +183,7 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 #endif
 
 #ifdef _WIN32
-    ConnectionProgressDialog::create(NULL);
+    ConnectionProgressDialog::create(ExtEventGetWindow());
 #endif
     
     return errNone; 
@@ -193,4 +194,36 @@ const LookupFinishedEventData* LookupFinishedData(Event& event)
     assert(extEventLookupFinished == ExtEventGetID(event));
     const LookupFinishedEventData* data = static_cast<const LookupFinishedEventData*>(ExtEventGetObject(event));
     return data;    
+}
+
+
+bool LookupManager::handleLookupFinishedInForm(Event& event)
+{  
+    const LookupFinishedEventData* data = LookupFinishedData(event);
+    assert(data != NULL);
+    switch (data->result)
+    {
+        case lookupResultError:
+            handleConnectionError(data->error);
+            return true;
+    
+        case lookupResultServerError:
+            handleServerError(data->serverError);  
+            return true;
+        
+        case lookupResultConnectionCancelledByUser:
+            return true;
+            
+        // TODO: handle the cases below
+        //case lookupResultLocationUnknown:
+        //    MoriartyApplication::alert(locationUnknownAlert);
+        //    handled=true;
+        //    break;
+
+        //case lookupResultNoResults:
+        //    MoriartyApplication::alert(noResultsAlert);
+        //    handled=true;
+        //    break;
+    }
+    return false;  
 }

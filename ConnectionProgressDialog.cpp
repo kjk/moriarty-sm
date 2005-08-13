@@ -92,9 +92,11 @@ long ConnectionProgressDialog::handleExtendedEvent(LPARAM& event)
             
         case extEventLookupFinished:
         {
-            destroy();
             const LookupFinishedEventData* data = LookupFinishedData(event);
-            ExtEventRepost(event);
+            bool handled = lookupManager_.handleLookupFinishedInForm(event);
+            destroy();
+            if (!handled)
+                ExtEventRepost(event);
             return messageHandled;
         }
     }     

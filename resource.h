@@ -20,10 +20,11 @@
 #define IDS_ALERT_REG_CODE_EXPIRED      515
 #define IDS_ALERT_NOT_ENOUGH_MEMORY     516
 #define IDS_ALERT_MALFORMED_RESPONSE    517
+#define IDS_ALERT_CONNECTION_TIMEOUT    518
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
-#define IDC_STATIC                      -1
 #define IDC_PROGRESS_BYTES              2004
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
