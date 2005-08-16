@@ -32,6 +32,8 @@ protected:
 	
 	long handleResize(UINT sizeType, ushort width, ushort height);
 	
+	LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
+	
 };
 
 #endif

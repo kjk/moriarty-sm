@@ -1,6 +1,9 @@
 #ifndef INFOMAN_GLOBALS_H__
 #define INFOMAN_GLOBALS_H__
 
+#include <Debug.hpp>
+#include <BaseTypes.hpp>
+
 enum InfoManExtEvents {
 	extEventLookupStarted,
 	extEventLookupProgress,
@@ -10,9 +13,12 @@ enum InfoManExtEvents {
 class Preferences;
 class LookupManager;
 class MainWindow;
+class HyperlinkHandler;
 
 Preferences* GetPreferences();
 LookupManager* GetLookupManager();
+HyperlinkHandler* GetHyperlinkHandler();
+char_t* GetStorePath(const char_t* name);
 
 #define INFOMAN_VERSION "1.6"
 

@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include "Tests.h"
 #include "LookupManager.h"
+#include "HyperlinkHandler.h"
 
 #include <Text.hpp>
 #include <SysUtils.hpp>
@@ -23,29 +24,47 @@ void CleanUp()
 {
 	LookupManagerDispose();
 	StyleDisposeStaticStyles();
+	HyperlinkHandlerDispose();
 	PrefsDispose();
 	DataStore::dispose();
 	DeinitLogging();
 }
 
-status_t DataStoreInit()
+char_t* GetStorePath(const char_t* name)
 {
 	char_t* path = GetAppDataPath();
 	if (NULL == path)
-		return memErrNotEnoughSpace;
+		return NULL;
 		
 	path = StrAppend(path, -1, TEXT("\\InfoMan"), -1);
 	if (NULL == path)
-		return memErrNotEnoughSpace;
+		return NULL;
 	
 	BOOL res = CreateDirectory(path, NULL);
 	if (!res && ERROR_ALREADY_EXISTS != GetLastError())
 	{
 		free(path);
-		return GetLastError();
+		return NULL;
 	}
 	
-	path = StrAppend(path, -1, TEXT("\\AppData.dat"), -1);
+	path = StrAppend(path, -1, TEXT("\\"), 1);
+	if (NULL == path)
+		return NULL;
+	
+	path = StrAppend(path, -1, name, -1);
+	if (NULL == path)
+		return NULL;
+	
+	path = StrAppend(path, -1, TEXT(".dat"), -1);
+	if (NULL == path)
+		return NULL;
+    
+    return path; 
+}
+
+status_t DataStoreInit()
+{
+	char_t* path = GetStorePath(TEXT("AppData"));
 	if (NULL == path)
 		return memErrNotEnoughSpace;
 	
@@ -162,7 +181,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		return FALSE;
 	}
    
-	if (NULL == GetPreferences())
+	if (NULL == GetPreferences() || NULL == GetHyperlinkHandler())
 	{
 		Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
 		CleanUp();

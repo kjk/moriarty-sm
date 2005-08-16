@@ -108,7 +108,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 	Rect r;
 	bounds(r);
-	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(55), handle(), cs.hInstance))
+	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 		return createFailed;
 	
 	return Window::handleCreate(cs);
@@ -152,6 +152,25 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(55), repaintWidget);
+	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
 	return Window::handleResize(sizeType, width, height);
+}
+
+LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam))
+    {
+        LookupManager* lm = GetLookupManager();
+        if (lm->handleLookupFinishedInForm(lParam))
+            return messageHandled;
+            
+        const LookupFinishedEventData* data = LookupFinishedData(lParam);
+        if (lookupResultEBookBrowse == data->result)
+        {
+            renderer_.setModel(lm->definitionModel, Definition::ownModel);
+            lm->definitionModel = NULL;
+        }
+        return messageHandled;
+    } 
+    return Window::callback(msg, wParam, lParam); 
 }

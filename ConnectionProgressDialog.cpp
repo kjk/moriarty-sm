@@ -77,7 +77,7 @@ long ConnectionProgressDialog::handleResize(UINT sizeType, ushort width, ushort 
     anchorChild(IDC_PROGRESS_TEXT, anchorRight, SCALEX(20), anchorNone, 0);
     progressBar_.anchor(anchorRight, SCALEX(20), anchorNone, 0);
     progressBytesText_.anchor(anchorRight, SCALEX(20), anchorNone, 0);
-    anchorChild(IDCANCEL, anchorLeft, SCALEX(106), anchorNone, 0);  
+    anchorChild(IDCANCEL, anchorLeft, SCALEX(86), anchorNone, 0);  
     return Dialog::handleResize(sizeType, width, height);
 }
 

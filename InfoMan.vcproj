@@ -53,7 +53,7 @@
 				Optimization="0"
 				InlineFunctionExpansion="0"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL,INFOMAN"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
@@ -133,7 +133,7 @@
 				ExecutionBucket="7"
 				Optimization="0"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL,INFOMAN"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
@@ -213,7 +213,7 @@
 				ExecutionBucket="7"
 				Optimization="0"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL,INFOMAN"
 				MinimalRebuild="true"
 				ExceptionHandling="1"
 				RuntimeLibrary="1"
@@ -294,7 +294,7 @@
 				ExecutionBucket="7"
 				Optimization="0"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);_DEBUG;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL,INFOMAN"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
@@ -374,7 +374,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL,INFOMAN"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -455,7 +455,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL,INFOMAN"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -536,7 +536,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;POCKETPC2003_UI_MODEL,INFOMAN"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -617,7 +617,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				AdditionalIncludeDirectories="../ars_framework_utf8/src;../moriarty_palm_utf8/src"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL;SMARTPHONE2003_UI_MODEL"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;$(PLATFORMDEFINES);NDEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;SMARTPHONE2003_UI_MODEL,INFOMAN"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -689,6 +689,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\History.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\HyperlinkHandler.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\InfoMan.cpp"
 				>
 			</File>
@@ -710,6 +718,14 @@
 			</File>
 			<File
 				RelativePath=".\MainWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ModuleDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Modules.cpp"
 				>
 			</File>
 			<File
@@ -849,6 +865,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\HistorySupport.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\HyperlinkHandlerBase.cpp"
 					>
 				</File>
 				<File
@@ -1039,6 +1059,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\History.h"
+				>
+			</File>
+			<File
+				RelativePath=".\HyperlinkHandler.h"
+				>
+			</File>
+			<File
 				RelativePath=".\InfoMan.h"
 				>
 			</File>
@@ -1060,6 +1088,14 @@
 			</File>
 			<File
 				RelativePath=".\MainWindow.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ModuleDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Modules.h"
 				>
 			</File>
 			<File
@@ -1091,6 +1127,14 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Controls.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\HyperlinkHandlerBase.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\PediaUrl.hpp"
 					>
 				</File>
 				<File
