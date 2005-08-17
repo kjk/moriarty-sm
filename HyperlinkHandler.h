@@ -1,6 +1,7 @@
 #ifndef INFOMAN_HYPERLINK_HANDLER_H__
 #define INFOMAN_HYPERLINK_HANDLER_H__
 
+#include "InfoManGlobals.h"
 #include <HyperlinkHandlerBase.hpp>
 #include <PediaUrl.hpp>
 
@@ -73,7 +74,64 @@
 
 
 class HyperlinkHandler: public HyperlinkHandlerBase {
+
+public:
+
+    typedef void (HyperlinkHandler::* HandlerFunction)(const char* hyperlink, ulong_t len, const Point*);
+
+private:
+
+    static HandlerFunction findHandler(const char* schema, ulong_t len);
+    
+/*    
+    static void closePopup(uint_t id);
+
+    static void closePopup();
+ */    
+        
+    enum HandlerFlag {
+        flagServerHyperlink = 1,
+        flagClosePopupForm = 2,
+        flagHistory = 4,
+        flagHistoryInCache = 8
+    };
+    
+    static uint_t interpretFlag(char flag);
+
+
+public:
+
+    void handleHyperlink(const char* link, ulong_t len, const Point* point);
+
+    ~HyperlinkHandler();
+
+private:
+    void handleRunModule(const char* hyperlink, ulong_t len, const Point* point);
+    void handleHttp(const char* hyperlink, ulong_t len, const Point* point);
+    void handleDream(const char* hyperlink, ulong_t len, const Point* point);
+    void handleMovie(const char* hyperlink, ulong_t len, const Point* point);
+    void handleTheatre(const char* hyperlink, ulong_t len, const Point* point);
+    void handleLyricsForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handleDictForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handleMenu(const char* hyperlink, ulong_t len, const Point* point);
+    void handleAmazonForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handleAmazonPreferences(const char* hyperlink, ulong_t len, const Point* point);
+    void handleSimpleFormWithDefinition(const char* hyperlink, ulong_t len, const Point* point);
+    void handleClipboardCopy(const char* hyperlink, ulong_t len, const Point* point);
+    void handleListsOfBestsForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handleEBayForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handlePedia(const char* hyperlink, ulong_t len, const Point* point);
+    void handlePediaHome(const char* hyperlink, ulong_t len, const Point* point);
+    void handlePediaLang(const char* hyperlink, ulong_t len, const Point* point);
+    void handlePediaSearch(const char* hyperlink, ulong_t len, const Point* point);
+    void handlePediaArticle(const char* hyperlink, ulong_t len, const Point* point);
+    void handleEBook(const char* hyperlink, ulong_t len, const Point* point);
+    void handleEBookDownload(const char* data, ulong_t len);
+    void handleNetflixForm(const char* hyperlink, ulong_t len, const Point* point);
+    void handleFlickr(const  char* hyperlink, ulong_t len, const Point* point);
 };
+
+const char* hyperlinkData(const char* link,  ulong_t& length);
 
 void HyperlinkHandlerDispose();
 

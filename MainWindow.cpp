@@ -8,9 +8,11 @@
 #include <SysUtils.hpp>
 
 #include "LookupManager.h"
+#include "Modules.h"
 
 using namespace DRA;
 
+/*
 #ifndef WIN32_PLATFORM_WFSP
 // Message handler for about box.
 static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
@@ -60,7 +62,8 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
     return (INT_PTR)FALSE;
 }
 #endif // !WIN32_PLATFORM_WFSP
-
+ */
+ 
 MainWindow::MainWindow():
 	Window(autoDelete)
 {}
@@ -102,7 +105,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     extEventHelper_.start(handle());
     
 #ifdef SHELL_MENUBAR
-	if (!menuBar_.create(handle(), 0, IDR_MENU, GetInstance(), 0, 0, 0))
+	if (!menuBar_.create(handle(), 0, IDR_MENU))
 		return createFailed;
 #endif
 
@@ -125,13 +128,13 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
     switch (id)
     {
 
-#ifndef WIN32_PLATFORM_WFSP
+//#ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-            GetLookupManager()->fetchUrl("s+eBook-browse:");
+            ModuleRun(moduleIdWeather);
             return 0;
         }
-#endif // !WIN32_PLATFORM_WFSP
+//#endif // !WIN32_PLATFORM_WFSP
 
 #ifdef WIN32_PLATFORM_WFSP
         case IDM_OK:

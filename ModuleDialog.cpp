@@ -4,7 +4,12 @@
 
 ModuleDialog::ModuleDialog(AutoDeleteOption ad, bool inputDialog, DWORD initDialogFlags):
     Dialog(ad, inputDialog, initDialogFlags)
-{}
+{
+}
+
+ModuleDialog::~ModuleDialog()
+{
+}
 
 bool ModuleDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
@@ -29,4 +34,26 @@ bool ModuleDialog::handleLookupFinished(Event& event, const LookupFinishedEventD
 {
     LookupManager* lm = GetLookupManager();
     return lm->handleLookupFinishedInForm(event);
+}
+
+static ModuleDialog* currentModuleDialog = NULL;
+
+void ModuleDialogSetCurrent(ModuleDialog* dialog)
+{
+    ModuleDialogDestroyCurrent();
+    currentModuleDialog = dialog; 
+}
+
+void ModuleDialogDestroyCurrent()
+{
+    if (NULL == currentModuleDialog)
+        return;
+
+    currentModuleDialog->destroy();
+    currentModuleDialog = NULL;  
+}
+
+ModuleDialog* ModuleDialogGetCurrent()
+{
+    return currentModuleDialog;
 }

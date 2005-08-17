@@ -164,7 +164,7 @@ static const UrlSchemaToCacheNameEntry* CacheNameForUrl(const char* url)
     const UrlSchemaToCacheNameEntry* cache = NULL;
     for (i = 0; i < ARRAY_SIZE(schemaToCacheNameDispatch); ++i)
     {
-        if (0 == strcmp(schema, schemaToCacheNameDispatch[i].urlSchema))
+        if (StrEquals(schema, schemaToCacheNameDispatch[i].urlSchema))
         {
             cache = &schemaToCacheNameDispatch[i];
             break;
@@ -185,10 +185,10 @@ bool ReadUrlFromCache(HistoryCache& cache, const char* url)
         return false;
     
     char_t* path = GetStorePath(cacheData->cacheName);
-    int res = tstrcmp(path, cache.dataStore->name());
+    bool res = StrEquals(path, cache.dataStore->name());
     free(path);
       
-    if (0 != res)
+    if (!res)
     {
         assert(cache.entryIsOnlyLink(index));
         return false;

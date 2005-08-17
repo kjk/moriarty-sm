@@ -2,10 +2,21 @@
 // Microsoft Visual C++ generated include file.
 // Used by InfoManCommon.rc
 //
+#define IDS_APP_TITLE                   1
+#define IDC_INFOMAN                     2
+#define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
+#define IDR_MENU                        102
+#define IDS_OK                          103
+#define IDS_HELP                        104
+#define IDS_MAIN                        105
+#define IDS_VIEW                        106
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
+#define IDD_WEATHER_MAIN                502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
+#define IDR_MENU1                       503
+#define IDR_WEATHER_MENU                503
 #define IDS_ALERT_MALFORMED_REQUEST     504
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
@@ -24,15 +35,25 @@
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
+#define IDM_OK                          40000
+#define IDM_HELP                        40001
+#define IDM_HELP_ABOUT                  40002
+#define IDM_MAIN                             40003
+#define IDM_VIEW                             40004
+#define ID_MAIN_CHANGELOCATION          50001
+#define ID_MAIN_UPDATE                  50002
+#define ID_MAIN_DONE                    50003
+#define ID_VIEW_DETAILED                50004
+#define ID_VIEW_SUMMARY                 50005
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        502
-#define _APS_NEXT_COMMAND_VALUE         50001
-#define _APS_NEXT_CONTROL_VALUE         2005
+#define _APS_NEXT_RESOURCE_VALUE        504
+#define _APS_NEXT_COMMAND_VALUE         50006
+#define _APS_NEXT_CONTROL_VALUE         2007
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

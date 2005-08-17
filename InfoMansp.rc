@@ -31,7 +31,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_INFOMAN             ICON                    "InfoMan.ico"
+//IDI_INFOMAN             ICON                    "InfoMan.ico"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -71,16 +71,16 @@ END
 // String Table
 //
 
-STRINGTABLE 
-BEGIN
-    IDS_APP_TITLE           "InfoMan"
-    IDC_INFOMAN             "INFOMAN"
-END
-
-STRINGTABLE 
-BEGIN
-    IDS_OK                  "OK"
-END
+//STRINGTABLE 
+//BEGIN
+//    IDS_APP_TITLE           "InfoMan"
+//    IDC_INFOMAN             "INFOMAN"
+//END
+//
+//STRINGTABLE 
+//BEGIN
+//    IDS_OK                  "OK"
+//END
 
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////

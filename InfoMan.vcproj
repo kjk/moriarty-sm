@@ -1044,6 +1044,18 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="Weather"
+				>
+				<File
+					RelativePath=".\WeatherMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\WeatherModule.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1146,6 +1158,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Weather"
+				>
+				<File
+					RelativePath=".\WeatherMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\WeatherModule.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -1158,6 +1182,10 @@
 			</File>
 			<File
 				RelativePath=".\InfoManCommon.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\InfoManCommon.rc2"
 				>
 			</File>
 			<File
@@ -1214,6 +1242,13 @@
 				<FileConfiguration
 					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"

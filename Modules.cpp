@@ -1,4 +1,10 @@
 #include "Modules.h"
+#include "WeatherModule.h"
+
+#ifdef _WIN32
+#include "ModuleDialog.h"
+#endif
+
 #include <Text.hpp>
 
 /*
@@ -27,7 +33,7 @@ struct Module {
 
 
 #ifdef _PALM_OS
-#define MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, starter, dataReader, free, tracksUpdate) \
+#define MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, dataReader, free, tracksUpdate) \
 {id, name, dispName, palmIcon, palmLargeIcon, mainFormId, dataReader, free, false, false, false, tracksUpdate, Module::neverUpdated}
 #endif
 
@@ -39,7 +45,7 @@ struct Module {
 #endif
 
 static Module modules[] = {
-    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, uint_t(-1), weatherMainForm, NULL, weatherDataRead, true, false),
+    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, uint_t(-1), weatherMainForm, WeatherStart, weatherDataRead, true, false),
     MOD(moduleId411, m411ModuleName, _T("Phone book"), m411SmallBitmap, frmInvalidObjectId, uint_t(-1), m411MainForm, NULL, m411DataRead, false, false),
     MOD(moduleIdMovies, moviesModuleName, _T("Movie times"), moviesSmallBitmap, frmInvalidObjectId, uint_t(-1), moviesMainForm, NULL, moviesDataRead, true, false),
     MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, uint_t(-1), amazonMainForm, NULL, NULL, false, false),
@@ -127,4 +133,81 @@ Module* ModuleGetActive(ulong_t index)
         }
     assert(false);
     return NULL; 
+}
+
+static Module* runningModule = NULL;
+
+Module* ModuleGetRunning()
+{
+    return runningModule;
+}
+
+ModuleID ModuleGetRunningId()
+{
+    if (NULL == runningModule)
+        return moduleIdNone;
+    
+    return runningModule->id;  
+}
+
+status_t ModuleRun(ModuleID id)
+{
+    status_t err = errNone; 
+    Module* mod = NULL;
+    
+    if (moduleIdNone != id)
+    {  
+        mod = ModuleGetById(id);
+        if (NULL == mod || !mod->active())
+            return sysErrParamErr;
+    
+        if (!mod->dataReady && NULL != mod->dataReader && errNone != (err = mod->dataReader()))
+            return err;
+
+    };
+        
+#ifdef _WIN32
+    ModuleDialogDestroyCurrent();
+    if (moduleIdNone != id)
+    {
+        ModuleDialog* d = mod->starter();
+        if (NULL != d)
+            d->show();
+        else
+        {
+            DWORD err = GetLastError();
+            assert(false);
+            // TODO: show some alert?!
+        }
+        ModuleDialogSetCurrent(d); 
+    }   
+#endif
+    
+#ifdef _PALM_OS
+    if (moduleIdNone != id)
+        if (frmInvalidObjectId != mod->mainFormId)
+            FrmGotoForm(mod->mainFormId);
+        else
+        {
+            assert(moduleIdAbout == id);
+            // TODO: show about form            
+        }
+    }
+    else
+        FrmGotoForm(mainForm);
+#endif
+
+    runningModule = mod;
+    return errNone; 
+}
+
+void ModuleTouchRunning()
+{
+    if (NULL == runningModule)
+        return;
+
+    if (!runningModule->tracksUpdateTime)
+        return;
+
+    runningModule->lastUpdateTime = ticks();  
 }

@@ -11,7 +11,7 @@
 // Add manually edited resources here...
 
 /////////////////////////////////////////////////////////////////////////////
-HI_RES_AWARE CEUX {1}	// turn off the emulation layer
+//HI_RES_AWARE CEUX {1}	// turn off the emulation layer
 			// Remove this resource to enable pixel-
 			// doubling on platforms that support it
 /////////////////////////////////////////////////////////////////////////////
@@ -21,11 +21,11 @@ HI_RES_AWARE CEUX {1}	// turn off the emulation layer
 // Data
 //
 
-IDR_MENU SHMENUBAR DISCARDABLE 
-BEGIN
-    IDR_MENU, 
-    1,
-
-    I_IMAGENONE, IDM_OK, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE, 
-    IDS_OK, 0, NOMENU,
-END
+//IDR_MENU SHMENUBAR DISCARDABLE 
+//BEGIN
+//    IDR_MENU, 
+//    1,
+//
+//    I_IMAGENONE, IDM_OK, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE, 
+//    IDS_OK, 0, NOMENU,
+//END

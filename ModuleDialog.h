@@ -19,10 +19,32 @@ protected:
 
 public:
 
-	explicit ModuleDialog(AutoDeleteOption ad = autoDeleteNot, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN);
+	explicit ModuleDialog(AutoDeleteOption ad = autoDelete, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN /* |SHIDIF_EMPTYMENU */ );
+	
+	~ModuleDialog();
     
     bool create(UINT resourceId); 
 
-}; 
+};
+
+void ModuleDialogSetCurrent(ModuleDialog* dialog);
+void ModuleDialogDestroyCurrent();
+ModuleDialog* ModuleDialogGetCurrent();
+
+#define MODULE_DIALOG_CREATE_DECLARE(Class) static Class* create()
+
+#define MODULE_DIALOG_CREATE_IMPLEMENT(Class, resourceId) \
+Class* Class::create() \
+{ \
+    Class* dlg = new_nt Class(); \
+    if (NULL == dlg) \
+        return NULL; \
+    if (!dlg->ModuleDialog::create(resourceId)) \
+    { \
+        delete dlg; \
+        return NULL; \
+    } \
+    return dlg; \
+}
 
 #endif

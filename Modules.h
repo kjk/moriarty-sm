@@ -1,7 +1,7 @@
 #ifndef INFOMAN_MODULES_H__
 #define INFOMAN_MODULES_H__
 
-#include "InfoManGlobals.h"
+#include <Debug.hpp>
 
 enum ModuleID {
     moduleIdAbout,
@@ -28,10 +28,17 @@ enum ModuleID {
     moduleIdEBooks,
     moduleIdFlights,
     moduleIdEBay,
-    moduleIdFlickr
+    moduleIdFlickr,
+   
+    // Add other ids before this
+    moduleIdNone = uint_t(-1) 
 };
 
-typedef status_t (*ModuleStarter)();
+#ifdef _WIN32
+class ModuleDialog;
+typedef ModuleDialog* (*ModuleStarter)();
+#endif
+
 typedef status_t (*ModuleDataReader)();
 
 struct Module {
@@ -45,7 +52,7 @@ struct Module {
 #endif
 #ifdef _WIN32
     ModuleStarter starter;
-#endif    
+#endif 
     ModuleDataReader dataReader; 
     bool free;
     bool dataReady;
@@ -65,6 +72,12 @@ Module* ModuleGet(ulong_t index);
 Module* ModuleGetByName(const char* name);
 Module* ModuleGetById(ModuleID id);
 Module* ModuleGetActive(ulong_t index);
+
+Module* ModuleGetRunning();
+ModuleID ModuleGetRunningId();
+status_t ModuleRun(ModuleID id);
+inline void ModuleRunMain() {ModuleRun(moduleIdNone);}
+void ModuleTouchRunning();
 
 #define MODULE_DATA_STREAM(name) name "-" dataStreamPostfix
 #define MODULE_PREFS_STREAM(name) name "-" prefsStreamPostfix

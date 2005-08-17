@@ -4,6 +4,8 @@
 #include <Debug.hpp>
 #include <BaseTypes.hpp>
 
+#include "InfoMan.h"
+
 enum InfoManExtEvents {
 	extEventLookupStarted,
 	extEventLookupProgress,

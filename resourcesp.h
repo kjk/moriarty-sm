@@ -3,15 +3,7 @@
 // Used by InfoMansp.rc
 //
 
-#define IDS_APP_TITLE			1
-#define IDC_INFOMAN	2
 #define IDI_INFOMAN	101
-#define IDR_MENU			102
-#define IDS_OK				104
-#define IDM_OK				40001
-#ifndef IDC_STATIC
-#define IDC_STATIC			-1
-#endif
 
 // Next default values for new objects
 // 
