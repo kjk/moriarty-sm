@@ -3,10 +3,12 @@
 
 #include "ModuleDialog.h"
 #include <WindowsCE/WinTextRenderer.hpp>
+#include <WindowsCE/Tabs.hpp>
 
 class WeatherMainDialog: public ModuleDialog {
     
-    TextRenderer renderer_; 
+    TextRenderer renderer_;
+    TabContainer tabs_; 
    
     WeatherMainDialog();
 

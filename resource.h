@@ -35,6 +35,7 @@
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
+#define IDC_TAB1                        2007
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -53,7 +54,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        504
 #define _APS_NEXT_COMMAND_VALUE         50006
-#define _APS_NEXT_CONTROL_VALUE         2007
+#define _APS_NEXT_CONTROL_VALUE         2008
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

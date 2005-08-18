@@ -940,6 +940,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Tabs.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\Text.cpp"
 					>
 				</File>
@@ -1150,6 +1154,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Tabs.hpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\Utility.hpp"
 					>
 				</File>
@@ -1183,6 +1191,70 @@
 			<File
 				RelativePath=".\InfoManCommon.rc"
 				>
+				<FileConfiguration
+					Name="Debug|Pocket PC 2003 (ARMV4)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Smartphone 2003 (ARMV4)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Pocket PC 2003 (ARMV4)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Smartphone 2003 (ARMV4)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\InfoManCommon.rc2"
@@ -1242,13 +1314,6 @@
 				<FileConfiguration
 					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"

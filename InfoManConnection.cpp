@@ -468,7 +468,7 @@ FIELD_HANDLER(TransactionId)
 {
 	long val;
 	status_t err = numericValue(value, vlen, val, 16);
-	if (errNone != err || val != transactionId)
+	if (errNone != err || val != long(transactionId))
 		return errResponseMalformed;
 		
 	return errNone;

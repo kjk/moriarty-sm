@@ -137,7 +137,7 @@ void ConnectionProgressDialog::handleScreenSizeChange(ulong_t w, ulong_t h)
     Rect r;
     bounds(r);
    
-    if (r.width() + SCALEX(4) != w)
+    if (r.width() + SCALEX(4) != long(w))
     {
         r.x() = SCALEX(2);
         r.setWidth(w - SCALEX(4));
