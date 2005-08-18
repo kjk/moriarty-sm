@@ -2,10 +2,28 @@
 #include "LookupManager.h"
 #include <SysUtils.hpp>
 
-ModuleDialog::ModuleDialog(AutoDeleteOption ad, bool inputDialog, DWORD initDialogFlags):
-    Dialog(ad, inputDialog, initDialogFlags)
+ModuleDialog::ModuleDialog(AdvancedOption, bool inputDialog, DWORD initDialogFlags):
+    Dialog(autoDelete, inputDialog, initDialogFlags),
+    menuBarId_(menuBarNone) 
 {
+    setOverrideNavBarText(true);
 }
+
+ModuleDialog::ModuleDialog(UINT menuBarId, bool inputDialog):
+#ifdef WIN32_PLATFORM_WFSP 
+    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN),
+#else
+    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN | (menuBarNone == menuBarId ? SHIDIF_EMPTYMENU : 0 )),
+#endif
+    menuBarId_(menuBarId)
+{
+#ifdef WIN32_PLATFORM_WFSP
+    if (menuBarNone == menuBarId_)
+        menuBarId_ = IDR_DONE;
+#endif     
+
+    setOverrideNavBarText(true);
+}  
 
 ModuleDialog::~ModuleDialog()
 {
@@ -14,6 +32,15 @@ ModuleDialog::~ModuleDialog()
 bool ModuleDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
     extEventHelper_.start(handle());
+    
+#ifdef SHELL_MENUBAR
+    if (menuBarNone != menuBarId_ && !menuBar_.create(handle(), 0, menuBarId_))
+    {  
+        DWORD err = GetLastError();
+        assert(false);
+    }  
+#endif
+
     return Dialog::handleInitDialog(focus_widget_handle, init_param); 
 }
 

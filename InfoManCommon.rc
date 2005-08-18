@@ -93,12 +93,11 @@ BEGIN
     LTEXT           "Downloading: ",IDC_PROGRESS_BYTES,7,24,142,8
 END
 
-IDD_WEATHER_MAIN DIALOG  0, 0, 128, 127
+IDD_WEATHER_MAIN DIALOGEX 0, 0, 128, 127
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Weather"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    PUSHBUTTON      "Done",IDOK,7,106,50,14
 END
 
 
@@ -165,6 +164,7 @@ END
 
 STRINGTABLE 
 BEGIN
+    IDS_APP_TITLE           "InfoMan"
     IDC_INFOMAN             "INFOMAN"
 END
 
@@ -174,6 +174,7 @@ BEGIN
     IDS_HELP                "Help"
     IDS_MAIN                "Main"
     IDS_VIEW                "View"
+    IDS_DONE                "Done"
 END
 
 STRINGTABLE 

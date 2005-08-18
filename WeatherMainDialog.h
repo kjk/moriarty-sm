@@ -3,16 +3,11 @@
 
 #include "ModuleDialog.h"
 #include <WindowsCE/WinTextRenderer.hpp>
-#include <WindowsCE/CommandBar.hpp>
 
 class WeatherMainDialog: public ModuleDialog {
     
     TextRenderer renderer_; 
    
-#ifdef SHELL_MENUBAR
-    CommandBar menuBar_;
-#endif      
-
     WeatherMainDialog();
 
 protected:
@@ -22,6 +17,8 @@ protected:
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data);
    
     long handleCommand(ushort notify_code, ushort id, HWND sender);
+   
+    long handleResize(UINT sizeType, ushort width, ushort height);
     
 public:
     

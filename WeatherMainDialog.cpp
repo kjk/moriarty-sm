@@ -5,7 +5,8 @@
 
 using namespace DRA;
 
-WeatherMainDialog::WeatherMainDialog()
+WeatherMainDialog::WeatherMainDialog():
+    ModuleDialog(IDR_WEATHER_MENU)
 {
 }
 
@@ -20,13 +21,6 @@ bool WeatherMainDialog::handleInitDialog(HWND wnd, long lp)
 	renderer_.definition.setNavOrderOptions(Definition::navOrderFirst);
 	renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle());
 	
-#ifdef SHELL_MENUBAR
-    if (!menuBar_.create(handle(), 0, IDR_WEATHER_MENU))
-    {  
-        DWORD err = GetLastError(); 
-    }  
-#endif     
-
     return ModuleDialog::handleInitDialog(wnd, lp);
 }
 
@@ -38,15 +32,16 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
 
 long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
-    if (IDCANCEL == id)
-    {
-        ModuleRunMain();
-        return messageHandled; 
-    }  
     if (IDOK == id)
     {
         ModuleRunMain();
         return messageHandled; 
     }  
 	return ModuleDialog::handleCommand(notify_code, id, sender);
+}
+
+long WeatherMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
+{
+	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+	return ModuleDialog::handleResize(sizeType, width, height);
 }

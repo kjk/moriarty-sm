@@ -2,12 +2,18 @@
 #define INFOMAN_MODULE_DIALOG_H__
 
 #include <WindowsCE/Dialog.hpp>
+#include <WindowsCE/CommandBar.hpp>
 #include <ExtendedEvent.hpp>
 
 struct LookupFinishedEventData;
 
 class ModuleDialog: public Dialog {
     ExtEventHelper extEventHelper_;
+
+    UINT menuBarId_;
+#ifdef SHELL_MENUBAR
+    CommandBar menuBar_;
+#endif      
 
 protected:
     
@@ -18,8 +24,13 @@ protected:
     bool handleInitDialog(HWND focus_widget_handle, long init_param);
 
 public:
+    
+    enum {menuBarNone = UINT(-1)}; 
+    enum AdvancedOption {advanced}; 
 
-	explicit ModuleDialog(AutoDeleteOption ad = autoDelete, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN /* |SHIDIF_EMPTYMENU */ );
+	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN);
+	
+	explicit ModuleDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
 	
 	~ModuleDialog();
     

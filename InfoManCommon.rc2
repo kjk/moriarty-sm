@@ -9,24 +9,43 @@ HI_RES_AWARE CEUX {1}	// turn off the emulation layer
 			// doubling on platforms that support it
 /////////////////////////////////////////////////////////////////////////////
 
+// The format for menu RCDATA resource is:
+//
+//resourceId SHMENUBAR DISCARDABLE
+//BEGIN
+//    referencedMenuId, 
+//    buttonCount,
+//
+//    /* button 0 */    
+//    I_IMAGENONE /* iconId? */, commandId /* like IDC_something, received through WM_COMMAND */, 
+//      buttonState /* TBSTATE_ENABLED */, buttonStyle /* TBSTYLE_BUTTON | TBSTYLE_DROPDOWN | TBSTYLE_AUTOSIZE */,
+//      captionId /* string resource IDS_OK */, 0 /* no idea */, menuIndex /* starting from 0 - leftmost, or NOMENU if TBSTYLE_BUTTON */,
+//    
+//    /* button 1 */
+//    I_IMAGENONE, IDM_HELP, TBSTATE_ENABLED, TBSTYLE_DROPDOWN | TBSTYLE_AUTOSIZE,
+//    IDS_HELP, 0, 0,
+//    ...
+//END
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // RCDATA
 //
 
-IDR_MENU RCDATA
+IDR_MENU SHMENUBAR DISCARDABLE
 BEGIN
     IDR_MENU, 
     2,
 
-    I_IMAGENONE, IDM_OK, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE,
-    IDS_OK, 0, NOMENU,
+    I_IMAGENONE, IDCLOSE, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE,
+    IDS_DONE, 0, NOMENU,
     
     I_IMAGENONE, IDM_HELP, TBSTATE_ENABLED, TBSTYLE_DROPDOWN | TBSTYLE_AUTOSIZE,
     IDS_HELP, 0, 0,
 END
 
-IDR_WEATHER_MENU RCDATA
+IDR_WEATHER_MENU SHMENUBAR DISCARDABLE
 BEGIN
     IDR_WEATHER_MENU,
     2,

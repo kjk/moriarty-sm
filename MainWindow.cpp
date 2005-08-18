@@ -66,7 +66,9 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
  
 MainWindow::MainWindow():
 	Window(autoDelete)
-{}
+{
+    setOverrideNavBarText(true);
+}
 
 MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
 {
@@ -85,7 +87,7 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
 	
 	if (NULL == wc)
 		goto Error;
-		 
+
 	if (!w->Window::create(wc, title, WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, instance))
 		goto Error;
 
@@ -106,14 +108,14 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     
 #ifdef SHELL_MENUBAR
 	if (!menuBar_.create(handle(), 0, IDR_MENU))
-		return createFailed;
+	    return createFailed;
 #endif
 
 	Rect r;
 	bounds(r);
 	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 		return createFailed;
-	
+
 	return Window::handleCreate(cs);
 }
 
@@ -137,13 +139,13 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 //#endif // !WIN32_PLATFORM_WFSP
 
 #ifdef WIN32_PLATFORM_WFSP
-        case IDM_OK:
+        case IDCLOSE:
             destroy();
             return 0;
 #endif // WIN32_PLATFORM_WFSP
 
 #ifndef WIN32_PLATFORM_WFSP
-        case IDM_OK:
+        case IDCLOSE:
             close();
             return 0;
 #endif // !WIN32_PLATFORM_WFSP

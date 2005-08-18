@@ -16,16 +16,18 @@
 			// doubling on platforms that support it
 /////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Data
-//
+#ifdef IDC_STATIC
+#undef IDC_STATIC
+#endif
 
-//IDR_MENU SHMENUBAR DISCARDABLE 
-//BEGIN
-//    IDR_MENU, 
-//    1,
-//
-//    I_IMAGENONE, IDM_OK, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE, 
-//    IDS_OK, 0, NOMENU,
-//END
+#include "resource.h"
+
+
+IDR_DONE SHMENUBAR DISCARDABLE
+BEGIN
+    IDR_DONE,
+    1,
+    
+    I_IMAGENONE, IDOK, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE, 
+    IDS_DONE, 0, NOMENU
+END
