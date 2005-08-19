@@ -35,7 +35,11 @@
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
-#define IDC_TAB1                        2007
+#define IDC_WEATHER_SUMMARY             2014
+#define IDC_WEATHER_DAYS_LIST           2015
+#define IDC_WEATHER_DAY_SELECT          2017
+#define IDC_WEATHER_DAY_SPIN            2018
+#define IDC_COMBO3                      2019
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -46,15 +50,18 @@
 #define ID_MAIN_DONE                    50003
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
+#define ID_VIEW_TEMPERATURE             50006
+#define ID_TEMPERATURE_FAHRENHEIT       50007
+#define ID_TEMPERATURE_CELSIUS          50008
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        504
-#define _APS_NEXT_COMMAND_VALUE         50006
-#define _APS_NEXT_CONTROL_VALUE         2008
+#define _APS_NEXT_RESOURCE_VALUE        505
+#define _APS_NEXT_COMMAND_VALUE         50009
+#define _APS_NEXT_CONTROL_VALUE         2020
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

@@ -12,7 +12,9 @@
 
 using namespace DRA;
 
-/*
+static void test_PropertyPages(HWND wnd);
+
+
 #ifndef WIN32_PLATFORM_WFSP
 // Message handler for about box.
 static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
@@ -23,38 +25,38 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 #ifdef SHELL_AYGSHELL
             {
                 // Create a Done button and size it.  
-                SHINITDLGINFO shidi;
-                shidi.dwMask = SHIDIM_FLAGS;
-                shidi.dwFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN | SHIDIF_EMPTYMENU;
-                shidi.hDlg = hDlg;
-                SHInitDialog(&shidi);
+                //SHINITDLGINFO shidi;
+                //shidi.dwMask = SHIDIM_FLAGS;
+                //shidi.dwFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN | SHIDIF_EMPTYMENU;
+                //shidi.hDlg = hDlg;
+                //SHInitDialog(&shidi);
             }
 #endif // SHELL_AYGSHELL
 			{
-				TextRenderer* r = new_nt TextRenderer(Widget::autoDelete);
-				r->create(WS_VISIBLE|WS_TABSTOP, 10, 40, 220, 160, hDlg, GetInstance());
+				// TextRenderer* r = new_nt TextRenderer(Widget::autoDelete);
+				// r->create(WS_VISIBLE|WS_TABSTOP, 10, 40, 220, 160, hDlg, GetInstance());
 			}
             return (INT_PTR)TRUE;
 
         case WM_COMMAND:
             if (LOWORD(wParam) == IDOK)
             {
-                EndDialog(hDlg, LOWORD(wParam));
+                // EndDialog(hDlg, LOWORD(wParam));
                 return (INT_PTR)TRUE;
             }
             break;
 
         case WM_CLOSE:
-            EndDialog(hDlg, message);
+            // EndDialog(hDlg, message);
             return (INT_PTR)TRUE;
 
 #ifdef _DEVICE_RESOLUTION_AWARE
         case WM_SIZE:
             {
-		DRA::RelayoutDialog(
-			GetInstance(), 
-			hDlg, 
-			DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
+		//DRA::RelayoutDialog(
+		//	GetInstance(), 
+		//	hDlg, 
+		//	DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
             }
             break;
 #endif
@@ -62,7 +64,6 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
     return (INT_PTR)FALSE;
 }
 #endif // !WIN32_PLATFORM_WFSP
- */
  
 MainWindow::MainWindow():
 	Window(autoDelete)
@@ -134,6 +135,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
         case IDM_HELP_ABOUT: 
         {
             ModuleRun(moduleIdWeather);
+            // test_PropertyPages(handle());
             return 0;
         }
 //#endif // !WIN32_PLATFORM_WFSP
@@ -179,3 +181,79 @@ LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
     } 
     return Window::callback(msg, wParam, lParam); 
 }
+
+/*
+static int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam) {
+
+    if (uMsg == PSCB_INITIALIZED) 
+    {
+        // Get tab control
+        HWND hwndTabs = GetDlgItem (hwndDlg, 0x3020);
+
+        DWORD dwStyle = GetWindowLong (hwndTabs, GWL_STYLE);
+        SetWindowLong (hwndTabs, GWL_STYLE, dwStyle | TCS_BOTTOM);
+    } 
+    else if (uMsg ==  PSCB_GETVERSION)
+        return COMCTL32_VERSION;
+    return 0;
+}
+
+
+void test_PropertyPages(HWND parent)
+{
+    PROPSHEETPAGE page;
+    ZeroMemory(&page, sizeof(page));
+    page.dwSize = sizeof(page);
+    page.dwFlags = PSP_PREMATURE;
+    page.hInstance = GetInstance();
+    page.pszTemplate = MAKEINTRESOURCE(IDD_DIALOG1);
+    page.hIcon = NULL;
+    page.pszTitle = NULL;
+    page.pfnDlgProc = About;
+    page.lParam = 0;
+    page.pfnCallback = NULL;
+    page.pcRefParent = NULL;
+    HPROPSHEETPAGE p1 = CreatePropertySheetPage(&page);
+    if (NULL == p1)
+    {
+        DWORD err = GetLastError();
+        assert(false); 
+        return;
+    }           
+
+    page.pszTemplate = MAKEINTRESOURCE(IDD_WEATHER_MAIN);  
+    HPROPSHEETPAGE p2 = CreatePropertySheetPage(&page);
+    if (NULL == p2)
+    {
+        DWORD err = GetLastError();
+        assert(false); 
+        return;
+    }           
+
+    HPROPSHEETPAGE pp[] = {p1, p2};
+    
+    PROPSHEETHEADER header;
+    ZeroMemory(&header, sizeof(header));
+    header.dwSize = sizeof(header);
+    header.dwFlags = PSH_MAXIMIZE | PSH_NOAPPLYNOW | PSH_USECALLBACK;
+    header.hwndParent = parent;
+    header.hInstance = GetInstance();
+    header.hIcon = NULL;
+    header.pszCaption = MAKEINTRESOURCE(IDS_APP_TITLE);
+    header.nPages = 2;
+    header.nStartPage = 0;
+    header.phpage = pp;
+    header.pfnCallback = PropSheetProc;
+    
+    HWND wnd = (HWND)PropertySheet(&header);
+    //if (NULL == wnd)
+    //{
+    //    DWORD err = GetLastError();
+    //    assert(false); 
+    //    return;
+    //}           
+
+    //ShowWindow(wnd, SW_SHOW);
+    //UpdateWindow(wnd);      
+}
+ */

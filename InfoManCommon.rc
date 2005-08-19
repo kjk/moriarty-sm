@@ -23,6 +23,65 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONNECTION_PROGRESS DIALOG  0, 0, 156, 62
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Connection in Progress"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,99,41,50,14
+    CONTROL         "",IDC_CONNECTION_PROGRESS,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,7,21,142,14
+    LTEXT           "Please wait while data is being downloaded.",IDC_PROGRESS_TEXT,7,7,142,10
+    LTEXT           "Downloading: ",IDC_PROGRESS_BYTES,7,24,142,8
+END
+
+IDD_WEATHER_MAIN DIALOG  0, 0, 140, 135
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Weather"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LISTBOX         IDC_WEATHER_DAYS_LIST,2,2,136,114,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_WEATHER_DAY_SELECT,2,121,49,11,LBS_SORT | WS_TABSTOP
+    CONTROL         "",IDC_WEATHER_DAY_SPIN,"msctls_updown32",UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,48,121,11,11
+    PUSHBUTTON      "Summary",IDC_WEATHER_SUMMARY,88,119,50,14
+    COMBOBOX        IDC_COMBO3,38,120,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CONNECTION_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 149
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_WEATHER_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 138
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 133
+        HORZGUIDE, 116
+        HORZGUIDE, 119
+        HORZGUIDE, 126
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -73,60 +132,8 @@ IDI_INFOMAN             ICON                    "InfoMan.ico"
 IDC_INFOMAN ACCELERATORS 
 BEGIN
     "A",            IDM_HELP_ABOUT,         VIRTKEY, CONTROL, NOINVERT
-    "Q",            IDM_OK,                 VIRTKEY, CONTROL, NOINVERT
+    "Q",            IDCLOSE,                VIRTKEY, CONTROL, NOINVERT
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_CONNECTION_PROGRESS DIALOG  0, 0, 156, 62
-STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
-CAPTION "Connection in Progress"
-FONT 8, "MS Shell Dlg"
-BEGIN
-    PUSHBUTTON      "Cancel",IDCANCEL,99,41,50,14
-    CONTROL         "",IDC_CONNECTION_PROGRESS,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,7,21,142,14
-    LTEXT           "Please wait while data is being downloaded.",IDC_PROGRESS_TEXT,7,7,142,10
-    LTEXT           "Downloading: ",IDC_PROGRESS_BYTES,7,24,142,8
-END
-
-IDD_WEATHER_MAIN DIALOGEX 0, 0, 109, 110
-STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Weather"
-FONT 8, "MS Shell Dlg"
-BEGIN
-    CONTROL         "",IDC_TAB1,"SysTabControl32",TCS_BOTTOM,7,7,95,96
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_CONNECTION_PROGRESS, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 149
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 55
-    END
-
-    IDD_WEATHER_MAIN, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 102
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 103
-    END
-END
-#endif    // APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -154,6 +161,12 @@ BEGIN
     BEGIN
         MENUITEM "Detailed",                    ID_VIEW_DETAILED
         MENUITEM "Summary",                     ID_VIEW_SUMMARY, CHECKED
+        MENUITEM SEPARATOR
+        POPUP "Temperature"
+        BEGIN
+            MENUITEM "Fahrenheit",                  ID_TEMPERATURE_FAHRENHEIT, CHECKED
+            MENUITEM "Celsius",                     ID_TEMPERATURE_CELSIUS
+        END
     END
 END
 
