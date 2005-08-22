@@ -1,10 +1,16 @@
 #include "LookupManager.h"
 #include "InfoManConnection.h"
 #include "InfoManPreferences.h"
+#include "HyperlinkHandler.h"
+#include "History.h"
+#include "Modules.h"
+
 #include <Definition.hpp>
 #include <UniversalDataFormat.hpp>
 #include <SysUtils.hpp>
 #include <Text.hpp>
+#include <HistorySupport.hpp>
+#include <HistoryCache.hpp>
 
 #ifdef _WIN32
 #include "ConnectionProgressDialog.h"
@@ -145,6 +151,24 @@ void LookupManager::handleConnectionError(status_t error)
 
 status_t LookupManager::fetchUrl(const char* url)
 {
+    // remove all flags except 's' from url
+    // for now only 'c' flag is used
+    int offset = 0;
+    while (urlFlagServer != url[offset])
+    {
+        offset++;
+        assert('\0' != url[offset]);
+    }   
+    assert(urlSeparatorFlags == url[offset+1]);
+    // read from cache
+    if (offset > 0)
+    {
+        if (urlFlagHistory == url[offset-1] || urlFlagHistoryInCache == url[offset-1])
+            offset--;
+    }       
+    if (ReadUrlFromCache(&url[offset]))
+        return errNone;
+
     InfoManConnection* conn = createConnection();
     if (NULL == conn)
         return memErrNotEnoughSpace;
@@ -216,16 +240,13 @@ bool LookupManager::handleLookupFinishedInForm(Event& event)
         case lookupResultConnectionCancelledByUser:
             return true;
             
-        // TODO: handle the cases below
-        //case lookupResultLocationUnknown:
-        //    MoriartyApplication::alert(locationUnknownAlert);
-        //    handled=true;
-        //    break;
+        case lookupResultLocationUnknown:
+            ALERT(locationUnknownAlert, IDS_ALERT_LOCATION_UNKNOWN);
+            return true;
 
-        //case lookupResultNoResults:
-        //    MoriartyApplication::alert(noResultsAlert);
-        //    handled=true;
-        //    break;
+        case lookupResultNoResults:
+            ALERT(noResultsAlert, IDS_ALERT_NO_RESULTS);
+            return true;
     }
     return false;  
 }
@@ -237,3 +258,161 @@ DefinitionModel* LookupManager::releaseDefinitionModel()
     definitionModel = NULL;
     return m;
 }
+
+bool HandleCrossModuleLookup(Event& event, const char_t* cacheName, const char_t* moduleName)
+{
+    assert(extEventLookupFinished == ExtEventGetID(event));
+    const LookupFinishedEventData* data = LookupFinishedData(event); 
+    assert(NULL != data);
+    
+    int moduleId = -1;
+    switch (data->result)
+    {
+        case lookupResultPediaArticle:
+        case lookupResultPediaSearch:
+        case lookupResultPediaStats:
+            moduleId = moduleIdPedia;
+            break;
+            
+        case lookupResultLyrics:
+            moduleId = moduleIdLyrics;
+            break;
+        
+        case lookupResultAmazon:
+            moduleId = moduleIdAmazon;
+            break;
+            
+        case lookupResultListsOfBests:
+            moduleId = moduleIdListsOfBests;
+            break;
+
+        case lookupResultNetflix:
+        case lookupResultNetflixLoginUnknown:
+        case lookupResultNetflixRequestPassword:
+        case lookupResultNetflixLoginOk:
+            moduleId = moduleIdNetflix;
+            break;
+
+        case lookupResultEBay:
+        case lookupResultEBayNoCache:
+        case lookupResultEBayLoginUnknown:
+        case lookupResultEBayRequestPassword:
+        case lookupResultEBayLoginOk:
+            moduleId = moduleIdEBay;
+            break;
+
+        case lookupResultDictDef:
+            moduleId = moduleIdDict;
+            break;
+        
+        case lookupResultEBookSearchResults:
+        case lookupResultEBookDownload:
+        case lookupResultEBookBrowse:
+        case lookupResultEBookHome:
+            moduleId = moduleIdEBooks;
+            break;
+
+    }
+    if (-1 == moduleId)
+        return false;
+    
+    LookupManager* lm = GetLookupManager();
+    lm->crossModuleLookup = true;
+    lm->historyCacheName = cacheName;
+    lm->moduleName = moduleName;
+    ModuleRun(ModuleID(moduleId));
+    ExtEventRepost(event);
+    return true;
+}
+
+// TODO: remember to pass cache name through GetStorePath()
+void FinishCrossModuleLookup(HistorySupport& history, const char_t* moduleName)
+{
+    char_t* str = NULL;
+    LookupManager* lm = GetLookupManager();
+    if (!lm->crossModuleLookup)
+        return;
+        
+    lm->crossModuleLookup = false;
+    if (NULL == lm->historyCacheName)
+    {   
+        Log(eLogWarning, _T("FinishCrossModuleLookup(): lm.lastHistoryCacheName is NULL, won't write return link."), true);
+        return;
+    }
+    const char_t* lastCacheName = lm->historyCacheName;
+    lm->historyCacheName = NULL;
+    
+    HistoryCache thisModuleCache;
+    status_t err = thisModuleCache.open(history.cacheName());
+    if (errNone != err)
+    {
+        LogStrUlong(eLogError, _T("FinishCrossModuleLookup(): unable to open thisModuleCache: "), err);
+        return;
+    }
+    
+    HistoryCache prevModuleCache;
+    err = prevModuleCache.open(lastCacheName);
+    if (errNone != err)
+    {
+        LogStrUlong(eLogError, _T("FinishCrossModuleLookup(): unable to open prevModuleCache: "), err);
+        return;
+    }
+    ulong_t count = thisModuleCache.entriesCount();
+    if (0 == count)
+    {
+        Log(eLogError, _T("FinishCrossModuleLookup(): thisModuleCache is empty, can't write return link's url."), true);
+        return;
+    }
+    
+    const char* url = thisModuleCache.entryUrl(history.currentHistoryIndex);
+    const char_t* title = thisModuleCache.entryTitle(history.currentHistoryIndex);
+   
+    // TODO: finish porting FinishCrossModuleLookup()
+/*    
+    if (NULL != moduleName && NULL != str.AppendCharP3(moduleName, _T(": "), title))
+        title = str.GetCStr();
+        
+    err = prevModuleCache.removeEntry(url);
+    if (errNone != err)
+        LogStrUlong(eLogWarning, "FinishCrossModuleLookup(): unable to remove old entry from prevModuleCache: ", err);
+    
+    err = prevModuleCache.appendLink(url, title);
+    if (errNone != err)
+    {
+        LogStrUlong(eLogError, "FinishCrossModuleLookup(): unable to append link to prevModuleCache: ", err);
+        return;
+    }
+    
+    count = prevModuleCache.entriesCount();
+    assert(0 != count); // We just wrote an entry to that cache.
+    if (1 == count)
+    {
+        Log(eLogWarning, "FinishCrossModuleLookup(): prevModuleCache was empty, not possible to write return link to thisModuleCache.", true);
+        return;
+    }
+    
+    url = prevModuleCache.entryUrl(count - 2);
+    title = prevModuleCache.entryTitle(count - 2);
+    str.Truncate(0);
+    
+    if (NULL != lm.lastModuleName && NULL != str.AppendCharP3(lm.lastModuleName, _T(": "), title))
+        title = str.GetCStr();
+            
+    err = thisModuleCache.removeEntry(url);
+    if (errNone != err)
+        LogStrUlong(eLogWarning, "FinishCrossModuleLookup(): unable to remove old entry from thisModuleCache: ", err);
+    
+    count = thisModuleCache.entriesCount();
+    if (0 == count)
+        err = thisModuleCache.appendLink(url, title);
+    else
+        err = thisModuleCache.insertLink(count - 1, url, title);
+        
+    if (errNone != err)
+    {
+        Log(eLogError, "FinishCrossModuleLookup(): unable to insert return link to into thisModuleCache: ", err);
+        return;
+    }
+    history.currentHistoryIndex = thisModuleCache.entriesCount() - 1;
+ */
+ }

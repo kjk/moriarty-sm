@@ -2,6 +2,7 @@
 #include "InfoMan.h"
 #include "HyperlinkHandler.h"
 #include "Modules.h"
+#include "LookupManager.h"
 
 using namespace DRA;
 
@@ -32,10 +33,15 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
 
 long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
-    if (IDOK == id)
+    switch (id)
     {
-        ModuleRunMain();
-        return messageHandled; 
+        case IDOK: 
+            ModuleRunMain();
+            return messageHandled; 
+            
+        case ID_MAIN_UPDATE:
+            GetLookupManager()->fetchUrl("s+eBook-browse:title;2;0;*");            
+            return messageHandled;
     }  
 	return ModuleDialog::handleCommand(notify_code, id, sender);
 }

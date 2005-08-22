@@ -32,6 +32,8 @@
 #define IDS_ALERT_NOT_ENOUGH_MEMORY     516
 #define IDS_ALERT_MALFORMED_RESPONSE    517
 #define IDS_ALERT_CONNECTION_TIMEOUT    518
+#define IDS_ALERT_NO_RESULTS            519
+#define IDS_ALERT_LOCATION_UNKNOWN      520
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -39,7 +41,6 @@
 #define IDC_WEATHER_DAYS_LIST           2015
 #define IDC_WEATHER_DAY_SELECT          2017
 #define IDC_WEATHER_DAY_SPIN            2018
-#define IDC_COMBO3                      2019
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002

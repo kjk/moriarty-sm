@@ -134,8 +134,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 //#ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-            GetLookupManager()->fetchUrl("s+eBook-browse:title;2;0;*");
-            // ModuleRun(moduleIdWeather);
+            ModuleRun(moduleIdWeather);
             // test_PropertyPages(handle());
             return 0;
         }
