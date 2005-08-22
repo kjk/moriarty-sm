@@ -96,20 +96,39 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		CleanUp();
 		return memErrNotEnoughSpace;
 	}
-
+    
+    HANDLE managerThread = lm->connectionManager().startManagerThread();
+    if (NULL == managerThread)
+    {
+        // TODO: alert
+        CleanUp();
+        return -1; 
+    }  
+    
 	MSG msg;
 	status_t err;
 	while (true) 
 	{
+/*
 		err = lm->connectionManager().waitForMessage(msg, 20);
 		if (errNone != err)
 			break;
-			
+ */
+        BOOL res = GetMessage(&msg, NULL, 0, 0);
+        if (-1 == res)
+        {
+            err = GetLastError();
+            break;
+        }			
+        
 		if (WM_QUIT == msg.message)
 		{
 			err = msg.wParam;
 			break;
 		}
+		
+		if (NULL != msg.hwnd && IsDialog(msg.hwnd) && IsDialogMessage(msg.hwnd, &msg))
+		    continue;
 					
 #ifndef WIN32_PLATFORM_WFSP
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
@@ -127,6 +146,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 			ExtEventFree(msg.lParam);
 		}
 	}
+	lm->connectionManager().stop();
+	if (WAIT_TIMEOUT == WaitForSingleObject(managerThread, 1000))
+	{
+	    assert(false);
+	    TerminateThread(managerThread, -1);
+	}
+	
 	PrefsSave();
 	CleanUp();
 	return err;

@@ -141,6 +141,10 @@ public:
 	void setUDF(UniversalDataFormat* udf);
 	void setStrings(char_t** strings, ulong_t stringsCount);
 	
+    DefinitionModel* releaseDefinitionModel();
+    UniversalDataFormat* releaseUDF();
+    void releaseStrings(char_t**& strings, ulong_t& stringsCount);  
+	
 	ulong_t regCodeDaysToExpire;
 	enum {regCodeDaysNotSet = ulong_t(-1)};
 	bool clientVersionChecked;
@@ -151,6 +155,12 @@ public:
 	status_t fetchUrl(const char* url);
 	
 	bool handleLookupFinishedInForm(Event& event);
+	
+	void acquire() {connectionManager().acquire();}
+	void release() {connectionManager().release();}
+	
+	typedef Guard<LookupManager> Guard;
+	
 
 private:
 

@@ -55,7 +55,7 @@ long ConnectionProgressDialog::handleCommand(ushort notify_code, ushort id, HWND
         case IDCANCEL:
         {
             bool active = lookupManager_.connectionManager().active();
-            lookupManager_.connectionManager().abortConnections();
+            lookupManager_.abortConnections();
             destroy();
             if (!active)
                 return messageHandled;

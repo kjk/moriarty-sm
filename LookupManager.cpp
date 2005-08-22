@@ -28,7 +28,6 @@ static const ServerErrorMapping serverErrors[] =  {
 #include "ServerErrors.hpp"
 };
 
-
 static LookupManager* lookupManager = NULL;
 
 LookupManager* GetLookupManager()
@@ -65,18 +64,21 @@ LookupManager::~LookupManager()
 
 void LookupManager::setDefinitionModel(DefinitionModel* model)
 {
+    Guard g(*this);
 	delete definitionModel;
 	definitionModel = model;
 }
 
 void LookupManager::setUDF(UniversalDataFormat* udff)
 {
+    Guard g(*this);
 	delete udf;
 	udf = udff;
 }
 
 void LookupManager::setStrings(char_t** ss, ulong_t sc)
 {
+    Guard g(*this);
 	StrArrFree(strings, stringsCount);
 	strings = ss;
 	stringsCount = sc;
