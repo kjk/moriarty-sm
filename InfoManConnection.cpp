@@ -149,7 +149,7 @@ status_t InfoManConnection::notifyFinished()
     // then change it into server failure error (shouldn't happen)
     if (lookupResultNone == result_)
     {
-        result_ = lookupResultServerError;
+        result_ = lookupResultError;
         serverError_ = serverErrorFailure;
     }
 
@@ -181,7 +181,7 @@ void InfoManConnection::handleError(status_t error)
 	LookupFinishedEventData* data = new_nt LookupFinishedEventData();
 	if (NULL != data)
 	{
-		data->result = lookupResultError;
+		data->result = lookupResultServerError;
 		data->error = error;
 		ExtEventSendObject(extEventLookupFinished, data);
 	} 

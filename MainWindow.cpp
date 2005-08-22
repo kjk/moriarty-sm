@@ -134,7 +134,8 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 //#ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-            ModuleRun(moduleIdWeather);
+            GetLookupManager()->fetchUrl("s+eBook-browse:title;2;0;*");
+            // ModuleRun(moduleIdWeather);
             // test_PropertyPages(handle());
             return 0;
         }
@@ -173,10 +174,8 @@ LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
             
         const LookupFinishedEventData* data = LookupFinishedData(lParam);
         if (lookupResultEBookBrowse == data->result)
-        {
-            renderer_.setModel(lm->definitionModel, Definition::ownModel);
-            lm->definitionModel = NULL;
-        }
+            renderer_.setModel(lm->releaseDefinitionModel(), Definition::ownModel);
+
         return messageHandled;
     } 
     return Window::callback(msg, wParam, lParam); 

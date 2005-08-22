@@ -229,3 +229,11 @@ bool LookupManager::handleLookupFinishedInForm(Event& event)
     }
     return false;  
 }
+
+DefinitionModel* LookupManager::releaseDefinitionModel()
+{
+    Guard g(*this);
+    DefinitionModel* m = definitionModel;
+    definitionModel = NULL;
+    return m;
+}
