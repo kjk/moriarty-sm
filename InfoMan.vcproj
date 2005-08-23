@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1060,6 +1059,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Recipes"
+				>
+				<File
+					RelativePath=".\RecipesMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RecipesModule.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1175,6 +1186,18 @@
 				</File>
 				<File
 					RelativePath=".\WeatherModule.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Recipes"
+				>
+				<File
+					RelativePath=".\RecipesMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RecipesModule.h"
 					>
 				</File>
 			</Filter>

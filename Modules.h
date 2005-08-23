@@ -98,8 +98,8 @@ void ModuleTouchRunning();
 #define m411BusinessDataStream MODULE_DATA_STREAM(m411ModuleName "-business")
 
 #define recipesModuleName                             "recipes"
-#define recipesListStream epicuriousModuleName "-recipesList"
-#define recipesItemStream epicuriousModuleName "-recipe"
+#define recipesListStream recipesModuleName "-recipesList"
+#define recipesItemStream recipesModuleName "-recipe"
 // #define epicuriousPrefsStream MODULE_PREFS_STREAM(epicuriousModuleName)
 
 #define boxOfficeModuleName                  "boxOffice"

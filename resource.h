@@ -12,11 +12,14 @@
 #define IDS_MAIN                        105
 #define IDS_VIEW                        106
 #define IDS_DONE                        107
+#define IDD_ABOUTBOX                    110
+#define IDD_ABOUTBOX_WIDE               111
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDD_WEATHER_MAIN                502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
 #define IDR_WEATHER_MENU                503
+#define IDD_RECIPES_MAIN                503
 #define IDS_ALERT_MALFORMED_REQUEST     504
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
@@ -41,6 +44,9 @@
 #define IDC_WEATHER_DAYS_LIST           2015
 #define IDC_WEATHER_DAY_SELECT          2017
 #define IDC_WEATHER_DAY_SPIN            2018
+#define IDC_BACK                        2020
+#define IDC_SEARCH                      2021
+#define IDC_SEARCH_TERM                 2022
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -48,21 +54,19 @@
 #define IDM_VIEW                        40004
 #define ID_MAIN_CHANGELOCATION          50001
 #define ID_MAIN_UPDATE                  50002
-#define ID_MAIN_DONE                    50003
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
-#define ID_VIEW_TEMPERATURE             50006
 #define ID_TEMPERATURE_FAHRENHEIT       50007
 #define ID_TEMPERATURE_CELSIUS          50008
-#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        505
+#define _APS_NO_MFC                     1
+#define _APS_NEXT_RESOURCE_VALUE        506
 #define _APS_NEXT_COMMAND_VALUE         50009
-#define _APS_NEXT_CONTROL_VALUE         2020
+#define _APS_NEXT_CONTROL_VALUE         2023
 #define _APS_NEXT_SYMED_VALUE           501
 #endif
 #endif

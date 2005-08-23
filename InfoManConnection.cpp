@@ -48,7 +48,7 @@ void InfoManConnection::prepareWriter()
 		if (NULL == historyCache_)
 			return;
 			
-		char_t* name = UTF8_ToNative(currentField_->dataSinkName);
+		char_t* name = GetStorePath((const char_t*)currentField_->dataSinkName);
 		if (NULL == name)
 			return;
  

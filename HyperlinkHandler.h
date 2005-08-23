@@ -44,6 +44,9 @@
 
 #define urlSchemaClipboardCopy                "clipbrdcopy"
 
+#define urlSchemaRecipesList             "s+recipeslist"
+
+
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'
 #define urlSeparatorSchemaStr                 ":"

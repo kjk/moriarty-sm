@@ -1,5 +1,6 @@
 #include "FieldMetaData.h"
 #include "InfoManConnection.h"
+#include "Modules.h"
 #include <algorithm>
 #include <Text.hpp>
 
@@ -26,7 +27,7 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
 #define FIELD_VALUE(name, handler) FIELD_VALUE_RESULT(name, handler, lookupResultNone)
 
 #define FIELD_BCF_RESULT(name, result, dataSink, sinkIsHistoryCache) \
-    {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (result), (dataSink), (sinkIsHistoryCache)}
+    {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (result), (const char*)(dataSink), (sinkIsHistoryCache)}
 
 #define FBRS(name, result, dataSink, sinkIsHistoryCache) \
     FIELD_BCF_RESULT(FIELD_NAME(name), result, dataSink, sinkIsHistoryCache)
@@ -35,12 +36,20 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
     FIELD_VALUE(FIELD_NAME(name), FIELD_HANDLER(name)) 
 #define FVRS(name, res) \
     FIELD_VALUE_RESULT(FIELD_NAME(name), FIELD_HANDLER(name), (res))
+   
+#define FIELD_UDF_RESULT(name, result, dataSink, sinkIsHistoryCache) \
+    {(name), fieldTypePayload, FIELD_HANDLER(Udf), &InfoManConnection::completeUdfField, (result), (const char*)(dataSink), (sinkIsHistoryCache)}
+
+#define FURS(name, result, dataSink, sinkIsHistoryCache) \
+    FIELD_UDF_RESULT(FIELD_NAME(name), result, dataSink, sinkIsHistoryCache)
 
 static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
     FVRS(Error, lookupResultServerError), 
-    FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, NULL, false), 
+    FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, ebookHistoryCacheName, true), 
     FVAL(LatestClientVersion),
+    FURS(Recipe, lookupResultRecipe, recipesItemStream, false), 
+    FURS(RecipesList, lookupResultRecipesList, recipesListStream, false), 
 	FVAL(TransactionId),
     FVAL(EBookVersion),
 };

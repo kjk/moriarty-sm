@@ -56,7 +56,8 @@ long ConnectionProgressDialog::handleCommand(ushort notify_code, ushort id, HWND
         {
             bool active = lookupManager_.connectionManager().active();
             lookupManager_.abortConnections();
-            destroy();
+            extEventHelper_.stop();
+            EndDialog(handle(), IDCANCEL);
             if (!active)
                 return messageHandled;
                 
@@ -94,7 +95,8 @@ long ConnectionProgressDialog::handleExtendedEvent(LPARAM& event)
         {
             const LookupFinishedEventData* data = LookupFinishedData(event);
             bool handled = lookupManager_.handleLookupFinishedInForm(event);
-            destroy();
+            extEventHelper_.stop();
+            EndDialog(handle(), IDOK);
             if (!handled)
                 ExtEventRepost(event);
             return messageHandled;
@@ -106,6 +108,7 @@ long ConnectionProgressDialog::handleExtendedEvent(LPARAM& event)
 void ConnectionProgressDialog::updateProgress()
 {
     char_t buffer[32];
+    LookupManager::Guard g(lookupManager_); 
     uint_t percent = lookupManager_.percentProgress();
     if (LookupManager::percentProgressDisabled == percent)
     { 

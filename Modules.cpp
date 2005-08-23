@@ -1,5 +1,7 @@
 #include "Modules.h"
+
 #include "WeatherModule.h"
+#include "RecipesModule.h"
 
 #ifdef _WIN32
 #include "ModuleDialog.h"
@@ -71,7 +73,7 @@ static Module modules[] = {
     MOD(moduleIdPedia, pediaModuleName, _T("Encyclopedia"), encyclopediaSmallBitmap, frmInvalidObjectId, uint_t(-1), pediaMainForm, NULL, NULL, true, false),
     MOD(moduleIdDict, dictModuleName, _T("Dictionary"), dictionarySmallBitmap, frmInvalidObjectId, uint_t(-1), dictMainForm, NULL, NULL, true, false),
     MOD(moduleIdLyrics, lyricsModuleName, _T("Lyrics"), lyricsSmallBitmap, frmInvalidObjectId, uint_t(-1), lyrics2MainForm, NULL, NULL, false, false),
-    MOD(moduleIdRecipes, recipesModuleName, _T("Recipes"), epicuriousSmallBitmap, frmInvalidObjectId, uint_t(-1), epicuriousMainForm, NULL, epicuriousDataRead, false, false),
+    MOD(moduleIdRecipes, recipesModuleName, _T("Recipes"), epicuriousSmallBitmap, frmInvalidObjectId, uint_t(-1), epicuriousMainForm, RecipesStart, epicuriousDataRead, false, false),
     MOD(moduleIdListsOfBests, listsOfBestsModuleName, _T("Lists of bests"), listofbestsSmallBitmap, frmInvalidObjectId, uint_t(-1), listsOfBestsMainForm, NULL, NULL, false, false),
     // MOD(moduleIdTvListings, _T("TV Listings"), tvListingsSmallBitmap, frmInvalidObjectId, uint_t(-1), tvListingsMainForm, NULL, NULL, true, false),
     MOD(moduleIdQuotes, quotesModuleName, _T("Quotes"), quotationsSmallBitmap, frmInvalidObjectId, uint_t(-1), quotesMainForm, NULL, quotesDataRead, true, true),

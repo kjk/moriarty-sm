@@ -209,7 +209,8 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 #endif
 
 #ifdef _WIN32
-    ConnectionProgressDialog::create(ExtEventGetWindow());
+    ConnectionProgressDialog::showModal(ExtEventGetWindow());
+    // ConnectionProgressDialog::create(ExtEventGetWindow());
 #endif
     
     return errNone; 
@@ -257,6 +258,14 @@ DefinitionModel* LookupManager::releaseDefinitionModel()
     DefinitionModel* m = definitionModel;
     definitionModel = NULL;
     return m;
+}
+
+UniversalDataFormat* LookupManager::releaseUDF()
+{
+    Guard g(*this);
+    UniversalDataFormat* u = udf;
+    udf = NULL;
+    return u;   
 }
 
 bool HandleCrossModuleLookup(Event& event, const char_t* cacheName, const char_t* moduleName)
@@ -336,22 +345,29 @@ void FinishCrossModuleLookup(HistorySupport& history, const char_t* moduleName)
     lm->crossModuleLookup = false;
     if (NULL == lm->historyCacheName)
     {   
-        Log(eLogWarning, _T("FinishCrossModuleLookup(): lm.lastHistoryCacheName is NULL, won't write return link."), true);
+        Log(eLogWarning, _T("FinishCrossModuleLookup(): lm.historyCacheName is NULL, won't write return link."), true);
         return;
     }
-    const char_t* lastCacheName = lm->historyCacheName;
+    char_t* lastCacheName = GetStorePath(lm->historyCacheName);
     lm->historyCacheName = NULL;
+    if (NULL == lastCacheName)
+    {
+        Log(eLogWarning, _T("FinishCrossModuleLookup(): GetStorePath() returned NULL, not enough memory?"), true);
+        return; 
+    }  
     
     HistoryCache thisModuleCache;
     status_t err = thisModuleCache.open(history.cacheName());
     if (errNone != err)
     {
         LogStrUlong(eLogError, _T("FinishCrossModuleLookup(): unable to open thisModuleCache: "), err);
+        free(lastCacheName);
         return;
     }
     
     HistoryCache prevModuleCache;
     err = prevModuleCache.open(lastCacheName);
+    free(lastCacheName); 
     if (errNone != err)
     {
         LogStrUlong(eLogError, _T("FinishCrossModuleLookup(): unable to open prevModuleCache: "), err);
@@ -367,19 +383,34 @@ void FinishCrossModuleLookup(HistorySupport& history, const char_t* moduleName)
     const char* url = thisModuleCache.entryUrl(history.currentHistoryIndex);
     const char_t* title = thisModuleCache.entryTitle(history.currentHistoryIndex);
    
-    // TODO: finish porting FinishCrossModuleLookup()
-/*    
-    if (NULL != moduleName && NULL != str.AppendCharP3(moduleName, _T(": "), title))
-        title = str.GetCStr();
-        
+    if (NULL == (str = StrAppend(str, -1, moduleName, -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 1."), true);
+         return;
+    }
+   
+    if (NULL == (str = StrAppend(str, -1, _T(": "), -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 2."), true);
+         return;
+    }
+
+    if (NULL == (str = StrAppend(str, -1, title, -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 3."), true);
+         return;
+    }
+   
     err = prevModuleCache.removeEntry(url);
     if (errNone != err)
-        LogStrUlong(eLogWarning, "FinishCrossModuleLookup(): unable to remove old entry from prevModuleCache: ", err);
-    
-    err = prevModuleCache.appendLink(url, title);
+        LogStrUlong(eLogWarning, _T("FinishCrossModuleLookup(): unable to remove old entry from prevModuleCache: "), err);
+
+    err = prevModuleCache.appendLink(url, str);
+    free(str);
+    str = NULL; 
     if (errNone != err)
     {
-        LogStrUlong(eLogError, "FinishCrossModuleLookup(): unable to append link to prevModuleCache: ", err);
+        LogStrUlong(eLogError, _T("FinishCrossModuleLookup(): unable to append link to prevModuleCache: "), err);
         return;
     }
     
@@ -387,32 +418,47 @@ void FinishCrossModuleLookup(HistorySupport& history, const char_t* moduleName)
     assert(0 != count); // We just wrote an entry to that cache.
     if (1 == count)
     {
-        Log(eLogWarning, "FinishCrossModuleLookup(): prevModuleCache was empty, not possible to write return link to thisModuleCache.", true);
+        Log(eLogWarning, _T("FinishCrossModuleLookup(): prevModuleCache was empty, not possible to write return link to thisModuleCache."), true);
         return;
     }
     
     url = prevModuleCache.entryUrl(count - 2);
     title = prevModuleCache.entryTitle(count - 2);
-    str.Truncate(0);
+    assert(NULL != lm->moduleName);
     
-    if (NULL != lm.lastModuleName && NULL != str.AppendCharP3(lm.lastModuleName, _T(": "), title))
-        title = str.GetCStr();
-            
+    if (NULL == (str = StrAppend(str, -1, lm->moduleName, -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 4."), true);
+         return;
+    }
+   
+    if (NULL == (str = StrAppend(str, -1, _T(": "), -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 5."), true);
+         return;
+    }
+
+    if (NULL == (str = StrAppend(str, -1, title, -1)))
+    {
+         Log(eLogError, _T("FinishCrossModuleLookup(): str is NULL 6."), true);
+         return;
+    }
+    
     err = thisModuleCache.removeEntry(url);
     if (errNone != err)
-        LogStrUlong(eLogWarning, "FinishCrossModuleLookup(): unable to remove old entry from thisModuleCache: ", err);
+        LogStrUlong(eLogWarning, _T("FinishCrossModuleLookup(): unable to remove old entry from thisModuleCache: "), err);
     
     count = thisModuleCache.entriesCount();
     if (0 == count)
-        err = thisModuleCache.appendLink(url, title);
+        err = thisModuleCache.appendLink(url, str);
     else
-        err = thisModuleCache.insertLink(count - 1, url, title);
+        err = thisModuleCache.insertLink(count - 1, url, str);
+    free(str);
         
     if (errNone != err)
     {
-        Log(eLogError, "FinishCrossModuleLookup(): unable to insert return link to into thisModuleCache: ", err);
+        Log(eLogError, _T("FinishCrossModuleLookup(): unable to insert return link to into thisModuleCache: "), err);
         return;
     }
     history.currentHistoryIndex = thisModuleCache.entriesCount() - 1;
- */
  }

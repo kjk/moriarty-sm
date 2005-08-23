@@ -22,6 +22,9 @@
 
 #define fieldGetUrlEBookBrowse          prefixFieldGetUrl "eBook-browse"
 
+#define fieldRecipesList                      "Recipes-List"
+#define fieldRecipe                            "Recipe"
+
 enum ResponseFieldType {
 	fieldTypeValue,
 	fieldTypePayload,
@@ -35,7 +38,7 @@ typedef status_t (InfoManConnection::* ResponsePayloadCompletionHandler)(BinaryI
 
 struct ResponseFieldDescriptor {
 
-// WARNING: Visual C++ 2005 B2 seems to be broken when aligning poointers-to-member-functions.
+// WARNING: Visual C++ 2005 B2 seems to be broken when aligning pointers-to-member-functions.
 // That's why these ugly fillXxxx__ unions are used.
 #if _MSC_VER >= 1400
 

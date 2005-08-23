@@ -15,13 +15,13 @@ class ConnectionProgressDialog: public Dialog {
     
     ConnectionProgressDialog(AutoDeleteOption ad);
 
-    static long showModal(HWND owner); 
    
     void updateProgress(); 
     
 public:
 
     static ConnectionProgressDialog* create(HWND parent);
+    static long showModal(HWND owner); 
     
 protected:
 

@@ -134,7 +134,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 //#ifndef WIN32_PLATFORM_WFSP
         case IDM_HELP_ABOUT: 
         {
-            ModuleRun(moduleIdWeather);
+            ModuleRun(moduleIdRecipes);
             // test_PropertyPages(handle());
             return 0;
         }
