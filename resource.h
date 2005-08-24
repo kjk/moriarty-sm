@@ -24,9 +24,14 @@
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
 #define IDS_ALERT_REQUEST_ARGUMENT_MISSING 507
+#define IDB_RECIPES_LARGE               507
 #define IDS_ALERT_UNEXPECTED_REQUEST_ARGUMENT 508
+#define IDB_RECIPES_SMALL               508
 #define IDS_ALERT_INVALID_COOKIE        509
+#define IDB_NONE_SMALL                  509
 #define IDS_ALERT_USER_DISABLED         510
+#define IDB_BITMAP1                     510
+#define IDB_NONE_LARGE                  510
 #define IDS_ALERT_INVALID_REG_CODE      511
 #define IDS_ALERT_FORCE_UPGRADE         512
 #define IDS_ALERT_INVALID_REQUEST       513
@@ -37,6 +42,7 @@
 #define IDS_ALERT_CONNECTION_TIMEOUT    518
 #define IDS_ALERT_NO_RESULTS            519
 #define IDS_ALERT_LOCATION_UNKNOWN      520
+#define IDS_ALERT_NOT_IMPLEMENTED       521
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -64,7 +70,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        506
+#define _APS_NEXT_RESOURCE_VALUE        511
 #define _APS_NEXT_COMMAND_VALUE         50009
 #define _APS_NEXT_CONTROL_VALUE         2023
 #define _APS_NEXT_SYMED_VALUE           501

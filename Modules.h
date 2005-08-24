@@ -45,9 +45,9 @@ struct Module {
     ModuleID id;
     const char* name;
     char_t* displayName;    
-    uint_t iconId;
-#ifdef _PALM_OS
+    uint_t smallIconId;
     uint_t largeIconId;
+#ifdef _PALM_OS
     uint_t mainFormId; 
 #endif
 #ifdef _WIN32
@@ -158,5 +158,21 @@ void ModuleTouchRunning();
 #define eBayHistoryCacheName MODULE_HISTORY_CACHE(eBayModuleName)
 
 #define flickrModuleName "flickr"
+
+#ifdef _WIN32
+#define MODULE_STARTER_DECLARE(name) \
+class ModuleDialog; \
+ModuleDialog* name ## Start() 
+
+#define MODULE_STARTER_DEFINE(name) \
+ModuleDialog* name ## Start() \
+{ \
+    return name ## MainDialog::create(); \
+}
+ 
+#else
+#define MODULE_STARTER_DECLARE(name) 
+#define MODULE_STARTER_DEFINE(name)
+#endif
 
 #endif

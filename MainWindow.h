@@ -17,10 +17,13 @@ class MainWindow: public Window
 #endif
 	
 	TextRenderer renderer_;
+	ListView listView_;
 	
 public:
 
 	static MainWindow* create(const char_t* title, const char_t* windowClass);
+	
+    bool createModuleItems();
 	
 protected:
 	
@@ -33,6 +36,8 @@ protected:
 	long handleResize(UINT sizeType, ushort width, ushort height);
 	
 	LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
+	
+	long handleNotify(int controlId, const NMHDR& header);
 	
 };
 

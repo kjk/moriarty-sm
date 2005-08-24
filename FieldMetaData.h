@@ -19,6 +19,7 @@
 #define fieldEBookVersion                  "eBook-Version"
 #define fieldLatestClientVersion           "Latest-Client-Version"
 #define fieldTransactionId                   transactionIdField
+#define fieldNoResults                        "No-Results"
 
 #define fieldGetUrlEBookBrowse          prefixFieldGetUrl "eBook-browse"
 

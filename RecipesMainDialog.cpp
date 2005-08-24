@@ -3,6 +3,7 @@
 #include "HyperlinkHandler.h"
 #include "Modules.h"
 #include "LookupManager.h"
+#include "RecipesModule.h"
 
 #include <ByteFormatParser.hpp>
 #include <Text.hpp>
@@ -49,31 +50,35 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 bool RecipesMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
 {
     LookupManager* lm = GetLookupManager();
+    UniversalDataFormat* udf = NULL; 
     switch (data->result)
     {
         case lookupResultRecipesList: 
         {
-            UniversalDataFormat* udf = lm->releaseUDF();
+            udf = lm->releaseUDF();
             assert(NULL != udf);
             delete listModel_;
             listModel_ =  DefinitionModelFromUDF(*udf);
+            delete udf; 
             if (NULL == listModel_)
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
             else 
                 setDisplayMode(showList);
-            delete udf; 
             return true;
         }
-/*        
+
         case lookupResultRecipe:
+            udf = lm->releaseUDF();
+            assert(NULL != udf);
             delete itemModel_;
-            itemModel_ = lm->releaseDefinitionModel();
+            itemModel_ = RecipeExtractFromUDF(*udf);
+            delete udf;
             if (NULL == itemModel_)
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
             else
                 setDisplayMode(showItem);
             return true;  
- */            
+
     }
     return ModuleDialog::handleLookupFinished(event, data); 
 }

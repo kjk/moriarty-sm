@@ -114,8 +114,20 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 	Rect r;
 	bounds(r);
-	if (!renderer_.create(WS_VISIBLE|WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
+	if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 		return createFailed;
+
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+        return createFailed;
+
+#ifndef LVS_EX_DOUBLEBUFFER
+#define LVS_EX_DOUBLEBUFFER 0
+#endif
+    
+    listView_.setStyleEx(LVS_EX_DOUBLEBUFFER | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
+        
+    if (!createModuleItems())
+        return createFailed; 
 
 	return Window::handleCreate(cs);
 }
@@ -160,6 +172,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
 	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
 	return Window::handleResize(sizeType, width, height);
 }
 
@@ -255,3 +268,130 @@ void test_PropertyPages(HWND parent)
     //UpdateWindow(wnd);      
 }
  */
+
+static void BitmapSize(HBITMAP bmp, LONG& w, LONG& h)
+{
+    BITMAP b;
+    int res = GetObject(bmp, sizeof(b), &b);
+    assert(0 != res);
+    w = b.bmWidth;
+    h = b.bmHeight;
+}
+
+bool MainWindow::createModuleItems()
+{
+    ulong_t actCount = ModuleActiveCount();
+    ulong_t count = ModuleCount();
+     
+    HINSTANCE inst = GetInstance();
+    HIMAGELIST smallIcons = NULL;
+    HIMAGELIST largeIcons = NULL;
+    HBITMAP bmp = NULL;
+    
+    LONG w, h;
+    ulong_t index = 0; 
+    for (ulong_t i = 0; i < count; ++i) 
+    {
+        const Module* module = ModuleGet(i);
+        if (!module->active())
+            continue;
+        
+        bmp = LoadBitmap(inst, MAKEINTRESOURCE(module->smallIconId));
+        if (NULL == bmp)
+            goto Error;
+        if (NULL == smallIcons)
+        {
+            BitmapSize(bmp, w, h);
+
+#ifndef ILC_COLOR16
+#define ILC_COLOR16 ILC_COLOR
+#endif
+            
+            smallIcons = ImageList_Create(w, h, ILC_COLOR16|ILC_MASK, actCount, 1);
+            if (NULL == smallIcons)
+                goto Error;
+        }
+        if (-1 == ImageList_AddMasked(smallIcons, bmp, RGB(255, 255, 255)))
+            goto Error;
+        
+        DeleteObject(bmp);
+        
+        bmp = LoadBitmap(inst, MAKEINTRESOURCE(module->largeIconId));
+        if (NULL == bmp)
+            goto Error;
+        if (NULL == largeIcons)
+        {
+            BitmapSize(bmp, w, h);
+            largeIcons = ImageList_Create(w, h, ILC_COLOR16|ILC_MASK, actCount, 1);
+            if (NULL == smallIcons)
+                goto Error;
+        }
+        if (-1 == ImageList_AddMasked(largeIcons, bmp, RGB(255, 255, 255)))
+            goto Error;
+        
+        DeleteObject(bmp);
+        bmp = NULL;
+        ++index; 
+    }  
+    
+    smallIcons = listView_.setImageList(smallIcons, LVSIL_SMALL);
+    if (NULL != smallIcons)
+        ImageList_Destroy(smallIcons);
+
+    largeIcons = listView_.setImageList(largeIcons, LVSIL_NORMAL);
+    if (NULL != largeIcons)
+        ImageList_Destroy(largeIcons); 
+
+    listView_.clear();
+    index = 0; 
+    for (ulong_t i = 0; i < count; ++i)
+    {
+        const Module* module = ModuleGet(i);
+        if (!module->active())
+            continue;
+        
+        const char_t* name = module->displayName;
+        LVITEM item;
+        ZeroMemory(&item, sizeof(item));
+
+        item.mask = LVIF_TEXT | LVIF_IMAGE;
+        item.iItem = index++;
+        item.iSubItem = 0;
+        item.pszText = const_cast<char_t*>(name);
+        item.iImage = item.iItem;
+        
+        if (-1 == listView_.insertItem(item))
+            goto Error;
+    }   
+    return true;
+Error:
+    DWORD res = GetLastError();
+    if (NULL != bmp)
+        DeleteObject(bmp); 
+    if (NULL != smallIcons)
+        ImageList_Destroy(smallIcons);
+    if (NULL != largeIcons)
+        ImageList_Destroy(largeIcons);
+    return false;  
+} 
+
+long MainWindow::handleNotify(int controlId, const NMHDR& header)
+{
+    if  (LVN_ITEMACTIVATE == header.code)
+    {
+        const NMLISTVIEW& h = (const NMLISTVIEW&)header;
+        if (-1 == h.iItem)
+            goto Default;
+        
+        const Module* module = ModuleGetActive(h.iItem);
+        assert(NULL != module);
+        status_t err = ModuleRun(module->id);
+        if (memErrNotEnoughSpace == err)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        else if (errNone != err)
+            Alert(IDS_ALERT_NOT_IMPLEMENTED);
+        return messageHandled;
+    }
+Default:
+    return Window::handleNotify(controlId, header); 
+}

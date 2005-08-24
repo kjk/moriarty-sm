@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1207,6 +1208,26 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\bitmap1.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\bitmap2.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\bmp00001.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\epicurious-small-lg-8.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\epicurious-small-sm-8.bmp"
+				>
+			</File>
 			<File
 				RelativePath=".\InfoMan.ico"
 				>
