@@ -6,7 +6,7 @@
 #define IDC_INFOMAN                     2
 #define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
-#define IDR_MENU                        102
+#define IDR_MAIN_MENU                   102
 #define IDS_OK                          103
 #define IDS_HELP                        104
 #define IDS_MAIN                        105
@@ -30,7 +30,6 @@
 #define IDS_ALERT_INVALID_COOKIE        509
 #define IDB_NONE_SMALL                  509
 #define IDS_ALERT_USER_DISABLED         510
-#define IDB_BITMAP1                     510
 #define IDB_NONE_LARGE                  510
 #define IDS_ALERT_INVALID_REG_CODE      511
 #define IDS_ALERT_FORCE_UPGRADE         512
@@ -64,6 +63,9 @@
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
 #define ID_TEMPERATURE_CELSIUS          50008
+#define ID_VIEW_LIST                    50009
+#define IDM_VIEW_ICONS                  50010
+#define ID_VIEW_ICONS                   50011
 
 // Next default values for new objects
 // 
@@ -71,7 +73,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        511
-#define _APS_NEXT_COMMAND_VALUE         50009
+#define _APS_NEXT_COMMAND_VALUE         50012
 #define _APS_NEXT_CONTROL_VALUE         2023
 #define _APS_NEXT_SYMED_VALUE           501
 #endif

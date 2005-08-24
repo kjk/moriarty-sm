@@ -169,11 +169,12 @@ END
 // Menu
 //
 
-IDR_MENU MENU 
+IDR_MAIN_MENU MENU 
 BEGIN
-    POPUP "Help"
+    POPUP "View"
     BEGIN
-        MENUITEM "About",                       IDM_HELP_ABOUT
+        MENUITEM "Icons",                       ID_VIEW_ICONS
+        MENUITEM "List",                        ID_VIEW_LIST
     END
 END
 
@@ -188,13 +189,10 @@ BEGIN
     POPUP "View"
     BEGIN
         MENUITEM "Detailed",                    ID_VIEW_DETAILED
-        MENUITEM "Summary",                     ID_VIEW_SUMMARY, CHECKED
+        MENUITEM "Summary",                     ID_VIEW_SUMMARY
         MENUITEM SEPARATOR
-        POPUP "Temperature"
-        BEGIN
-            MENUITEM "Fahrenheit",                  ID_TEMPERATURE_FAHRENHEIT, CHECKED
-            MENUITEM "Celsius",                     ID_TEMPERATURE_CELSIUS
-        END
+        MENUITEM "Fahrenheit",                  ID_TEMPERATURE_FAHRENHEIT
+        MENUITEM "Celsius",                     ID_TEMPERATURE_CELSIUS
     END
 END
 

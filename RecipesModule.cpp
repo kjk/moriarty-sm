@@ -69,7 +69,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
    
     status_t err = errNone;
     TextElement* text = NULL;
-    const char_t* str = NULL;
+    const char* str = NULL;
     //if (prefs.fDisplayRecipePart[prefs.recipeName])
     {
         TXT(recipe.getItemText(0, recipeNameIndex));
@@ -82,15 +82,16 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
 
     //if (prefs.fDisplayRecipePart[prefs.recipeNote])
     {
-        str = recipe.getItemText(0, recipeInfoIndex);
+        str = recipe.getItemData(0, recipeInfoIndex);
         if (0 != Len(str))
         {
             // avoid displaying huge empty space due to line breaks
             // if we don't have recipe info
             // TODO: maybe the test for empty string should be more
             // sophisticated
-            // parseSimpleFormatting(elems, str);
-            // TODO: implement parseSimpleFormatting()
+            if (errNone != (err = DefinitionParseSimple(*model, str, -1)))
+                goto Error;
+
             APP(new_nt LineBreakElement());
             APP(new_nt LineBreakElement());
         }
@@ -102,8 +103,9 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         text->setStyle(StyleGetStaticStyle(styleNameHeader));
         APP(new_nt LineBreakElement());
 
-        str = recipe.getItemText(0, recipeIngredientsIndex);
-        //parseSimpleFormatting(elems, str);
+        str = recipe.getItemData(0, recipeIngredientsIndex);
+        if (errNone != (err = DefinitionParseSimple(*model, str, -1)))
+            goto Error;
         APP(new_nt LineBreakElement());
         APP(new_nt LineBreakElement());
     }    
@@ -114,8 +116,9 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         text->setStyle(StyleGetStaticStyle(styleNameHeader));
         APP(new_nt LineBreakElement());
 
-        str = recipe.getItemText(0, recipePreperationIndex);
-        //parseSimpleFormatting(elems, str);
+        str = recipe.getItemData(0, recipePreperationIndex);
+        if (errNone != (err = DefinitionParseSimple(*model, str, -1)))
+            goto Error;
         APP(new_nt LineBreakElement());
         APP(new_nt LineBreakElement());
     }    

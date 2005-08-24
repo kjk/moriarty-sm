@@ -108,7 +108,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     extEventHelper_.start(handle());
     
 #ifdef SHELL_MENUBAR
-	if (!menuBar_.create(handle(), 0, IDR_MENU))
+	if (!menuBar_.create(handle(), 0, IDR_MAIN_MENU))
 	    return createFailed;
 #endif
 
@@ -125,6 +125,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 #endif
     
     listView_.setStyleEx(LVS_EX_DOUBLEBUFFER | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
+    ListView_SetTextBkColor(listView_.handle(), CLR_NONE);
         
     if (!createModuleItems())
         return createFailed; 
@@ -143,14 +144,13 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
     switch (id)
     {
 
-//#ifndef WIN32_PLATFORM_WFSP
-        case IDM_HELP_ABOUT: 
-        {
-            ModuleRun(moduleIdRecipes);
-            // test_PropertyPages(handle());
-            return 0;
-        }
-//#endif // !WIN32_PLATFORM_WFSP
+        case ID_VIEW_ICONS:
+            listView_.modifyStyle(LVS_ICON, LVS_LIST);
+            return messageHandled;
+        
+        case ID_VIEW_LIST:
+            listView_.modifyStyle(LVS_LIST, LVS_ICON);
+            return messageHandled;
 
 #ifdef WIN32_PLATFORM_WFSP
         case IDCLOSE:
