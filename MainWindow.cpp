@@ -114,22 +114,19 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 	Rect r;
 	bounds(r);
-	if (!renderer_.create(WS_TABSTOP, 0, 0, r.width(), r.height(), handle(), cs.hInstance))
-		return createFailed;
+	//if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
+	//	return createFailed;
 
-    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
         
 #ifndef LVS_EX_DOUBLEBUFFER
 #define LVS_EX_DOUBLEBUFFER 0
 #endif
     
-    listView_.setStyleEx(LVS_EX_DOUBLEBUFFER | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
+    listView_.setStyleEx(/* LVS_EX_DOUBLEBUFFER | */ LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
 
-    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-    ListView_SetIconSpacing(listView_.handle(), 75, 66);
-        
     if (!createModuleItems())
         return createFailed; 
 
@@ -174,25 +171,32 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	renderer_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
-	listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+	//renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+
+    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
+    ushort iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / 70);
+    ushort iconHeight = height / (height / 65);
+    ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
+	
+	update();
 	return Window::handleResize(sizeType, width, height);
 }
 
 LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam))
-    {
-        LookupManager* lm = GetLookupManager();
-        if (lm->handleLookupFinishedInForm(lParam))
-            return messageHandled;
-            
-        const LookupFinishedEventData* data = LookupFinishedData(lParam);
-        if (lookupResultEBookBrowse == data->result)
-            renderer_.setModel(lm->releaseDefinitionModel(), Definition::ownModel);
+    //if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam))
+    //{
+    //    LookupManager* lm = GetLookupManager();
+    //    if (lm->handleLookupFinishedInForm(lParam))
+    //        return messageHandled;
+    //        
+    //    const LookupFinishedEventData* data = LookupFinishedData(lParam);
+    //    if (lookupResultEBookBrowse == data->result)
+    //        renderer_.setModel(lm->releaseDefinitionModel(), Definition::ownModel);
 
-        return messageHandled;
-    } 
+    //    return messageHandled;
+    //} 
     return Window::callback(msg, wParam, lParam); 
 }
 
@@ -397,4 +401,12 @@ long MainWindow::handleNotify(int controlId, const NMHDR& header)
     }
 Default:
     return Window::handleNotify(controlId, header); 
+}
+
+long MainWindow::handleActivate(ushort action, bool minimized, HWND prev)
+{
+    if (WA_ACTIVE == action || WA_CLICKACTIVE == action)
+        listView_.focus();
+         
+    return Window::handleActivate(action, minimized, prev); 
 }

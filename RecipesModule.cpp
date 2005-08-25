@@ -1,11 +1,19 @@
 #include "RecipesModule.h"
 #include "MoriartyStyles.hpp"
 
+#include <ExtendedEvent.hpp>
+
 #ifdef _WIN32
 #include "RecipesMainDialog.h"
 #endif
 
-MODULE_STARTER_DEFINE(Recipes)
+ MODULE_STARTER_DEFINE(Recipes)
+
+//ModuleDialog* RecipesStart()
+//{
+//    RecipesMainDialog::showModal(ExtEventGetWindow());
+//    return NULL ;
+//}
 
 #include <Definition.hpp>
 #include <UniversalDataFormat.hpp>

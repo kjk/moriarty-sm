@@ -28,7 +28,7 @@ public:
     enum {menuBarNone = UINT(-1)}; 
     enum AdvancedOption {advanced}; 
 
-	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN);
+	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
 	
 	explicit ModuleDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
 	

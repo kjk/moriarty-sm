@@ -4,7 +4,7 @@
 #include <WindowsCE/Window.hpp>
 #include <WindowsCE/CommandBar.hpp>
 #include <WindowsCE/Controls.hpp>
-#include <WindowsCE/WinTextRenderer.hpp>
+// #include <WindowsCE/WinTextRenderer.hpp>
 #include <ExtendedEvent.hpp>
 
 class MainWindow: public Window
@@ -16,7 +16,7 @@ class MainWindow: public Window
 	CommandBar menuBar_;
 #endif
 	
-	TextRenderer renderer_;
+	// TextRenderer renderer_;
 	ListView listView_;
 	
 public:
@@ -38,6 +38,8 @@ protected:
 	LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
 	
 	long handleNotify(int controlId, const NMHDR& header);
+	
+	long handleActivate(ushort action, bool minimized, HWND prev);
 	
 };
 

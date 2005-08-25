@@ -11,9 +11,9 @@ ModuleDialog::ModuleDialog(AdvancedOption, bool inputDialog, DWORD initDialogFla
 
 ModuleDialog::ModuleDialog(UINT menuBarId, bool inputDialog):
 #ifdef WIN32_PLATFORM_WFSP 
-    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN),
+    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN),
 #else
-    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIPDOWN | SHIDIF_SIZEDLGFULLSCREEN | (menuBarNone == menuBarId ? SHIDIF_EMPTYMENU : 0 )),
+    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN | (menuBarNone == menuBarId ? SHIDIF_EMPTYMENU : 0 )),
 #endif
     menuBarId_(menuBarId)
 {

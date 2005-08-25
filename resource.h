@@ -86,7 +86,6 @@
 #define IDB_QUOTES_LARGE                551
 #define IDB_QUOTES_SMALL                552
 #define IDB_STOCKS_LARGE                553
-#define IDB_BITMAP2                     554
 #define IDB_STOCKS_SMALL                554
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
@@ -112,6 +111,7 @@
 #define ID_VIEW_LIST                    50009
 #define IDM_VIEW_ICONS                  50010
 #define ID_VIEW_ICONS                   50011
+#define ID_VIEW_PREFERENCES             50012
 
 // Next default values for new objects
 // 
@@ -119,7 +119,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        555
-#define _APS_NEXT_COMMAND_VALUE         50012
+#define _APS_NEXT_COMMAND_VALUE         50013
 #define _APS_NEXT_CONTROL_VALUE         2023
 #define _APS_NEXT_SYMED_VALUE           501
 #endif

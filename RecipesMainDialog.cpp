@@ -29,6 +29,12 @@ RecipesMainDialog::~RecipesMainDialog()
 
 MODULE_DIALOG_CREATE_IMPLEMENT(RecipesMainDialog, IDD_RECIPES_MAIN);
 
+long RecipesMainDialog::showModal(HWND parent)
+{
+    RecipesMainDialog dlg;
+    return dlg.ModuleDialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_MAIN), parent); 
+}
+
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 {
 	Rect r;
@@ -43,8 +49,8 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 	search_.attachControl(handle(), IDC_SEARCH);
 	
     setDisplayMode(displayMode_);
-	
-    return ModuleDialog::handleInitDialog(wnd, lp);
+	ModuleDialog::handleInitDialog(wnd, lp);
+    return FALSE;
 }
 
 bool RecipesMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)

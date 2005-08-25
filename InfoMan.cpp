@@ -6,6 +6,7 @@
 #include "Tests.h"
 #include "LookupManager.h"
 #include "HyperlinkHandler.h"
+#include "ModuleDialog.h"
 
 #include <Text.hpp>
 #include <SysUtils.hpp>
@@ -127,7 +128,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 			break;
 		}
 		
-		if (NULL != msg.hwnd && IsDialog(msg.hwnd) && IsDialogMessage(msg.hwnd, &msg))
+		if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
 		    continue;
 					
 #ifndef WIN32_PLATFORM_WFSP

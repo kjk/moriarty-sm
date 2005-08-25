@@ -112,6 +112,7 @@ BEGIN
     PUSHBUTTON      "Back",IDC_BACK,1,1,50,14
     EDITTEXT        IDC_SEARCH_TERM,1,1,101,14,ES_AUTOHSCROLL
     PUSHBUTTON      "Search",IDC_SEARCH,104,1,50,14
+    CONTROL         "",-1,"SIPPREF",NOT WS_VISIBLE,-10,-10,6,6
 END
 
 
@@ -219,6 +220,8 @@ BEGIN
     BEGIN
         MENUITEM "Icons",                       ID_VIEW_ICONS
         MENUITEM "List",                        ID_VIEW_LIST
+        MENUITEM SEPARATOR
+        MENUITEM "Preferences",                 ID_VIEW_PREFERENCES
     END
 END
 
