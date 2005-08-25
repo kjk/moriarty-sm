@@ -114,18 +114,21 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 	Rect r;
 	bounds(r);
-	if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
+	if (!renderer_.create(WS_TABSTOP, 0, 0, r.width(), r.height(), handle(), cs.hInstance))
 		return createFailed;
 
-    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
-
+        
 #ifndef LVS_EX_DOUBLEBUFFER
 #define LVS_EX_DOUBLEBUFFER 0
 #endif
     
     listView_.setStyleEx(LVS_EX_DOUBLEBUFFER | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
+
+    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
+    ListView_SetIconSpacing(listView_.handle(), 75, 66);
         
     if (!createModuleItems())
         return createFailed; 
@@ -171,8 +174,8 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
-	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+	renderer_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+	listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
 	return Window::handleResize(sizeType, width, height);
 }
 
@@ -311,7 +314,7 @@ bool MainWindow::createModuleItems()
             if (NULL == smallIcons)
                 goto Error;
         }
-        if (-1 == ImageList_AddMasked(smallIcons, bmp, RGB(255, 255, 255)))
+        if (-1 == ImageList_AddMasked(smallIcons, bmp, RGB(255, 0, 255)))
             goto Error;
         
         DeleteObject(bmp);
@@ -326,7 +329,7 @@ bool MainWindow::createModuleItems()
             if (NULL == smallIcons)
                 goto Error;
         }
-        if (-1 == ImageList_AddMasked(largeIcons, bmp, RGB(255, 255, 255)))
+        if (-1 == ImageList_AddMasked(largeIcons, bmp, RGB(255, 0, 255)))
             goto Error;
         
         DeleteObject(bmp);

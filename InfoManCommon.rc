@@ -34,6 +34,48 @@ IDB_NONE_SMALL          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\no
 IDB_NONE_LARGE          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\none-large.bmp"
 IDB_WEATHER_LARGE       BITMAP                  "..\\moriarty_palm_utf8\\Rsc\\weath-small-lg-8.bmp"
 IDB_WEATHER_SMALL       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weath-small-sm-8.bmp"
+IDB_ABOUT_SMALL         BITMAP                  "..\\moriarty_palm_utf8\\rsc\\about-small-sm-8.bmp"
+IDB_ABOUT_LARGE         BITMAP                  "..\\moriarty_palm_utf8\\rsc\\about-small-lg-8.bmp"
+IDB_AMAZON_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\amazon-small-lg-8.bmp"
+IDB_AMAZON_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\amazon-small-sm-8.bmp"
+IDB_BOXOFFICE_SMALL     BITMAP                  "..\\moriarty_palm_utf8\\rsc\\boxoffice-small-sm-8.bmp"
+IDB_BOXOFFICE_LARGE     BITMAP                  "..\\moriarty_palm_utf8\\rsc\\boxoffice-small-lg-8.bmp"
+IDB_CURRENCY_LARGE      BITMAP                  "..\\moriarty_palm_utf8\\rsc\\currency-small-lg-8.bmp"
+IDB_CURRENCY_SMALL      BITMAP                  "..\\moriarty_palm_utf8\\rsc\\currency-small-sm-8.bmp"
+IDB_DICTIONARY_LARGE    BITMAP                  "..\\moriarty_palm_utf8\\rsc\\dictionary-small-lg-8.bmp"
+IDB_DICTIONARY_SMALL    BITMAP                  "..\\moriarty_palm_utf8\\rsc\\dictionary-small-sm-8.bmp"
+IDB_DREAMS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\dreams-small-lg-8.bmp"
+IDB_DREAMS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\dreams-small-sm-8.bmp"
+IDB_EBAY_LARGE          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\ebay-small-lg-8.bmp"
+IDB_EBAY_SMALL          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\ebay-small-sm-8.bmp"
+IDB_EBOOKS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\ebooks-small-lg-8.bmp"
+IDB_EBOOKS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\ebooks-small-sm-8.bmp"
+IDB_ENCYCLOPEDIA_LARGE  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\encyclopedia-small-lg-8.bmp"
+IDB_ENCYCLOPEDIA_SMALL  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\encyclopedia-small-sm-8.bmp"
+IDB_FLICKR_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\flickr-small-lg-8.bmp"
+IDB_FLICKR_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\flickr-small-sm-8.bmp"
+IDB_FLIGHTS_LARGE       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\flights-small-lg-8.bmp"
+IDB_FLIGHTS_SMALL       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\flights-small-sm-8.bmp"
+IDB_GAS_LARGE           BITMAP                  "..\\moriarty_palm_utf8\\rsc\\gas-small-lg-8.bmp"
+IDB_GAS_SMALL           BITMAP                  "..\\moriarty_palm_utf8\\rsc\\gas-small-sm-8.bmp"
+IDB_HOROSCOPES_LARGE    BITMAP                  "..\\moriarty_palm_utf8\\rsc\\horoscopes-small-lg-8.bmp"
+IDB_HOROSCOPES_SMALL    BITMAP                  "..\\moriarty_palm_utf8\\rsc\\horoscopes-small-sm-8.bmp"
+IDB_JOKES_LARGE         BITMAP                  "..\\moriarty_palm_utf8\\rsc\\jokes-small-lg-8.bmp"
+IDB_JOKES_SMALL         BITMAP                  "..\\moriarty_palm_utf8\\rsc\\jokes-small-sm-8.bmp"
+IDB_LISTOFBESTS_LARGE   BITMAP                  "..\\moriarty_palm_utf8\\rsc\\listofbests-small-lg-8.bmp"
+IDB_LISTOFBESTS_SMALL   BITMAP                  "..\\moriarty_palm_utf8\\rsc\\listofbests-small-sm-8.bmp"
+IDB_LYRICS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\lyrics-small-lg-8.bmp"
+IDB_LYRICS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\lyrics-small-sm-8.bmp"
+IDB_M411_LARGE          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\m411-small-lg-8.bmp"
+IDB_M411_SMALL          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\m411-small-sm-8.bmp"
+IDB_MOVIES_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\movies-small-lg-8.bmp"
+IDB_MOVIES_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\movies-small-sm-8.bmp"
+IDB_NETFLIX_LARGE       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\netflix-small-lg-8.bmp"
+IDB_NETFLIX_SMALL       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\netflix-small-sm-8.bmp"
+IDB_QUOTES_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\quotations-small-lg-8.bmp"
+IDB_QUOTES_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\quotations-small-sm-8.bmp"
+IDB_STOCKS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\stocks-small-lg-8.bmp"
+IDB_STOCKS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\stocks-small-sm-8.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -198,6 +240,13 @@ BEGIN
     END
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RCDATA
+//
+
+IDR_RECIPES_START       RCDATA                  "..\\moriarty_palm_utf8\\rsc\\recipes-start-page.txt"
 
 /////////////////////////////////////////////////////////////////////////////
 //

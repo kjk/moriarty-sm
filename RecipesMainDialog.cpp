@@ -145,7 +145,32 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
 
 void RecipesMainDialog::prepareAbout()
 {
-    // TODO: implement prepareAbout() 
+    const char* data = (const char*)LoadBinaryData(IDR_RECIPES_START);
+    if (NULL == data)
+        goto Error;
+
+    ByteFormatParser* parser = new_nt ByteFormatParser();
+    if (NULL == parser)
+        goto Error;
+        
+    status_t err = parser->parseAll(data, -1); 
+    if (memErrNotEnoughSpace == err)
+        goto Error;
+    assert(errNone == err);
+   
+    DefinitionModel* model = parser->releaseModel();
+    if (NULL == model)
+        goto Error;
+    
+    renderer_.setModel(model, Definition::ownModel);      
+Finish:
+    if (NULL != parser)
+        delete parser; 
+    return; 
+Error:
+    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+    ModuleRunMain(); 
+    goto Finish;         
 }
 
 void RecipesMainDialog::search()
