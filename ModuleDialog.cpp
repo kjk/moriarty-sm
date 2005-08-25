@@ -63,6 +63,12 @@ bool ModuleDialog::handleLookupFinished(Event& event, const LookupFinishedEventD
     return lm->handleLookupFinishedInForm(event);
 }
 
+void ModuleDialog::endModal(int code)
+{
+    extEventHelper_.stop();
+    Dialog::endModal(code);
+}
+
 static ModuleDialog* currentModuleDialog = NULL;
 
 void ModuleDialogSetCurrent(ModuleDialog* dialog)

@@ -35,6 +35,8 @@ public:
 	~ModuleDialog();
     
     bool create(UINT resourceId); 
+   
+    void endModal(int code); 
 
 };
 

@@ -30,8 +30,10 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 IDB_RECIPES_LARGE       BITMAP                  "..\\moriarty_palm_utf8\\Rsc\\epicurious-small-lg-8.bmp"
 IDB_RECIPES_SMALL       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\epicurious-small-sm-8.bmp"
-IDB_NONE_SMALL          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\bitmap2.bmp"
-IDB_NONE_LARGE          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\bmp00001.bmp"
+IDB_NONE_SMALL          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\none-small.bmp"
+IDB_NONE_LARGE          BITMAP                  "..\\moriarty_palm_utf8\\rsc\\none-large.bmp"
+IDB_WEATHER_LARGE       BITMAP                  "..\\moriarty_palm_utf8\\Rsc\\weath-small-lg-8.bmp"
+IDB_WEATHER_SMALL       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weath-small-sm-8.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

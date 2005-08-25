@@ -125,7 +125,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 #endif
     
     listView_.setStyleEx(LVS_EX_DOUBLEBUFFER | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
-    ListView_SetTextBkColor(listView_.handle(), CLR_NONE);
+    listView_.setTextBkColor(CLR_NONE);
         
     if (!createModuleItems())
         return createFailed; 

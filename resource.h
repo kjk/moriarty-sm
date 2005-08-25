@@ -32,7 +32,9 @@
 #define IDS_ALERT_USER_DISABLED         510
 #define IDB_NONE_LARGE                  510
 #define IDS_ALERT_INVALID_REG_CODE      511
+#define IDB_WEATHER_LARGE                    511
 #define IDS_ALERT_FORCE_UPGRADE         512
+#define IDB_WEATHER_SMALL                    512
 #define IDS_ALERT_INVALID_REQUEST       513
 #define IDS_ALERT_MODULE_DOWN           514
 #define IDS_ALERT_REG_CODE_EXPIRED      515
