@@ -22,6 +22,11 @@ protected:
     virtual bool handleLookupFinished(Event& event, const LookupFinishedEventData* data);
 
     bool handleInitDialog(HWND focus_widget_handle, long init_param);
+   
+#ifdef SHELL_MENUBAR   
+    CommandBar& menuBar() {return menuBar_;}
+    const CommandBar& menuBar() const  {return menuBar_;}
+#endif    
 
 public:
     

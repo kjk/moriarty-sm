@@ -127,6 +127,11 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     listView_.setStyleEx(/* LVS_EX_DOUBLEBUFFER | */ LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
 
+    HMENU menu = menuBar_.subMenu(IDM_VIEW);
+    CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
+    CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
+    
+
     if (!createModuleItems())
         return createFailed; 
 
@@ -141,15 +146,22 @@ long MainWindow::handleDestroy()
 
 long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
+    HMENU menu;
     switch (id)
     {
 
         case ID_VIEW_ICONS:
             listView_.modifyStyle(LVS_ICON, LVS_LIST);
+            menu = menuBar_.subMenu(IDM_VIEW);
+            CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
+            CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
             return messageHandled;
         
         case ID_VIEW_LIST:
             listView_.modifyStyle(LVS_LIST, LVS_ICON);
+            menu = menuBar_.subMenu(IDM_VIEW);
+            CheckMenuItem(menu, ID_VIEW_ICONS, MF_UNCHECKED);
+            CheckMenuItem(menu, ID_VIEW_LIST, MF_CHECKED);
             return messageHandled;
 
 #ifdef WIN32_PLATFORM_WFSP
@@ -175,8 +187,8 @@ long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
 
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-    ushort iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / 70);
-    ushort iconHeight = height / (height / 65);
+    ushort iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
+    ushort iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
 	
 	update();
@@ -287,6 +299,10 @@ static void BitmapSize(HBITMAP bmp, LONG& w, LONG& h)
 
 bool MainWindow::createModuleItems()
 {
+    bool scaleIcons = false;
+    if (SCALEX(50) >= 100)
+        scaleIcons = true;   
+    
     ulong_t actCount = ModuleActiveCount();
     ulong_t count = ModuleCount();
      
@@ -295,7 +311,7 @@ bool MainWindow::createModuleItems()
     HIMAGELIST largeIcons = NULL;
     HBITMAP bmp = NULL;
     
-    LONG w, h;
+    LONG sw, sh, lw, lh;
     ulong_t index = 0; 
     for (ulong_t i = 0; i < count; ++i) 
     {
@@ -308,16 +324,31 @@ bool MainWindow::createModuleItems()
             goto Error;
         if (NULL == smallIcons)
         {
-            BitmapSize(bmp, w, h);
+            BitmapSize(bmp, sw, sh);
 
 #ifndef ILC_COLOR16
 #define ILC_COLOR16 ILC_COLOR
 #endif
+
+        if (scaleIcons)
+        {
+            sw = SCALEX(sw); 
+            sh = SCALEY(sh);
+        }
             
-            smallIcons = ImageList_Create(w, h, ILC_COLOR16|ILC_MASK, actCount, 1);
+            smallIcons = ImageList_Create(sw, sh, ILC_COLOR16|ILC_MASK, actCount, 1);
             if (NULL == smallIcons)
                 goto Error;
         }
+        if (scaleIcons)
+        {
+            HBITMAP b;
+            if (!ImageList_StretchBitmap(bmp, &b, sw, sh, 1, 1))
+                goto Error;
+            DeleteObject(bmp);
+            bmp = b;
+        } 
+
         if (-1 == ImageList_AddMasked(smallIcons, bmp, RGB(255, 0, 255)))
             goto Error;
         
@@ -328,18 +359,32 @@ bool MainWindow::createModuleItems()
             goto Error;
         if (NULL == largeIcons)
         {
-            BitmapSize(bmp, w, h);
-            largeIcons = ImageList_Create(w, h, ILC_COLOR16|ILC_MASK, actCount, 1);
+            BitmapSize(bmp, lw, lh);
+            if (scaleIcons) 
+            {
+                lw = SCALEX(lw); 
+                lh = SCALEY(lh);
+            } 
+            largeIcons = ImageList_Create(lw, lh, ILC_COLOR16|ILC_MASK, actCount, 1);
             if (NULL == smallIcons)
                 goto Error;
         }
+        if (scaleIcons)
+        {
+            HBITMAP b;
+            if (!ImageList_StretchBitmap(bmp, &b, lw, lh, 1, 1))
+                goto Error;
+            DeleteObject(bmp);
+            bmp = b;
+        } 
+
         if (-1 == ImageList_AddMasked(largeIcons, bmp, RGB(255, 0, 255)))
             goto Error;
         
         DeleteObject(bmp);
         bmp = NULL;
         ++index; 
-    }  
+    }
     
     smallIcons = listView_.setImageList(smallIcons, LVSIL_SMALL);
     if (NULL != smallIcons)

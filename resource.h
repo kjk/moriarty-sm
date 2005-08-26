@@ -12,6 +12,8 @@
 #define IDS_MAIN                        105
 #define IDS_VIEW                        106
 #define IDS_DONE                        107
+#define IDS_SEARCH                      108
+#define IDS_BACK                        109
 #define IDD_ABOUTBOX                    110
 #define IDD_ABOUTBOX_WIDE               111
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
@@ -87,6 +89,7 @@
 #define IDB_QUOTES_SMALL                552
 #define IDB_STOCKS_LARGE                553
 #define IDB_STOCKS_SMALL                554
+#define IDR_RECIPES_MENU                555
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -94,8 +97,6 @@
 #define IDC_WEATHER_DAYS_LIST           2015
 #define IDC_WEATHER_DAY_SELECT          2017
 #define IDC_WEATHER_DAY_SPIN            2018
-#define IDC_BACK                        2020
-#define IDC_SEARCH                      2021
 #define IDC_SEARCH_TERM                 2022
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
@@ -109,18 +110,21 @@
 #define ID_TEMPERATURE_FAHRENHEIT       50007
 #define ID_TEMPERATURE_CELSIUS          50008
 #define ID_VIEW_LIST                    50009
-#define IDM_VIEW_ICONS                  50010
 #define ID_VIEW_ICONS                   50011
 #define ID_VIEW_PREFERENCES             50012
+#define ID_VIEW_RECIPE                  50013
+#define ID_VIEW_RECIPES_LIST            50016
+#define ID_SEARCH                       50015
+#define ID_BACK                         50014
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        555
-#define _APS_NEXT_COMMAND_VALUE         50013
+#define _APS_NEXT_RESOURCE_VALUE        556
+#define _APS_NEXT_COMMAND_VALUE         50017
 #define _APS_NEXT_CONTROL_VALUE         2023
-#define _APS_NEXT_SYMED_VALUE           501
+#define _APS_NEXT_SYMED_VALUE           503
 #endif
 #endif

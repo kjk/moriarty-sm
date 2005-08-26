@@ -109,9 +109,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 CAPTION "InfoMan - Recipes"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    PUSHBUTTON      "Back",IDC_BACK,1,1,50,14
-    EDITTEXT        IDC_SEARCH_TERM,1,1,101,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Search",IDC_SEARCH,104,1,50,14
+    EDITTEXT        IDC_SEARCH_TERM,1,2,153,13,ES_AUTOHSCROLL
     CONTROL         "",-1,"SIPPREF",NOT WS_VISIBLE,-10,-10,6,6
 END
 
@@ -221,7 +219,7 @@ BEGIN
         MENUITEM "Icons",                       ID_VIEW_ICONS
         MENUITEM "List",                        ID_VIEW_LIST
         MENUITEM SEPARATOR
-        MENUITEM "Preferences",                 ID_VIEW_PREFERENCES
+        MENUITEM "Preferences...",              ID_VIEW_PREFERENCES
     END
 END
 
@@ -240,6 +238,17 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Fahrenheit",                  ID_TEMPERATURE_FAHRENHEIT
         MENUITEM "Celsius",                     ID_TEMPERATURE_CELSIUS
+    END
+END
+
+IDR_RECIPES_MENU MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "Recipe",                      ID_VIEW_RECIPE
+        MENUITEM "Recipes list",                ID_VIEW_RECIPES_LIST
+        MENUITEM SEPARATOR
+        MENUITEM "Preferences...",              ID_VIEW_PREFERENCES
     END
 END
 
@@ -269,6 +278,8 @@ BEGIN
     IDS_MAIN                "Main"
     IDS_VIEW                "View"
     IDS_DONE                "Done"
+    IDS_SEARCH              "Search"
+    IDS_BACK                "Back"
 END
 
 STRINGTABLE 

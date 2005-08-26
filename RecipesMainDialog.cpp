@@ -14,6 +14,7 @@
 using namespace DRA;
 
 RecipesMainDialog::RecipesMainDialog():
+    ModuleDialog(IDR_RECIPES_MENU),
     listModel_(NULL),
     itemModel_(NULL),
     displayMode_(showAbout),
@@ -42,11 +43,9 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 	renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
 	renderer_.definition.setInteractionBehavior(Definition::behavDoubleClickSelection | Definition::behavHyperlinkNavigation | Definition::behavMouseSelection | Definition::behavUpDownScroll);
 	renderer_.definition.setNavOrderOptions(Definition::navOrderLast);
-	renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(24), r.width() - SCALEX(2), r.height() - SCALEY(26), handle());
+	renderer_.create(WS_TABSTOP | WS_VISIBLE, SCALEX(1), SCALEY(25), r.width() - SCALEX(2), r.height() - SCALEY(26), handle());
 	
 	term_.attachControl(handle(), IDC_SEARCH_TERM);
-	back_.attachControl(handle(), IDC_BACK);
-	search_.attachControl(handle(), IDC_SEARCH);
 	
     setDisplayMode(displayMode_);
 	ModuleDialog::handleInitDialog(wnd, lp);
@@ -95,10 +94,10 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
         case IDOK:
             ModuleRunMain();
             return messageHandled;
-        case IDC_SEARCH:
+        case ID_SEARCH:
             search();
             return messageHandled;
-        case IDC_BACK:
+        case ID_BACK:
             setDisplayMode(showList);
             return messageHandled;
     };
@@ -107,41 +106,51 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
 
 long RecipesMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 {
-    renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(26), repaintWidget);
-    term_.anchor(anchorRight, SCALEX(78), anchorNone, 0, repaintWidget);
-    search_.anchor(anchorLeft, SCALEX(76), anchorNone, 0, repaintWidget);  
+    if (showItem == displayMode_)
+        renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+    else
+        renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(26), repaintWidget);
+        
+    term_.anchor(anchorRight, SCALEX(2), anchorNone, 0, repaintWidget);
     return ModuleDialog::handleResize(sizeType, width, height);
 }
 
 void RecipesMainDialog::setDisplayMode(DisplayMode dm)
 {
+    UINT buttonId = (showItem == displayMode_ ? ID_BACK : ID_SEARCH);
+    Rect b;
+    bounds(b);
+    b.set(SCALEX(1), SCALEY(25), b.width() - SCALEX(2), b.height() - SCALEY(26));
     switch (displayMode_ = dm)
     {
         case showAbout:
-            back_.hide();
             prepareAbout(); 
-            renderer_.show();
+            renderer_.setBounds(b);
+            if (ID_SEARCH != buttonId)
+                menuBar().replaceButton(buttonId, ID_SEARCH, IDS_SEARCH);
             term_.show();
-            search_.show();
             term_.focus();
             break;
         
         case showList:
-            back_.hide();
             assert(NULL != listModel_);
+            renderer_.setBounds(b);
             renderer_.setModel(listModel_);
             renderer_.focus();
+            if (ID_SEARCH != buttonId)
+                menuBar().replaceButton(buttonId, ID_SEARCH, IDS_SEARCH);
             term_.show();
-            search_.show();
             break;
 
         case showItem:
             term_.hide();
-            search_.hide();
             assert(NULL != itemModel_);
+            b.y() = SCALEY(1);
+            renderer_.setBounds(b);
             renderer_.setModel(itemModel_);
             renderer_.focus();
-            back_.show();
+            if (ID_BACK != buttonId)
+                menuBar().replaceButton(buttonId, ID_BACK, IDS_BACK);
             break;
         
         default:

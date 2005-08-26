@@ -129,8 +129,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 		}
 		
 		if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
+		{
+		    //OutputDebugString(_T("IsDialogMessage(): "));
+		    //DumpMessage(msg.message, msg.wParam, msg.lParam);
 		    continue;
-					
+        }
+		
 #ifndef WIN32_PLATFORM_WFSP
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 #endif // !WIN32_PLATFORM_WFSP
@@ -228,7 +232,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	w->update();
 
 	RunTests(w->handle());
-
     return TRUE;
 }
 

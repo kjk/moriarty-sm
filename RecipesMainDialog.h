@@ -8,8 +8,6 @@
 class RecipesMainDialog: public ModuleDialog {
     TextRenderer renderer_;
     EditBox term_;
-    Widget back_;
-    Widget search_;
 
     RecipesMainDialog();
     ~RecipesMainDialog(); 
