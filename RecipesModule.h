@@ -12,4 +12,6 @@ struct UniversalDataFormat;
 class DefinitionModel;
 DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& udf);
 
+status_t RecipesDataRead(DefinitionModel*& listModel, DefinitionModel*& itemModel);
+
 #endif

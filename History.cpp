@@ -22,7 +22,7 @@ static status_t UDF_CacheDataRead(const char_t* title, Reader& reader, LookupRes
     if (NULL == lm->udf)
         return memErrNotEnoughSpace;
           
-    status_t err= readUniversalDataFromReader(reader, *lm->udf);
+    status_t err= UDF_ReadFromReader(reader, *lm->udf);
     if (errNone != err)
         return err;
 

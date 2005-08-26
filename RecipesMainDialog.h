@@ -27,6 +27,7 @@ class RecipesMainDialog: public ModuleDialog {
     void prepareAbout(); 
    
     void search(); 
+    void resyncViewMenu(); 
     
 protected:
     

@@ -18,10 +18,12 @@ ConnectionProgressDialog::ConnectionProgressDialog(AutoDeleteOption ad):
 bool ConnectionProgressDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
     extEventHelper_.start(handle());
-    Dialog::handleInitDialog(focus_widget_handle, init_param);
-    handleScreenSizeChange(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)); 
     progressBar_.attachControl(handle(), IDC_CONNECTION_PROGRESS);
     progressBytesText_.attachControl(handle(), IDC_PROGRESS_BYTES); 
+    
+    Dialog::handleInitDialog(focus_widget_handle, init_param);
+    
+    handleScreenSizeChange(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)); 
     progressBar_.setRange(0, 100); 
     updateProgress(); 
     return true;  

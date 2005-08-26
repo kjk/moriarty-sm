@@ -1,5 +1,6 @@
 #include "RecipesModule.h"
 #include "MoriartyStyles.hpp"
+#include "LookupManager.h"
 
 #include <ExtendedEvent.hpp>
 
@@ -16,10 +17,11 @@
 //}
 
 #include <Definition.hpp>
-#include <UniversalDataFormat.hpp>
+#include <UniversalDataHandler.hpp>
 #include <TextElement.hpp>
 #include <LineBreakElement.hpp>
 #include <Text.hpp>
+#include <ByteFormatParser.hpp>
 
 enum {
     recipeNameIndex,
@@ -175,4 +177,37 @@ Error:
     if (NULL != model)
         delete model;
     return NULL;     
+}
+
+
+status_t RecipesDataRead(DefinitionModel*& listModel, DefinitionModel*& itemModel)
+{
+    UniversalDataFormat* udf = new_nt UniversalDataFormat();
+    if (NULL == udf)
+        return memErrNotEnoughSpace;
+        
+    status_t err = UDF_ReadFromStream(recipesListStream, *udf);
+    if (errNone == err) 
+    { 
+        DefinitionModel* model = DefinitionModelFromUDF(*udf);
+        if (NULL != model)
+        {
+            delete listModel;
+            listModel = model;
+        }
+    }
+   
+    udf->reset();
+    err = UDF_ReadFromStream(recipesItemStream, *udf);
+    if (errNone == err)
+    {
+        DefinitionModel* model = RecipeExtractFromUDF(*udf);
+        if (NULL != model)
+        {
+            delete itemModel;
+            itemModel = model;
+        }
+    }     
+    delete udf;
+    return errNone;     
 }

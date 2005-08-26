@@ -39,8 +39,6 @@ class ModuleDialog;
 typedef ModuleDialog* (*ModuleStarter)();
 #endif
 
-typedef status_t (*ModuleDataReader)();
-
 struct Module {
     ModuleID id;
     const char* name;
@@ -53,7 +51,6 @@ struct Module {
 #ifdef _WIN32
     ModuleStarter starter;
 #endif 
-    ModuleDataReader dataReader; 
     bool free;
     bool dataReady;
     bool disabledRemotely;

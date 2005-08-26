@@ -36,8 +36,8 @@ struct Module {
 
 
 #ifdef _PALM_OS
-#define MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, dataReader, free, tracksUpdate) \
-{id, name, dispName, palmIcon, palmLargeIcon, mainFormId, dataReader, free, false, false, false, tracksUpdate, Module::neverUpdated}
+#define MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, free, tracksUpdate) \
+{id, name, dispName, palmIcon, palmLargeIcon, mainFormId, free, false, false, false, tracksUpdate, Module::neverUpdated}
 #endif
 
 // TODO: use commented-out version when data readers are ported to WinCE
@@ -46,27 +46,27 @@ struct Module {
 #define MOD_ICON_LARGE(name) IDB_ ## name ## _LARGE
 #define MOD_ICON_SMALL(name) IDB_ ## name ## _SMALL
 
-#define  MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, starter, dataReader, free, tracksUpdate) \
-{id, name, dispName, MOD_ICON_SMALL(winIcon), MOD_ICON_LARGE(winIcon), starter, NULL, free, false, false, false, tracksUpdate, Module::neverUpdated}
+#define  MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, starter, free, tracksUpdate) \
+{id, name, dispName, MOD_ICON_SMALL(winIcon), MOD_ICON_LARGE(winIcon), starter, free, false, false, false, tracksUpdate, Module::neverUpdated}
 // {id, name, dispName, winIcon, starter, dataReader, free, false, false, false, tracksUpdate, neverUpdated}
 #endif
 
 static Module modules[] = {
-    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, WEATHER, weatherMainForm, WeatherStart, weatherDataRead, true, false),
-    MOD(moduleId411, m411ModuleName, _T("Phone book"), m411SmallBitmap, frmInvalidObjectId, M411, m411MainForm, NULL, m411DataRead, false, false),
-    MOD(moduleIdMovies, moviesModuleName, _T("Movie times"), moviesSmallBitmap, frmInvalidObjectId, MOVIES, moviesMainForm, NULL, moviesDataRead, true, false),
-    MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, AMAZON, amazonMainForm, NULL, NULL, false, false),
-    MOD(moduleIdBoxOffice, boxOfficeModuleName, _T("Box office"), boxofficeSmallBitmap, frmInvalidObjectId, BOXOFFICE, boxOfficeMainForm, NULL, boxOfficeDataRead, true, true),
-    MOD(moduleIdCurrency, currencyModuleName, _T("Currency"), currencySmallBitmap, frmInvalidObjectId, CURRENCY, currencyMainForm, NULL, currencyDataRead, true, false),
-    MOD(moduleIdStocks, stocksModuleName, _T("Stocks"), stocksSmallBitmap, frmInvalidObjectId, STOCKS, stocksMainForm, NULL, stocksDataRead, true, false),
-    MOD(moduleIdJokes, jokesModuleName, _T("Jokes"), jokesSmallBitmap, frmInvalidObjectId, JOKES, jokesMainForm, NULL, jokesDataRead, false, true),
-    MOD(moduleIdGasPrices, gasPricesModuleName, _T("Gas prices"), gasPricesSmallBitmap, frmInvalidObjectId, GAS, gasPricesMainForm, NULL, gasPricesDataRead, true, false),
-    MOD(moduleIdHoroscopes, horoscopeModuleName, _T("Horoscopes"), horoscopesSmallBitmap, frmInvalidObjectId, HOROSCOPES, horoscopesMainForm, NULL, horoscopeDataRead, true, true) ,
-    MOD(moduleIdDreams, dreamsModuleName, _T("Dreams"), dreamsSmallBitmap, frmInvalidObjectId, DREAMS, dreamsMainForm, NULL, dreamsDataRead, false, true),
-    MOD(moduleIdAbout, "about", _T("About"), aboutSmallBitmap, frmInvalidObjectId, ABOUT, frmInvalidObjectId, NULL, NULL, false, false),
+    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, WEATHER, weatherMainForm, WeatherStart, true, false),
+    MOD(moduleId411, m411ModuleName, _T("Phone book"), m411SmallBitmap, frmInvalidObjectId, M411, m411MainForm, NULL, false, false),
+    MOD(moduleIdMovies, moviesModuleName, _T("Movie times"), moviesSmallBitmap, frmInvalidObjectId, MOVIES, moviesMainForm, NULL, true, false),
+    MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, AMAZON, amazonMainForm, NULL, false, false),
+    MOD(moduleIdBoxOffice, boxOfficeModuleName, _T("Box office"), boxofficeSmallBitmap, frmInvalidObjectId, BOXOFFICE, boxOfficeMainForm, NULL, true, true),
+    MOD(moduleIdCurrency, currencyModuleName, _T("Currency"), currencySmallBitmap, frmInvalidObjectId, CURRENCY, currencyMainForm, NULL, true, false),
+    MOD(moduleIdStocks, stocksModuleName, _T("Stocks"), stocksSmallBitmap, frmInvalidObjectId, STOCKS, stocksMainForm, NULL, true, false),
+    MOD(moduleIdJokes, jokesModuleName, _T("Jokes"), jokesSmallBitmap, frmInvalidObjectId, JOKES, jokesMainForm, NULL, false, true),
+    MOD(moduleIdGasPrices, gasPricesModuleName, _T("Gas prices"), gasPricesSmallBitmap, frmInvalidObjectId, GAS, gasPricesMainForm, NULL, true, false),
+    MOD(moduleIdHoroscopes, horoscopeModuleName, _T("Horoscopes"), horoscopesSmallBitmap, frmInvalidObjectId, HOROSCOPES, horoscopesMainForm, NULL, true, true) ,
+    MOD(moduleIdDreams, dreamsModuleName, _T("Dreams"), dreamsSmallBitmap, frmInvalidObjectId, DREAMS, dreamsMainForm, NULL, false, true),
+    MOD(moduleIdAbout, "about", _T("About"), aboutSmallBitmap, frmInvalidObjectId, ABOUT, frmInvalidObjectId, NULL, false, false),
 #ifndef SHIPPING
     // this one's special: it never ships
-    MOD(moduleIdTestWiki, "test", _T("Test parser"), aboutSmallBitmap, frmInvalidObjectId, NONE, testWikiMainForm, NULL, NULL, true, false),
+    MOD(moduleIdTestWiki, "test", _T("Test parser"), aboutSmallBitmap, frmInvalidObjectId, NONE, testWikiMainForm, NULL, true, false),
 #endif
 #ifndef SHIPPING
 
@@ -74,18 +74,18 @@ static Module modules[] = {
     // When changing module to appear in "shipping" version remember to change this in MoriartyPreferences.cpp as well
     // (Preferences::serialize) and MoriartyApplication::createForm() in this file
     
-    MOD(moduleIdNetflix, netflixModuleName, _T("Netflix"), netflixSmallBitmap, frmInvalidObjectId, NETFLIX, netflixMainForm, NULL, netflixDataRead, false, false),
-    MOD(moduleIdPedia, pediaModuleName, _T("Encyclopedia"), encyclopediaSmallBitmap, frmInvalidObjectId, ENCYCLOPEDIA, pediaMainForm, NULL, NULL, true, false),
-    MOD(moduleIdDict, dictModuleName, _T("Dictionary"), dictionarySmallBitmap, frmInvalidObjectId, DICTIONARY, dictMainForm, NULL, NULL, true, false),
-    MOD(moduleIdLyrics, lyricsModuleName, _T("Lyrics"), lyricsSmallBitmap, frmInvalidObjectId, LYRICS, lyrics2MainForm, NULL, NULL, false, false),
-    MOD(moduleIdRecipes, recipesModuleName, _T("Recipes"), epicuriousSmallBitmap, frmInvalidObjectId, RECIPES, epicuriousMainForm, RecipesStart, epicuriousDataRead, false, false),
-    MOD(moduleIdListsOfBests, listsOfBestsModuleName, _T("Lists of bests"), listofbestsSmallBitmap, frmInvalidObjectId, LISTOFBESTS, listsOfBestsMainForm, NULL, NULL, false, false),
-    // MOD(moduleIdTvListings, _T("TV Listings"), tvListingsSmallBitmap, frmInvalidObjectId, NONE, tvListingsMainForm, NULL, NULL, true, false),
-    MOD(moduleIdQuotes, quotesModuleName, _T("Quotes"), quotationsSmallBitmap, frmInvalidObjectId, QUOTES, quotesMainForm, NULL, quotesDataRead, true, true),
-    MOD(moduleIdEBooks, ebookModuleName, _T("eBooks"),  ebooksSmallBitmap, frmInvalidObjectId, EBOOKS, ebookMainForm, NULL, NULL, false, false),
-    MOD(moduleIdFlights, flightsModuleName, _T("Flights"),  flightsSmallBitmap, frmInvalidObjectId, FLIGHTS, flightsMainForm, NULL, flightsDataRead, true, false),
-    MOD(moduleIdEBay, eBayModuleName, _T("eBay"), eBaySmallBitmap, frmInvalidObjectId, EBAY, eBayMainForm, NULL, NULL, false, false),
-    MOD(moduleIdFlickr, flickrModuleName, _T("Flickr"), flickrSmallBitmap, frmInvalidObjectId, FLICKR, flickrMainForm, NULL, NULL, false, true),
+    MOD(moduleIdNetflix, netflixModuleName, _T("Netflix"), netflixSmallBitmap, frmInvalidObjectId, NETFLIX, netflixMainForm, NULL, false, false),
+    MOD(moduleIdPedia, pediaModuleName, _T("Encyclopedia"), encyclopediaSmallBitmap, frmInvalidObjectId, ENCYCLOPEDIA, pediaMainForm, NULL, true, false),
+    MOD(moduleIdDict, dictModuleName, _T("Dictionary"), dictionarySmallBitmap, frmInvalidObjectId, DICTIONARY, dictMainForm, NULL, true, false),
+    MOD(moduleIdLyrics, lyricsModuleName, _T("Lyrics"), lyricsSmallBitmap, frmInvalidObjectId, LYRICS, lyrics2MainForm, NULL, false, false),
+    MOD(moduleIdRecipes, recipesModuleName, _T("Recipes"), epicuriousSmallBitmap, frmInvalidObjectId, RECIPES, epicuriousMainForm, RecipesStart, false, false),
+    MOD(moduleIdListsOfBests, listsOfBestsModuleName, _T("Lists of bests"), listofbestsSmallBitmap, frmInvalidObjectId, LISTOFBESTS, listsOfBestsMainForm, NULL, false, false),
+    // MOD(moduleIdTvListings, _T("TV Listings"), tvListingsSmallBitmap, frmInvalidObjectId, NONE, tvListingsMainForm, NULL, true, false),
+    MOD(moduleIdQuotes, quotesModuleName, _T("Quotes"), quotationsSmallBitmap, frmInvalidObjectId, QUOTES, quotesMainForm, NULL, true, true),
+    MOD(moduleIdEBooks, ebookModuleName, _T("eBooks"),  ebooksSmallBitmap, frmInvalidObjectId, EBOOKS, ebookMainForm, NULL, false, false),
+    MOD(moduleIdFlights, flightsModuleName, _T("Flights"),  flightsSmallBitmap, frmInvalidObjectId, FLIGHTS, flightsMainForm, NULL, true, false),
+    MOD(moduleIdEBay, eBayModuleName, _T("eBay"), eBaySmallBitmap, frmInvalidObjectId, EBAY, eBayMainForm, NULL, false, false),
+    MOD(moduleIdFlickr, flickrModuleName, _T("Flickr"), flickrSmallBitmap, frmInvalidObjectId, FLICKR, flickrMainForm, NULL, false, true),
 #endif
 };
 
@@ -167,10 +167,6 @@ status_t ModuleRun(ModuleID id)
         mod = ModuleGetById(id);
         if (NULL == mod || !mod->active())
             return sysErrParamErr;
-    
-        if (!mod->dataReady && NULL != mod->dataReader && errNone != (err = mod->dataReader()))
-            return err;
-
     };
         
 #ifdef _WIN32

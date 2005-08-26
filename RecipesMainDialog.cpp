@@ -36,8 +36,19 @@ long RecipesMainDialog::showModal(HWND parent)
     return dlg.ModuleDialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_MAIN), parent); 
 }
 
+void RecipesMainDialog::resyncViewMenu()
+{
+    HMENU menu = menuBar().subMenu(IDM_VIEW);
+    EnableMenuItem(menu, ID_VIEW_RECIPES_LIST, (NULL == listModel_ ? MF_GRAYED : MF_ENABLED));
+    EnableMenuItem(menu, ID_VIEW_RECIPE, (NULL == itemModel_ ? MF_GRAYED : MF_ENABLED));
+    CheckMenuItem(menu, ID_VIEW_RECIPES_LIST, (showList == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    CheckMenuItem(menu, ID_VIEW_RECIPE, (showItem == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+}
+
+
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 {
+	
 	Rect r;
 	bounds(r);
 	renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
@@ -47,9 +58,17 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 	
 	term_.attachControl(handle(), IDC_SEARCH_TERM);
 	
-    setDisplayMode(displayMode_);
 	ModuleDialog::handleInitDialog(wnd, lp);
-    return FALSE;
+	
+	RecipesDataRead(listModel_, itemModel_);
+	if (NULL != itemModel_)
+	    setDisplayMode(showItem);
+    else if (NULL != listModel_)
+        setDisplayMode(showList);
+    else 
+        setDisplayMode(displayMode_);
+
+    return false;
 }
 
 bool RecipesMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
@@ -94,11 +113,18 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
         case IDOK:
             ModuleRunMain();
             return messageHandled;
+            
         case ID_SEARCH:
             search();
             return messageHandled;
+            
+        case ID_VIEW_RECIPES_LIST:
         case ID_BACK:
             setDisplayMode(showList);
+            return messageHandled;
+            
+        case ID_VIEW_RECIPE:
+            setDisplayMode(showItem);
             return messageHandled;
     };
     return ModuleDialog::handleCommand(notify_code, id, sender);
@@ -156,6 +182,7 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
         default:
             assert(false);
     }  
+    resyncViewMenu();
 }
 
 void RecipesMainDialog::prepareAbout()
