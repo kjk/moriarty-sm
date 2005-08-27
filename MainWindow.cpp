@@ -123,7 +123,11 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 #ifndef LVS_EX_DOUBLEBUFFER
 #define LVS_EX_DOUBLEBUFFER 0
 #endif
-    
+
+#ifndef LVS_EX_GRADIENT
+#define LVS_EX_GRADIENT 0
+#endif
+
     listView_.setStyleEx(/* LVS_EX_DOUBLEBUFFER | */ LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
 
@@ -187,8 +191,8 @@ long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
 
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-    ushort iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
-    ushort iconHeight = height / (height / SCALEY(54));
+    long iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
+    long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
 	
 	update();
@@ -340,6 +344,7 @@ bool MainWindow::createModuleItems()
             if (NULL == smallIcons)
                 goto Error;
         }
+#if _MSC_VER > 1200
         if (scaleIcons)
         {
             HBITMAP b;
@@ -348,6 +353,7 @@ bool MainWindow::createModuleItems()
             DeleteObject(bmp);
             bmp = b;
         } 
+#endif
 
         if (-1 == ImageList_AddMasked(smallIcons, bmp, RGB(255, 0, 255)))
             goto Error;
@@ -369,6 +375,7 @@ bool MainWindow::createModuleItems()
             if (NULL == smallIcons)
                 goto Error;
         }
+#if _MSC_VER > 1200
         if (scaleIcons)
         {
             HBITMAP b;
@@ -377,6 +384,7 @@ bool MainWindow::createModuleItems()
             DeleteObject(bmp);
             bmp = b;
         } 
+#endif
 
         if (-1 == ImageList_AddMasked(largeIcons, bmp, RGB(255, 0, 255)))
             goto Error;

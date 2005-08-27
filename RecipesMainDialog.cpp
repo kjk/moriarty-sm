@@ -187,20 +187,23 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
 
 void RecipesMainDialog::prepareAbout()
 {
+	ByteFormatParser* parser = NULL;
+	DefinitionModel* model = NULL;
+	status_t err = errNone;
     const char* data = (const char*)LoadBinaryData(IDR_RECIPES_START);
     if (NULL == data)
         goto Error;
 
-    ByteFormatParser* parser = new_nt ByteFormatParser();
+    parser = new_nt ByteFormatParser();
     if (NULL == parser)
         goto Error;
         
-    status_t err = parser->parseAll(data, -1); 
+    err = parser->parseAll(data, -1); 
     if (memErrNotEnoughSpace == err)
         goto Error;
     assert(errNone == err);
    
-    DefinitionModel* model = parser->releaseModel();
+    model = parser->releaseModel();
     if (NULL == model)
         goto Error;
     

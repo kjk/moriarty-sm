@@ -40,8 +40,8 @@ typedef status_t (InfoManConnection::* ResponsePayloadCompletionHandler)(BinaryI
 struct ResponseFieldDescriptor {
 
 // WARNING: Visual C++ 2005 B2 seems to be broken when aligning pointers-to-member-functions.
-// That's why these ugly fillXxxx__ unions are used.
-#if _MSC_VER >= 1400
+// That's why these ugly fillXxxx__ unions are used. (eVC 3.0 seems to be broken as well)
+#if _MSC_VER
 
     union {
 	    const char* name;
