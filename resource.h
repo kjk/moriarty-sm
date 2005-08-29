@@ -23,6 +23,7 @@
 #define IDR_WEATHER_MENU                503
 #define IDD_RECIPES_MAIN                503
 #define IDS_ALERT_MALFORMED_REQUEST     504
+#define IDD_RECIPES_PREFS               504
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
 #define IDS_ALERT_REQUEST_ARGUMENT_MISSING 507
@@ -98,6 +99,13 @@
 #define IDC_WEATHER_DAY_SELECT          2017
 #define IDC_WEATHER_DAY_SPIN            2018
 #define IDC_SEARCH_TERM                 2022
+#define IDC_RECIPE_NAME                 2023
+#define IDC_RECIPE_NOTE                 2024
+#define IDC_RECIPE_INGREDIENTS          2025
+#define IDC_RECIPE_PREPARATION          2026
+#define IDC_RECIPE_REVIEWS              2027
+#define IDC_SHOW_RECIPE_GLOBAL_NOTE     2028
+#define IDC_RECIPE_GLOBAL_NOTE          2028
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -113,18 +121,19 @@
 #define ID_VIEW_ICONS                   50011
 #define ID_VIEW_PREFERENCES             50012
 #define ID_VIEW_RECIPE                  50013
-#define ID_VIEW_RECIPES_LIST            50016
-#define ID_SEARCH                       50015
 #define ID_BACK                         50014
+#define ID_SEARCH                       50015
+#define ID_VIEW_RECIPES_LIST            50016
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        556
+#define _APS_NEXT_RESOURCE_VALUE        557
 #define _APS_NEXT_COMMAND_VALUE         50017
-#define _APS_NEXT_CONTROL_VALUE         2023
+#define _APS_NEXT_CONTROL_VALUE         2029
 #define _APS_NEXT_SYMED_VALUE           503
 #endif
 #endif

@@ -111,7 +111,6 @@ enum {
     serialIdKeybardLaunchEnabled,
     serialIdRenderingPreferences,
     
-    
     // This id is declared "frozen" and can't be used. 
     // It was serialized out in shipping version of InfoMan in which this module wasn't available.
     // To prevent serialization errors I assign to such modules fresh id and disable their
@@ -136,7 +135,8 @@ enum {
     serialIdLatestClientVersion,
     serialIdTvListingsPreferences,
     serialIdPediaPreferences,
-    serialIdEpicuriousPreferences,
+    _serialIdEpicuriousPreferences, // renamed to serialIdRecipesPreferences as it's more general
+    serialIdRecipesPreferences =  _serialIdEpicuriousPreferences,
     serialIdAmazonPreferences,
     serialIdNetflixPreferences,
     serialIdListsOfBestsPreferences,
@@ -155,6 +155,7 @@ status_t Preferences::serialize(Serializer& serialize)
 	ErrTry {
 		serialize.narrow(cookie, NULL, serialIdCookie);
 		serialize.narrow(regCode, NULL, serialIdRegCode);
+		serialize(recipesPrefs, serialIdRecipesPreferences);
 	}
 	ErrCatch (ex) {
 		return ex;

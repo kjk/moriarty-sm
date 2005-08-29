@@ -1,29 +1,119 @@
 #include "ModuleDialog.h"
 #include "LookupManager.h"
 #include <SysUtils.hpp>
+#include <WindowsCE/Controls.hpp>
+#include <Text.hpp>
 
-ModuleDialog::ModuleDialog(AdvancedOption, bool inputDialog, DWORD initDialogFlags):
+MenuDialog::MenuDialog(AdvancedOption, bool inputDialog, DWORD initDialogFlags):
     Dialog(autoDelete, inputDialog, initDialogFlags),
-    menuBarId_(menuBarNone) 
+    menuBarId_(menuBarNone),
+    menuBarFlags_(0) 
 {
     setOverrideNavBarText(true);
 }
 
-ModuleDialog::ModuleDialog(UINT menuBarId, bool inputDialog):
-#ifdef WIN32_PLATFORM_WFSP 
+MenuDialog::MenuDialog(UINT menuBarId, bool inputDialog):
     Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN),
-#else
-    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN | (menuBarNone == menuBarId ? SHIDIF_EMPTYMENU : 0 )),
-#endif
-    menuBarId_(menuBarId)
+    menuBarId_(menuBarId),
+    menuBarFlags_(0) 
 {
-#ifdef WIN32_PLATFORM_WFSP
-    if (menuBarNone == menuBarId_)
-        menuBarId_ = IDR_DONE;
-#endif     
-
     setOverrideNavBarText(true);
-}  
+}
+
+MenuDialog::~MenuDialog()
+{
+}
+
+bool MenuDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
+{
+#ifdef SHELL_MENUBAR
+
+    UINT mb = menuBarId_;
+    DWORD flags = menuBarFlags_; 
+    if (menuBarNone == mb)
+#ifdef WIN32_PLATFORM_WFSP
+        mb = IDR_DONE;
+#else
+    {
+        mb = 0;
+        flags |= SHCMBF_EMPTYBAR;
+    }
+#endif 
+        
+    if (!menuBar_.create(handle(), flags, mb))
+    {  
+        DWORD err = GetLastError();
+        assert(false);
+    }  
+#endif // SHELL_MENUBAR
+    
+    return Dialog::handleInitDialog(focus_widget_handle, init_param); 
+}
+
+LRESULT MenuDialog::callback(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)
+    {
+        case WM_HOTKEY:
+            if (HIWORD(lParam) == VK_TBACK && handleBackKey(uMsg, wParam, lParam))
+                return messageHandled;
+    }
+    return Dialog::callback(uMsg, wParam, lParam);   
+}
+
+bool MenuDialog::handleBackKey(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    bool keyUp = (0 != (UINT(LOWORD(lParam)) & MOD_KEYUP));
+    HWND wnd = GetFocus();
+    if (NULL == wnd)
+    { 
+        if (keyUp) 
+        {
+            PostMessage(handle(), WM_COMMAND, MAKEWPARAM(IDCANCEL, 0), 0);
+            return true;
+        }
+        else
+            return true;
+    }
+        
+    char_t name[8];
+    int res = GetClassName(wnd, name, 5);
+    if (0 == res || !(equalsIgnoreCase(name, WINDOW_CLASS_EDITBOX) || equalsIgnoreCase(name, _T("CAPEDIT"))))
+    { 
+        if (keyUp)
+        { 
+            //SHNavigateBack(); 
+            PostMessage(handle(), WM_COMMAND, MAKEWPARAM(IDCANCEL, 0), 0);
+            return true;
+        }
+        else
+            return true;
+    }
+
+#ifdef SHELL_TPCSHELL
+    SHSendBackToFocusWindow(msg, wParam, lParam);
+    return true;
+#else
+    return false;
+#endif 
+}
+
+void MenuDialog::overrideBackKey()
+{
+	LPARAM lparam = MAKELPARAM(SHMBOF_NODEFAULT | SHMBOF_NOTIFY, SHMBOF_NODEFAULT | SHMBOF_NOTIFY);
+	menuBar_.sendMessage(SHCMBM_OVERRIDEKEY, VK_TBACK, lparam);
+}
+
+
+ModuleDialog::ModuleDialog(AdvancedOption adv, bool inputDialog, DWORD initDialogFlags):
+    MenuDialog(adv, inputDialog, initDialogFlags)
+{
+}
+
+ModuleDialog::ModuleDialog(UINT menuBarId, bool inputDialog):
+    MenuDialog(menuBarId, inputDialog)
+{
+}   
 
 ModuleDialog::~ModuleDialog()
 {
@@ -32,21 +122,12 @@ ModuleDialog::~ModuleDialog()
 bool ModuleDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
     extEventHelper_.start(handle());
-    
-#ifdef SHELL_MENUBAR
-    if (menuBarNone != menuBarId_ && !menuBar_.create(handle(), 0, menuBarId_))
-    {  
-        DWORD err = GetLastError();
-        assert(false);
-    }  
-#endif
-
-    return Dialog::handleInitDialog(focus_widget_handle, init_param); 
+    return MenuDialog::handleInitDialog(focus_widget_handle, init_param); 
 }
 
 bool ModuleDialog::create(UINT resourceId)
 {
-    return Dialog::create(GetInstance(), resourceId, ExtEventGetWindow());
+    return MenuDialog::create(GetInstance(), resourceId, ExtEventGetWindow());
 }
 
     
@@ -54,7 +135,7 @@ LRESULT ModuleDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam) && handleLookupFinished(lParam, LookupFinishedData(lParam)))
         return messageHandled;
-    return Dialog::callback(msg, wParam, lParam); 
+    return MenuDialog::callback(msg, wParam, lParam); 
 }
 
 bool ModuleDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
@@ -66,7 +147,7 @@ bool ModuleDialog::handleLookupFinished(Event& event, const LookupFinishedEventD
 void ModuleDialog::endModal(int code)
 {
     extEventHelper_.stop();
-    Dialog::endModal(code);
+    MenuDialog::endModal(code);
 }
 
 static ModuleDialog* currentModuleDialog = NULL;

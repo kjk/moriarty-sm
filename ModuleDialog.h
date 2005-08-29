@@ -7,13 +7,47 @@
 
 struct LookupFinishedEventData;
 
-class ModuleDialog: public Dialog {
-    ExtEventHelper extEventHelper_;
-
+class MenuDialog: public Dialog {
+    DWORD menuBarFlags_;
     UINT menuBarId_;
 #ifdef SHELL_MENUBAR
     CommandBar menuBar_;
-#endif      
+#endif  
+
+    virtual bool handleBackKey(UINT msg, WPARAM wParam, LPARAM lParam);
+    
+protected:
+
+#ifdef SHELL_MENUBAR   
+    CommandBar& menuBar() {return menuBar_;}
+    const CommandBar& menuBar() const  {return menuBar_;}
+#endif
+
+    void setMenuBarId(UINT menuBarId) {menuBarId_ = menuBarId;}
+    void setMenuBarFlags(DWORD flags) {menuBarFlags_ = flags;}
+    void overrideBackKey(); 
+
+    bool handleInitDialog(HWND focus_widget_handle, long init_param);
+   
+    LRESULT callback(UINT uMsg, WPARAM wParam, LPARAM lParam); 
+
+public:
+
+    
+    enum {menuBarNone = UINT(-1)}; 
+    enum AdvancedOption {advanced}; 
+
+	explicit MenuDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
+	
+	explicit MenuDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
+	
+	~MenuDialog();
+
+
+};
+
+class ModuleDialog: public MenuDialog {
+    ExtEventHelper extEventHelper_;
 
 protected:
     
@@ -23,16 +57,8 @@ protected:
 
     bool handleInitDialog(HWND focus_widget_handle, long init_param);
    
-#ifdef SHELL_MENUBAR   
-    CommandBar& menuBar() {return menuBar_;}
-    const CommandBar& menuBar() const  {return menuBar_;}
-#endif    
-
 public:
     
-    enum {menuBarNone = UINT(-1)}; 
-    enum AdvancedOption {advanced}; 
-
 	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
 	
 	explicit ModuleDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);

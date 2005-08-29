@@ -1,12 +1,16 @@
 #ifndef INFOMAN_PREFERENCES_H__
 #define INFOMAN_PREFERENCES_H__
 
+#include "RecipesModule.h"
+
 #include <Utility.hpp>
 
 class Serializer;
 
 class Preferences: private NonCopyable {
 public:
+
+    RecipesPrefs recipesPrefs;
 
 	Preferences();
 

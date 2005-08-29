@@ -4,6 +4,7 @@
 #include "Modules.h"
 #include "LookupManager.h"
 #include "RecipesModule.h"
+#include "InfoManPreferences.h"
 
 #include <ByteFormatParser.hpp>
 #include <Text.hpp>
@@ -12,6 +13,77 @@
 #include <UniversalDataFormat.hpp>
 
 using namespace DRA;
+
+static UINT recipePrefsCheckboxes[] = {
+    IDC_RECIPE_NAME,
+    IDC_RECIPE_NOTE,
+    IDC_RECIPE_INGREDIENTS,
+    IDC_RECIPE_PREPARATION,
+    IDC_RECIPE_REVIEWS,
+    IDC_RECIPE_GLOBAL_NOTE
+};
+
+static const StaticAssert<ARRAY_SIZE(recipePrefsCheckboxes) == RecipesPrefs::recipeSectionsCount_> ids_count_equals_sections_count;
+
+class RecipesPrefsDialog: public MenuDialog {
+
+    RecipesPrefsDialog()
+    {
+        setMenuBarFlags(SHCMBF_HIDESIPBUTTON);
+    }
+   
+    ~RecipesPrefsDialog()
+    {
+    }   
+   
+public:
+           
+    static long showModal(HWND parent)
+    {
+        RecipesPrefsDialog dlg;
+        return dlg.Dialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_PREFS), parent); 
+    }  
+   
+protected:
+
+    bool handleInitDialog(HWND focus_widget_handle, long init_param)
+    {
+        const RecipesPrefs& prefs = GetPreferences()->recipesPrefs;
+        Button b;
+        for (uint_t i = 0; i < prefs.recipeSectionsCount_; ++i)
+        {
+            b.attachControl(handle(), recipePrefsCheckboxes[i]);
+            assert(b.valid());
+            b.setCheck(prefs.activeSections[i] ? BST_CHECKED : BST_UNCHECKED);
+        }
+        b.detach();
+        return MenuDialog::handleInitDialog(focus_widget_handle, init_param);
+    }
+   
+	long handleCommand(ushort notify_code, ushort id, HWND sender)
+	{
+	    switch (id) 
+	    {
+	        case IDOK:
+            {
+                RecipesPrefs& prefs = GetPreferences()->recipesPrefs;
+                Button b;
+                for (uint_t i = 0; i < prefs.recipeSectionsCount_; ++i)
+                {
+                    b.attachControl(handle(), recipePrefsCheckboxes[i]);
+                    assert(b.valid());
+                    prefs.activeSections[i] = (BST_CHECKED == b.checked());    
+                }
+            }
+            // Intentional fall-through
+            case IDCANCEL:
+                endModal(id);
+                return messageHandled; 
+        }
+        return Dialog::handleCommand(notify_code, id, sender);
+	}
+     
+};
 
 RecipesMainDialog::RecipesMainDialog():
     ModuleDialog(IDR_RECIPES_MENU),
@@ -45,7 +117,6 @@ void RecipesMainDialog::resyncViewMenu()
     CheckMenuItem(menu, ID_VIEW_RECIPE, (showItem == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
 }
 
-
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 {
 	
@@ -59,8 +130,9 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 	term_.attachControl(handle(), IDC_SEARCH_TERM);
 	
 	ModuleDialog::handleInitDialog(wnd, lp);
+	overrideBackKey();
 	
-	RecipesDataRead(listModel_, itemModel_);
+    RecipesDataRead(listModel_, itemModel_);
 	if (NULL != itemModel_)
 	    setDisplayMode(showItem);
     else if (NULL != listModel_)
@@ -109,7 +181,9 @@ bool RecipesMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
 
 long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
-    switch (id) {
+    switch (id) 
+    {
+        case IDCANCEL: 
         case IDOK:
             ModuleRunMain();
             return messageHandled;
@@ -126,6 +200,11 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
         case ID_VIEW_RECIPE:
             setDisplayMode(showItem);
             return messageHandled;
+
+        case ID_VIEW_PREFERENCES:
+            RecipesPrefsDialog::showModal(handle());
+            return messageHandled;
+            
     };
     return ModuleDialog::handleCommand(notify_code, id, sender);
 }

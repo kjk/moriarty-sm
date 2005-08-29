@@ -1,6 +1,7 @@
 #include "RecipesModule.h"
 #include "MoriartyStyles.hpp"
 #include "LookupManager.h"
+#include "InfoManPreferences.h"
 
 #include <ExtendedEvent.hpp>
 
@@ -69,8 +70,7 @@ static TextElement* TextEl(const char_t* text)
 
 DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
 {
-    // TODO: customize recipe based on preferences
-    //const Preferences::EpicuriousPreferences& prefs = application().preferences().epicuriousPreferences; 
+    const RecipesPrefs& prefs = GetPreferences()->recipesPrefs;
     
     DefinitionModel* model = new_nt DefinitionModel();
     if (NULL == model)
@@ -80,7 +80,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
     status_t err = errNone;
     TextElement* text = NULL;
     const char* str = NULL;
-    //if (prefs.fDisplayRecipePart[prefs.recipeName])
+    if (prefs.activeSections[prefs.recipeName])
     {
         TXT(recipe.getItemText(0, recipeNameIndex));
         text->setStyle(StyleGetStaticStyle(styleNameBold));
@@ -90,7 +90,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         APP(new_nt LineBreakElement());
     }    
 
-    //if (prefs.fDisplayRecipePart[prefs.recipeNote])
+    if (prefs.activeSections[prefs.recipeNote])
     {
         str = recipe.getItemData(0, recipeInfoIndex);
         if (0 != Len(str))
@@ -107,7 +107,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         }
     }    
 
-    //if (prefs.fDisplayRecipePart[prefs.recipeIngredients])
+    if (prefs.activeSections[prefs.recipeIngredients])
     {
         TXT(_T("Ingredients"));
         text->setStyle(StyleGetStaticStyle(styleNameHeader));
@@ -120,7 +120,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         APP(new_nt LineBreakElement());
     }    
 
-    //if (prefs.fDisplayRecipePart[prefs.recipePreperation])
+    if (prefs.activeSections[prefs.recipePreperation])
     {
         TXT(_T("Preparation"));
         text->setStyle(StyleGetStaticStyle(styleNameHeader));
@@ -133,7 +133,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         APP(new_nt LineBreakElement());
     }    
 
-    //if (prefs.fDisplayRecipePart[prefs.recipeReviews])
+    if (prefs.activeSections[prefs.recipeReviews])
     {
         uint_t itemsCount = recipe.getItemsCount();
         if (itemsCount > 1)
@@ -165,7 +165,7 @@ DefinitionModel* RecipeExtractFromUDF(const UniversalDataFormat& recipe)
         }
     }    
 
-    //if (prefs.fDisplayRecipePart[prefs.recipeGlobalNote])
+    if (prefs.activeSections[prefs.recipeGlobalNote])
     {
         TXT(_T("Global note"));
         text->setStyle(StyleGetStaticStyle(styleNameHeader));
@@ -210,4 +210,23 @@ status_t RecipesDataRead(DefinitionModel*& listModel, DefinitionModel*& itemMode
     }     
     delete udf;
     return errNone;     
+}
+
+RecipesPrefs::RecipesPrefs()
+{
+    for (int i = 0; i < recipeSectionsCount_; ++i)
+        activeSections[i] = true; 
+    activeSections[recipeReviews] = false;
+}
+
+RecipesPrefs::~RecipesPrefs()
+{
+}
+             
+void RecipesPrefs::serialize(Serializer& ser)
+{
+    for (int i = 0; i < recipeSectionsCount_; ++i)
+    {
+        ser(activeSections[i]);
+    }
 }

@@ -168,18 +168,15 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
             CheckMenuItem(menu, ID_VIEW_LIST, MF_CHECKED);
             return messageHandled;
 
+        case IDCLOSE:
 #ifdef WIN32_PLATFORM_WFSP
-        case IDCLOSE:
             destroy();
-            return 0;
 #endif // WIN32_PLATFORM_WFSP
-
 #ifndef WIN32_PLATFORM_WFSP
-        case IDCLOSE:
             close();
-            return 0;
 #endif // !WIN32_PLATFORM_WFSP
-
+            return messageHandled;
+            
 	}
     return Window::handleCommand(notify_code, id, sender);
 }
@@ -194,8 +191,8 @@ long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
     long iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
+    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1); 
 	
-	update();
 	return Window::handleResize(sizeType, width, height);
 }
 

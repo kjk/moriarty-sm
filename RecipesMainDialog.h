@@ -38,7 +38,7 @@ protected:
     long handleCommand(ushort notify_code, ushort id, HWND sender);
    
     long handleResize(UINT sizeType, ushort width, ushort height);
-    
+   
 public:
     
    MODULE_DIALOG_CREATE_DECLARE(RecipesMainDialog);
