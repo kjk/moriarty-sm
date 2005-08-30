@@ -202,7 +202,14 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
             return messageHandled;
 
         case ID_VIEW_PREFERENCES:
-            RecipesPrefsDialog::showModal(handle());
+            if (IDOK == RecipesPrefsDialog::showModal(handle()))
+            {
+                if (showItem == displayMode_ || showList == displayMode_)
+                    renderer_.setModel(NULL);
+                     
+                RecipesDataRead(listModel_, itemModel_);
+                setDisplayMode(displayMode_); 
+            }
             return messageHandled;
             
     };

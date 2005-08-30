@@ -459,10 +459,11 @@ Default:
 
 long MainWindow::handleActivate(ushort action, bool minimized, HWND prev)
 {
-    //if (WA_ACTIVE == action || WA_CLICKACTIVE == action)
-    //    updateListViewFocus();
+    Window::handleActivate(action, minimized, prev);
+    if (WA_ACTIVE == action || WA_CLICKACTIVE == action)
+        updateListViewFocus();
                  
-    return Window::handleActivate(action, minimized, prev); 
+    return messageHandled; 
 }
 
 void MainWindow::updateListViewFocus()
