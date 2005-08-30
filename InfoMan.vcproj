@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1163,6 +1162,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\WindowsCE\Controls.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Definition.hpp"
 					>
 				</File>
 				<File

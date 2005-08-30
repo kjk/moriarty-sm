@@ -129,6 +129,7 @@ static const ErrorMapping errors[] = {
 	DEF_ERROR(SocketConnection::errResponseMalformed, malformedResponseAlert, IDS_ALERT_MALFORMED_RESPONSE)
 	DEF_ERROR(memErrNotEnoughSpace, notEnoughMemoryAlert, IDS_ALERT_NOT_ENOUGH_MEMORY)
 	DEF_ERROR(netErrTimeout, connectionTimedOutAlert, IDS_ALERT_CONNECTION_TIMEOUT)
+	DEF_ERROR(netErrUnreachableDest, connectionErrorAlert, IDS_ALERT_HOST_UNREACHABLE)
 };
 
 void LookupManager::handleConnectionError(status_t error)
@@ -198,22 +199,21 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 {
     assert(NULL != conn);
 
+#ifdef _PALM_OS
     status_t error = conn->enqueue();
     if (errNone != error)
     { 
         delete conn;
         return error;
     }
-#ifdef _PALM_OS
     MoriartyApplication::popupForm(connectionProgressForm);
+    return errNone; 
 #endif
 
 #ifdef _WIN32
-    ConnectionProgressDialog::showModal(ExtEventGetWindow());
+    return ConnectionProgressDialog::showModal(ExtEventGetWindow(), conn);
     // ConnectionProgressDialog::create(ExtEventGetWindow());
 #endif
-    
-    return errNone; 
 }
 
 const LookupFinishedEventData* LookupFinishedData(Event& event)

@@ -58,6 +58,7 @@
 #define IDS_ALERT_NOT_IMPLEMENTED       521
 #define IDB_DICTIONARY_LARGE            521
 #define IDB_DICTIONARY_SMALL            522
+#define IDS_ALERT_HOST_UNREACHABLE      522
 #define IDB_DREAMS_LARGE                523
 #define IDB_DREAMS_SMALL                524
 #define IDB_EBAY_LARGE                  525

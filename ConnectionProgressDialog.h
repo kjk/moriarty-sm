@@ -6,22 +6,25 @@
 #include <ExtendedEvent.hpp>
 
 class LookupManager;
+class InfoManConnection;
 
 class ConnectionProgressDialog: public Dialog {
     ExtEventHelper extEventHelper_;
     LookupManager& lookupManager_; 
     ProgressBar progressBar_;
     Widget progressBytesText_; 
+    InfoManConnection* connectionToEnqueue_; 
     
-    ConnectionProgressDialog(AutoDeleteOption ad);
+    ConnectionProgressDialog(AutoDeleteOption ad, InfoManConnection* conn);
 
    
     void updateProgress(); 
     
+    static ConnectionProgressDialog* create(HWND parent, InfoManConnection* conn);
+    
 public:
 
-    static ConnectionProgressDialog* create(HWND parent);
-    static long showModal(HWND owner); 
+    static status_t showModal(HWND owner, InfoManConnection* conn); 
     
 protected:
 

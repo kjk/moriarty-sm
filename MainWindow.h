@@ -18,6 +18,8 @@ class MainWindow: public Window
 	
 	// TextRenderer renderer_;
 	ListView listView_;
+	long lastItemIndex_;
+	void updateListViewFocus();
 	
 public:
 

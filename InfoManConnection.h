@@ -37,6 +37,10 @@ protected:
 
     friend class LookupManager;
     
+#ifdef _WIN32
+    friend class ConnectionProgressDialog;
+#endif     
+    
     status_t enqueue();
     
     status_t handleField(const char* name, ulong_t nameLen, const char* value, ulong_t valueLen);

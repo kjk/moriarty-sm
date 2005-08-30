@@ -110,11 +110,6 @@ CAPTION "InfoMan - Recipes"
 FONT 8, "MS Shell Dlg"
 BEGIN
     EDITTEXT        IDC_SEARCH_TERM,2,2,120,13,ES_AUTOHSCROLL
-
-#ifdef WIN32_PLATFORM_PSPC    
-    CONTROL         "",-1,"SIPPREF",NOT WS_VISIBLE,-10,-10,6,6
-#endif
-    
 END
 
 IDD_RECIPES_PREFS DIALOG  0, 0, 156, 177
@@ -339,6 +334,8 @@ BEGIN
     IDS_ALERT_LOCATION_UNKNOWN 
                             "The location you entered is unknown.\nPlease check if it's correct."
     IDS_ALERT_NOT_IMPLEMENTED "This feature is not implemented."
+    IDS_ALERT_HOST_UNREACHABLE 
+                            "Network connection could not be established.\nPlease verify your connection configuration."
 END
 
 #endif    // English (U.S.) resources

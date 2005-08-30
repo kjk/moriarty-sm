@@ -66,7 +66,8 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 #endif // !WIN32_PLATFORM_WFSP
  
 MainWindow::MainWindow():
-	Window(autoDelete)
+	Window(autoDelete),
+	lastItemIndex_(0)
 {
     setOverrideNavBarText(true);
 }
@@ -139,6 +140,8 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     if (!createModuleItems())
         return createFailed; 
 
+    updateListViewFocus();
+    
 	return Window::handleCreate(cs);
 }
 
@@ -186,12 +189,12 @@ long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
 	//renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
 	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
-
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
     long iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
-    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1); 
+    listView_.invalidate(erase);
+    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
 	
 	return Window::handleResize(sizeType, width, height);
 }
@@ -440,7 +443,8 @@ long MainWindow::handleNotify(int controlId, const NMHDR& header)
         if (-1 == h.iItem)
             goto Default;
         
-        const Module* module = ModuleGetActive(h.iItem);
+        lastItemIndex_ = h.iItem;
+        const Module* module = ModuleGetActive(lastItemIndex_);
         assert(NULL != module);
         status_t err = ModuleRun(module->id);
         if (memErrNotEnoughSpace == err)
@@ -455,8 +459,18 @@ Default:
 
 long MainWindow::handleActivate(ushort action, bool minimized, HWND prev)
 {
-    if (WA_ACTIVE == action || WA_CLICKACTIVE == action)
-        listView_.focus();
-         
+    //if (WA_ACTIVE == action || WA_CLICKACTIVE == action)
+    //    updateListViewFocus();
+                 
     return Window::handleActivate(action, minimized, prev); 
+}
+
+void MainWindow::updateListViewFocus()
+{
+    listView_.focus();
+    long l = ListView_GetSelectionMark(listView_.handle());
+    if (-1 == l)
+        l = lastItemIndex_;
+        
+    ListView_SetItemState(listView_.handle(), l, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
 }
