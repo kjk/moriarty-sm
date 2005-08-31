@@ -67,6 +67,8 @@ public:
     
     bool create(UINT resourceId); 
    
+    long showModal(UINT resourceId); 
+   
     void endModal(int code); 
 
 };
@@ -89,6 +91,22 @@ Class* Class::create() \
         return NULL; \
     } \
     return dlg; \
+}
+
+#define MODULE_DIALOG_SHOW_MODAL_DECLARE(Class) static long showModal()
+
+#define MODULE_DIALOG_SHOW_MODAL_IMPLEMENT(Class, resourceId) \
+long Class::showModal() \
+{ \
+    Class* dlg = new_nt Class(); \
+    if (NULL == dlg) \
+    { \
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY); \
+        return 0; \
+    } \
+    long res = dlg->ModuleDialog::showModal(resourceId); \
+    delete dlg; \
+    return res; \
 }
 
 #endif

@@ -46,6 +46,8 @@
 
 #define urlSchemaRecipesList             "s+recipeslist"
 
+#define urlSchemaHoroscope              "s+horoscope"
+
 
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'

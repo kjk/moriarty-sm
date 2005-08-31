@@ -41,9 +41,8 @@ protected:
    
 public:
     
-   MODULE_DIALOG_CREATE_DECLARE(RecipesMainDialog);
-   
-    static long showModal(HWND parent);
+    MODULE_DIALOG_CREATE_DECLARE(RecipesMainDialog);
+    MODULE_DIALOG_SHOW_MODAL_DECLARE(RecipesMainDialog);
     
 };
 

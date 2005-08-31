@@ -211,7 +211,8 @@ status_t LookupManager::enqueueConnection(InfoManConnection* conn)
 #endif
 
 #ifdef _WIN32
-    return ConnectionProgressDialog::showModal(ExtEventGetWindow(), conn);
+    ConnectionProgressDialog::showModal(ExtEventGetWindow(), conn);
+    return errNone; 
     // ConnectionProgressDialog::create(ExtEventGetWindow());
 #endif
 }

@@ -49,6 +49,7 @@ static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
     FVRS(Error, lookupResultServerError), 
     FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, ebookHistoryCacheName, true), 
+    FURS(Horoscope, lookupResultHoroscope, horoscopeDataStream, false), 
     FVAL(LatestClientVersion),
     FRES(NoResults, lookupResultNoResults),
     FURS(Recipe, lookupResultRecipe, recipesItemStream, false), 

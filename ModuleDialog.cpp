@@ -130,6 +130,10 @@ bool ModuleDialog::create(UINT resourceId)
     return MenuDialog::create(GetInstance(), resourceId, ExtEventGetWindow());
 }
 
+long ModuleDialog::showModal(UINT resourceId)
+{
+    return MenuDialog::showModal(GetInstance(), resourceId, ExtEventGetWindow());
+}
     
 LRESULT ModuleDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
 {

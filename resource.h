@@ -25,6 +25,7 @@
 #define IDS_ALERT_MALFORMED_REQUEST     504
 #define IDD_RECIPES_PREFS               504
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
+#define IDD_HOROSCOPES_MAIN             505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
 #define IDS_ALERT_REQUEST_ARGUMENT_MISSING 507
 #define IDB_RECIPES_LARGE               507
@@ -92,6 +93,19 @@
 #define IDB_STOCKS_LARGE                553
 #define IDB_STOCKS_SMALL                554
 #define IDR_RECIPES_MENU                555
+#define IDS_ZODIAC0                     800
+#define IDS_ZODIAC1                     801
+#define IDS_ZODIAC2                     802
+#define IDS_ZODIAC3                     803
+#define IDS_ZODIAC4                     804
+#define IDS_ZODIAC5                     805
+#define IDS_ZODIAC6                     806
+#define IDS_ZODIAC7                     807
+#define IDS_ZODIAC8                     808
+#define IDS_ZODIAC9                     809
+#define IDS_ZODIAC10                    810
+#define IDS_STRING811                   811
+#define IDS_ZODIAC11                    811
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -107,6 +121,7 @@
 #define IDC_RECIPE_REVIEWS              2027
 #define IDC_SHOW_RECIPE_GLOBAL_NOTE     2028
 #define IDC_RECIPE_GLOBAL_NOTE          2028
+#define IDC_LIST                        2029
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -134,7 +149,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        557
 #define _APS_NEXT_COMMAND_VALUE         50017
-#define _APS_NEXT_CONTROL_VALUE         2029
+#define _APS_NEXT_CONTROL_VALUE         2030
 #define _APS_NEXT_SYMED_VALUE           503
 #endif
 #endif

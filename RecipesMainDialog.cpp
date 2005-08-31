@@ -102,11 +102,7 @@ RecipesMainDialog::~RecipesMainDialog()
 
 MODULE_DIALOG_CREATE_IMPLEMENT(RecipesMainDialog, IDD_RECIPES_MAIN);
 
-long RecipesMainDialog::showModal(HWND parent)
-{
-    RecipesMainDialog dlg;
-    return dlg.ModuleDialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_MAIN), parent); 
-}
+MODULE_DIALOG_SHOW_MODAL_IMPLEMENT(RecipesMainDialog, IDD_RECIPES_MAIN);
 
 void RecipesMainDialog::resyncViewMenu()
 {
@@ -119,15 +115,17 @@ void RecipesMainDialog::resyncViewMenu()
 
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 {
+	term_.attachControl(handle(), IDC_SEARCH_TERM);
 	
 	Rect r;
-	bounds(r);
+	innerBounds(r);
 	renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
 	renderer_.definition.setInteractionBehavior(Definition::behavDoubleClickSelection | Definition::behavHyperlinkNavigation | Definition::behavMouseSelection | Definition::behavUpDownScroll);
 	renderer_.definition.setNavOrderOptions(Definition::navOrderLast);
-	renderer_.create(WS_TABSTOP | WS_VISIBLE, SCALEX(1), SCALEY(25), r.width() - SCALEX(2), r.height() - SCALEY(26), handle());
 	
-	term_.attachControl(handle(), IDC_SEARCH_TERM);
+	long h = term_.height() + LogY(1);
+	//renderer_.create(WS_TABSTOP | WS_VISIBLE, SCALEX(1), SCALEY(25), r.width() - SCALEX(2), r.height() - SCALEY(26), handle());
+	renderer_.create(WS_TABSTOP | WS_VISIBLE, LogX(1), h, r.width() - 2 * LogX(1), r.height() - h - LogY(1), handle());
 	
 	ModuleDialog::handleInitDialog(wnd, lp);
 	overrideBackKey();
@@ -218,12 +216,13 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
 
 long RecipesMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 {
+    term_.anchor(anchorRight, 2 * LogX(1), anchorNone, 0, repaintWidget);
+    long h = term_.height(); 
     if (showItem == displayMode_)
-        renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+        renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, 2 * LogY(1), repaintWidget);
     else
-        renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(26), repaintWidget);
+        renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, h + 2 * LogY(1), repaintWidget);
         
-    term_.anchor(anchorRight, SCALEX(2), anchorNone, 0, repaintWidget);
     return ModuleDialog::handleResize(sizeType, width, height);
 }
 
@@ -232,7 +231,8 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
     UINT buttonId = (showItem == displayMode_ ? ID_BACK : ID_SEARCH);
     Rect b;
     bounds(b);
-    b.set(SCALEX(1), SCALEY(25), b.width() - SCALEX(2), b.height() - SCALEY(26));
+    long h = term_.height(); 
+    b.set(LogX(1), h + LogY(1), b.width() - 2 * LogX(1), b.height() - h - 2 * LogY(1));
     switch (displayMode_ = dm)
     {
         case showAbout:
@@ -257,7 +257,7 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
         case showItem:
             term_.hide();
             assert(NULL != itemModel_);
-            b.y() = SCALEY(1);
+            b.y() = LogY(1);
             renderer_.setBounds(b);
             renderer_.setModel(itemModel_);
             renderer_.focus();

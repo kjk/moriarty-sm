@@ -1,6 +1,7 @@
 #ifndef INFOMAN_MODULES_H__
 #define INFOMAN_MODULES_H__
 
+#include "InfoManGlobals.h"
 #include <Debug.hpp>
 
 enum ModuleID {
@@ -76,7 +77,7 @@ status_t ModuleRun(ModuleID id);
 inline void ModuleRunMain() {ModuleRun(moduleIdNone);}
 void ModuleTouchRunning();
 
-#define MODULE_DATA_STREAM(name) name "-" dataStreamPostfix
+#define MODULE_DATA_STREAM(name) (name "-" dataStreamPostfix)
 #define MODULE_PREFS_STREAM(name) name "-" prefsStreamPostfix
 #define MODULE_HISTORY_CACHE(name) _T(name) _T("-HistoryCache")
 

@@ -109,7 +109,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 CAPTION "InfoMan - Recipes"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    EDITTEXT        IDC_SEARCH_TERM,2,2,120,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SEARCH_TERM,1,1,122,13,ES_AUTOHSCROLL
 END
 
 IDD_RECIPES_PREFS DIALOG  0, 0, 156, 177
@@ -124,6 +124,14 @@ BEGIN
     CONTROL         "Preparation",IDC_RECIPE_PREPARATION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,62,53,10
     CONTROL         "Reviews",IDC_RECIPE_REVIEWS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,76,43,10
     CONTROL         "Global note",IDC_RECIPE_GLOBAL_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,90,52,10
+END
+
+IDD_HOROSCOPES_MAIN DIALOG  0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Horoscopes"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_SMALLICON | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ALIGNLEFT | WS_TABSTOP,1,1,154,175
 END
 
 
@@ -160,6 +168,8 @@ BEGIN
         RIGHTMARGIN, 122
         TOPMARGIN, 2
         BOTTOMMARGIN, 130
+        HORZGUIDE, 14
+        HORZGUIDE, 16
     END
 
     IDD_RECIPES_PREFS, DIALOG
@@ -169,6 +179,14 @@ BEGIN
         VERTGUIDE, 14
         TOPMARGIN, 7
         BOTTOMMARGIN, 170
+    END
+
+    IDD_HOROSCOPES_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 155
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 176
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -336,6 +354,22 @@ BEGIN
     IDS_ALERT_NOT_IMPLEMENTED "This feature is not implemented."
     IDS_ALERT_HOST_UNREACHABLE 
                             "Network connection could not be established.\nPlease verify your connection configuration."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ZODIAC0             "Aries (03/21 - 04/19)"
+    IDS_ZODIAC1             "Taurus (04/20 - 05/20)"
+    IDS_ZODIAC2             "Gemini (05/21 - 06/21)"
+    IDS_ZODIAC3             "Cancer (06/22 - 07/22)"
+    IDS_ZODIAC4             "Leo (07/23 - 08/22)"
+    IDS_ZODIAC5             "Virgo (08/23 - 09/22)"
+    IDS_ZODIAC6             "Libra (09/23 - 10/22)"
+    IDS_ZODIAC7             "Scorpio (10/23 - 11/21)"
+    IDS_ZODIAC8             "Sagittarius (11/22 - 12/21)"
+    IDS_ZODIAC9             "Capricorn (12/22 - 01/19)"
+    IDS_ZODIAC10            "Aquarius (01/20 - 02/18)"
+    IDS_ZODIAC11            "Pisces (02/19 - 03/20)"
 END
 
 #endif    // English (U.S.) resources

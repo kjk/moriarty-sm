@@ -4,9 +4,6 @@
 #include "Modules.h"
 #include <Serializer.hpp>
 
-//class ModuleDialog;
-//ModuleDialog* RecipesStart();
-
 MODULE_STARTER_DECLARE(Recipes);
 
 struct UniversalDataFormat;

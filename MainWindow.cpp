@@ -140,7 +140,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     if (!createModuleItems())
         return createFailed; 
 
-    updateListViewFocus();
+    // updateListViewFocus();
     
 	return Window::handleCreate(cs);
 }

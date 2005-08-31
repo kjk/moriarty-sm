@@ -128,7 +128,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
 			break;
 		}
 		
-		if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
+		//if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
+		HWND fw = GetForegroundWindow();
+		if (NULL != fw && IsDialogMessage(fw, &msg))
 		{
 		    //OutputDebugString(_T("IsDialogMessage(): "));
 		    //DumpMessage(msg.message, msg.wParam, msg.lParam);
