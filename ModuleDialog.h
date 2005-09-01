@@ -57,6 +57,8 @@ protected:
 
     bool handleInitDialog(HWND focus_widget_handle, long init_param);
    
+    long handleCommand(ushort nc, ushort id, HWND sender); 
+   
 public:
     
 	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);

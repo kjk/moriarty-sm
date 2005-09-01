@@ -181,11 +181,6 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
 {
     switch (id) 
     {
-        case IDCANCEL: 
-        case IDOK:
-            ModuleRunMain();
-            return messageHandled;
-            
         case ID_SEARCH:
             search();
             return messageHandled;
@@ -228,7 +223,6 @@ long RecipesMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 
 void RecipesMainDialog::setDisplayMode(DisplayMode dm)
 {
-    UINT buttonId = (showItem == displayMode_ ? ID_BACK : ID_SEARCH);
     Rect b;
     bounds(b);
     long h = term_.height(); 
@@ -238,8 +232,7 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
         case showAbout:
             prepareAbout(); 
             renderer_.setBounds(b);
-            if (ID_SEARCH != buttonId)
-                menuBar().replaceButton(buttonId, ID_SEARCH, IDS_SEARCH);
+            menuBar().replaceButton(ID_BACK, ID_SEARCH, IDS_SEARCH);
             term_.show();
             term_.focus();
             break;
@@ -249,8 +242,7 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
             renderer_.setBounds(b);
             renderer_.setModel(listModel_);
             renderer_.focus();
-            if (ID_SEARCH != buttonId)
-                menuBar().replaceButton(buttonId, ID_SEARCH, IDS_SEARCH);
+            menuBar().replaceButton(ID_BACK, ID_SEARCH, IDS_SEARCH);
             term_.show();
             break;
 
@@ -261,8 +253,7 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
             renderer_.setBounds(b);
             renderer_.setModel(itemModel_);
             renderer_.focus();
-            if (ID_BACK != buttonId)
-                menuBar().replaceButton(buttonId, ID_BACK, IDS_BACK);
+            menuBar().replaceButton(ID_SEARCH, ID_BACK, IDS_BACK);
             break;
         
         default:

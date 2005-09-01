@@ -11,8 +11,10 @@ struct HoroscopesPrefs: public Serializable {
    HoroscopesPrefs();
    ~HoroscopesPrefs();
    
-   char* lastQuery;
-   ulong_t lastSign;
+   char* finishedQuery;
+   char* pendingQuery;
+   ulong_t finishedSign;
+   ulong_t pendingSign;
    enum {signNotSet = ulong_t(-1)};
    
    void serialize(Serializer& ser);
@@ -25,5 +27,6 @@ DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf, char_t*
 
 enum {horoscopesSignCount = 12};
 status_t HoroscopeFetch(uint_t index);
+status_t HoroscopeFetch(const char* query);
 
 #endif // HOROSCOPES_MODULE_H__

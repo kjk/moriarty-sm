@@ -1,5 +1,7 @@
 #include "ModuleDialog.h"
 #include "LookupManager.h"
+#include "Modules.h"
+
 #include <SysUtils.hpp>
 #include <WindowsCE/Controls.hpp>
 #include <Text.hpp>
@@ -152,6 +154,18 @@ void ModuleDialog::endModal(int code)
 {
     extEventHelper_.stop();
     MenuDialog::endModal(code);
+}
+
+long ModuleDialog::handleCommand(ushort nc, ushort id, HWND sender)
+{
+    switch (id) 
+    {
+        case IDOK:
+        case IDCANCEL:
+            ModuleRunMain();
+            return messageHandled;
+    }
+    return MenuDialog::handleCommand(nc, id, sender);   
 }
 
 static ModuleDialog* currentModuleDialog = NULL;

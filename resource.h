@@ -15,6 +15,7 @@
 #define IDS_SEARCH                      108
 #define IDS_BACK                        109
 #define IDD_ABOUTBOX                    110
+#define IDS_UPDATE                      110
 #define IDD_ABOUTBOX_WIDE               111
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
@@ -27,6 +28,7 @@
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDD_HOROSCOPES_MAIN             505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
+#define IDD_BOXOFFICE_MAIN              506
 #define IDS_ALERT_REQUEST_ARGUMENT_MISSING 507
 #define IDB_RECIPES_LARGE               507
 #define IDS_ALERT_UNEXPECTED_REQUEST_ARGUMENT 508
@@ -93,8 +95,8 @@
 #define IDB_STOCKS_LARGE                553
 #define IDB_STOCKS_SMALL                554
 #define IDR_RECIPES_MENU                555
-#define IDR_MENU1                       557
 #define IDR_HOROSCOPES_MENU             557
+#define IDR_BOXOFFICE_MENU              558
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -106,7 +108,6 @@
 #define IDS_ZODIAC8                     808
 #define IDS_ZODIAC9                     809
 #define IDS_ZODIAC10                    810
-#define IDS_STRING811                   811
 #define IDS_ZODIAC11                    811
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
@@ -124,6 +125,7 @@
 #define IDC_SHOW_RECIPE_GLOBAL_NOTE     2028
 #define IDC_RECIPE_GLOBAL_NOTE          2028
 #define IDC_LIST                        2029
+#define IDC_LIST1                       2032
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -145,6 +147,7 @@
 #define ID_VIEW_SIGNLIST                50017
 #define ID_VIEW_HOROSCOPE               50018
 #define ID_VIEW_SIGN_LIST               50019
+#define ID_VIEW_UPDATE                  50020
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -152,9 +155,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        558
-#define _APS_NEXT_COMMAND_VALUE         50020
-#define _APS_NEXT_CONTROL_VALUE         2030
+#define _APS_NEXT_RESOURCE_VALUE        559
+#define _APS_NEXT_COMMAND_VALUE         50021
+#define _APS_NEXT_CONTROL_VALUE         2033
 #define _APS_NEXT_SYMED_VALUE           503
 #endif
 #endif

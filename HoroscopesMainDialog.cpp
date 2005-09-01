@@ -15,8 +15,7 @@ HoroscopesMainDialog::HoroscopesMainDialog():
     ModuleDialog(IDR_HOROSCOPES_MENU),
     udf_(NULL),
     displayMode_(showSigns),
-    date_(NULL),
-    downloadingSign_(HoroscopesPrefs::signNotSet) 
+    date_(NULL)
 {
     setMenuBarFlags(SHCMBF_HIDESIPBUTTON);
 }
@@ -60,6 +59,11 @@ bool HoroscopesMainDialog::handleInitDialog(HWND fw, long ip)
     }   
     
     prepareSigns();
+    HoroscopesPrefs& prefs = GetPreferences()->horoscopesPrefs;
+    ulong_t index = 0;
+    if (prefs.signNotSet != prefs.finishedSign)
+        index = prefs.finishedSign;
+    ListView_SetItemState(listView_.handle(), index, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
      
     setDisplayMode(displayMode_);
     return false;  
@@ -129,11 +133,6 @@ long HoroscopesMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
     switch (id)
     {
-        case IDOK:
-        case IDCANCEL:
-            ModuleRunMain();
-            return messageHandled;
-
         case ID_VIEW_SIGN_LIST:
         case ID_BACK:
             setDisplayMode(showSigns);
@@ -141,6 +140,11 @@ long HoroscopesMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 
         case ID_VIEW_HOROSCOPE:
             setDisplayMode(showHoroscope);
+            return messageHandled;
+        
+        case ID_VIEW_UPDATE:
+            if (errNone != HoroscopeFetch(GetPreferences()->horoscopesPrefs.finishedQuery))
+               Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
             return messageHandled;
     }
     return ModuleDialog::handleCommand(nc, id, sender);   
@@ -154,8 +158,7 @@ long HoroscopesMainDialog::handleNotify(int controlId, const NMHDR& header)
         if (-1 == h.iItem)
             goto Default;
             
-        downloadingSign_ = h.iItem;
-        status_t err = HoroscopeFetch(downloadingSign_);
+        status_t err = HoroscopeFetch(h.iItem);
         if (errNone != err)
             Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
         return messageHandled;
@@ -178,24 +181,37 @@ bool HoroscopesMainDialog::handleLookupFinished(Event& event, const LookupFinish
             if (NULL != model)
             {
                 renderer_.setModel(model, Definition::ownModel);
-                setDisplayMode(showHoroscope);
                 ModuleTouchRunning();
-                if (HoroscopesPrefs::signNotSet != downloadingSign_)
-                    prefs.lastSign = downloadingSign_; 
+                assert(NULL != prefs.pendingQuery);
+                free(prefs.finishedQuery);
+                prefs.finishedQuery = prefs.pendingQuery;
+                prefs.pendingQuery = NULL;
+                
+                if (prefs.signNotSet != prefs.pendingSign)
+                    prefs.finishedSign = prefs.pendingSign;                
+                                           
+                setDisplayMode(showHoroscope);
             }
             else
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            free(prefs.pendingQuery);
+            prefs.pendingQuery = NULL; 
+            prefs.pendingSign = prefs.signNotSet; 
             return true;
         } 
     }
-    downloadingSign_ = HoroscopesPrefs::signNotSet; 
+    free(prefs.pendingQuery);
+    prefs.pendingQuery = NULL; 
+    prefs.pendingSign = prefs.signNotSet; 
     return ModuleDialog::handleLookupFinished(event, data);    
 }
 
 void HoroscopesMainDialog::resyncViewMenu()
 {
+    HoroscopesPrefs& prefs = GetPreferences()->horoscopesPrefs;
     HMENU menu = menuBar().subMenu(IDM_VIEW);
     EnableMenuItem(menu, ID_VIEW_HOROSCOPE, (renderer_.definition.empty() ? MF_GRAYED : MF_ENABLED));
     CheckMenuItem(menu, ID_VIEW_SIGN_LIST, (showSigns == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
     CheckMenuItem(menu, ID_VIEW_HOROSCOPE, (showHoroscope == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    EnableMenuItem(menu, ID_VIEW_UPDATE, (0 == Len(prefs.finishedQuery) ? MF_GRAYED : MF_ENABLED));
 }

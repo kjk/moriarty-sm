@@ -1,6 +1,7 @@
 #include "HoroscopesModule.h"
 #include "HyperlinkHandler.h"
 #include "LookupManager.h"
+#include "InfoManPreferences.h"
 
 #include "MoriartyStyles.hpp"
 
@@ -17,20 +18,23 @@
 MODULE_STARTER_DEFINE(Horoscopes)
 
 HoroscopesPrefs::HoroscopesPrefs():
-    lastQuery(StringCopy("")),
-    lastSign(signNotSet)
+    finishedQuery(StringCopy("")),
+    pendingQuery(NULL), 
+    finishedSign(signNotSet),
+    pendingSign(signNotSet) 
 {
 }
 
 HoroscopesPrefs::~HoroscopesPrefs()
 {
-    free(lastQuery); 
+    free(finishedQuery); 
+    free(pendingQuery); 
 }
 
 void HoroscopesPrefs::serialize(Serializer& ser)
 {
-    ser(lastSign);
-    ser.narrow(lastQuery); 
+    ser(finishedSign);
+    ser.narrow(finishedQuery); 
 }
 
 static const char* signNames[] = {
@@ -48,10 +52,16 @@ static const char* signNames[] = {
     "Pisces"
 }; 
 
-static status_t HoroscopeFetch(const char* name)
+status_t HoroscopeFetch(const char* query)
 {
+    HoroscopesPrefs& prefs = GetPreferences()->horoscopesPrefs;
+    free(prefs.pendingQuery);
+    prefs.pendingQuery = StringCopy(query);
+    if (NULL == prefs.pendingQuery)
+        return memErrNotEnoughSpace;
+             
     char* url = StringCopy(urlSchemaHoroscope urlSeparatorSchemaStr);
-    if (NULL == url || NULL == (url = StrAppend(url, -1, name, -1)))
+    if (NULL == url || NULL == (url = StrAppend(url, -1, prefs.pendingQuery, -1)))
         return memErrNotEnoughSpace;
         
     status_t err = GetLookupManager()->fetchUrl(url);
@@ -62,6 +72,8 @@ static status_t HoroscopeFetch(const char* name)
 status_t HoroscopeFetch(uint_t index)
 {
     assert(index < horoscopesSignCount);
+    HoroscopesPrefs& prefs = GetPreferences()->horoscopesPrefs;
+    prefs.pendingSign = index; 
     const char* name = signNames[index];
     return HoroscopeFetch(name);
 }

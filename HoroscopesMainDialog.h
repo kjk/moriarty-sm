@@ -26,7 +26,6 @@ class HoroscopesMainDialog: public ModuleDialog {
     void prepareSigns(); 
    
     char_t* date_; 
-    ulong_t downloadingSign_; 
    
     void resyncViewMenu(); 
    

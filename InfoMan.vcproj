@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -687,126 +688,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath=".\ConnectionProgressDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\FieldMetaData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\History.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\HyperlinkHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoMan.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManConnection.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManPreferences.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManStyles.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\LookupManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MainWindow.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ModuleDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Modules.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Pocket PC 2003 (ARMV4)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Smartphone 2003 (ARMV4)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Pocket PC 2003 (ARMV4)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Smartphone 2003 (ARMV4)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\Tests.cpp"
-				>
-			</File>
 			<Filter
 				Name="Framework"
 				>
@@ -1091,80 +972,148 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="BoxOffice"
+				>
+				<File
+					RelativePath=".\BoxOfficeMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BoxOfficeModule.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Core"
+				>
+				<File
+					RelativePath=".\ConnectionProgressDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FieldMetaData.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\History.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\HyperlinkHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoMan.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManConnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManPreferences.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManStyles.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\LookupManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MainWindow.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ModuleDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Modules.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\stdafx.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Pocket PC 2003 (ARMV4)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Smartphone 2003 (ARMV4)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Pocket PC 2003 (ARMV4)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Smartphone 2003 (ARMV4)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Tests.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\ConnectionProgressDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\FieldMetaData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\History.h"
-				>
-			</File>
-			<File
-				RelativePath=".\HyperlinkHandler.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoMan.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManConnection.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManGlobals.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InfoManPreferences.h"
-				>
-			</File>
-			<File
-				RelativePath=".\LookupManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MainWindow.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ModuleDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Modules.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resourceppc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resourcesp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Src\ServerErrors.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.h"
-				>
-			</File>
 			<Filter
 				Name="Framework"
 				>
@@ -1234,6 +1183,90 @@
 				</File>
 				<File
 					RelativePath=".\HoroscopesModule.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="BoxOffice"
+				>
+				<File
+					RelativePath=".\BoxOfficeMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\BoxOfficeModule.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Core"
+				>
+				<File
+					RelativePath=".\ConnectionProgressDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FieldMetaData.h"
+					>
+				</File>
+				<File
+					RelativePath=".\History.h"
+					>
+				</File>
+				<File
+					RelativePath=".\HyperlinkHandler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoMan.h"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManConnection.h"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManGlobals.h"
+					>
+				</File>
+				<File
+					RelativePath=".\InfoManPreferences.h"
+					>
+				</File>
+				<File
+					RelativePath=".\LookupManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MainWindow.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ModuleDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Modules.h"
+					>
+				</File>
+				<File
+					RelativePath=".\resource.h"
+					>
+				</File>
+				<File
+					RelativePath=".\resourceppc.h"
+					>
+				</File>
+				<File
+					RelativePath=".\resourcesp.h"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Src\ServerErrors.hpp"
+					>
+				</File>
+				<File
+					RelativePath=".\stdafx.h"
 					>
 				</File>
 			</Filter>
