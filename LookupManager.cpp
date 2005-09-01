@@ -130,6 +130,7 @@ static const ErrorMapping errors[] = {
 	DEF_ERROR(memErrNotEnoughSpace, notEnoughMemoryAlert, IDS_ALERT_NOT_ENOUGH_MEMORY)
 	DEF_ERROR(netErrTimeout, connectionTimedOutAlert, IDS_ALERT_CONNECTION_TIMEOUT)
 	DEF_ERROR(netErrUnreachableDest, connectionErrorAlert, IDS_ALERT_HOST_UNREACHABLE)
+	DEF_ERROR(netErrSocketClosedByRemote, connectionErrorAlert, IDS_ALERT_HOST_UNREACHABLE)
 };
 
 void LookupManager::handleConnectionError(status_t error)

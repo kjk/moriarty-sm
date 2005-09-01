@@ -30,7 +30,10 @@ HoroscopesMainDialog::~HoroscopesMainDialog()
 
 bool HoroscopesMainDialog::handleInitDialog(HWND fw, long ip)  
 {
-    listView_.attachControl(handle(), IDC_LIST);
+    // listView_.attachControl(handle(), IDC_LIST);
+    Rect r;
+    innerBounds(r);  
+    listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, LogX(1), LogY(1), r.width() - 2 * LogX(1), r.height() - 2 * LogY(1), handle(), GetInstance());
 
 #ifndef LVS_EX_GRADIENT
 #define LVS_EX_GRADIENT 0
@@ -39,8 +42,6 @@ bool HoroscopesMainDialog::handleInitDialog(HWND fw, long ip)
     listView_.setStyleEx(LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
     
-    Rect r;
-    innerBounds(r);  
     renderer_.create(WS_TABSTOP | WS_VISIBLE, LogX(1), LogY(1), r.width() - 2 * LogX(1), r.height() - 2 * LogY(1), handle());
     renderer_.definition.setInteractionBehavior(
         Definition::behavUpDownScroll
@@ -72,6 +73,15 @@ bool HoroscopesMainDialog::handleInitDialog(HWND fw, long ip)
 long HoroscopesMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 {
     listView_.anchor(anchorRight, 2 * LogX(1), anchorBottom, 2 * LogY(1), repaintWidget);
+
+    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
+    long iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
+    long iconHeight = height / (height / SCALEY(62));
+    ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
+    listView_.invalidate(erase);
+    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
+
+    
     renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, 2 * LogY(1), repaintWidget);
     return ModuleDialog::handleResize(sizeType, width, height); 
 }
@@ -102,8 +112,20 @@ void HoroscopesMainDialog::prepareSigns()
     bool scaleIcons = false;
     if (SCALEX(50) >= 100)
         scaleIcons = true; 
+     
+    // TODO: add error-checking
+    HIMAGELIST il = ImageList_Create(24, 24, ILC_COLOR | ILC_MASK, 12, 1);
+    if (NULL == il)
+        goto Error;
+
+    HBITMAP bmp = LoadBitmap(GetInstance(), MAKEINTRESOURCE(IDB_ZODIAC_SIGNS)); 
+    long res = ImageList_AddMasked(il, bmp, RGB(255, 0, 255));
+    DeleteObject(bmp); 
 
     listView_.clear();   
+    listView_.setImageList(il, LVSIL_NORMAL); 
+    ListView_SetColumnWidth(listView_.handle(), 0, listView_.width());
+   
     for (ulong_t i = 0; i < horoscopesSignCount; ++i)
     {
         char_t* name = LoadString(IDS_ZODIAC0 + i);
@@ -113,11 +135,11 @@ void HoroscopesMainDialog::prepareSigns()
         LVITEM item;
         ZeroMemory(&item, sizeof(item));
 
-        item.mask = LVIF_TEXT; // | LVIF_IMAGE;
+        item.mask = LVIF_TEXT | LVIF_IMAGE;
         item.iItem = i;
         item.iSubItem = 0;
         item.pszText = name;
-        // item.iImage = item.iItem;
+        item.iImage = i;
         
         long res = listView_.insertItem(item);
         free(name);

@@ -76,6 +76,7 @@ IDB_QUOTES_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\qu
 IDB_QUOTES_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\quotations-small-sm-8.bmp"
 IDB_STOCKS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\stocks-small-lg-8.bmp"
 IDB_STOCKS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\stocks-small-sm-8.bmp"
+IDB_ZODIAC_SIGNS        BITMAP                  ".\\zodiac.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -131,7 +132,6 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Horoscopes"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    CONTROL         "",IDC_LIST,"SysListView32",LVS_SMALLICON | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ALIGNLEFT | WS_TABSTOP,1,1,154,175
 END
 
 IDD_BOXOFFICE_MAIN DIALOG  0, 0, 156, 177
@@ -319,7 +319,6 @@ BEGIN
 END
 
 
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // RCDATA
@@ -387,18 +386,18 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_ZODIAC0             "Aries (03/21 - 04/19)"
-    IDS_ZODIAC1             "Taurus (04/20 - 05/20)"
-    IDS_ZODIAC2             "Gemini (05/21 - 06/21)"
-    IDS_ZODIAC3             "Cancer (06/22 - 07/22)"
-    IDS_ZODIAC4             "Leo (07/23 - 08/22)"
-    IDS_ZODIAC5             "Virgo (08/23 - 09/22)"
-    IDS_ZODIAC6             "Libra (09/23 - 10/22)"
-    IDS_ZODIAC7             "Scorpio (10/23 - 11/21)"
-    IDS_ZODIAC8             "Sagittarius (11/22 - 12/21)"
-    IDS_ZODIAC9             "Capricorn (12/22 - 01/19)"
-    IDS_ZODIAC10            "Aquarius (01/20 - 02/18)"
-    IDS_ZODIAC11            "Pisces (02/19 - 03/20)"
+    IDS_ZODIAC0             "Aries\n03/21-04/19"
+    IDS_ZODIAC1             "Taurus\n04/20-05/20"
+    IDS_ZODIAC2             "Gemini\n05/21-06/21"
+    IDS_ZODIAC3             "Cancer\n06/22-07/22"
+    IDS_ZODIAC4             "Leo\n07/23-08/22"
+    IDS_ZODIAC5             "Virgo\n08/23-09/22"
+    IDS_ZODIAC6             "Libra\n09/23-10/22"
+    IDS_ZODIAC7             "Scorpio\n10/23-11/21"
+    IDS_ZODIAC8             "Sagittarius\n11/22-12/21"
+    IDS_ZODIAC9             "Capricorn\n12/22-01/19"
+    IDS_ZODIAC10            "Aquarius\n01/20-02/18"
+    IDS_ZODIAC11            "Pisces\n02/19-03/20"
 END
 
 #endif    // English (U.S.) resources

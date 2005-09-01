@@ -114,7 +114,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 #endif
 
 	Rect r;
-	bounds(r);
+    innerBounds(r);  
 	//if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 	//	return createFailed;
 
