@@ -156,6 +156,7 @@ status_t Preferences::serialize(Serializer& serialize)
 		serialize.narrow(cookie, NULL, serialIdCookie);
 		serialize.narrow(regCode, NULL, serialIdRegCode);
 		serialize(recipesPrefs, serialIdRecipesPreferences);
+		serialize(horoscopesPrefs, serialIdHoroscopesPreferences);
 	}
 	ErrCatch (ex) {
 		return ex;

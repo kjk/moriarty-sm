@@ -21,7 +21,7 @@ struct HoroscopesPrefs: public Serializable {
 
 struct UniversalDataFormat;
 class DefinitionModel;
-DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf);
+DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf, char_t*& date);
 
 enum {horoscopesSignCount = 12};
 status_t HoroscopeFetch(uint_t index);

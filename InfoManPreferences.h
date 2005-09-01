@@ -2,6 +2,7 @@
 #define INFOMAN_PREFERENCES_H__
 
 #include "RecipesModule.h"
+#include "HoroscopesModule.h"
 
 #include <Utility.hpp>
 
@@ -11,6 +12,7 @@ class Preferences: private NonCopyable {
 public:
 
     RecipesPrefs recipesPrefs;
+    HoroscopesPrefs horoscopesPrefs; 
 
 	Preferences();
 

@@ -93,6 +93,8 @@
 #define IDB_STOCKS_LARGE                553
 #define IDB_STOCKS_SMALL                554
 #define IDR_RECIPES_MENU                555
+#define IDR_MENU1                       557
+#define IDR_HOROSCOPES_MENU             557
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -140,6 +142,9 @@
 #define ID_BACK                         50014
 #define ID_SEARCH                       50015
 #define ID_VIEW_RECIPES_LIST            50016
+#define ID_VIEW_SIGNLIST                50017
+#define ID_VIEW_HOROSCOPE               50018
+#define ID_VIEW_SIGN_LIST               50019
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -147,8 +152,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        557
-#define _APS_NEXT_COMMAND_VALUE         50017
+#define _APS_NEXT_RESOURCE_VALUE        558
+#define _APS_NEXT_COMMAND_VALUE         50020
 #define _APS_NEXT_CONTROL_VALUE         2030
 #define _APS_NEXT_SYMED_VALUE           503
 #endif

@@ -25,6 +25,11 @@ class HoroscopesMainDialog: public ModuleDialog {
     void setDisplayMode(DisplayMode dm); 
     void prepareSigns(); 
    
+    char_t* date_; 
+    ulong_t downloadingSign_; 
+   
+    void resyncViewMenu(); 
+   
 protected:
 
     bool handleInitDialog(HWND fw, long ip);    

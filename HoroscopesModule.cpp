@@ -2,12 +2,17 @@
 #include "HyperlinkHandler.h"
 #include "LookupManager.h"
 
+#include "MoriartyStyles.hpp"
+
 #ifdef _WIN32
 #include "HoroscopesMainDialog.h"
 #endif
 
 #include <Text.hpp>
 #include <UniversalDataHandler.hpp>
+#include <DefinitionElement.hpp>
+#include <LineBreakElement.hpp>
+
 
 MODULE_STARTER_DEFINE(Horoscopes)
 
@@ -73,7 +78,10 @@ static void HoroscopesLinkCallback(void* data)
 #define horoscopeDate          ("D")
 #define horoscopeUrlLink       ("L")
 
-DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf)
+#define TXT(text) if (errNone != model->appendText(text)) goto Error
+#define LBR()    if (errNone != model->append(new_nt LineBreakElement())) goto Error
+
+DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf, char_t*& date)
 {
     DefinitionModel* model = new_nt DefinitionModel();
     if (NULL == model)
@@ -82,45 +90,45 @@ DefinitionModel* HoroscopeExtractFromUDF(const UniversalDataFormat& udf)
     ulong_t size = udf.getItemsCount();       
     for (ulong_t i=0; i < size; i++)
     {
-        if (2 != udf.getItemElementsCount(i))
-            goto Error;
-            
         const char* type = udf.getItemData(i, 0);
         if (StrEquals(horoscopeTitle, type))
         {
-            //elems.push_back(text=new TextElement(item.getItemText(i,1)));
-            //text->setStyle(StyleGetStaticStyle(styleNameBold));
-            //text->setJustification(DefinitionElement::justifyCenter);
+            TXT(udf.getItemText(i, 1));
+            model->last()->setStyle(StyleGetStaticStyle(styleNameBold));
+            model->last()->setJustification(DefinitionElement::justifyCenter);
         }
         else if (StrEquals(horoscopeText, type))
         {
-            //elems.push_back(new LineBreakElement());
-            //elems.push_back(text=new TextElement(item.getItemText(i,1)));
+            LBR();
+            TXT(udf.getItemText(i, 1));
         }
         else if (StrEquals(horoscopeSection, type))
         {
-            //elems.push_back(new LineBreakElement());
-            //elems.push_back(new LineBreakElement());
-            //elems.push_back(text=new TextElement(item.getItemText(i,1)));
-            //text->setStyle(StyleGetStaticStyle(styleNameBold));
+            LBR();
+            LBR();
+            TXT(udf.getItemText(i, 1));
+            model->last()->setStyle(StyleGetStaticStyle(styleNameBold));
         }
         else if (StrEquals(horoscopeSmallSection, type))
         {
-            //elems.push_back(new LineBreakElement());
-            //elems.push_back(text=new TextElement(item.getItemText(i,1)));
-            //text->setStyle(StyleGetStaticStyle(styleNameBold));
+            LBR();
+            TXT(udf.getItemText(i, 1));
+            model->last()->setStyle(StyleGetStaticStyle(styleNameBold));
         }
         else if (StrEquals(horoscopeDate, type))
         {
-            //dateString_ = item.getItemText(i,1);
+            char_t* d = StringCopy(udf.getItemText(i, 1));
+            free(date);
+            date = d;
+            if (NULL == date)
+                goto Error;
         }
         else if (StrEquals(horoscopeUrlLink, type))
         {
-            //elems.push_back(new LineBreakElement());
-            //elems.push_back(text=new TextElement(item.getItemText(i,1)));
-            //String empty;
-            //text->setHyperlink(empty, hyperlinkCallback);
-            //text->setActionCallback(horoscopeLinkCallback, (void*) ((char_t*)item.getItemText(i,2)));
+            LBR();
+            TXT(udf.getItemText(i, 1));
+            model->last()->setActionCallback(HoroscopesLinkCallback, (void*)udf.getItemData(i, 2));
+            model->last()->setHyperlink("", hyperlinkCallback);
         }            
         else
             goto Error;

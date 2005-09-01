@@ -126,7 +126,7 @@ BEGIN
     CONTROL         "Global note",IDC_RECIPE_GLOBAL_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,90,52,10
 END
 
-IDD_HOROSCOPES_MAIN DIALOG  0, 0, 156, 177
+IDD_HOROSCOPES_MAIN DIALOGEX 0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Horoscopes"
 FONT 8, "MS Shell Dlg"
@@ -285,9 +285,18 @@ BEGIN
     POPUP "View"
     BEGIN
         MENUITEM "Recipe",                      ID_VIEW_RECIPE
-        MENUITEM "Recipes list",                ID_VIEW_RECIPES_LIST
+        MENUITEM "Recipe List",                 ID_VIEW_RECIPES_LIST
         MENUITEM SEPARATOR
         MENUITEM "Preferences...",              ID_VIEW_PREFERENCES
+    END
+END
+
+IDR_HOROSCOPES_MENU MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "Sign List",                   ID_VIEW_SIGN_LIST, CHECKED
+        MENUITEM "Horoscope",                   ID_VIEW_HOROSCOPE
     END
 END
 
