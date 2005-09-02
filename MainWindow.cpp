@@ -118,7 +118,7 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 	//if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 	//	return createFailed;
 
-    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
         
 #ifndef LVS_EX_DOUBLEBUFFER
@@ -188,9 +188,10 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
 	//renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
-	listView_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+	listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-    long iconWidth = (width - x - SCALEX(2)) / ((width - x - SCALEX(2)) / SCALEX(70));
+    uint_t w = listView_.width(); 
+    long iconWidth = (w - x) / ((w - x) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
     listView_.invalidate(erase);

@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1435,10 +1436,6 @@
 				RelativePath="..\moriarty_palm_utf8\Rsc\recipes-start-page.txt"
 				>
 			</File>
-			<File
-				RelativePath=".\zodiac.bmp"
-				>
-			</File>
 			<Filter
 				Name="Bitmaps"
 				Filter="bmp"
@@ -1633,6 +1630,14 @@
 				</File>
 				<File
 					RelativePath="..\moriarty_palm_utf8\Rsc\weath-small-sm-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath=".\zodiac.bmp"
+					>
+				</File>
+				<File
+					RelativePath=".\zodiac_hires.bmp"
 					>
 				</File>
 			</Filter>

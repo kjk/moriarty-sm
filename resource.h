@@ -99,6 +99,8 @@
 #define IDR_BOXOFFICE_MENU              558
 #define IDB_BITMAP1                     559
 #define IDB_ZODIAC_SIGNS                559
+#define IDB_BITMAP2                     560
+#define IDB_ZODIAC_SIGNS_HIRES          560
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -156,7 +158,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        560
+#define _APS_NEXT_RESOURCE_VALUE        561
 #define _APS_NEXT_COMMAND_VALUE         50021
 #define _APS_NEXT_CONTROL_VALUE         2033
 #define _APS_NEXT_SYMED_VALUE           503
