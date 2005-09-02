@@ -96,10 +96,9 @@
 #define IDB_STOCKS_SMALL                554
 #define IDR_RECIPES_MENU                555
 #define IDR_HOROSCOPES_MENU             557
-#define IDR_BOXOFFICE_MENU              558
+#define IDR_DONE_UPDATE_MENU            558
 #define IDB_BITMAP1                     559
 #define IDB_ZODIAC_SIGNS                559
-#define IDB_BITMAP2                     560
 #define IDB_ZODIAC_SIGNS_HIRES          560
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801

@@ -48,6 +48,8 @@
 
 #define urlSchemaHoroscope              "s+horoscope"
 
+#define urlSchemaBoxOffice               "s+boxoffice"
+
 
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'

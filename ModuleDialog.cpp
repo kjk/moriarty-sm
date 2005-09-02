@@ -52,6 +52,10 @@ bool MenuDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
     return Dialog::handleInitDialog(focus_widget_handle, init_param); 
 }
 
+#ifndef VK_TBACK
+#define VK_TBACK VK_ESCAPE
+#endif
+
 LRESULT MenuDialog::callback(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)

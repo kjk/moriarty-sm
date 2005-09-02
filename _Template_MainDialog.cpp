@@ -26,3 +26,11 @@ long $(ModuleName)MainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
     return ModuleDialog::handleCommand(nc, id, sender);
 }
+
+bool $(ModuleName)MainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
+{
+    switch (data->result)
+    {
+    }  
+    return ModuleDialog::handleLookupFinished(event, data);
+}

@@ -13,6 +13,7 @@
 #define fieldRegistrationCode                  regCodeField
 #define fieldProtocolVersion                    protocolVersionField
 #define fieldGetCookie                           getCookieField
+#define fieldCurrentBoxOffice                 "Current-Box-Office"
 
 #define fieldError                               "Error"
 #define fieldCookie                            cookieField

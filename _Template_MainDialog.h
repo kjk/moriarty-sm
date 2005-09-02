@@ -18,6 +18,8 @@ protected:
    
     long handleCommand(ushort nc, ushort id, HWND sender);  
      
+    bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
+
 public:
     
     MODULE_DIALOG_CREATE_DECLARE($(ModuleName)MainDialog);

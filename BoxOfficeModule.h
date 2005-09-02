@@ -5,4 +5,15 @@
 
 MODULE_STARTER_DECLARE(BoxOffice);
 
+enum BoxOfficeUDFIndex {
+    boxOfficeLastWeekPosIndexInUDF,
+    boxOfficeTitleIndexInUDF,
+    boxOfficeWeekGrossIndexInUDF,
+    boxOfficeCumulativeGrossIndexInUDF,
+    boxOfficeReleaseWeeksIndexInUDF,
+    boxOfficeTheatersNumberIndexInUDF,
+    boxOfficeAbbrevGrossIndexInUDF
+}; 
+
+
 #endif // BOX_OFFICE_MODULE_H__

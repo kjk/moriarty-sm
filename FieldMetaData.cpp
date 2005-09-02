@@ -47,6 +47,7 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
 
 static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
+    FURS(CurrentBoxOffice, lookupResultBoxOfficeData, boxOfficeDataStream, false), 
     FVRS(Error, lookupResultServerError), 
     FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, ebookHistoryCacheName, true), 
     FURS(Horoscope, lookupResultHoroscope, horoscopeDataStream, false), 

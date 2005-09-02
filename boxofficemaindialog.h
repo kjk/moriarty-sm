@@ -4,13 +4,21 @@
 #include "ModuleDialog.h"
 #include <WindowsCE/Controls.hpp>
 
+struct UniversalDataFormat;
+
 class BoxOfficeMainDialog: public ModuleDialog {
 
-    ListBox list_;
+    // ListBox list_;
+    ListView listView_; 
 
     BoxOfficeMainDialog();
     ~BoxOfficeMainDialog();
-
+     
+    UniversalDataFormat* udf_;
+   
+    void fetchData();
+    void updateList(); 
+    
 protected:
 
     bool handleInitDialog(HWND fw, long ip);
@@ -18,6 +26,16 @@ protected:
     long handleResize(UINT st, ushort w, ushort h);
    
     long handleCommand(ushort nc, ushort id, HWND sender);  
+   
+    bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
+   
+    bool handleDrawItem(const NMLVCUSTOMDRAW& data); 
+   
+    bool handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data); 
+   
+    LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
+   
+    long handleNotify(int controlId, const NMHDR& header);  
      
 public:
     

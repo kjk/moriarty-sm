@@ -116,13 +116,14 @@ void HoroscopesMainDialog::prepareSigns()
      
     HIMAGELIST il = NULL;
     HBITMAP bmp = NULL;
-    
+    UINT bmpId;
+
     long x = scaleIcons ? 48 : 24; 
     il = ImageList_Create(x, x, ILC_COLOR | ILC_MASK, 12, 1);
     if (NULL == il)
         goto Error;
 
-    UINT bmpId = scaleIcons ? IDB_ZODIAC_SIGNS_HIRES : IDB_ZODIAC_SIGNS;
+    bmpId = scaleIcons ? IDB_ZODIAC_SIGNS_HIRES : IDB_ZODIAC_SIGNS;
     bmp = LoadBitmap(GetInstance(), MAKEINTRESOURCE(bmpId));
     if (NULL == bmp)
         goto Error;
