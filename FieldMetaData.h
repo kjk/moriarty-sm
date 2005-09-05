@@ -22,8 +22,9 @@
 #define fieldTransactionId                   transactionIdField
 #define fieldNoResults                        "No-Results"
 
-#define fieldHoroscope                       "Horoscope"
 
+#define fieldHoroscope                       "Horoscope"
+#define fieldDream                            "Dream-Interpretation"
 #define fieldGetUrlEBookBrowse          prefixFieldGetUrl "eBook-browse"
 
 #define fieldRecipesList                      "Recipes-List"

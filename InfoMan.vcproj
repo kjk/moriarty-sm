@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1107,6 +1108,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Dreams"
+				>
+				<File
+					RelativePath=".\DreamsMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\DreamsModule.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1266,6 +1279,18 @@
 				</File>
 				<File
 					RelativePath=".\stdafx.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Dreams"
+				>
+				<File
+					RelativePath=".\DreamsMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\DreamsModule.h"
 					>
 				</File>
 			</Filter>

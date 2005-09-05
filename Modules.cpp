@@ -5,6 +5,7 @@
 #include "RecipesModule.h"
 #include "HoroscopesModule.h"
 #include "BoxOfficeModule.h"
+#include "DreamsModule.h"
 
 #ifdef _WIN32
 #include "ModuleDialog.h"
@@ -64,7 +65,7 @@ static Module modules[] = {
     MOD(moduleIdJokes, jokesModuleName, _T("Jokes"), jokesSmallBitmap, frmInvalidObjectId, JOKES, jokesMainForm, NULL, false, true),
     MOD(moduleIdGasPrices, gasPricesModuleName, _T("Gas prices"), gasPricesSmallBitmap, frmInvalidObjectId, GAS, gasPricesMainForm, NULL, true, false),
     MOD(moduleIdHoroscopes, horoscopeModuleName, _T("Horoscopes"), horoscopesSmallBitmap, frmInvalidObjectId, HOROSCOPES, horoscopesMainForm, HoroscopesStart, true, true) ,
-    MOD(moduleIdDreams, dreamsModuleName, _T("Dreams"), dreamsSmallBitmap, frmInvalidObjectId, DREAMS, dreamsMainForm, NULL, false, true),
+    MOD(moduleIdDreams, dreamsModuleName, _T("Dreams"), dreamsSmallBitmap, frmInvalidObjectId, DREAMS, dreamsMainForm, DreamsStart, false, true),
     MOD(moduleIdAbout, "about", _T("About"), aboutSmallBitmap, frmInvalidObjectId, ABOUT, frmInvalidObjectId, NULL, false, false),
 #ifndef SHIPPING
     // this one's special: it never ships

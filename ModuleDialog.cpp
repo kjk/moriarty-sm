@@ -26,6 +26,15 @@ MenuDialog::~MenuDialog()
 {
 }
 
+bool MenuDialog::createSipPrefControl()
+{
+#ifdef WIN32_PLATFORM_PSPC
+    return NULL != CreateWindow(TEXT("SIPPREF"), NULL, 0, -10, -10, 6, 6, handle(), NULL, GetInstance(), NULL);
+#else
+    return true;
+#endif    
+} 
+
 bool MenuDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
 #ifdef SHELL_MENUBAR

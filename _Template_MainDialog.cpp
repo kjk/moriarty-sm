@@ -1,4 +1,5 @@
 #include "$(ModuleName)MainDialog.h"
+#include "LookupManager.h"
 #include "InfoMan.h"
 
 $(ModuleName)MainDialog::$(ModuleName)MainDialog():
@@ -8,7 +9,7 @@ $(ModuleName)MainDialog::$(ModuleName)MainDialog():
 
 $(ModuleName)MainDialog::~$(ModuleName)MainDialog()
 {
-} 
+}
 
 MODULE_DIALOG_CREATE_IMPLEMENT($(ModuleName)MainDialog, IDD_$(MODULE)_MAIN)
 
@@ -31,6 +32,6 @@ bool $(ModuleName)MainDialog::handleLookupFinished(Event& event, const LookupFin
 {
     switch (data->result)
     {
-    }  
+    }
     return ModuleDialog::handleLookupFinished(event, data);
 }

@@ -146,7 +146,9 @@ enum {
     serialIdEBayPreferences,
     serialIdFlickrPreferences,
     serialIdMainFromView,
-    serialIdDictionaryPreferences
+    serialIdDictionaryPreferences,
+    
+    serialIdDreamsPreferences,  
 };
 
 	
@@ -157,6 +159,7 @@ status_t Preferences::serialize(Serializer& serialize)
 		serialize.narrow(regCode, NULL, serialIdRegCode);
 		serialize(recipesPrefs, serialIdRecipesPreferences);
 		serialize(horoscopesPrefs, serialIdHoroscopesPreferences);
+		serialize(dreamsPrefs, serialIdDreamsPreferences);
 	}
 	ErrCatch (ex) {
 		return ex;

@@ -156,14 +156,6 @@ const char* hyperlinkData(const char* link,  ulong_t& length)
     return link;
 }
 
-void HyperlinkHandler::handleDream(const char* link,  ulong_t length, const Point*)
-{
-    const char* data = hyperlinkData(link, length);
-
-         
-//    lookupManager->fetchField(getDreamsField, dreamStr);
-}
-
 void HyperlinkHandler::handleDictForm(const char* link,  ulong_t length, const Point*)
 {
     //const char* data = hyperlinkData(link, length);

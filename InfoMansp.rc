@@ -2,7 +2,9 @@
 //
 #include "resourcesp.h"
 
+#ifndef APSTUDIO_INVOKED
 #include "InfoManCommon.rc"
+#endif
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////

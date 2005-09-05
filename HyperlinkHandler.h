@@ -50,6 +50,7 @@
 
 #define urlSchemaBoxOffice               "s+boxoffice"
 
+#define urlSchemaGetDream                   "s+dream"
 
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'

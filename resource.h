@@ -97,9 +97,10 @@
 #define IDR_RECIPES_MENU                555
 #define IDR_HOROSCOPES_MENU             557
 #define IDR_DONE_UPDATE_MENU            558
-#define IDB_BITMAP1                     559
+#define IDR_DONE_SEARCH_MENU         559
 #define IDB_ZODIAC_SIGNS                559
 #define IDB_ZODIAC_SIGNS_HIRES          560
+#define IDD_DREAMS_MAIN                 561
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -128,6 +129,12 @@
 #define IDC_SHOW_RECIPE_GLOBAL_NOTE     2028
 #define IDC_RECIPE_GLOBAL_NOTE          2028
 #define IDC_LIST                        2029
+#define IDC_SIP                         2033
+#define IDC_SIP1                        2037
+#define IDC_EDIT1                       2038
+#define IDC_RECIPES_INFO                2038
+#define IDC_DREAMS_INFO                 2038
+#define IDC_DRE                         2039
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -157,9 +164,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        561
+#define _APS_NEXT_RESOURCE_VALUE        562
 #define _APS_NEXT_COMMAND_VALUE         50021
-#define _APS_NEXT_CONTROL_VALUE         2033
+#define _APS_NEXT_CONTROL_VALUE         2040
 #define _APS_NEXT_SYMED_VALUE           503
 #endif
 #endif

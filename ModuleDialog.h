@@ -31,6 +31,8 @@ protected:
    
     LRESULT callback(UINT uMsg, WPARAM wParam, LPARAM lParam); 
 
+    bool createSipPrefControl();
+    
 public:
 
     

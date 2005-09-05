@@ -2,13 +2,6 @@
 // Microsoft Visual C++ generated include file.
 // Used by InfoManppc.rc
 //
-#define IDD_ABOUTBOX                    110
-#define IDD_ABOUTBOX_WIDE               111
-#define IDC_STATIC_1                    201
-#define IDC_STATIC_2                    202
-#define IDC_STATIC_3                    203
-#define IDC_EDIT1                       1005
-#define IDC_EDIT2                       1006
 
 // Next default values for new objects
 // 

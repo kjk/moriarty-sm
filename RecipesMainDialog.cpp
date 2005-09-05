@@ -115,6 +115,8 @@ void RecipesMainDialog::resyncViewMenu()
 
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 {
+    createSipPrefControl();
+    
 	term_.attachControl(handle(), IDC_SEARCH_TERM);
 	
 	Rect r;
