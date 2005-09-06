@@ -44,8 +44,18 @@ bool DreamsMainDialog::handleInitDialog(HWND fw, long ip)
     ModuleDialog::handleInitDialog(fw, ip);
    
     overrideBackKey();
-      
-    term_.focus();
+    
+    DreamsPrefs& prefs = GetPreferences()->dreamsPrefs;
+    DefinitionModel* model = NULL;
+    DreamsDataRead(model, title_);
+    if (NULL != model)
+    {
+        renderer_.setModel(model, Definition::ownModel);
+        term_.setCaption(prefs.downloadedTerm);
+        renderer_.focus();
+    }    
+    else
+        term_.focus();
     return false;
 }
 

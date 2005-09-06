@@ -125,8 +125,7 @@ bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)
 	renderer_.definition.setInteractionBehavior(Definition::behavDoubleClickSelection | Definition::behavHyperlinkNavigation | Definition::behavMouseSelection | Definition::behavUpDownScroll);
 	renderer_.definition.setNavOrderOptions(Definition::navOrderLast);
 	
-	long h = term_.height() + LogY(1);
-	//renderer_.create(WS_TABSTOP | WS_VISIBLE, SCALEX(1), SCALEY(25), r.width() - SCALEX(2), r.height() - SCALEY(26), handle());
+	long h = term_.height() + LogY(2);
 	renderer_.create(WS_TABSTOP | WS_VISIBLE, LogX(1), h, r.width() - 2 * LogX(1), r.height() - h - LogY(1), handle());
 	
 	ModuleDialog::handleInitDialog(wnd, lp);
@@ -214,11 +213,11 @@ long RecipesMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
 long RecipesMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 {
     term_.anchor(anchorRight, 2 * LogX(1), anchorNone, 0, repaintWidget);
-    long h = term_.height(); 
+    long h = term_.height() + LogY(2); 
     if (showItem == displayMode_)
         renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, 2 * LogY(1), repaintWidget);
     else
-        renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, h + 2 * LogY(1), repaintWidget);
+        renderer_.anchor(anchorRight, 2 * LogX(1), anchorBottom, h + LogY(1), repaintWidget);
         
     return ModuleDialog::handleResize(sizeType, width, height);
 }
@@ -227,8 +226,8 @@ void RecipesMainDialog::setDisplayMode(DisplayMode dm)
 {
     Rect b;
     bounds(b);
-    long h = term_.height(); 
-    b.set(LogX(1), h + LogY(1), b.width() - 2 * LogX(1), b.height() - h - 2 * LogY(1));
+    long h = term_.height() + LogY(2); 
+    b.set(LogX(1), h, b.width() - 2 * LogX(1), b.height() - h - LogY(1));
     switch (displayMode_ = dm)
     {
         case showAbout:
