@@ -17,6 +17,8 @@
 #define IDD_ABOUTBOX                    110
 #define IDS_UPDATE                      110
 #define IDD_ABOUTBOX_WIDE               111
+#define IDS_STOCK                       111
+#define IDS_PORTFOLIO                   112
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDD_WEATHER_MAIN                502
@@ -97,10 +99,12 @@
 #define IDR_RECIPES_MENU                555
 #define IDR_HOROSCOPES_MENU             557
 #define IDR_DONE_UPDATE_MENU            558
-#define IDR_DONE_SEARCH_MENU         559
+#define IDR_DONE_SEARCH_MENU            559
 #define IDB_ZODIAC_SIGNS                559
 #define IDB_ZODIAC_SIGNS_HIRES          560
 #define IDD_DREAMS_MAIN                 561
+#define IDR_STOCKS_MENU                 562
+#define IDD_STOCKS_MAIN                 562
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -135,11 +139,14 @@
 #define IDC_RECIPES_INFO                2038
 #define IDC_DREAMS_INFO                 2038
 #define IDC_DRE                         2039
+#define IDC_STOCKS_LIST                 2040
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
 #define IDM_MAIN                        40003
 #define IDM_VIEW                        40004
+#define IDM_STOCK                       40005
+#define IDM_PORTFOLIO                   40006
 #define ID_MAIN_CHANGELOCATION          50001
 #define ID_MAIN_UPDATE                  50002
 #define ID_VIEW_DETAILED                50004
@@ -157,6 +164,16 @@
 #define ID_VIEW_HOROSCOPE               50018
 #define ID_VIEW_SIGN_LIST               50019
 #define ID_VIEW_UPDATE                  50020
+#define ID_STOCK_ADD                    50021
+#define ID_STOCK_DELETE                 50022
+#define ID_STOCK_SETQUANTITY            50023
+#define ID_STOCK_UPDATE                 50024
+#define ID_PORTFOLIO_SWITCH             50025
+#define ID_PORTFOLIO_ADD                50026
+#define ID_PORTFOLIO_DELETE             50027
+#define ID_PORTFOLIO_RENAME             50028
+#define ID_STOCK_SET_QUANTITY           50029
+#define ID_UPDATE                       50030
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -164,9 +181,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        562
-#define _APS_NEXT_COMMAND_VALUE         50021
-#define _APS_NEXT_CONTROL_VALUE         2040
-#define _APS_NEXT_SYMED_VALUE           503
+#define _APS_NEXT_RESOURCE_VALUE        563
+#define _APS_NEXT_COMMAND_VALUE         50031
+#define _APS_NEXT_CONTROL_VALUE         2041
+#define _APS_NEXT_SYMED_VALUE           505
 #endif
 #endif

@@ -29,14 +29,14 @@ protected:
    
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
    
-    bool handleDrawItem(const NMLVCUSTOMDRAW& data); 
+    bool drawListViewItem(const NMLVCUSTOMDRAW& data); 
    
     bool handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data); 
+
+    //long handleNotify(int controlId, const NMHDR& header);  
    
     LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
    
-    long handleNotify(int controlId, const NMHDR& header);  
-     
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(BoxOfficeMainDialog);

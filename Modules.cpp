@@ -6,6 +6,7 @@
 #include "HoroscopesModule.h"
 #include "BoxOfficeModule.h"
 #include "DreamsModule.h"
+#include "StocksModule.h"
 
 #ifdef _WIN32
 #include "ModuleDialog.h"
@@ -61,7 +62,7 @@ static Module modules[] = {
     MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, AMAZON, amazonMainForm, NULL, false, false),
     MOD(moduleIdBoxOffice, boxOfficeModuleName, _T("Box office"), boxofficeSmallBitmap, frmInvalidObjectId, BOXOFFICE, boxOfficeMainForm, BoxOfficeStart, true, true),
     MOD(moduleIdCurrency, currencyModuleName, _T("Currency"), currencySmallBitmap, frmInvalidObjectId, CURRENCY, currencyMainForm, NULL, true, false),
-    MOD(moduleIdStocks, stocksModuleName, _T("Stocks"), stocksSmallBitmap, frmInvalidObjectId, STOCKS, stocksMainForm, NULL, true, false),
+    MOD(moduleIdStocks, stocksModuleName, _T("Stocks"), stocksSmallBitmap, frmInvalidObjectId, STOCKS, stocksMainForm, StocksStart, true, false),
     MOD(moduleIdJokes, jokesModuleName, _T("Jokes"), jokesSmallBitmap, frmInvalidObjectId, JOKES, jokesMainForm, NULL, false, true),
     MOD(moduleIdGasPrices, gasPricesModuleName, _T("Gas prices"), gasPricesSmallBitmap, frmInvalidObjectId, GAS, gasPricesMainForm, NULL, true, false),
     MOD(moduleIdHoroscopes, horoscopeModuleName, _T("Horoscopes"), horoscopesSmallBitmap, frmInvalidObjectId, HOROSCOPES, horoscopesMainForm, HoroscopesStart, true, true) ,

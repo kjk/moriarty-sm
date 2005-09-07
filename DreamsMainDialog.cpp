@@ -52,6 +52,9 @@ bool DreamsMainDialog::handleInitDialog(HWND fw, long ip)
     {
         renderer_.setModel(model, Definition::ownModel);
         term_.setCaption(prefs.downloadedTerm);
+        
+        info_.hide();
+        renderer_.show();
         renderer_.focus();
     }    
     else

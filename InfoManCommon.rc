@@ -151,6 +151,14 @@ BEGIN
     LTEXT           "Find a dream intrpretation entering keyword (e.g. ""tooth"") into text field and pressing ""Search"".",IDC_DREAMS_INFO,1,15,121,44
 END
 
+IDD_STOCKS_MAIN DIALOGEX 0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Stocks"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_STOCKS_LIST,"SysListView32",LVS_REPORT | LVS_AUTOARRANGE | LVS_OWNERDRAWFIXED | LVS_ALIGNLEFT | WS_TABSTOP,0,0,156,177
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -336,6 +344,24 @@ BEGIN
     END
 END
 
+IDR_STOCKS_MENU MENU 
+BEGIN
+    POPUP "Stock"
+    BEGIN
+        MENUITEM "Add...",                      ID_STOCK_ADD
+        MENUITEM "Delete",                      ID_STOCK_DELETE
+        MENUITEM "Set Quantity...",             ID_STOCK_SET_QUANTITY
+    END
+    POPUP "Portfolio"
+    BEGIN
+        MENUITEM "Update",                      ID_VIEW_UPDATE
+        MENUITEM "Switch...",                   ID_PORTFOLIO_SWITCH
+        MENUITEM "Add...",                      ID_PORTFOLIO_ADD
+        MENUITEM "Delete",                      ID_PORTFOLIO_DELETE
+        MENUITEM "Rename...",                   ID_PORTFOLIO_RENAME
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -365,6 +391,7 @@ BEGIN
     IDS_SEARCH              "Search"
     IDS_BACK                "Back"
     IDS_UPDATE              "Update"
+    IDS_STOCK               "Stock"
 END
 
 STRINGTABLE 
@@ -416,6 +443,11 @@ BEGIN
     IDS_ZODIAC9             "Capricorn\n12/22-01/19"
     IDS_ZODIAC10            "Aquarius\n01/20-02/18"
     IDS_ZODIAC11            "Pisces\n02/19-03/20"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PORTFOLIO           "Portfolio"
 END
 
 #endif    // English (U.S.) resources

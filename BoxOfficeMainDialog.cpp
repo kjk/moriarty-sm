@@ -104,35 +104,11 @@ LRESULT BoxOfficeMainDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
             return 0;
         //    return handleDrawItem(wParam, *(const DRAWITEMSTRUCT*)lParam);
         
-        case WM_MEASUREITEM:
-            return handleMeasureItem(wParam, *(MEASUREITEMSTRUCT*)lParam);
     }
     return ModuleDialog::callback(msg, wParam, lParam);
 }
 
-long BoxOfficeMainDialog::handleNotify(int controlId, const NMHDR& header)
-{
-    switch (header.code)
-    {
-        case NM_CUSTOMDRAW:
-        {
-            const NMLVCUSTOMDRAW& h = (const NMLVCUSTOMDRAW&)header;
-            if (CDDS_PREPAINT == h.nmcd.dwDrawStage)
-                return CDRF_NOTIFYITEMDRAW;
-            else if (CDDS_ITEMPREPAINT == h.nmcd.dwDrawStage)
-            {
-                handleDrawItem(h);
-                return CDRF_SKIPDEFAULT;
-            }
-            else
-                return CDRF_DODEFAULT;
-        }
-    }  
-    return ModuleDialog::handleNotify(controlId, header);
-}
-
-
-bool BoxOfficeMainDialog::handleDrawItem(const NMLVCUSTOMDRAW& data)
+bool BoxOfficeMainDialog::drawListViewItem(const NMLVCUSTOMDRAW& data)
 {
     Rect r;
     ulong_t i = data.nmcd.dwItemSpec;
@@ -185,7 +161,7 @@ bool BoxOfficeMainDialog::handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& d
     SelectObject(dc, oldFont);
     ReleaseDC(NULL, dc);
     
-    data.itemHeight = 2 * m.tmHeight + SCALEY(2);
+    data.itemHeight = 2 * m.tmHeight + SCALEY(4);
     return true;
 }
 

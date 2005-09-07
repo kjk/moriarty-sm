@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1120,6 +1119,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Stocks"
+				>
+				<File
+					RelativePath=".\StocksMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\StocksModule.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1151,6 +1162,10 @@
 				</File>
 				<File
 					RelativePath="..\ars_framework_utf8\Src\PediaUrl.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ars_framework_utf8\Src\Text.hpp"
 					>
 				</File>
 				<File
@@ -1291,6 +1306,18 @@
 				</File>
 				<File
 					RelativePath=".\DreamsModule.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Stocks"
+				>
+				<File
+					RelativePath=".\StocksMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\StocksModule.h"
 					>
 				</File>
 			</Filter>

@@ -69,6 +69,9 @@ LRESULT MenuDialog::callback(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
     {
+        case WM_MEASUREITEM:
+            return handleMeasureItem(wParam, *(MEASUREITEMSTRUCT*)lParam);
+
         case WM_HOTKEY:
             if (HIWORD(lParam) == VK_TBACK && handleBackKey(uMsg, wParam, lParam))
                 return messageHandled;
@@ -117,6 +120,36 @@ void MenuDialog::overrideBackKey()
 {
 	LPARAM lparam = MAKELPARAM(SHMBOF_NODEFAULT | SHMBOF_NOTIFY, SHMBOF_NODEFAULT | SHMBOF_NOTIFY);
 	menuBar_.sendMessage(SHCMBM_OVERRIDEKEY, VK_TBACK, lparam);
+}
+
+long MenuDialog::handleNotify(int controlId, const NMHDR& header)
+{
+    switch (header.code)
+    {
+        case NM_CUSTOMDRAW:
+        {
+            const NMLVCUSTOMDRAW& h = (const NMLVCUSTOMDRAW&)header;
+            if (CDDS_PREPAINT == h.nmcd.dwDrawStage)
+                return CDRF_NOTIFYITEMDRAW;
+            else if (CDDS_ITEMPREPAINT == h.nmcd.dwDrawStage)
+            {
+                if (drawListViewItem(h))
+                    return CDRF_SKIPDEFAULT;
+            }
+            return CDRF_DODEFAULT;
+        }
+    }  
+    return Dialog::handleNotify(controlId, header);
+}
+
+bool MenuDialog::drawListViewItem(const NMLVCUSTOMDRAW& data)
+{
+    return false;
+}
+
+bool MenuDialog::handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data)
+{
+    return false;
 }
 
 
@@ -180,6 +213,12 @@ long ModuleDialog::handleCommand(ushort nc, ushort id, HWND sender)
     }
     return MenuDialog::handleCommand(nc, id, sender);   
 }
+
+
+
+
+
+
 
 static ModuleDialog* currentModuleDialog = NULL;
 

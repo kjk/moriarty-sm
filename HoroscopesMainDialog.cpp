@@ -64,7 +64,7 @@ bool HoroscopesMainDialog::handleInitDialog(HWND fw, long ip)
     ulong_t index = 0;
     if (prefs.signNotSet != prefs.finishedSign)
         index = prefs.finishedSign;
-    ListView_SetItemState(listView_.handle(), index, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+    listView_.setItemState(index, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
      
     setDisplayMode(displayMode_);
     return false;  
@@ -74,13 +74,19 @@ long HoroscopesMainDialog::handleResize(UINT sizeType, ushort width, ushort heig
 {
     listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
 
+    Rect r;
+    listView_.bounds(r);
+     
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
     uint_t w = listView_.width(); 
     long iconWidth = (w - x) / ((w - x) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(62));
-    ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
+    if (r.height() / iconHeight >= horoscopesSignCount / (r.width() / iconWidth))
+        iconWidth = w / (w / SCALEX(70)); 
+    
+    listView_.setIconSpacing(iconWidth, iconHeight);
     listView_.invalidate(erase);
-    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
+    listView_.redrawItems(0, listView_.itemCount() - 1);
 
     
     renderer_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
@@ -137,7 +143,7 @@ void HoroscopesMainDialog::prepareSigns()
     listView_.clear();   
     listView_.setImageList(il, LVSIL_NORMAL); 
     il = NULL; 
-    ListView_SetColumnWidth(listView_.handle(), 0, listView_.width());
+    listView_.setColumnWidth(0, listView_.width());
    
     for (ulong_t i = 0; i < horoscopesSignCount; ++i)
     {

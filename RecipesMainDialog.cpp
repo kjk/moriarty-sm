@@ -29,21 +29,16 @@ class RecipesPrefsDialog: public MenuDialog {
 
     RecipesPrefsDialog()
     {
+        setAutoDelete(autoDeleteNot); 
         setMenuBarFlags(SHCMBF_HIDESIPBUTTON);
     }
    
-    ~RecipesPrefsDialog()
-    {
-    }   
+    ~RecipesPrefsDialog();
    
 public:
            
-    static long showModal(HWND parent)
-    {
-        RecipesPrefsDialog dlg;
-        return dlg.Dialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_PREFS), parent); 
-    }  
-   
+    static long showModal(HWND parent);
+ 
 protected:
 
     bool handleInitDialog(HWND focus_widget_handle, long init_param)
@@ -60,30 +55,45 @@ protected:
         return MenuDialog::handleInitDialog(focus_widget_handle, init_param);
     }
    
-	long handleCommand(ushort notify_code, ushort id, HWND sender)
-	{
-	    switch (id) 
-	    {
-	        case IDOK:
-            {
-                RecipesPrefs& prefs = GetPreferences()->recipesPrefs;
-                Button b;
-                for (uint_t i = 0; i < prefs.recipeSectionsCount_; ++i)
-                {
-                    b.attachControl(handle(), recipePrefsCheckboxes[i]);
-                    assert(b.valid());
-                    prefs.activeSections[i] = (BST_CHECKED == b.checked());    
-                }
-            }
-            // Intentional fall-through
-            case IDCANCEL:
-                endModal(id);
-                return messageHandled; 
-        }
-        return Dialog::handleCommand(notify_code, id, sender);
-	}
-     
+	long handleCommand(ushort notify_code, ushort id, HWND sender);
+	
 };
+
+long RecipesPrefsDialog::showModal(HWND parent)
+{
+    RecipesPrefsDialog dlg;
+    return dlg.Dialog::showModal(GetInstance(), MAKEINTRESOURCE(IDD_RECIPES_PREFS), parent); 
+}  
+
+
+long RecipesPrefsDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
+{
+	switch (id) 
+	{
+	    case IDOK:
+        {
+            RecipesPrefs& prefs = GetPreferences()->recipesPrefs;
+            Button b;
+            for (uint_t i = 0; i < prefs.recipeSectionsCount_; ++i)
+            {
+                b.attachControl(handle(), recipePrefsCheckboxes[i]);
+                assert(b.valid());
+                prefs.activeSections[i] = (BST_CHECKED == b.checked());    
+            }
+        }
+        // Intentional fall-through
+        case IDCANCEL:
+            endModal(id);
+            return messageHandled; 
+    }
+    return Dialog::handleCommand(notify_code, id, sender);
+}
+
+
+RecipesPrefsDialog::~RecipesPrefsDialog()
+{
+}   
+
 
 RecipesMainDialog::RecipesMainDialog():
     ModuleDialog(IDR_RECIPES_MENU),
