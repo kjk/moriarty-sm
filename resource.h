@@ -4,6 +4,9 @@
 //
 #define IDS_APP_TITLE                   1
 #define IDC_INFOMAN                     2
+#define IDS_CONFIRM                     3
+#define IDS_INFO                        4
+#define IDS_WARNING                     5
 #define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
 #define IDR_MAIN_MENU                   102
@@ -105,6 +108,10 @@
 #define IDD_DREAMS_MAIN                 561
 #define IDR_STOCKS_MENU                 562
 #define IDD_STOCKS_MAIN                 562
+#define IDD_STOCKS_EDIT_PORTFOLIO       563
+#define IDS_CONFIRM_STOCK_DELETE        600
+#define IDS_CONFIRM_PORTFOLIO_DELETE    601
+#define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
@@ -117,6 +124,12 @@
 #define IDS_ZODIAC9                     809
 #define IDS_ZODIAC10                    810
 #define IDS_ZODIAC11                    811
+#define IDS_STOCK_SYMBOL                820
+#define IDS_STOCK_CHANGE                821
+#define IDS_STOCK_PERCENT_CHANGE        822
+#define IDS_STOCK_VOLUME                823
+#define IDS_STOCK_TRADE                 824
+#define IDS_STOCK_QUANTITY              825
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -138,8 +151,14 @@
 #define IDC_EDIT1                       2038
 #define IDC_RECIPES_INFO                2038
 #define IDC_DREAMS_INFO                 2038
+#define IDC_PORTFOLIO_VALUE             2038
+#define IDC_PORTFOLIO_NAME              2038
 #define IDC_DRE                         2039
 #define IDC_STOCKS_LIST                 2040
+#define IDC_PORTFOLIO                   2041
+#define IDC_CURRENT_PORTFOLIO           2041
+#define IDC_CURRENT_PORTFOLIO_TEXT      2042
+#define IDC_PORTFOLIO_VALUE_TEXT        2043
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -181,9 +200,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        563
+#define _APS_NEXT_RESOURCE_VALUE        565
 #define _APS_NEXT_COMMAND_VALUE         50031
-#define _APS_NEXT_CONTROL_VALUE         2041
+#define _APS_NEXT_CONTROL_VALUE         2044
 #define _APS_NEXT_SYMED_VALUE           505
 #endif
 #endif

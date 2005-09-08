@@ -151,12 +151,25 @@ BEGIN
     LTEXT           "Find a dream intrpretation entering keyword (e.g. ""tooth"") into text field and pressing ""Search"".",IDC_DREAMS_INFO,1,15,121,44
 END
 
-IDD_STOCKS_MAIN DIALOGEX 0, 0, 156, 177
+IDD_STOCKS_MAIN DIALOG  0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Stocks"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    CONTROL         "",IDC_STOCKS_LIST,"SysListView32",LVS_REPORT | LVS_AUTOARRANGE | LVS_OWNERDRAWFIXED | LVS_ALIGNLEFT | WS_TABSTOP,0,0,156,177
+    LTEXT           "Current Portfolio:",IDC_CURRENT_PORTFOLIO_TEXT,5,9,68,8
+    COMBOBOX        IDC_CURRENT_PORTFOLIO,79,7,73,38,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STOCKS_LIST,"SysListView32",LVS_REPORT | LVS_AUTOARRANGE | LVS_ALIGNLEFT | WS_TABSTOP,0,23,156,130
+    LTEXT           "Portfolio Value:",IDC_PORTFOLIO_VALUE_TEXT,5,160,56,8
+    EDITTEXT        IDC_PORTFOLIO_VALUE,79,158,72,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_STOCKS_EDIT_PORTFOLIO DIALOG  0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Edit Portfolio"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter portfolio name:",IDC_STATIC,7,7,78,8
+    EDITTEXT        IDC_PORTFOLIO_NAME,7,20,142,12,ES_AUTOHSCROLL
 END
 
 
@@ -229,6 +242,30 @@ BEGIN
         TOPMARGIN, 1
         BOTTOMMARGIN, 130
         HORZGUIDE, 14
+    END
+
+    IDD_STOCKS_MAIN, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 151
+        HORZGUIDE, 7
+        HORZGUIDE, 13
+        HORZGUIDE, 19
+        HORZGUIDE, 23
+        HORZGUIDE, 153
+        HORZGUIDE, 158
+        HORZGUIDE, 164
+        HORZGUIDE, 170
+    END
+
+    IDD_STOCKS_EDIT_PORTFOLIO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 149
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 170
+        HORZGUIDE, 17
+        HORZGUIDE, 20
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -355,7 +392,6 @@ BEGIN
     POPUP "Portfolio"
     BEGIN
         MENUITEM "Update",                      ID_VIEW_UPDATE
-        MENUITEM "Switch...",                   ID_PORTFOLIO_SWITCH
         MENUITEM "Add...",                      ID_PORTFOLIO_ADD
         MENUITEM "Delete",                      ID_PORTFOLIO_DELETE
         MENUITEM "Rename...",                   ID_PORTFOLIO_RENAME
@@ -379,6 +415,9 @@ STRINGTABLE
 BEGIN
     IDS_APP_TITLE           "InfoMan"
     IDC_INFOMAN             "INFOMAN"
+    IDS_CONFIRM             "Confirm"
+    IDS_INFO                "Information"
+    IDS_WARNING             "Warning"
 END
 
 STRINGTABLE 
@@ -392,6 +431,11 @@ BEGIN
     IDS_BACK                "Back"
     IDS_UPDATE              "Update"
     IDS_STOCK               "Stock"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PORTFOLIO           "Portfolio"
 END
 
 STRINGTABLE 
@@ -447,7 +491,21 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_PORTFOLIO           "Portfolio"
+    IDS_STOCK_SYMBOL        "Symbol"
+    IDS_STOCK_CHANGE        "Change"
+    IDS_STOCK_PERCENT_CHANGE "% Change"
+    IDS_STOCK_VOLUME        "Volume"
+    IDS_STOCK_TRADE         "Trade"
+    IDS_STOCK_QUANTITY      "Quantity"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CONFIRM_STOCK_DELETE 
+                            "Are you sure you want to remove the selected index from current portfolio?"
+    IDS_CONFIRM_PORTFOLIO_DELETE 
+                            "Are you sure you want to delete the current portfolio?"
+    IDS_INFO_CANT_DELETE_LAST_PORTFOLIO "You can't delete the last portfolio."
 END
 
 #endif    // English (U.S.) resources

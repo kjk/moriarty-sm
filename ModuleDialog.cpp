@@ -128,7 +128,7 @@ long MenuDialog::handleNotify(int controlId, const NMHDR& header)
     {
         case NM_CUSTOMDRAW:
         {
-            const NMLVCUSTOMDRAW& h = (const NMLVCUSTOMDRAW&)header;
+            NMLVCUSTOMDRAW& h = (NMLVCUSTOMDRAW&)header;
             if (CDDS_PREPAINT == h.nmcd.dwDrawStage)
                 return CDRF_NOTIFYITEMDRAW;
             else if (CDDS_ITEMPREPAINT == h.nmcd.dwDrawStage)
@@ -142,7 +142,7 @@ long MenuDialog::handleNotify(int controlId, const NMHDR& header)
     return Dialog::handleNotify(controlId, header);
 }
 
-bool MenuDialog::drawListViewItem(const NMLVCUSTOMDRAW& data)
+bool MenuDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
 {
     return false;
 }

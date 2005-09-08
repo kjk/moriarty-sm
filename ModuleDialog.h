@@ -33,7 +33,7 @@ protected:
 
     bool createSipPrefControl();
     
-    virtual bool drawListViewItem(const NMLVCUSTOMDRAW& data); 
+    virtual bool drawListViewItem(NMLVCUSTOMDRAW& data); 
    
     virtual bool handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data); 
 

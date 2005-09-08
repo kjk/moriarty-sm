@@ -4,12 +4,21 @@
 #include "ModuleDialog.h"
 #include <WindowsCE/Controls.hpp>
 
-class StocksMainDialog: public ModuleDialog {
+struct UniversalDataFormat;
 
+class StocksMainDialog: public ModuleDialog {
+    
+    ComboBox portfolioCombo_; 
     ListView list_;
+    EditBox portfolioValue_; 
 
     StocksMainDialog();
     ~StocksMainDialog();
+    
+    void resyncPortfoliosCombo(); 
+    void resyncPortfolio(); 
+    void createColumns();
+    
 
 protected:
 
@@ -21,6 +30,8 @@ protected:
      
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
 
+    bool drawListViewItem(NMLVCUSTOMDRAW& data);
+    
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(StocksMainDialog);

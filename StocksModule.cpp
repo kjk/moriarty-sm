@@ -8,10 +8,14 @@
 
 MODULE_STARTER_DEFINE(Stocks)
 
+const double StocksPortfolio::valueNotAvailable = DBL_MAX;
 
 StocksPortfolio::Entry::Entry():
     symbol(NULL),
-    quantity(0)
+    quantity(0),
+    change(valueNotAvailable),
+    percentChange(valueNotAvailable),
+    trade(valueNotAvailable)
 {
 }
 
@@ -21,8 +25,7 @@ StocksPortfolio::Entry::~Entry()
 }  
 
 StocksPortfolio::StocksPortfolio():
-    name_(NULL),
-    value_(NULL)
+    name_(NULL)
 {
 }
 
@@ -32,7 +35,6 @@ StocksPortfolio::~StocksPortfolio()
     for (ulong_t i = 0; i < size; ++i)
         delete entries_[i];
     free(name_);
-    free(value_);   
 }  
 
 status_t StocksPortfolio::initialize(const char_t* name)
@@ -85,10 +87,18 @@ bool StocksPortfolio::addSymbol(const char_t* symbol, ulong_t quantity)
     return true;  
 }
 
-void StocksPortfolio::serialize(Serializer& ser)
+ulong_t StocksPortfolio::schemaVersion() const {return 2;}
+
+void StocksPortfolio::serialize(Serializer& ser, ulong_t version)
 {
     ser.text(name_);
-    ser.text(value_);
+    
+    if (1 == version)
+    {  
+        char_t* value = NULL; 
+        ser.text(value);
+        free(value);
+    }
    
     uint_t size = entries_.size();
     ser(size);
@@ -107,13 +117,36 @@ void StocksPortfolio::serialize(Serializer& ser)
                 ErrThrow(memErrNotEnoughSpace);
             }
         }
-        ser.text(entries_[i]->symbol);
-        ser(entries_[i]->quantity);
+        Entry& e = *entries_[i];
+        ser.text(e.symbol);
+        ser(e.quantity);
+        if (version > 1)
+        {
+            ser(e.change);
+            ser(e.percentChange);
+            ser(e.trade);
+        }
     }  
 }
 
+bool StocksPortfolio::serializeInFromVersion(Serializer& ser, ulong_t version)
+{
+    if (1 == version)
+    {
+        serialize(ser, version);
+        return true; 
+    }  
+    assert(false);
+    return false;  
+}
+
+void StocksPortfolio::serialize(Serializer& ser)
+{
+    serialize(ser, schemaVersion());
+}
+
 StocksPrefs::StocksPrefs():
-    currentPortfolio(portfolioIndexInvalid),
+    currentPortfolio(0),
     downloadedPortfolio(portfolioIndexInvalid) 
 {
     addPortfolio(TEXT("Default"));

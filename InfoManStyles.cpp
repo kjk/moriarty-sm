@@ -6,16 +6,20 @@ static const StaticStyleDescriptor staticStyleDescriptors[] = {
 	{styleNameDefault, "color: rgb(0, 0, 0); background-color: rgb(100%, 255, 255);"},
 	{styleNameHyperlink, "text-decoration: underline; color: rgb(0, 0, 100%);"},
 
-	{styleNameBold, "font-weight: bold;"},
-	{styleNameHeader, "font-size: large; font-weight: bold;"},
-/*	
 	{styleNameBlack, "color: rgb(0, 0, 0);"},
 	{styleNameBlue, "color: rgb(0, 0, 100%);"},
+
+	{styleNameBold, "font-weight: bold;"},
+
 	{styleNameBoldBlue, "font-weight: bold; color: rgb(0, 0, 100%);"},
 	{styleNameBoldGreen, "font-weight: bold; color: rgb(0, 100%, 0);"},
 	{styleNameBoldRed, "font-weight: bold; color: rgb(100%, 0, 0);"},
 	{styleNameGray, "color: rgb(67%, 67%, 67%);"},
 	{styleNameGreen, "color: rgb(0, 100%, 0);"},
+
+
+	{styleNameHeader, "font-size: large; font-weight: bold;"},
+
 	{styleNameLarge, "font-size: large;"},
 	{styleNameLargeBlue, "font-size: large; color: rgb(0, 0, 100%);"},
 	{styleNamePageTitle, "font-size: x-large; font-weight: bold;"},
@@ -24,7 +28,7 @@ static const StaticStyleDescriptor staticStyleDescriptors[] = {
 	{styleNameStockPriceDown, "font-weight: bold; color: rgb(100%, 0, 0);"},
 	{styleNameStockPriceUp, "font-weight: bold; color: rgb(0, 100%, 0);"},
 	{styleNameYellow, "color: rgb(100%, 100%, 0);"},
- */
+
 };
 
 static DefinitionStyle* staticStyles[ARRAY_SIZE(staticStyleDescriptors)] = {NULL};
