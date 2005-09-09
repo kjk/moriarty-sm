@@ -54,6 +54,8 @@ public:
     const char_t* name() const {return name_;}
     bool addSymbol(const char_t* symbol, ulong_t quantity);
     ulong_t size() const {return entries_.size();}
+   
+    void replaceName(char_t* name); 
 
 /*    
     const char_t* symbol(ulong_t index) const {return entries_[index]->symbol;}
@@ -88,5 +90,7 @@ public:
     void serialize(Serializer& ser); 
      
 };
+
+bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio);
        
 #endif // STOCKS_MODULE_H__

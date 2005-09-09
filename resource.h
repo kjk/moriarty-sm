@@ -10,6 +10,7 @@
 #define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
 #define IDR_MAIN_MENU                   102
+#define IDS_CANCEL                      102
 #define IDS_OK                          103
 #define IDS_HELP                        104
 #define IDS_MAIN                        105
@@ -32,6 +33,7 @@
 #define IDD_RECIPES_PREFS               504
 #define IDS_ALERT_LOOKUP_LIMIT_REACHED  505
 #define IDD_HOROSCOPES_MAIN             505
+#define IDR_DONE_CANCEL_MENU            505
 #define IDS_ALERT_INVALID_PROTOCOL_VERSION 506
 #define IDD_BOXOFFICE_MAIN              506
 #define IDS_ALERT_REQUEST_ARGUMENT_MISSING 507
@@ -108,7 +110,8 @@
 #define IDD_DREAMS_MAIN                 561
 #define IDR_STOCKS_MENU                 562
 #define IDD_STOCKS_MAIN                 562
-#define IDD_STOCKS_EDIT_PORTFOLIO       563
+#define IDD_STOCKS_EDIT_PORTFOLIO       564
+#define IDD_STOCKS_EDIT_STOCK           565
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -153,12 +156,15 @@
 #define IDC_DREAMS_INFO                 2038
 #define IDC_PORTFOLIO_VALUE             2038
 #define IDC_PORTFOLIO_NAME              2038
+#define IDC_STOCK_QUANTITY              2038
 #define IDC_DRE                         2039
 #define IDC_STOCKS_LIST                 2040
 #define IDC_PORTFOLIO                   2041
 #define IDC_CURRENT_PORTFOLIO           2041
 #define IDC_CURRENT_PORTFOLIO_TEXT      2042
 #define IDC_PORTFOLIO_VALUE_TEXT        2043
+#define IDC_PORTFOLIO_INFO_TEXT         2044
+#define IDC_STOCK_SYMBOL                2045
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -185,7 +191,6 @@
 #define ID_VIEW_UPDATE                  50020
 #define ID_STOCK_ADD                    50021
 #define ID_STOCK_DELETE                 50022
-#define ID_STOCK_SETQUANTITY            50023
 #define ID_STOCK_UPDATE                 50024
 #define ID_PORTFOLIO_SWITCH             50025
 #define ID_PORTFOLIO_ADD                50026
@@ -202,7 +207,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        565
 #define _APS_NEXT_COMMAND_VALUE         50031
-#define _APS_NEXT_CONTROL_VALUE         2044
-#define _APS_NEXT_SYMED_VALUE           505
+#define _APS_NEXT_CONTROL_VALUE         2047
+#define _APS_NEXT_SYMED_VALUE           506
 #endif
 #endif

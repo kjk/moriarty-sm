@@ -18,8 +18,9 @@ class StocksMainDialog: public ModuleDialog {
     void resyncPortfoliosCombo(); 
     void resyncPortfolio(); 
     void createColumns();
+    void createPortfolio(const char_t* name); 
+    void addStock(const char_t* name, ulong_t quantity); 
     
-
 protected:
 
     bool handleInitDialog(HWND fw, long ip);

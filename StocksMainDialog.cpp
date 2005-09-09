@@ -12,6 +12,205 @@
 
 using namespace DRA;
 
+class StocksEditPortfolioDialog: public MenuDialog {
+
+    EditBox edit_;
+    Widget infoText_; 
+    long index_;
+    char_t* name_;
+     
+    StocksEditPortfolioDialog(long index):
+        MenuDialog(IDR_DONE_CANCEL_MENU, true),
+        index_(index),
+        name_(NULL)
+    {
+        setAutoDelete(autoDeleteNot); 
+    }
+   
+    ~StocksEditPortfolioDialog()
+    {
+    }
+    
+protected:
+    
+    bool handleInitDialog(HWND fw, long ip)
+    {   
+        infoText_.attachControl(handle(), IDC_PORTFOLIO_INFO_TEXT); 
+        edit_.attachControl(handle(), IDC_PORTFOLIO_NAME); 
+        if (-1 != index_)
+        {
+            const StocksPortfolio& p = GetPreferences()->stocksPrefs.portfolio(index_);
+            edit_.setCaption(p.name());
+            edit_.setSelection();
+            infoText_.hide();
+        } 
+        else
+            infoText_.show();
+            
+        edit_.focus();
+        
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        return false;
+    }
+
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        switch (id)
+        {
+            case IDOK:
+                free(name_);
+                name_ = edit_.caption();
+                {
+                    ulong_t len = Len(name_);
+                    const char_t* n = name_;
+                    strip(n, len);
+                    if (0 == len)
+                    {
+                        edit_.setSelection();
+                        edit_.focus();
+                        return messageHandled;
+                    }
+                }
+                // intentional fall-through 
+            case IDCANCEL: 
+                endModal(id);
+                return messageHandled;
+        }
+        return MenuDialog::handleCommand(nc, id, sender); 
+    }   
+
+public:
+    
+    static long showModal(char_t*& name, HWND parent, long index)
+    {
+        StocksEditPortfolioDialog dlg(index);
+        long res = dlg.MenuDialog::showModal(GetInstance(), IDD_STOCKS_EDIT_PORTFOLIO, parent);
+        if (IDOK == res)
+        {
+            free(name);
+            name = dlg.name_;
+            dlg.name_ = NULL;
+        }
+        return res;
+    }
+    
+};
+
+class StocksEditStockDialog: public MenuDialog {
+    
+    EditBox symbolBox_;
+    EditBox quantityBox_;
+     
+    long index_;
+    char_t* symbol_;
+    ulong_t quantity_;
+
+    StocksEditStockDialog(long index):
+        MenuDialog(IDR_DONE_CANCEL_MENU, true),
+        symbol_(NULL),
+        quantity_(0),
+        index_(index)
+    {
+        setAutoDelete(autoDeleteNot); 
+    }
+    
+    ~StocksEditStockDialog()
+    {
+        free(symbol_); 
+    }
+
+protected:
+    
+    bool handleInitDialog(HWND fw, long ip)
+    {   
+        symbolBox_.attachControl(handle(), IDC_STOCK_SYMBOL);
+        quantityBox_.attachControl(handle(), IDC_STOCK_QUANTITY);
+        
+        if (-1 != index_)
+        {
+            const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+            const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+            const StocksPortfolio::Entry& e = p.entry(index_);
+            symbolBox_.setCaption(e.symbol);
+            symbolBox_.setReadOnly(true);
+            char_t buffer[32];
+            tprintf(buffer, _T("%ld"), e.quantity);
+            quantityBox_.setCaption(buffer);
+            quantityBox_.setSelection();
+            quantityBox_.focus();
+        } 
+        else
+        {
+            symbolBox_.focus();
+            quantityBox_.setCaption(_T("0"));
+        }
+        
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        return false;
+    }
+
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        switch (id)
+        {
+            case IDOK:
+                if (-1 == index_)
+                { 
+                    free(symbol_);
+                    symbol_ = symbolBox_.caption();
+                    {
+                        ulong_t len = Len(symbol_);
+                        const char_t* n = symbol_;
+                        strip(n, len);
+                        if (0 == len)
+                        {
+                            symbolBox_.setSelection();
+                            symbolBox_.focus();
+                            return messageHandled;
+                        }
+                    }
+                }
+                { 
+                    char_t* q = quantityBox_.caption();
+                    long val;
+                    if (NULL == q || errNone != numericValue(q, Len(q), val))
+                    {
+                        free(q);
+                        quantityBox_.focus();
+                        return messageHandled; 
+                    }
+                    free(q); 
+                    quantity_ = val; 
+                }
+                // intentional fall-through 
+            case IDCANCEL: 
+                endModal(id);
+                return messageHandled;
+        }
+        return MenuDialog::handleCommand(nc, id, sender); 
+    }   
+
+public:
+
+    static long showModal(char_t*& symbol, ulong_t& quantity, HWND parent, long index)
+    {
+        StocksEditStockDialog dlg(index);
+        long res = dlg.MenuDialog::showModal(GetInstance(), IDD_STOCKS_EDIT_STOCK, parent);
+        if (IDOK == res)
+        {
+            free(symbol);
+            symbol = dlg.symbol_;
+            dlg.symbol_ = NULL;
+            quantity = dlg.quantity_;
+        }
+        return res;
+    }  
+      
+};
+         
+
 StocksMainDialog::StocksMainDialog():
     ModuleDialog(IDR_STOCKS_MENU)
 {
@@ -27,9 +226,11 @@ MODULE_DIALOG_CREATE_IMPLEMENT(StocksMainDialog, IDD_STOCKS_MAIN)
 bool StocksMainDialog::handleInitDialog(HWND fw, long ip)
 {
     portfolioCombo_.attachControl(handle(), IDC_CURRENT_PORTFOLIO);
+    // portfolioCombo_.setStyle(CBS_DROPDOWNLIST | WS_TABSTOP | WS_VISIBLE);
     
     list_.attachControl(handle(), IDC_STOCKS_LIST);
     portfolioValue_.attachControl(handle(), IDC_PORTFOLIO_VALUE); 
+    portfolioValue_.modifyStyle(ES_RIGHT, ES_LEFT | ES_CENTER);
     
 #ifndef LVS_EX_GRADIENT
 #define LVS_EX_GRADIENT 0
@@ -41,8 +242,6 @@ bool StocksMainDialog::handleInitDialog(HWND fw, long ip)
     
     ModuleDialog::handleInitDialog(fw, ip);
     
-    portfolioCombo_.modifyStyle(CBS_DROPDOWNLIST, CBS_DROPDOWN);
-    //portfolioCombo_.modifyStyle(CBS_DROPDOWN, CBS_DROPDOWNLIST);
     resyncPortfoliosCombo(); 
     resyncPortfolio(); 
     return false; 
@@ -50,22 +249,22 @@ bool StocksMainDialog::handleInitDialog(HWND fw, long ip)
 
 long StocksMainDialog::handleResize(UINT st, ushort w, ushort h)
 {
+    ulong_t hh = SCALEY(5) + portfolioCombo_.height() + SCALEY(5); 
        
     // This mess below is result of resource editor using f**king "logical units"
     Widget text;
     text.attachControl(handle(), IDC_CURRENT_PORTFOLIO_TEXT);
-    text.anchor(anchorNone, 0, anchorTop, h - SCALEX(8), repaintWidget);
-
-    portfolioCombo_.anchor(anchorRight, w / 2 + SCALEX(5), anchorTop, h - SCALEX(5), repaintWidget);
-    ulong_t hh = SCALEX(5) + portfolioCombo_.height() + SCALEX(5); 
+    text.setBounds(SCALEX(5), SCALEY(8), w / 2 - SCALEX(5), text.height(), repaintWidget);
     
-    list_.anchor(anchorNone, 0, anchorTop, h - hh, repaintNot); 
-    list_.anchor(anchorRight, 0, anchorBottom, 2 * hh, repaintWidget);
+    portfolioCombo_.setBounds(w / 2 + 1, SCALEY(5), w / 2 - SCALEX(5), portfolioCombo_.height(), repaintWidget);
+    
+    list_.setBounds(0, hh, w, h - 2 * hh, repaintWidget);
+    hh += list_.height(); 
     
     text.attachControl(handle(), IDC_PORTFOLIO_VALUE_TEXT);
-    text.anchor(anchorNone, 0, anchorTop, text.height() + SCALEX(7), repaintWidget); 
-    
-    portfolioValue_.anchor(anchorRight, w / 2 + SCALEX(5), anchorTop, portfolioValue_.height() + SCALEY(5), repaintWidget);
+    text.setBounds(SCALEX(5), hh + SCALEY(8), w / 2 - SCALEX(5), text.height(), repaintWidget);
+
+    portfolioValue_.setBounds(w / 2 + 1, hh + SCALEY(5), w / 2 - SCALEX(5), portfolioValue_.height());
     return ModuleDialog::handleResize(st, w, h);
 }
 
@@ -74,9 +273,10 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
     StocksPrefs& prefs = GetPreferences()->stocksPrefs;
     assert(uint_t(prefs.currentPortfolio) < prefs.portfolioCount());
     StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    char_t* name = NULL;
     
     switch (id) 
-    { 
+    {  
         case IDC_CURRENT_PORTFOLIO:
             if (CBN_SELCHANGE == nc)
             {
@@ -87,6 +287,35 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
                 return messageHandled;    
             } 
             break;
+        
+        case ID_STOCK_SET_QUANTITY:
+        {
+            long index = ListView_GetNextItem(list_.handle(), -1, LVNI_ALL | LVNI_SELECTED);
+            if (-1 == index)
+                return messageHandled;
+            assert(ulong_t(index) < p.size());
+            if (StrStartsWith(p.entry(index).symbol, _T("^")))
+            {
+                // TODO: add info that you can't set quantity of cumulative indexes
+                return messageHandled; 
+            }
+            ulong_t q;
+            if (IDOK == StocksEditStockDialog::showModal(name, q, handle(), index))
+            {
+                p.entry(index).quantity = q;
+                resyncPortfolio();
+            }
+            return messageHandled; 
+        }
+        
+        case ID_STOCK_ADD:
+        {
+            ulong_t q;
+            if (IDOK == StocksEditStockDialog::showModal(name, q, handle(), -1))
+                addStock(name, q);
+            free(name);
+            return messageHandled;
+        } 
             
         case ID_STOCK_DELETE:
         {
@@ -108,12 +337,28 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
                 Alert(handle(), IDS_INFO_CANT_DELETE_LAST_PORTFOLIO, IDS_INFO, MB_OK | MB_ICONINFORMATION);
                 return messageHandled;  
             }
+            if (IDYES != Alert(handle(), IDS_CONFIRM_PORTFOLIO_DELETE, IDS_CONFIRM, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2))
+                return messageHandled; 
             prefs.removePortfolio(prefs.currentPortfolio);
             prefs.currentPortfolio = 0;
             resyncPortfoliosCombo();
             resyncPortfolio();
             return messageHandled;
         }
+        
+        case ID_PORTFOLIO_RENAME:
+            if (IDOK == StocksEditPortfolioDialog::showModal(name, handle(), prefs.currentPortfolio) && NULL != name)
+            {
+                p.replaceName(name);
+                resyncPortfoliosCombo(); 
+            }
+            return messageHandled;
+        
+        case ID_PORTFOLIO_ADD:
+            if (IDOK == StocksEditPortfolioDialog::showModal(name, handle(), -1) && NULL != name)
+                createPortfolio(name);
+            free(name);
+            return messageHandled;
               
     }  
     return ModuleDialog::handleCommand(nc, id, sender);
@@ -213,11 +458,18 @@ void StocksMainDialog::resyncPortfolio()
     LVITEM item;
     ZeroMemory(&item, sizeof(item));
     item.mask = LVIF_TEXT;
-     
+    
+    char_t buffer[64];
+    double value = 0; 
+    
     for (ulong_t i = 0; i < size; ++i)
     {
         const StocksPortfolio::Entry& e = p.entry(i);
-        char_t buffer[64];
+        if (p.valueNotAvailable != e.trade && p.valueNotAvailable != value)
+            value += e.quantity * e.trade;
+        else
+            value = p.valueNotAvailable;
+
         item.iItem = i;
         for (ulong_t j = 0; j < ARRAY_SIZE(columnNameIds); ++j)
         {
@@ -278,7 +530,14 @@ void StocksMainDialog::resyncPortfolio()
                 res = ListView_SetItem(list_.handle(), &item); 
             assert(-1 != res);  
         }
-    }               
+    }
+    if (p.valueNotAvailable == value)
+        portfolioValue_.setCaption(_T("N/A"));
+    else
+    {
+        tprintf(buffer, _T("%.2f"), value);
+        portfolioValue_.setCaption(buffer); 
+    }                   
 }
 
 bool StocksMainDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
@@ -298,4 +557,46 @@ bool StocksMainDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
             data.clrText = style->foregroundColor;
     }  
     return false; 
+}
+
+void StocksMainDialog::createPortfolio(const char_t* name)
+{
+    StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+    StocksPortfolio* p = prefs.addPortfolio(name);
+    if (NULL == p)
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return; 
+    }
+    prefs.currentPortfolio = prefs.portfolioCount() - 1;
+    resyncPortfoliosCombo();
+    ulong_t size = p->size();
+    ulong_t synced = 0; 
+    for (ulong_t i = 0; i < size; ++i)
+        if (StocksResyncEntry(p->entry(i), prefs.currentPortfolio))
+            ++synced;
+            
+    resyncPortfolio();
+    if (synced != size)
+    {         
+        // TODO: fetch data from server    
+        
+    }
+}
+
+void StocksMainDialog::addStock(const char_t* name, ulong_t quantity)
+{
+    StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+    StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    if (!p.addSymbol(name, quantity))
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return; 
+    }
+    ulong_t index = p.size() - 1;
+    if (!StocksResyncEntry(p.entry(index), prefs.currentPortfolio))
+    {
+        // TODO: fetch data from server 
+    }    
+    resyncPortfolio(); 
 }

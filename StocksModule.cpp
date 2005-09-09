@@ -1,4 +1,5 @@
 #include "StocksModule.h"
+#include "InfoManPreferences.h"
 
 #include <Text.hpp>
 
@@ -85,6 +86,12 @@ bool StocksPortfolio::addSymbol(const char_t* symbol, ulong_t quantity)
     }   
     entry->quantity = quantity;
     return true;  
+}
+
+void StocksPortfolio::replaceName(char_t* name)
+{
+    free(name_);
+    name_ = name; 
 }
 
 ulong_t StocksPortfolio::schemaVersion() const {return 2;}
@@ -219,4 +226,31 @@ void StocksPrefs::serialize(Serializer& ser)
         }
         ser(*portfolios_[i]);
     }
+}
+
+bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio)
+{
+    const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+
+    ulong_t pc = prefs.portfolioCount();
+    for (ulong_t  j = 0; j < pc; ++j)
+    {
+        if (j == skipPortfolio)
+            continue;
+             
+        const StocksPortfolio& pp = prefs.portfolio(j);
+        ulong_t ss = pp.size();
+        for (ulong_t k = 0; k < ss; ++k)
+        {
+            const StocksPortfolio::Entry& ee = pp.entry(k);
+            if (StrEquals(e.symbol, ee.symbol))
+            {
+                e.change = ee.change;
+                e.percentChange = ee.percentChange;
+                e.trade = ee.trade;
+                return true;
+            }   
+        }
+    }
+    return false;
 }
