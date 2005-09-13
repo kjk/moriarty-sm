@@ -1,7 +1,12 @@
 #include "StocksModule.h"
 #include "InfoManPreferences.h"
+#include "HyperlinkHandler.h"
+#include "LookupManager.h"
 
+#include <Definition.hpp>
 #include <Text.hpp>
+#include <UTF8_Processor.hpp>
+#include <UniversalDataFormat.hpp>
 
 #ifdef _WIN32
 #include "StocksMainDialog.h"
@@ -11,18 +16,23 @@ MODULE_STARTER_DEFINE(Stocks)
 
 const double StocksPortfolio::valueNotAvailable = DBL_MAX;
 
-StocksPortfolio::Entry::Entry():
+StocksEntry::StocksEntry():
+    url(NULL),
+    changed(NULL), 
     symbol(NULL),
     quantity(0),
-    change(valueNotAvailable),
-    percentChange(valueNotAvailable),
-    trade(valueNotAvailable)
+    change(StocksPortfolio::valueNotAvailable),
+    percentChange(StocksPortfolio::valueNotAvailable),
+    trade(StocksPortfolio::valueNotAvailable),
+    status(statusUnknown) 
 {
 }
 
-StocksPortfolio::Entry::~Entry()
+StocksEntry::~StocksEntry()
 {
     free(symbol); 
+    free(changed);
+    free(url);  
 }  
 
 StocksPortfolio::StocksPortfolio():
@@ -132,6 +142,11 @@ void StocksPortfolio::serialize(Serializer& ser, ulong_t version)
             ser(e.change);
             ser(e.percentChange);
             ser(e.trade);
+            ser.narrow(e.url);
+            ser.text(e.changed);
+            uint_t s = e.status;
+            ser(s);
+            e.status = StocksEntry::Status(s);
         }
     }  
 }
@@ -228,7 +243,7 @@ void StocksPrefs::serialize(Serializer& ser)
     }
 }
 
-bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio)
+bool StocksResyncEntry(StocksEntry& e, ulong_t skipPortfolio)
 {
     const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
 
@@ -242,7 +257,7 @@ bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio)
         ulong_t ss = pp.size();
         for (ulong_t k = 0; k < ss; ++k)
         {
-            const StocksPortfolio::Entry& ee = pp.entry(k);
+            const StocksEntry& ee = pp.entry(k);
             if (StrEquals(e.symbol, ee.symbol))
             {
                 e.change = ee.change;
@@ -253,4 +268,209 @@ bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio)
         }
     }
     return false;
+}
+
+status_t StocksUpdate()
+{
+    char* url = StringCopy(urlSchemaStocksList urlSeparatorSchemaStr);
+    if (NULL == url)
+        return memErrNotEnoughSpace;  
+
+    const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+    
+    //ulong_t size = prefs.portfolioCount();     
+    //for (ulong_t i = 0; i < size; ++i)
+    //{
+    //    const StocksPortfolio& p = prefs.portfolio(i);
+        const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio); 
+        ulong_t  s = p.size();
+        for (ulong_t j = 0; j < s; ++j)
+        { 
+            bool first = ((j == 0)); // && (i == 0));
+            if (!first && NULL == (url = StrAppend(url, -1, "; ", -1)))
+                return memErrNotEnoughSpace;
+            
+            char* symbol = UTF8_FromNative(p.entry(j).symbol);
+            if (NULL == symbol)
+            {
+                free(url);
+                return memErrNotEnoughSpace; 
+            }
+            if (NULL == (url = StrAppend(url, -1, symbol, -1)))
+            {
+                free(symbol);
+                return memErrNotEnoughSpace;
+            }
+            free(symbol); 
+        }       
+    //}
+    LookupManager* lm = GetLookupManager();
+    status_t err = lm->fetchUrl(url);
+    free(url);
+    return err;   
+}
+
+enum {
+    stocksListItemUrlIndex,
+    stocksListItemSymbolIndex,
+    stocksListItemTimeIndex,
+    stocksListItemTradeIndex,
+    stocksListItemChangeIconIndex,
+    stocksListItemChangeIndex,
+    stocksListItemPercentChangeIndex,
+    stocksListItemVolumeIndex,
+    stocksListElementsCount
+};
+
+enum {
+    stocksListNotFoundElementsCount = 2
+};
+
+//static bool StocksSyncEntriesToUDF(const UniversalDataFormat& udf, ulong_t i)
+//{
+//    const char_t* symbol = udf.getItemText(i, stocksListItemSymbolIndex);
+//    if (NULL == symbol)
+//        return false;
+//
+//    StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+//    ulong_t sz = prefs.portfolioCount();
+//    for (ulong_t j = 0; j < sz; ++j)
+//    {
+//        StocksPortfolio& p = prefs.portfolio(j);
+//        ulong_t ss = p.size();
+//        for (ulong_t k = 0; k < ss; ++k)
+//        {
+//            StocksEntry& e = p.entry(k);
+//            if (equalsIgnoreCase(symbol, e.symbol))
+//            {
+//                const char* trade = udf.getItemData(i, stocksListItemTradeIndex);
+//                const char* change = udf.getItemData(i, stocksListItemChangeIndex);
+//                const char* percent = udf.getItemData(i, stocksListItemPercentChangeIndex);
+//                if (errNone != numericValue(trade, -1, e.trade))
+//                    return false;
+//                if (errNone != numericValue(change, -1, e.change))
+//                    return false;
+//                ulong_t len = Len(percent);
+//                if (0 == len || '%' != percent[len - 1])
+//                    return false;
+//                if (errNone != numericValue(percent, len - 1, e.percentChange))
+//                    return false; 
+//            }
+//        }
+//    } 
+//    return true;    
+//}
+
+bool StocksUpdateFromUDF(const UniversalDataFormat& udf)
+{
+    StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+    StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    ulong_t len = udf.getItemsCount();
+    assert(len == p.size()); 
+    for (ulong_t i = 0; i < len; ++i)
+    {
+        StocksEntry& e = p.entry(i);
+        assert(udf.getItemElementsCount(i) >= 2);
+        
+        e.url = StringCopy(udf.getItemData(i, stocksListItemUrlIndex));
+        if (NULL == e.url)
+            return false;
+            
+        const char_t* symbol = udf.getItemText(i, stocksListItemSymbolIndex);
+
+        if (equalsIgnoreCase(symbol, e.symbol))
+        {
+            assert(stocksListElementsCount == udf.getItemElementsCount(i));
+            e.status = e.statusReady;
+            const char* trade = udf.getItemData(i, stocksListItemTradeIndex);
+            const char* change = udf.getItemData(i, stocksListItemChangeIndex);
+            const char* percent = udf.getItemData(i, stocksListItemPercentChangeIndex);
+            if (errNone != numericValue(trade, -1, e.trade))
+                return false;
+            if (errNone != numericValue(change, -1, e.change))
+                return false;
+            ulong_t len = Len(percent);
+            if (0 == len || '%' != percent[len - 1])
+                return false;
+            if (errNone != numericValue(percent, len - 1, e.percentChange))
+                return false; 
+        } 
+        else if (equalsIgnoreCase(symbol, _T("?")))
+        {
+            assert(stocksListNotFoundElementsCount == udf.getItemElementsCount(i));
+            e.status = e.statusAmbiguous;
+        }
+        else
+        {
+            assert(stocksListNotFoundElementsCount == udf.getItemElementsCount(i));
+            free(e.changed);
+            e.changed = StringCopy(symbol);
+            if (NULL == e.changed)
+                return false;
+            e.status = e.statusChanged; 
+        }
+    }  
+    return true;
+}
+
+enum {
+    stocksNameIndex,
+    stocksLastTradeIndex,
+    stocksTradeTimeIndex,
+    stocksChangeIconIndex,
+    stocksChangeIndex,
+    stocksPrevCloseIndex,
+    stocksOpenIndex,
+    stocksBidIndex,
+    stocksAskIndex,
+    stocks1yTargetEstIndex,
+    stocksDaysRangeIndex,
+    stocks52wkRangeIndex,
+    stocksVolumeIndex,
+    stocksAvgVolIndex,
+    stocksMarketCapIndex,
+    stocksPEIndex,
+    stocksEPSIndex,
+    stocksDivYieldIndex,
+    stocksStockElementsCount
+};
+
+
+DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& udf)
+{
+    DefinitionModel* model = new_nt DefinitionModel();
+    if (NULL == model)
+        return NULL;
+        
+    if (1 != udf.getItemsCount())
+        goto Error;
+
+    ulong_t size = udf.getItemElementsCount(0);
+    for (ulong_t i = 0; i < size; ++i)
+    {
+         
+    }  
+    return model;
+Error:
+    delete model;
+    return NULL;   
+}
+
+status_t StocksFetchDetails(const char_t* symbol)
+{
+    char* s = UTF8_FromNative(symbol);
+    if (NULL == s)
+        return memErrNotEnoughSpace;
+
+    char* url = StringCopy(urlSchemaStock urlSeparatorSchemaStr);
+    if (NULL == url || NULL == (url = StrAppend(url, -1, s, -1)))
+    {
+        free(s);
+        return memErrNotEnoughSpace; 
+    }     
+    free(s);
+    LookupManager* lm = GetLookupManager();
+    status_t err = lm->fetchUrl(url);
+    free(url);
+    return err;     
 }

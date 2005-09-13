@@ -112,9 +112,12 @@
 #define IDD_STOCKS_MAIN                 562
 #define IDD_STOCKS_EDIT_PORTFOLIO       564
 #define IDD_STOCKS_EDIT_STOCK           565
+#define IDD_POCKETPC_PORTRAIT           566
+#define IDD_EMPTY                       566
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
+#define IDS_INFO_CUMULATIVE_INDEX       603
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802

@@ -9,25 +9,36 @@
 
 MODULE_STARTER_DECLARE(Stocks);
 
+struct StocksEntry: private NonCopyable {
+    char* url;
+    char_t* symbol;
+    char_t* changed;
+     
+    ulong_t quantity;
+    double change;
+    double percentChange;
+    double trade;
+   
+    enum Status {
+        statusUnknown,
+        statusReady,
+        statusChanged,
+        statusAmbiguous
+    } status;  
+
+private:
+    friend class StocksPortfolio;             
+    ~StocksEntry();
+    StocksEntry();
+}; 
+ 
 class StocksPortfolio: public Serializable {
 
 public:
+    typedef StocksEntry Entry;
 
     static const double valueNotAvailable;
 
-    struct Entry: private NonCopyable {
-        char_t* symbol;
-        ulong_t quantity;
-        double change;
-        double percentChange;
-        double trade;
-
-    private:
-        friend class StocksPortfolio;             
-        ~Entry();
-        Entry();
-    }; 
- 
 private:  
     
     typedef std::vector<Entry*> Entries_t;
@@ -92,5 +103,11 @@ public:
 };
 
 bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio);
+status_t StocksUpdate();
+struct UniversalDataFormat;
+bool StocksUpdateFromUDF(const UniversalDataFormat& udf);
+class DefinitionModel;
+DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& udf);
+status_t StocksFetchDetails(const char_t* symbol);
        
 #endif // STOCKS_MODULE_H__

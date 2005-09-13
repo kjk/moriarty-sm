@@ -56,6 +56,7 @@ static const ResponseFieldDescriptor descriptors[] = {
     FRES(NoResults, lookupResultNoResults),
     FURS(Recipe, lookupResultRecipe, recipesItemStream, false), 
     FURS(RecipesList, lookupResultRecipesList, recipesListStream, false), 
+    FURS(StocksList, lookupResultStocksList, NULL, false), 
 	FVAL(TransactionId),
     FVAL(EBookVersion),
 };

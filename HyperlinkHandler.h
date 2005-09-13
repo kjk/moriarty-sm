@@ -52,6 +52,9 @@
 
 #define urlSchemaGetDream                   "s+dream"
 
+#define urlSchemaStocksList                   "s+stockslist"
+#define urlSchemaStock                         "s+stock"
+
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'
 #define urlSeparatorSchemaStr                 ":"

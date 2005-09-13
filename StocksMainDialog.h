@@ -32,6 +32,8 @@ protected:
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
 
     bool drawListViewItem(NMLVCUSTOMDRAW& data);
+   
+    long handleNotify(int controlId, const NMHDR& header); 
     
 public:
     

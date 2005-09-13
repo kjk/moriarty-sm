@@ -4,11 +4,14 @@
 #include "StocksModule.h"
 #include "InfoManPreferences.h"
 #include "MoriartyStyles.hpp"
+#include "HyperlinkHandler.h"
 
 #include <SysUtils.hpp>
 #include <Text.hpp>
 #include <Utility.hpp>
 #include <DefinitionStyle.hpp>
+#include <WindowsCE/WinTextRenderer.hpp>
+#include <UniversalDataFormat.hpp>
 
 using namespace DRA;
 
@@ -171,6 +174,9 @@ protected:
                             return messageHandled;
                         }
                     }
+                    ulong_t l = Len(symbol_);
+                    for (ulong_t i = 0; i < l; ++i)
+                        symbol_[i] = toUpper(symbol_[i]);
                 }
                 { 
                     char_t* q = quantityBox_.caption();
@@ -209,7 +215,45 @@ public:
     }  
       
 };
-         
+
+class StocksDetailsDialog: public MenuDialog {
+    TextRenderer renderer_; 
+    
+    StocksDetailsDialog(DefinitionModel* model):
+        MenuDialog(IDR_DONE_UPDATE_MENU) 
+    {
+        setAutoDelete(autoDeleteNot);
+        renderer_.setModel(model, Definition::ownModel); 
+    }   
+    
+    ~StocksDetailsDialog()
+    {
+    }
+protected:
+    
+    bool handleInitDialog(HWND fw, long ip)
+    {
+        Rect r;
+        innerBounds(r); 
+        renderer_.create(WS_VISIBLE | WS_TABSTOP, 0, 0, r.width(), r.height(), handle());
+        renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
+        renderer_.definition.setInteractionBehavior(Definition::behavHyperlinkNavigation | Definition::behavMouseSelection | Definition::behavUpDownScroll);
+        
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        renderer_.focus();
+        return false;
+    }   
+     
+public:
+          
+    static long showModal(DefinitionModel* model, HWND parent) 
+    {
+        StocksDetailsDialog dlg(model);
+        return dlg.MenuDialog::showModal(GetInstance(), IDD_EMPTY, parent);
+    }
+    
+}; 
 
 StocksMainDialog::StocksMainDialog():
     ModuleDialog(IDR_STOCKS_MENU)
@@ -296,7 +340,7 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
             assert(ulong_t(index) < p.size());
             if (StrStartsWith(p.entry(index).symbol, _T("^")))
             {
-                // TODO: add info that you can't set quantity of cumulative indexes
+                Alert(handle(), IDS_INFO_CUMULATIVE_INDEX, IDS_INFO, MB_OK | MB_ICONINFORMATION);
                 return messageHandled; 
             }
             ulong_t q;
@@ -359,6 +403,11 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
                 createPortfolio(name);
             free(name);
             return messageHandled;
+       
+        case ID_VIEW_UPDATE:
+            if (errNone != StocksUpdate())
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return messageHandled; 
               
     }  
     return ModuleDialog::handleCommand(nc, id, sender);
@@ -366,9 +415,42 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 
 bool StocksMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
 {
-    //switch (data->result)
-    //{
-    //}
+    LookupManager* lm = GetLookupManager();
+    switch (data->result)
+    {
+        case lookupResultStocksList:
+        {
+            UniversalDataFormat* udf = NULL;
+            PassOwnership(lm->udf, udf);
+            assert(NULL != udf);
+            bool res = StocksUpdateFromUDF(*udf);
+            delete udf;
+            if (res)
+            {
+                resyncPortfolio();
+                ModuleTouchRunning();
+            }  
+            else
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return true;
+        }  
+        
+        case lookupResultStock:
+        {
+            UniversalDataFormat* udf = NULL;
+            PassOwnership(lm->udf, udf);
+            assert(NULL != udf);
+            DefinitionModel* model = StocksDetailsFromUDF(*udf);
+            delete udf;
+            if (NULL == model)
+            {
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+                return true; 
+            }
+            // TODO: show StocksDetailsDialog
+            return true;
+        }
+    }
     return ModuleDialog::handleLookupFinished(event, data);
 }
 
@@ -442,8 +524,8 @@ void StocksMainDialog::resyncPortfoliosCombo()
         sel = prefs.currentPortfolio;
     portfolioCombo_.setSelection(sel);
     
-    //if (1 == size)
-    //    portfolioCombo_.setEnabled(false);  
+    if (1 == size)
+        portfolioCombo_.setEnabled(false);  
 }
 
 void StocksMainDialog::resyncPortfolio()
@@ -464,11 +546,10 @@ void StocksMainDialog::resyncPortfolio()
     
     for (ulong_t i = 0; i < size; ++i)
     {
-        const StocksPortfolio::Entry& e = p.entry(i);
-        if (p.valueNotAvailable != e.trade && p.valueNotAvailable != value)
+        const StocksEntry& e = p.entry(i);
+                
+        if (p.valueNotAvailable != e.trade)
             value += e.quantity * e.trade;
-        else
-            value = p.valueNotAvailable;
 
         item.iItem = i;
         for (ulong_t j = 0; j < ARRAY_SIZE(columnNameIds); ++j)
@@ -483,6 +564,7 @@ void StocksMainDialog::resyncPortfolio()
                     if (!StrStartsWith(e.symbol, _T("^")))
                     { 
                         tprintf(buffer, _T("%ld"), e.quantity);
+                        StrNumberApplyGrouping(buffer, 64);
                         localizeNumberStrInPlace(buffer);
                         item.pszText = buffer;
                     }
@@ -493,6 +575,7 @@ void StocksMainDialog::resyncPortfolio()
                     if (StocksPortfolio::valueNotAvailable != e.trade)
                     {
                         tprintf(buffer, _T("%.2f"), e.trade);
+                        StrNumberApplyGrouping(buffer, 64);
                         localizeNumberStrInPlace(buffer);
                         item.pszText = buffer;
                     }
@@ -504,6 +587,7 @@ void StocksMainDialog::resyncPortfolio()
                     if (StocksPortfolio::valueNotAvailable != e.change)
                     {
                         tprintf(buffer, _T("%.2f"), e.change);
+                        StrNumberApplyGrouping(buffer, 64);
                         localizeNumberStrInPlace(buffer);
                         item.pszText = buffer;
                     }
@@ -515,6 +599,7 @@ void StocksMainDialog::resyncPortfolio()
                     {
                         
                         tprintf(buffer, _T("%+.2f%%"), e.percentChange);
+                        StrNumberApplyGrouping(buffer, 64);
                         localizeNumberStrInPlace(buffer);
                         item.pszText = buffer;
                     }
@@ -531,13 +616,10 @@ void StocksMainDialog::resyncPortfolio()
             assert(-1 != res);  
         }
     }
-    if (p.valueNotAvailable == value)
-        portfolioValue_.setCaption(_T("N/A"));
-    else
-    {
-        tprintf(buffer, _T("%.2f"), value);
-        portfolioValue_.setCaption(buffer); 
-    }                   
+    tprintf(buffer, _T("%.2f"), value);
+    StrNumberApplyGrouping(buffer, 64);
+    localizeNumberStrInPlace(buffer); 
+    portfolioValue_.setCaption(buffer); 
 }
 
 bool StocksMainDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
@@ -576,12 +658,9 @@ void StocksMainDialog::createPortfolio(const char_t* name)
         if (StocksResyncEntry(p->entry(i), prefs.currentPortfolio))
             ++synced;
             
+    if (synced != size && errNone != StocksUpdate())
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY); 
     resyncPortfolio();
-    if (synced != size)
-    {         
-        // TODO: fetch data from server    
-        
-    }
 }
 
 void StocksMainDialog::addStock(const char_t* name, ulong_t quantity)
@@ -600,3 +679,25 @@ void StocksMainDialog::addStock(const char_t* name, ulong_t quantity)
     }    
     resyncPortfolio(); 
 }
+
+
+long StocksMainDialog::handleNotify(int controlId, const NMHDR& header)
+{
+    if  (LVN_ITEMACTIVATE == header.code)
+    {
+        const NMLISTVIEW& h = (const NMLISTVIEW&)header;
+        if (-1 == h.iItem)
+            goto Default;
+        
+        ulong_t item = h.iItem;
+        const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
+        const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+        const char_t* symbol = p.entry(item).symbol;
+        status_t err = StocksFetchDetails(symbol);
+        if (errNone != err)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return messageHandled;
+    }
+Default:
+    return ModuleDialog::handleNotify(controlId, header);
+} 
