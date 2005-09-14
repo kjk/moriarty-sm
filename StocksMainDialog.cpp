@@ -62,19 +62,18 @@ protected:
         switch (id)
         {
             case IDOK:
-                free(name_);
-                name_ = edit_.caption();
+            {
+                char_t* cap = edit_.caption();
+                free(name_); 
+                name_ = StocksValidatePortfolioName(cap);
+                free(cap); 
+                if (NULL == name_)
                 {
-                    ulong_t len = Len(name_);
-                    const char_t* n = name_;
-                    strip(n, len);
-                    if (0 == len)
-                    {
-                        edit_.setSelection();
-                        edit_.focus();
-                        return messageHandled;
-                    }
-                }
+                    edit_.focus();
+                    edit_.setSelection();
+                    return messageHandled;
+                }   
+            } 
                 // intentional fall-through 
             case IDCANCEL: 
                 endModal(id);
@@ -161,22 +160,16 @@ protected:
             case IDOK:
                 if (-1 == index_)
                 { 
+                    char_t* cap = symbolBox_.caption();
                     free(symbol_);
-                    symbol_ = symbolBox_.caption();
+                    symbol_ = StocksValidateTicker(cap);
+                    free(cap);
+                    if (NULL == symbol_)
                     {
-                        ulong_t len = Len(symbol_);
-                        const char_t* n = symbol_;
-                        strip(n, len);
-                        if (0 == len)
-                        {
-                            symbolBox_.setSelection();
-                            symbolBox_.focus();
-                            return messageHandled;
-                        }
+                        symbolBox_.setSelection();
+                        symbolBox_.focus();
+                        return messageHandled;
                     }
-                    ulong_t l = Len(symbol_);
-                    for (ulong_t i = 0; i < l; ++i)
-                        symbol_[i] = toUpper(symbol_[i]);
                 }
                 { 
                     char_t* q = quantityBox_.caption();
@@ -218,9 +211,11 @@ public:
 
 class StocksDetailsDialog: public MenuDialog {
     TextRenderer renderer_; 
+    const StocksEntry& entry_; 
     
-    StocksDetailsDialog(DefinitionModel* model):
-        MenuDialog(IDR_DONE_UPDATE_MENU) 
+    StocksDetailsDialog(DefinitionModel* model, const StocksEntry& entry):
+        MenuDialog(IDR_DONE_UPDATE_MENU),
+        entry_(entry)
     {
         setAutoDelete(autoDeleteNot);
         renderer_.setModel(model, Definition::ownModel); 
@@ -244,15 +239,123 @@ protected:
         renderer_.focus();
         return false;
     }   
+   
+    long handleResize(UINT, ushort, ushort)
+    {
+        renderer_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+        return messageHandled; 
+    }   
+   
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        switch (id)
+        {
+            case IDCANCEL:
+            case IDOK:
+                endModal(id);
+                return messageHandled;
+            case ID_VIEW_UPDATE:
+                if (errNone != StocksFetchDetails(entry_.url))
+                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+                return messageHandled;  
+        }
+        return MenuDialog::handleCommand(nc, id, sender);  
+    }   
      
 public:
           
-    static long showModal(DefinitionModel* model, HWND parent) 
+    static long showModal(DefinitionModel* model, const StocksEntry& entry, HWND parent) 
     {
-        StocksDetailsDialog dlg(model);
+        StocksDetailsDialog dlg(model, entry);
         return dlg.MenuDialog::showModal(GetInstance(), IDD_EMPTY, parent);
     }
     
+}; 
+
+class StocksValidateTickerDialog: public MenuDialog {
+
+    UniversalDataFormat* udf_;
+    ListView list_;
+    char_t* symbol_; 
+   
+    StocksValidateTickerDialog(UniversalDataFormat* udf):
+        MenuDialog(IDR_DONE_CANCEL_MENU),
+        udf_(udf),
+        symbol_(NULL)
+    {
+        setAutoDelete(autoDeleteNot); 
+    }
+   
+    ~StocksValidateTickerDialog()
+    {
+        delete udf_;
+        free(symbol_);
+    }    
+   
+   void createColumns();
+   void createListItems();
+   
+protected:
+
+    long handleResize(UINT, ushort, ushort)
+    {
+        list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+        return messageHandled; 
+    }   
+
+    bool handleInitDialog(HWND fw, long ip)
+    {
+        Rect r;
+        innerBounds(r); 
+        list_.create(WS_VISIBLE | WS_TABSTOP | LVS_ALIGNLEFT | LVS_REPORT | LVS_REPORT | LVS_SINGLESEL, 0, 0, r.width(), r.height(), handle(), NULL);
+        
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        list_.focus();
+        return false;
+    }   
+   
+    long handleListItemActivate(int controlId, const NMLISTVIEW& header)
+    {
+        symbol_ = StringCopy(udf_->getItemText(header.iItem, 1));
+        endModal(IDOK);
+        return messageHandled;
+    }   
+   
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        switch (id) 
+        {
+            case IDOK:
+            {
+                long sel = list_.selection();
+                if (-1 == sel)
+                    return messageHandled;
+                symbol_ = StringCopy(udf_->getItemText(sel, 1));
+            }
+            // intentional fall-through
+            case IDCANCEL:
+                endModal(id);
+                return messageHandled;
+        }    
+        return MenuDialog::handleCommand(nc, id, sender);
+    }   
+
+public:
+
+    static long showModal(UniversalDataFormat* udf, char_t*& symbol, HWND parent)
+    {
+        StocksValidateTickerDialog dlg(udf);
+        long res = dlg.MenuDialog::showModal(GetInstance(), IDD_EMPTY, parent);
+        if (IDOK == res)
+        {
+            free(symbol);
+            symbol = dlg.symbol_;
+            dlg.symbol_ = NULL;
+        }
+        return res;
+    }
+
 }; 
 
 StocksMainDialog::StocksMainDialog():
@@ -315,8 +418,7 @@ long StocksMainDialog::handleResize(UINT st, ushort w, ushort h)
 long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
     StocksPrefs& prefs = GetPreferences()->stocksPrefs;
-    assert(uint_t(prefs.currentPortfolio) < prefs.portfolioCount());
-    StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    StocksPortfolio& p = prefs.current();
     char_t* name = NULL;
     
     switch (id) 
@@ -334,7 +436,7 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
         
         case ID_STOCK_SET_QUANTITY:
         {
-            long index = ListView_GetNextItem(list_.handle(), -1, LVNI_ALL | LVNI_SELECTED);
+            long index = list_.selection();
             if (-1 == index)
                 return messageHandled;
             assert(ulong_t(index) < p.size());
@@ -363,7 +465,7 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
             
         case ID_STOCK_DELETE:
         {
-            long index = ListView_GetNextItem(list_.handle(), -1, LVNI_ALL | LVNI_SELECTED);
+            long index = list_.selection();
             if (-1 == index)
                 return messageHandled;
             assert(ulong_t(index) < p.size());
@@ -408,19 +510,36 @@ long StocksMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
             if (errNone != StocksUpdate())
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
             return messageHandled; 
+        
+        case ID_STOCK_DETAILS:
+        {
+            long item = list_.selection();
+            if (-1 == item)
+                return messageHandled;
               
-    }  
+            const char* url = p.entry(item).url;
+            if (NULL != url)
+            {
+                status_t err = StocksFetchDetails(url);
+                if (errNone != err)
+                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            }
+            else ;
+                // TODO: show alert that list must be updated first??
+            return messageHandled; 
+        }  
+    }
     return ModuleDialog::handleCommand(nc, id, sender);
 }
 
 bool StocksMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
 {
     LookupManager* lm = GetLookupManager();
+    UniversalDataFormat* udf = NULL; 
     switch (data->result)
     {
         case lookupResultStocksList:
         {
-            UniversalDataFormat* udf = NULL;
             PassOwnership(lm->udf, udf);
             assert(NULL != udf);
             bool res = StocksUpdateFromUDF(*udf);
@@ -437,7 +556,6 @@ bool StocksMainDialog::handleLookupFinished(Event& event, const LookupFinishedEv
         
         case lookupResultStock:
         {
-            UniversalDataFormat* udf = NULL;
             PassOwnership(lm->udf, udf);
             assert(NULL != udf);
             DefinitionModel* model = StocksDetailsFromUDF(*udf);
@@ -447,9 +565,20 @@ bool StocksMainDialog::handleLookupFinished(Event& event, const LookupFinishedEv
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
                 return true; 
             }
-            // TODO: show StocksDetailsDialog
+            // TODO: change this snippet to reference the real entry used when FetchDetails was called
+            long l = list_.selection();
+            if (-1 == l) l = 0;
+            
+            StocksDetailsDialog::showModal(model, GetPreferences()->stocksPrefs.current().entry(l), handle());
             return true;
         }
+        
+        case lookupResultStocksListByName:
+            PassOwnership(lm->udf, udf);
+            assert(NULL != udf);
+            validateLastStock(udf);
+            return true;
+
     }
     return ModuleDialog::handleLookupFinished(event, data);
 }
@@ -530,11 +659,8 @@ void StocksMainDialog::resyncPortfoliosCombo()
 
 void StocksMainDialog::resyncPortfolio()
 {
-    const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
-    assert(uint_t(prefs.currentPortfolio) < prefs.portfolioCount());
-    
     list_.clear();
-    const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    const StocksPortfolio& p = GetPreferences()->stocksPrefs.current();
     ulong_t size = p.size();
    
     LVITEM item;
@@ -597,8 +723,10 @@ void StocksMainDialog::resyncPortfolio()
                 case scPercentChange:
                     if (StocksPortfolio::valueNotAvailable != e.percentChange)
                     {
-                        
-                        tprintf(buffer, _T("%+.2f%%"), e.percentChange);
+                        if (e.percentChange < 0.01 && e.percentChange > -0.01)
+                            tprintf(buffer, _T("%.2f%%"), e.percentChange);
+                        else 
+                            tprintf(buffer, _T("%+.2f%%"), e.percentChange);
                         StrNumberApplyGrouping(buffer, 64);
                         localizeNumberStrInPlace(buffer);
                         item.pszText = buffer;
@@ -624,10 +752,8 @@ void StocksMainDialog::resyncPortfolio()
 
 bool StocksMainDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
 {
-    const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
-    const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
-     
-    const StocksPortfolio::Entry& e = p.entry(data.nmcd.dwItemSpec);
+    const StocksPortfolio& p = GetPreferences()->stocksPrefs.current();
+    const StocksEntry& e = p.entry(data.nmcd.dwItemSpec);
     if (p.valueNotAvailable != e.percentChange)
     {
         const DefinitionStyle* style = NULL; 
@@ -666,7 +792,7 @@ void StocksMainDialog::createPortfolio(const char_t* name)
 void StocksMainDialog::addStock(const char_t* name, ulong_t quantity)
 {
     StocksPrefs& prefs = GetPreferences()->stocksPrefs;
-    StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
+    StocksPortfolio& p = prefs.current();
     if (!p.addSymbol(name, quantity))
     {
         Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
@@ -675,29 +801,113 @@ void StocksMainDialog::addStock(const char_t* name, ulong_t quantity)
     ulong_t index = p.size() - 1;
     if (!StocksResyncEntry(p.entry(index), prefs.currentPortfolio))
     {
-        // TODO: fetch data from server 
+        status_t err = StocksUpdate(true);
+        if (errNone != err)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
     }    
     resyncPortfolio(); 
 }
 
-
-long StocksMainDialog::handleNotify(int controlId, const NMHDR& header)
+long StocksMainDialog::handleListItemActivate(int controlId, const NMLISTVIEW& h)
 {
-    if  (LVN_ITEMACTIVATE == header.code)
-    {
-        const NMLISTVIEW& h = (const NMLISTVIEW&)header;
-        if (-1 == h.iItem)
-            goto Default;
-        
-        ulong_t item = h.iItem;
-        const StocksPrefs& prefs = GetPreferences()->stocksPrefs;
-        const StocksPortfolio& p = prefs.portfolio(prefs.currentPortfolio);
-        const char_t* symbol = p.entry(item).symbol;
-        status_t err = StocksFetchDetails(symbol);
-        if (errNone != err)
-            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+    ulong_t item = h.iItem;
+    const StocksPortfolio& p = GetPreferences()->stocksPrefs.current();
+    const char* url =  p.entry(item).url;
+    if (NULL == url)
         return messageHandled;
+          
+    status_t err = StocksFetchDetails(url);
+    if (errNone != err)
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+    return messageHandled;
+}
+
+LRESULT StocksMainDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    switch (msg)
+    {
+        case WM_CONTEXTMENU:
+            if (handleContextMenu(wParam, lParam))
+                return messageHandled;
     }
-Default:
-    return ModuleDialog::handleNotify(controlId, header);
-} 
+    return ModuleDialog::callback(msg, wParam, lParam);   
+}
+
+bool StocksMainDialog::handleContextMenu(WPARAM wParam, LPARAM lParam)
+{
+    if (list_.handle() != (HWND)wParam)
+        return false;
+    
+    HMENU menu = menuBar().subMenu(IDM_STOCK); 
+    if (NULL == menu)
+        return false;  
+
+    bool onlyAdd = false;
+    Point p(LOWORD(lParam), HIWORD(lParam));
+    if (-1 == p.x && -1 == p.y)
+    {
+        long item = list_.selection();
+        if (-1 == item)
+            return false;
+              
+        Rect rect;
+        if (!list_.itemBounds(item, rect, LVIR_SELECTBOUNDS))
+            return false;
+            
+        ClientToScreen(list_.handle(), rect);
+        rect.center(p);
+    }
+    else
+    {
+        LVHITTESTINFO ht;
+        ht.pt = p;
+        ScreenToClient(list_.handle(), &ht.pt);
+        list_.hitTest(ht);
+        if (0 == (LVHT_ONITEM & ht.flags))
+            onlyAdd = true;
+        else
+            ListView_SetItemState(list_.handle(), ht.iItem, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
+    }    
+    
+     
+    if (onlyAdd)
+    {
+        EnableMenuItem(menu, ID_STOCK_DETAILS, MF_GRAYED); 
+        EnableMenuItem(menu, ID_STOCK_DELETE, MF_GRAYED);
+        EnableMenuItem(menu, ID_STOCK_SET_QUANTITY, MF_GRAYED);
+    }   
+     
+    TrackPopupMenu(menu, TPM_TOPALIGN | TPM_LEFTALIGN, p.x, p.y, 0, handle(), NULL);
+   
+    if (onlyAdd)
+    {
+        EnableMenuItem(menu, ID_STOCK_DETAILS, MF_ENABLED); 
+        EnableMenuItem(menu, ID_STOCK_DELETE, MF_ENABLED);
+        EnableMenuItem(menu, ID_STOCK_SET_QUANTITY, MF_ENABLED);
+    }           
+    
+    return true;
+}
+
+void StocksMainDialog::validateLastStock(UniversalDataFormat* udf)
+{
+    StocksPortfolio& p = GetPreferences()->stocksPrefs.current();
+     
+    char_t* symbol = NULL;
+    long res = StocksValidateTickerDialog::showModal(udf, symbol, handle());
+    
+    long q = p.entry(p.size() - 1).quantity;
+    p.removeSymbol(p.size() - 1);
+    if (IDOK == res)
+    {
+        bool r = p.addSymbol(symbol, q);
+        resyncPortfolio();
+        if (!r)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        else
+            StocksUpdate();
+    }
+    else
+        resyncPortfolio();
+    free(symbol);
+}

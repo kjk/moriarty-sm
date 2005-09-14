@@ -151,7 +151,7 @@ BEGIN
     LTEXT           "Find a dream intrpretation entering keyword (e.g. ""tooth"") into text field and pressing ""Search"".",IDC_DREAMS_INFO,1,15,121,44
 END
 
-IDD_STOCKS_MAIN DIALOGEX 0, 0, 156, 177
+IDD_STOCKS_MAIN DIALOG  0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Stocks"
 FONT 8, "MS Shell Dlg"
@@ -184,7 +184,7 @@ BEGIN
     EDITTEXT        IDC_STOCK_QUANTITY,7,50,142,12,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
 END
 
-IDD_EMPTY DIALOGEX 0, 0, 156, 177
+IDD_EMPTY DIALOG  0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg"
@@ -420,6 +420,7 @@ IDR_STOCKS_MENU MENU
 BEGIN
     POPUP "Stock"
     BEGIN
+        MENUITEM "Details...",                  ID_STOCK_DETAILS
         MENUITEM "Add...",                      ID_STOCK_ADD
         MENUITEM "Delete",                      ID_STOCK_DELETE
         MENUITEM "Set Quantity...",             ID_STOCK_SET_QUANTITY

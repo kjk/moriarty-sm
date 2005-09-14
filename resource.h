@@ -201,6 +201,7 @@
 #define ID_PORTFOLIO_RENAME             50028
 #define ID_STOCK_SET_QUANTITY           50029
 #define ID_UPDATE                       50030
+#define ID_STOCK_DETAILS                50031
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -209,7 +210,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        565
-#define _APS_NEXT_COMMAND_VALUE         50031
+#define _APS_NEXT_COMMAND_VALUE         50032
 #define _APS_NEXT_CONTROL_VALUE         2047
 #define _APS_NEXT_SYMED_VALUE           506
 #endif

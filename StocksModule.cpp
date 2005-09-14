@@ -3,10 +3,15 @@
 #include "HyperlinkHandler.h"
 #include "LookupManager.h"
 
+#include "MoriartyStyles.hpp"
+
 #include <Definition.hpp>
 #include <Text.hpp>
 #include <UTF8_Processor.hpp>
 #include <UniversalDataFormat.hpp>
+#include <DefinitionElement.hpp>
+#include <LineBreakElement.hpp>
+#include <SysUtils.hpp>
 
 #ifdef _WIN32
 #include "StocksMainDialog.h"
@@ -18,7 +23,7 @@ const double StocksPortfolio::valueNotAvailable = DBL_MAX;
 
 StocksEntry::StocksEntry():
     url(NULL),
-    changed(NULL), 
+    data(NULL), 
     symbol(NULL),
     quantity(0),
     change(StocksPortfolio::valueNotAvailable),
@@ -31,7 +36,7 @@ StocksEntry::StocksEntry():
 StocksEntry::~StocksEntry()
 {
     free(symbol); 
-    free(changed);
+    free(data);
     free(url);  
 }  
 
@@ -143,7 +148,7 @@ void StocksPortfolio::serialize(Serializer& ser, ulong_t version)
             ser(e.percentChange);
             ser(e.trade);
             ser.narrow(e.url);
-            ser.text(e.changed);
+            ser.text(e.data);
             uint_t s = e.status;
             ser(s);
             e.status = StocksEntry::Status(s);
@@ -270,9 +275,10 @@ bool StocksResyncEntry(StocksEntry& e, ulong_t skipPortfolio)
     return false;
 }
 
-status_t StocksUpdate()
+status_t StocksUpdate(bool validate)
 {
-    char* url = StringCopy(urlSchemaStocksList urlSeparatorSchemaStr);
+    const char* schema = (validate ? urlSchemaStocksValidate urlSeparatorSchemaStr : urlSchemaStocksList urlSeparatorSchemaStr);
+    char* url = StringCopy(schema);
     if (NULL == url)
         return memErrNotEnoughSpace;  
 
@@ -403,9 +409,9 @@ bool StocksUpdateFromUDF(const UniversalDataFormat& udf)
         else
         {
             assert(stocksListNotFoundElementsCount == udf.getItemElementsCount(i));
-            free(e.changed);
-            e.changed = StringCopy(symbol);
-            if (NULL == e.changed)
+            free(e.data);
+            e.data = StringCopy(symbol);
+            if (NULL == e.data)
                 return false;
             e.status = e.statusChanged; 
         }
@@ -435,42 +441,171 @@ enum {
     stocksStockElementsCount
 };
 
+enum { shortNamesCount = 9 };
+static const char_t* stockInformationNames[]={
+    _T("Name:"),
+    _T("Last Trade:"),
+    _T("Trade Time:"),
+    _T("Change icon:"),
+    _T("Change:"),
+    _T("Prev Close:"),
+    _T("Open:"),
+    _T("Bid:"),
+    _T("Ask:"),
+    _T("1y Target Est:"),
+    _T("Day's Range:"),
+    _T("52wk Range:"),
+    _T("Volume:"),
+    _T("Avg Vol (3m):"),
+    _T("Market Cap:"),
+    _T("P/E (ttm):"),
+    _T("EPS (ttm):"),
+    _T("Div & Yield:")
+};
 
-DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& udf)
+static const char_t* stockInformationShortNames[]={
+    _T("Name:"),
+    _T("Index Value:"),
+    _T("Trade Time:"),
+    _T("Change icon:"),
+    _T("Change:"),
+    _T("Prev Close:"),
+    _T("Open:"),
+    _T("Day's Range:"),
+    _T("52wk Range:") 
+};
+
+static const char_t* stockInformationQuantityNames[]={
+    _T("Quantity:"),
+    _T("Value:")    
+};
+
+#define TXT(txt) if (errNone != (model->appendText(txt))) goto Error
+#define LBR() if (errNone != (model->append(new_nt LineBreakElement()))) goto Error
+
+DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& stock)
 {
     DefinitionModel* model = new_nt DefinitionModel();
     if (NULL == model)
         return NULL;
         
-    if (1 != udf.getItemsCount())
+    if (1 != stock.getItemsCount())
         goto Error;
 
-    ulong_t size = udf.getItemElementsCount(0);
-    for (ulong_t i = 0; i < size; ++i)
+    ulong_t size = stock.getItemElementsCount(0);
+    for (ulong_t i=0; i < size && i < stocksStockElementsCount; i++)
     {
-         
-    }  
+        switch (i)
+        {
+            case stocksNameIndex:        
+            {
+                TXT(stock.getItemText(0, i));
+
+                const char* style = NULL;
+                if (startsWith(stock.getItemData(0, stocksChangeIconIndex), "D"))
+                    style = styleNameStockPriceDown;
+                else if (startsWith(stock.getItemData(0, stocksChangeIconIndex), "U"))
+                    style = styleNameStockPriceUp;
+                else
+                    style = styleNameHeader;
+                model->last()->setStyle(StyleGetStaticStyle(style));
+                model->last()->setJustification(DefinitionElement::justifyCenter);
+                break;
+            }
+            case stocksChangeIconIndex:
+                break;            
+        
+            case stocksChangeIndex: 
+            {
+                LBR();
+                TXT(stockInformationNames[i]);
+
+                char_t* val = StringCopy(stock.getItemText(0, i));
+                if (NULL == val)
+                    goto Error;
+                      
+                localizeNumberStrInPlace(val);
+                TXT(val);
+                free(val);  
+
+                const char* style = NULL;
+                if (startsWith(stock.getItemData(0, stocksChangeIconIndex), "D"))
+                    style = styleNameStockPriceDown;
+                else if (startsWith(stock.getItemData(0, stocksChangeIconIndex), "U"))
+                    style = styleNameStockPriceUp;
+                else
+                    style = styleNameHeader;
+                model->last()->setStyle(StyleGetStaticStyle(style));
+
+                model->last()->setJustification(DefinitionElement::justifyRightLastElementInLine);
+                break;
+            }        
+            default:
+                LBR();
+                if (shortNamesCount == size)
+                {
+                    TXT(stockInformationShortNames[i]);
+                }
+                else
+                { 
+                    TXT(stockInformationNames[i]);
+                }
+
+                char_t* val = StringCopy(stock.getItemText(0, i));
+                if (NULL == val)
+                    goto Error;
+
+                localizeNumberStrInPlace(val);
+                TXT(val);
+                free(val);
+                
+                model->last()->setStyle(StyleGetStaticStyle(styleNameBold));
+                model->last()->setJustification(DefinitionElement::justifyRightLastElementInLine);
+                break;
+        }    
+    }
+
+
+    // TODO: add quantity information
     return model;
 Error:
     delete model;
     return NULL;   
 }
 
-status_t StocksFetchDetails(const char_t* symbol)
+status_t StocksFetchDetails(const char* s)
 {
-    char* s = UTF8_FromNative(symbol);
-    if (NULL == s)
-        return memErrNotEnoughSpace;
-
     char* url = StringCopy(urlSchemaStock urlSeparatorSchemaStr);
     if (NULL == url || NULL == (url = StrAppend(url, -1, s, -1)))
-    {
-        free(s);
         return memErrNotEnoughSpace; 
-    }     
-    free(s);
+
     LookupManager* lm = GetLookupManager();
     status_t err = lm->fetchUrl(url);
     free(url);
     return err;     
 }
+
+char_t* StocksValidateTicker(const char_t* ticker)
+{
+    ulong_t len = Len(ticker);
+    strip(ticker, len);
+    if (0 == len)
+        return NULL;
+    char_t* t = StringCopyN(ticker, len);
+    if (NULL == t)
+        return NULL;
+          
+    for (ulong_t i = 0; i < len; ++i)
+        t[i] = toUpper(t[i]);
+    return t;
+}
+
+char_t* StocksValidatePortfolioName(const char_t* portfolio)
+{
+    ulong_t len = Len(portfolio);
+    strip(portfolio, len);
+    if (0 == len)
+        return NULL;
+    return StringCopyN(portfolio, len);
+}
+

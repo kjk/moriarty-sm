@@ -138,8 +138,19 @@ long MenuDialog::handleNotify(int controlId, const NMHDR& header)
             }
             return CDRF_DODEFAULT;
         }
+        
+        case LVN_ITEMACTIVATE:
+        {
+            const NMLISTVIEW& h = (const NMLISTVIEW&)header;
+            return handleListItemActivate(controlId, h);
+        }
     }  
     return Dialog::handleNotify(controlId, header);
+}
+
+long MenuDialog::handleListItemActivate(int controlId, const NMLISTVIEW& header)
+{
+    return Dialog::handleNotify(controlId, (const NMHDR&)header);
 }
 
 bool MenuDialog::drawListViewItem(NMLVCUSTOMDRAW& data)

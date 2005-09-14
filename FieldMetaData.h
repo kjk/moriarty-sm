@@ -31,6 +31,8 @@
 #define fieldRecipe                            "Recipe"
 
 #define fieldStocksList                        "Stocks-List"
+#define fieldStocksListByName            "Stocks-List-By-Name"
+#define fieldStock                              "Stock"
 
 enum ResponseFieldType {
 	fieldTypeValue,

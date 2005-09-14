@@ -255,7 +255,8 @@ void HoroscopesMainDialog::resyncViewMenu()
     HoroscopesPrefs& prefs = GetPreferences()->horoscopesPrefs;
     HMENU menu = menuBar().subMenu(IDM_VIEW);
     EnableMenuItem(menu, ID_VIEW_HOROSCOPE, (renderer_.definition.empty() ? MF_GRAYED : MF_ENABLED));
-    CheckMenuItem(menu, ID_VIEW_SIGN_LIST, (showSigns == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
-    CheckMenuItem(menu, ID_VIEW_HOROSCOPE, (showHoroscope == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    CheckMenuRadioItem(menu, ID_VIEW_HOROSCOPE, ID_VIEW_SIGN_LIST, (showSigns == displayMode_ ? ID_VIEW_SIGN_LIST : ID_VIEW_HOROSCOPE), MF_BYCOMMAND);  
+    //CheckMenuItem(menu, ID_VIEW_SIGN_LIST, (showSigns == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    //CheckMenuItem(menu, ID_VIEW_HOROSCOPE, (showHoroscope == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
     EnableMenuItem(menu, ID_VIEW_UPDATE, (0 == Len(prefs.finishedQuery) ? MF_GRAYED : MF_ENABLED));
 }

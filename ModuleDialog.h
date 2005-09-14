@@ -39,6 +39,8 @@ protected:
 
     long handleNotify(int controlId, const NMHDR& header);
    
+    virtual long handleListItemActivate(int controlId, const NMLISTVIEW& header);
+   
 public:
 
     

@@ -12,7 +12,7 @@ MODULE_STARTER_DECLARE(Stocks);
 struct StocksEntry: private NonCopyable {
     char* url;
     char_t* symbol;
-    char_t* changed;
+    char_t* data;
      
     ulong_t quantity;
     double change;
@@ -96,18 +96,23 @@ public:
     StocksPortfolio* addPortfolio(const char_t* name);
     ulong_t portfolioCount() const {return portfolios_.size();}
     void removePortfolio(ulong_t index);
-    StocksPortfolio& portfolio(ulong_t index) const {return *portfolios_[index];} 
+    const StocksPortfolio& portfolio(ulong_t index) const {return *portfolios_[index];} 
+    StocksPortfolio& portfolio(ulong_t index) {return *portfolios_[index];} 
+    StocksPortfolio& current() {return portfolio(currentPortfolio);}
+    const StocksPortfolio& current() const {return portfolio(currentPortfolio);} 
    
     void serialize(Serializer& ser); 
      
 };
 
 bool StocksResyncEntry(StocksPortfolio::Entry& e, ulong_t skipPortfolio);
-status_t StocksUpdate();
+status_t StocksUpdate(bool validate = false);
 struct UniversalDataFormat;
 bool StocksUpdateFromUDF(const UniversalDataFormat& udf);
 class DefinitionModel;
 DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& udf);
-status_t StocksFetchDetails(const char_t* symbol);
+status_t StocksFetchDetails(const char* url);
+char_t* StocksValidateTicker(const char_t* ticker);
+char_t* StocksValidatePortfolioName(const char_t* portfolio);
        
 #endif // STOCKS_MODULE_H__

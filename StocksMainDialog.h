@@ -20,6 +20,7 @@ class StocksMainDialog: public ModuleDialog {
     void createColumns();
     void createPortfolio(const char_t* name); 
     void addStock(const char_t* name, ulong_t quantity); 
+    void validateLastStock(UniversalDataFormat* udf); 
     
 protected:
 
@@ -33,7 +34,11 @@ protected:
 
     bool drawListViewItem(NMLVCUSTOMDRAW& data);
    
-    long handleNotify(int controlId, const NMHDR& header); 
+    bool handleContextMenu(WPARAM wParam, LPARAM lParam); 
+    
+    LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);  
+    
+    long handleListItemActivate(int controlId, const NMLISTVIEW& h);
     
 public:
     

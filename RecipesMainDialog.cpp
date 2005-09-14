@@ -119,8 +119,9 @@ void RecipesMainDialog::resyncViewMenu()
     HMENU menu = menuBar().subMenu(IDM_VIEW);
     EnableMenuItem(menu, ID_VIEW_RECIPES_LIST, (NULL == listModel_ ? MF_GRAYED : MF_ENABLED));
     EnableMenuItem(menu, ID_VIEW_RECIPE, (NULL == itemModel_ ? MF_GRAYED : MF_ENABLED));
-    CheckMenuItem(menu, ID_VIEW_RECIPES_LIST, (showList == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
-    CheckMenuItem(menu, ID_VIEW_RECIPE, (showItem == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    CheckMenuRadioItem(menu,  ID_VIEW_RECIPE, ID_VIEW_RECIPES_LIST, (showList == displayMode_ ? ID_VIEW_RECIPES_LIST : ID_VIEW_RECIPE), MF_BYCOMMAND);
+    //CheckMenuItem(menu, ID_VIEW_RECIPES_LIST, (showList == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
+    //CheckMenuItem(menu, ID_VIEW_RECIPE, (showItem == displayMode_ ? MF_CHECKED : MF_UNCHECKED));
 }
 
 bool RecipesMainDialog::handleInitDialog(HWND wnd, long lp)

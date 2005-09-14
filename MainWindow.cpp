@@ -133,8 +133,10 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     listView_.setTextBkColor(CLR_NONE);
 
     HMENU menu = menuBar_.subMenu(IDM_VIEW);
-    CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
-    CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
+    
+    CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_ICONS, MF_BYCOMMAND);  
+    //CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
+    //CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
     
 
     if (!createModuleItems())
@@ -160,15 +162,17 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
         case ID_VIEW_ICONS:
             listView_.modifyStyle(LVS_ICON, LVS_LIST);
             menu = menuBar_.subMenu(IDM_VIEW);
-            CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
-            CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
+            CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_ICONS, MF_BYCOMMAND);  
+            //CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
+            //CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
             return messageHandled;
         
         case ID_VIEW_LIST:
             listView_.modifyStyle(LVS_LIST, LVS_ICON);
             menu = menuBar_.subMenu(IDM_VIEW);
-            CheckMenuItem(menu, ID_VIEW_ICONS, MF_UNCHECKED);
-            CheckMenuItem(menu, ID_VIEW_LIST, MF_CHECKED);
+            CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_LIST, MF_BYCOMMAND);  
+            //CheckMenuItem(menu, ID_VIEW_ICONS, MF_UNCHECKED);
+            //CheckMenuItem(menu, ID_VIEW_LIST, MF_CHECKED);
             return messageHandled;
 
         case IDCLOSE:
