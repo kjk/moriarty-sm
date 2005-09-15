@@ -55,6 +55,7 @@
 #define urlSchemaStocksList                   "s+stockslist"
 #define urlSchemaStock                         "s+stock"
 #define urlSchemaStocksValidate            "s+stocksvalidate"
+#define urlSchemaStockName                 "s+stockname"
 
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'

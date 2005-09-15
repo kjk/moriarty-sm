@@ -473,6 +473,9 @@ END
 STRINGTABLE 
 BEGIN
     IDS_PORTFOLIO           "Portfolio"
+    IDS_NAME                "Name"
+    IDS_MARKET              "Market"
+    IDS_INDUSTRY            "Industry"
 END
 
 STRINGTABLE 
@@ -534,6 +537,8 @@ BEGIN
     IDS_STOCK_VOLUME        "Volume"
     IDS_STOCK_TRADE         "Trade"
     IDS_STOCK_QUANTITY      "Quantity"
+    IDS_STOCKS_SELECT_TICKER "InfoMan - Select Ticker"
+    IDS_STOCKS_DETAILS      "InfoMan - Stock Details"
 END
 
 STRINGTABLE 

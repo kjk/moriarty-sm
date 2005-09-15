@@ -23,6 +23,9 @@
 #define IDD_ABOUTBOX_WIDE               111
 #define IDS_STOCK                       111
 #define IDS_PORTFOLIO                   112
+#define IDS_NAME                        113
+#define IDS_MARKET                      114
+#define IDS_INDUSTRY                    115
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDD_WEATHER_MAIN                502
@@ -136,6 +139,8 @@
 #define IDS_STOCK_VOLUME                823
 #define IDS_STOCK_TRADE                 824
 #define IDS_STOCK_QUANTITY              825
+#define IDS_STOCKS_SELECT_TICKER        826
+#define IDS_STOCKS_DETAILS              827
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004

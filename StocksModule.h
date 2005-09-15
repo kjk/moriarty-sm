@@ -111,7 +111,7 @@ struct UniversalDataFormat;
 bool StocksUpdateFromUDF(const UniversalDataFormat& udf);
 class DefinitionModel;
 DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& udf);
-status_t StocksFetchDetails(const char* url);
+status_t StocksFetchDetails(const char* url, bool direct);
 char_t* StocksValidateTicker(const char_t* ticker);
 char_t* StocksValidatePortfolioName(const char_t* portfolio);
        

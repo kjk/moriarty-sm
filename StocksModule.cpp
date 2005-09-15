@@ -573,9 +573,10 @@ Error:
     return NULL;   
 }
 
-status_t StocksFetchDetails(const char* s)
+status_t StocksFetchDetails(const char* s, bool direct)
 {
-    char* url = StringCopy(urlSchemaStock urlSeparatorSchemaStr);
+    const char* schema = (direct ? urlSchemaStock urlSeparatorSchemaStr : urlSchemaStockName urlSeparatorSchemaStr);
+    char* url = StringCopy(schema);
     if (NULL == url || NULL == (url = StrAppend(url, -1, s, -1)))
         return memErrNotEnoughSpace; 
 
