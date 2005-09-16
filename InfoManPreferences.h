@@ -5,6 +5,7 @@
 #include "HoroscopesModule.h"
 #include "DreamsModule.h"
 #include "StocksModule.h"
+#include "WeatherModule.h"
 
 #include <Utility.hpp>
 
@@ -17,6 +18,7 @@ public:
     HoroscopesPrefs horoscopesPrefs; 
     DreamsPrefs dreamsPrefs; 
     StocksPrefs stocksPrefs; 
+    WeatherPrefs weatherPrefs; 
 
 	Preferences();
 

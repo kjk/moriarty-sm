@@ -26,9 +26,9 @@
 #define IDS_NAME                        113
 #define IDS_MARKET                      114
 #define IDS_INDUSTRY                    115
+#define IDS_TODAY                       116
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
-#define IDD_WEATHER_MAIN                502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
 #define IDR_WEATHER_MENU                503
 #define IDD_RECIPES_MAIN                503
@@ -117,6 +117,8 @@
 #define IDD_STOCKS_EDIT_STOCK           565
 #define IDD_POCKETPC_PORTRAIT           566
 #define IDD_EMPTY                       566
+#define IDD_POCKETPC_PORTRAIT1          567
+#define IDD_WEATHER_MAIN                567
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -141,13 +143,10 @@
 #define IDS_STOCK_QUANTITY              825
 #define IDS_STOCKS_SELECT_TICKER        826
 #define IDS_STOCKS_DETAILS              827
+#define IDS_WEATHER_TITLE               828
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
-#define IDC_WEATHER_SUMMARY             2014
-#define IDC_WEATHER_DAYS_LIST           2015
-#define IDC_WEATHER_DAY_SELECT          2017
-#define IDC_WEATHER_DAY_SPIN            2018
 #define IDC_SEARCH_TERM                 2022
 #define IDC_RECIPE_NAME                 2023
 #define IDC_RECIPE_NOTE                 2024
@@ -158,14 +157,11 @@
 #define IDC_RECIPE_GLOBAL_NOTE          2028
 #define IDC_LIST                        2029
 #define IDC_SIP                         2033
-#define IDC_SIP1                        2037
-#define IDC_EDIT1                       2038
 #define IDC_RECIPES_INFO                2038
 #define IDC_DREAMS_INFO                 2038
 #define IDC_PORTFOLIO_VALUE             2038
 #define IDC_PORTFOLIO_NAME              2038
 #define IDC_STOCK_QUANTITY              2038
-#define IDC_DRE                         2039
 #define IDC_STOCKS_LIST                 2040
 #define IDC_PORTFOLIO                   2041
 #define IDC_CURRENT_PORTFOLIO           2041
@@ -173,6 +169,7 @@
 #define IDC_PORTFOLIO_VALUE_TEXT        2043
 #define IDC_PORTFOLIO_INFO_TEXT         2044
 #define IDC_STOCK_SYMBOL                2045
+#define IDC_WEATHER_DAY                 2048
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -193,13 +190,11 @@
 #define ID_BACK                         50014
 #define ID_SEARCH                       50015
 #define ID_VIEW_RECIPES_LIST            50016
-#define ID_VIEW_SIGNLIST                50017
 #define ID_VIEW_HOROSCOPE               50018
 #define ID_VIEW_SIGN_LIST               50019
 #define ID_VIEW_UPDATE                  50020
 #define ID_STOCK_ADD                    50021
 #define ID_STOCK_DELETE                 50022
-#define ID_STOCK_UPDATE                 50024
 #define ID_PORTFOLIO_SWITCH             50025
 #define ID_PORTFOLIO_ADD                50026
 #define ID_PORTFOLIO_DELETE             50027
@@ -207,6 +202,7 @@
 #define ID_STOCK_SET_QUANTITY           50029
 #define ID_UPDATE                       50030
 #define ID_STOCK_DETAILS                50031
+#define ID_VIEW_UPDATE50032             50032
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -215,8 +211,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        565
-#define _APS_NEXT_COMMAND_VALUE         50032
-#define _APS_NEXT_CONTROL_VALUE         2047
+#define _APS_NEXT_COMMAND_VALUE         50033
+#define _APS_NEXT_CONTROL_VALUE         2049
 #define _APS_NEXT_SYMED_VALUE           506
 #endif
 #endif

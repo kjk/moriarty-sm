@@ -8,9 +8,23 @@
 class WeatherMainDialog: public ModuleDialog {
     
     TextRenderer renderer_;
-    // TabControl tabs_; 
-   
+    ListView list_;
+    ComboBox combo_;  
+       
     WeatherMainDialog();
+   
+    void createListItems(); 
+    void createComboItems();
+   
+    enum DisplayMode {
+        showDetails,
+        showSummary
+    } displayMode_;  
+   
+    void setDisplayMode(DisplayMode dm); 
+    void resyncTempMenu(); 
+   
+    ~WeatherMainDialog(); 
 
 protected:
     

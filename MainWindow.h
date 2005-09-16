@@ -4,7 +4,6 @@
 #include <WindowsCE/Window.hpp>
 #include <WindowsCE/CommandBar.hpp>
 #include <WindowsCE/Controls.hpp>
-// #include <WindowsCE/WinTextRenderer.hpp>
 #include <ExtendedEvent.hpp>
 
 class MainWindow: public Window

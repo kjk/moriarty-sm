@@ -18,7 +18,7 @@
 MODULE_STARTER_DEFINE(Dreams)
 
 DreamsPrefs::DreamsPrefs():
-    downloadedTerm(StringCopy(TEXT(""))),
+    downloadedTerm(NULL),
     pendingTerm(NULL)
 {
 }

@@ -469,10 +469,6 @@ bool StocksMainDialog::handleInitDialog(HWND fw, long ip)
     portfolioValue_.attachControl(handle(), IDC_PORTFOLIO_VALUE); 
     portfolioValue_.modifyStyle(ES_RIGHT, ES_LEFT | ES_CENTER);
     
-#ifndef LVS_EX_GRADIENT
-#define LVS_EX_GRADIENT 0
-#endif
-
     list_.setStyleEx(LVS_EX_GRADIENT | LVS_EX_FULLROWSELECT);
     list_.setTextBkColor(CLR_NONE);
     createColumns();

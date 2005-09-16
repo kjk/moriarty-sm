@@ -161,6 +161,7 @@ status_t Preferences::serialize(Serializer& serialize)
 		serialize(horoscopesPrefs, serialIdHoroscopesPreferences);
 		serialize(dreamsPrefs, serialIdDreamsPreferences);
 		serialize(stocksPrefs, serialIdStocksPreferences);
+		serialize(weatherPrefs, serialIdWeatherPreferences);
 	}
 	ErrCatch (ex) {
 		return ex;

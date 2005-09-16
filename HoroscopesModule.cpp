@@ -18,7 +18,7 @@
 MODULE_STARTER_DEFINE(Horoscopes)
 
 HoroscopesPrefs::HoroscopesPrefs():
-    finishedQuery(StringCopy("")),
+    finishedQuery(NULL),
     pendingQuery(NULL), 
     finishedSign(signNotSet),
     pendingSign(signNotSet) 

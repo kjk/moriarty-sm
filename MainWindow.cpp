@@ -118,17 +118,9 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 	//if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
 	//	return createFailed;
 
-    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_AUTOARRANGE | LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | /* LVS_AUTOARRANGE | */ LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
         
-#ifndef LVS_EX_DOUBLEBUFFER
-#define LVS_EX_DOUBLEBUFFER 0
-#endif
-
-#ifndef LVS_EX_GRADIENT
-#define LVS_EX_GRADIENT 0
-#endif
-
     listView_.setStyleEx(/* LVS_EX_DOUBLEBUFFER | */ LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
 
@@ -188,6 +180,15 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
     return Window::handleCommand(notify_code, id, sender);
 }
 
+int CALLBACK MainWindowListViewSort(LPARAM l1, LPARAM l2, LPARAM l)
+{
+    if (l1 < l2)
+        return -1;
+    else if (l1 > l2)
+        return 1;
+    else
+        return 0;   
+}
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
@@ -198,10 +199,15 @@ long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
     long iconWidth = (w - x) / ((w - x) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
+	//if (0 != (LVS_ICON & listView_.style()))
+	//{
+    ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
+    ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
     listView_.invalidate(erase);
     ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
-	
-	return Window::handleResize(sizeType, width, height);
+    //}
+    	
+	return messageHandled;
 }
 
 LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
@@ -419,8 +425,8 @@ bool MainWindow::createModuleItems()
         LVITEM item;
         ZeroMemory(&item, sizeof(item));
 
-        item.mask = LVIF_TEXT | LVIF_IMAGE;
-        item.iItem = index++;
+        item.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
+        item.lParam = item.iItem = index++;
         item.iSubItem = 0;
         item.pszText = const_cast<char_t*>(name);
         item.iImage = item.iItem;
@@ -477,6 +483,6 @@ void MainWindow::updateListViewFocus()
     long l = ListView_GetSelectionMark(listView_.handle());
     if (-1 == l)
         l = lastItemIndex_;
-        
+     
     ListView_SetItemState(listView_.handle(), l, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
 }
