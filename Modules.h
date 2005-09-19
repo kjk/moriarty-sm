@@ -40,7 +40,7 @@ class ModuleDialog;
 typedef ModuleDialog* (*ModuleStarter)();
 #endif
 
-struct Module {
+struct InfoManModule {
     ModuleID id;
     const char* name;
     char_t* displayName;    
@@ -57,12 +57,22 @@ struct Module {
     bool disabledRemotely;
     bool disabledByUser;
     bool tracksUpdateTime;
+#ifdef _PALM_OS    
     tick_t lastUpdateTime;
+    enum {neverUpdated = tick_t(-1)};     
+#endif
+
+#ifdef _WIN32
+    long long lastUpdateTime;
+    typedef long long Time_t; 
+    enum {neverUpdated = Time_t(-1)};
+#endif      
     
     bool active() const {return !(disabledByUser || disabledRemotely);}    
    
-    enum {neverUpdated = tick_t(-1)};     
 };
+
+typedef InfoManModule Module;
 
 ulong_t ModuleCount();
 ulong_t ModuleActiveCount();

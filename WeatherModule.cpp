@@ -80,11 +80,11 @@ DefinitionModel* WeatherExtractFromUDF(const UniversalDataFormat& udf, ulong_t i
     {
         if (NULL == (text = StrAppend(text, -1, prefixTemperatureDay, -1))) goto Error;
         int d = udf.getItemNumericValue(i, dailyTemperatureDayInUDF);
-        const char_t* ft = _T("%d\xb0F");
+        const char_t* ft = _T("%d\260F");
         if (prefs.celsiusMode)
         {
             d = WeatherFahrenheitToCelsius(d);
-            ft = _T("%d\xb0C");
+            ft = _T("%d\260C");
         }
         tprintf(buffer, ft, d);
         if (NULL == (text = StrAppend(text, -1, buffer, -1))) goto Error;
@@ -95,11 +95,11 @@ DefinitionModel* WeatherExtractFromUDF(const UniversalDataFormat& udf, ulong_t i
 
     if (NULL == (text = StrAppend(text, -1, prefixTemperatureNight, -1))) goto Error;
     int d = udf.getItemNumericValue(i, dailyTemperatureNightInUDF);
-    const char_t* ft = _T("%d\xb0F");
+    const char_t* ft = _T("%d\260F");
     if (prefs.celsiusMode)
     {
         d = WeatherFahrenheitToCelsius(d);
-        ft = _T("%d\xb0C");
+        ft = _T("%d\260C");
     }
     tprintf(buffer, ft, d);
     if (NULL == (text = StrAppend(text, -1, buffer, -1))) goto Error;

@@ -115,9 +115,7 @@
 #define IDD_STOCKS_MAIN                 562
 #define IDD_STOCKS_EDIT_PORTFOLIO       564
 #define IDD_STOCKS_EDIT_STOCK           565
-#define IDD_POCKETPC_PORTRAIT           566
 #define IDD_EMPTY                       566
-#define IDD_POCKETPC_PORTRAIT1          567
 #define IDD_WEATHER_MAIN                567
 #define IDD_CHANGE_LOCATION             568
 #define IDS_CONFIRM_STOCK_DELETE        600
@@ -145,6 +143,8 @@
 #define IDS_STOCKS_SELECT_TICKER        826
 #define IDS_STOCKS_DETAILS              827
 #define IDS_WEATHER_TITLE               828
+#define IDS_WEATHER_DAY                 830
+#define IDS_WEATHER_TEMP                831
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -173,6 +173,7 @@
 #define IDC_WEATHER_DAY                 2048
 #define IDC_ZIP_CODE                    2049
 #define IDC_SET_LOCATION_TEXT           2050
+#define IDC_WEATHER_LIST                2051
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -180,8 +181,6 @@
 #define IDM_VIEW                        40004
 #define IDM_STOCK                       40005
 #define IDM_PORTFOLIO                   40006
-#define ID_MAIN_CHANGELOCATION          50001
-#define ID_MAIN_UPDATE                  50002
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
@@ -198,14 +197,12 @@
 #define ID_VIEW_UPDATE                  50020
 #define ID_STOCK_ADD                    50021
 #define ID_STOCK_DELETE                 50022
-#define ID_PORTFOLIO_SWITCH             50025
 #define ID_PORTFOLIO_ADD                50026
 #define ID_PORTFOLIO_DELETE             50027
 #define ID_PORTFOLIO_RENAME             50028
 #define ID_STOCK_SET_QUANTITY           50029
 #define ID_UPDATE                       50030
 #define ID_STOCK_DETAILS                50031
-#define ID_VIEW_UPDATE50032             50032
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -215,7 +212,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        565
 #define _APS_NEXT_COMMAND_VALUE         50033
-#define _APS_NEXT_CONTROL_VALUE         2051
+#define _APS_NEXT_CONTROL_VALUE         2053
 #define _APS_NEXT_SYMED_VALUE           506
 #endif
 #endif

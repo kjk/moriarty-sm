@@ -15,6 +15,7 @@ class WeatherMainDialog: public ModuleDialog {
    
     void createListItems(); 
     void createComboItems();
+    void createListColumns(); 
    
     enum DisplayMode {
         showDetails,

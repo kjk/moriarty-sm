@@ -20,18 +20,18 @@ public:
     StocksPrefs stocksPrefs; 
     WeatherPrefs weatherPrefs; 
 
-	Preferences();
+    Preferences();
 
-	~Preferences();
-	
-	char* serverAddress;
+    ~Preferences();
+
+    char* serverAddress;
     enum {cookieLength=32};
     enum {regCodeLength=32};
-	char* cookie;
-	char* regCode;
-	char* lastClientVersion;
-	
-	status_t serialize(Serializer& ser);
+    char* cookie;
+    char* regCode;
+    char* lastClientVersion;
+
+    status_t serialize(Serializer& ser);
 
 };
 

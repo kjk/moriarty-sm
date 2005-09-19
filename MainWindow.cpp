@@ -10,10 +10,80 @@
 #include "LookupManager.h"
 #include "Modules.h"
 
+#include "ModuleDialog.h"
+
+#include <UTF8_Processor.hpp>
+#include <Text.hpp>
+
+#include "InfoManPreferences.h"
+
 using namespace DRA;
 
 static void test_PropertyPages(HWND wnd);
 
+
+
+static const char* servers[] = {
+    "192.168.1.2:4000",
+    "127.0.0.1:4000",
+    "infoman.arslexis.com:4000",
+    "infoman.arslexis.com:5012",
+    "infoman.arslexis.com:5010",
+    "infoman.arslexis.com:5014",
+};
+
+class SelectServerDialog: public MenuDialog {
+    
+    ListBox list_;
+    
+protected:
+    bool handleInitDialog(HWND fw, long ip)
+    {
+        setCaption(_T("Select Server"));
+        list_.create(WS_VSCROLL | WS_TABSTOP | WS_VISIBLE | LBS_NOTIFY, 0, 0, width(), height(), handle(), NULL);
+        
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        for (ulong_t i = 0; i < ARRAY_SIZE(servers); ++i)
+        {
+            const char* server = servers[i];
+            char_t* s = UTF8_ToNative(server);
+            list_.sendMessage(LB_ADDSTRING, 0, (LPARAM)s);
+            free(s);
+        }
+        list_.sendMessage(LB_SETCURSEL, 0, 0);
+        return false;
+    }
+
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        Preferences& prefs = *GetPreferences();
+        switch (id) {
+            case IDOK:
+            {
+                const char* server = servers[list_.sendMessage(LB_GETCURSEL, 0, 0)];
+                free(prefs.serverAddress);
+                prefs.serverAddress = StringCopy(server);
+            }
+            case IDCANCEL:
+                endModal(id);
+                return messageHandled;
+        }
+        return MenuDialog::handleCommand(nc, id, sender);
+    }
+    long handleResize(UINT, ushort, ushort)
+    {
+        list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+        return messageHandled;
+    }
+public: 
+
+    SelectServerDialog()
+    {
+        setAutoDelete(autoDeleteNot);
+    }
+
+};
 
 #ifndef WIN32_PLATFORM_WFSP
 // Message handler for about box.
@@ -135,7 +205,12 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
         return createFailed; 
 
     // updateListViewFocus();
-    
+
+#ifndef SHIPPING   
+    SelectServerDialog dlg;
+    dlg.showModal(NULL, IDD_EMPTY, handle());
+#endif
+
 	return Window::handleCreate(cs);
 }
 
@@ -486,3 +561,4 @@ void MainWindow::updateListViewFocus()
      
     ListView_SetItemState(listView_.handle(), l, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
 }
+;

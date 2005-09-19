@@ -56,7 +56,7 @@ struct Module {
 #endif
 
 static Module modules[] = {
-    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, WEATHER, weatherMainForm, WeatherStart, true, false),
+    MOD(moduleIdWeather, weatherModuleName, _T("Weather"), weatherSmallBitmap, frmInvalidObjectId, WEATHER, weatherMainForm, WeatherStart, true, true),
     MOD(moduleId411, m411ModuleName, _T("Phone book"), m411SmallBitmap, frmInvalidObjectId, M411, m411MainForm, NULL, false, false),
     MOD(moduleIdMovies, moviesModuleName, _T("Movie times"), moviesSmallBitmap, frmInvalidObjectId, MOVIES, moviesMainForm, NULL, true, false),
     MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, AMAZON, amazonMainForm, NULL, false, false),
@@ -146,7 +146,7 @@ Module* ModuleGetActive(ulong_t index)
     return NULL; 
 }
 
-static Module* runningModule = NULL;
+static InfoManModule* runningModule = NULL;
 
 Module* ModuleGetRunning()
 {
@@ -164,7 +164,7 @@ ModuleID ModuleGetRunningId()
 status_t ModuleRun(ModuleID id)
 {
     status_t err = errNone; 
-    Module* mod = NULL;
+    InfoManModule* mod = NULL;
     
     if (moduleIdNone != id)
     {  
@@ -182,7 +182,11 @@ status_t ModuleRun(ModuleID id)
              
         ModuleDialog* d = mod->starter();
         if (NULL != d)
+        {
+            runningModule = mod;
+            ModuleDialogSetCurrent(d); 
             d->show();
+        }
         else
         {
             DWORD err = GetLastError();
@@ -190,8 +194,10 @@ status_t ModuleRun(ModuleID id)
             return sysErrParamErr;
             // TODO: show some alert?!
         }
-        ModuleDialogSetCurrent(d); 
+        
     }   
+    else
+        runningModule = mod; 
 #endif
     
 #ifdef _PALM_OS
@@ -206,9 +212,10 @@ status_t ModuleRun(ModuleID id)
     }
     else
         FrmGotoForm(mainForm);
-#endif
 
     runningModule = mod;
+#endif
+
     return errNone; 
 }
 
@@ -220,5 +227,11 @@ void ModuleTouchRunning()
     if (!runningModule->tracksUpdateTime)
         return;
 
+#ifdef _PALM_OS
     runningModule->lastUpdateTime = ticks();  
+#endif
+
+#ifdef _WIN32
+    _time64(&runningModule->lastUpdateTime);
+#endif 
 }
