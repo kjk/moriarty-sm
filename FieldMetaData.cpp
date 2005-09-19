@@ -26,6 +26,9 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
     {(name), fieldTypeValue, (handler), NULL, (result), NULL, false}
 #define FIELD_VALUE(name, handler) FIELD_VALUE_RESULT(name, handler, lookupResultNone)
 
+//#define FRES(name, result) \
+//    FIELD_VALUE_RESULT(FIELD_NAME(name), NULL, (result))
+
 #define FIELD_BCF_RESULT(name, result, dataSink, sinkIsHistoryCache) \
     {(name), fieldTypePayload, FIELD_HANDLER(DefinitionModel), &InfoManConnection::completeDefinitionModelField, (result), (const char*)(dataSink), (sinkIsHistoryCache)}
 
@@ -53,6 +56,7 @@ static const ResponseFieldDescriptor descriptors[] = {
     FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, ebookHistoryCacheName, true), 
     FURS(Horoscope, lookupResultHoroscope, horoscopeDataStream, false), 
     FVAL(LatestClientVersion),
+    FRES(LocationUnknown, lookupResultLocationUnknown),
     FRES(NoResults, lookupResultNoResults),
     FURS(Recipe, lookupResultRecipe, recipesItemStream, false), 
     FURS(RecipesList, lookupResultRecipesList, recipesListStream, false), 
@@ -60,6 +64,8 @@ static const ResponseFieldDescriptor descriptors[] = {
     FURS(StocksList, lookupResultStocksList, NULL, false), 
     FURS(StocksListByName, lookupResultStocksListByName, NULL, false), 
 	FVAL(TransactionId),
+	FURS(Weather, lookupResultWeatherData, weatherDataStream, false),
+	FURS(WeatherMultiselect, lookupResultWeatherMultiselect, NULL, false),
     FVAL(EBookVersion),
 };
 

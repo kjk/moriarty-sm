@@ -25,6 +25,8 @@ class WeatherMainDialog: public ModuleDialog {
     void resyncTempMenu(); 
    
     ~WeatherMainDialog(); 
+   
+    void prepareWeather(ulong_t index); 
 
 protected:
     
@@ -35,6 +37,8 @@ protected:
     long handleCommand(ushort notify_code, ushort id, HWND sender);
    
     long handleResize(UINT sizeType, ushort width, ushort height);
+   
+    long handleListItemActivate(int controlId, const NMLISTVIEW& header); 
     
 public:
     

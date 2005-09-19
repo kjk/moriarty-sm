@@ -34,6 +34,10 @@
 #define fieldStocksListByName            "Stocks-List-By-Name"
 #define fieldStock                              "Stock"
 
+#define fieldWeather                          "Weather"
+#define fieldWeatherMultiselect           "Weather-Multiselect"
+#define fieldLocationUnknown             "Location-Unknown"
+
 enum ResponseFieldType {
 	fieldTypeValue,
 	fieldTypePayload,

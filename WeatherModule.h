@@ -53,4 +53,6 @@ inline int WeatherFahrenheitToCelsius(int f)
         return (10 * f - 5) / 18;
 } 
 
+status_t WeatherFetchData();
+
 #endif // INFOMAN_WEATHER_MODULE_H__

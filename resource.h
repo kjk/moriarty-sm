@@ -119,6 +119,7 @@
 #define IDD_EMPTY                       566
 #define IDD_POCKETPC_PORTRAIT1          567
 #define IDD_WEATHER_MAIN                567
+#define IDD_CHANGE_LOCATION             568
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -170,6 +171,8 @@
 #define IDC_PORTFOLIO_INFO_TEXT         2044
 #define IDC_STOCK_SYMBOL                2045
 #define IDC_WEATHER_DAY                 2048
+#define IDC_ZIP_CODE                    2049
+#define IDC_SET_LOCATION_TEXT           2050
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -212,7 +215,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        565
 #define _APS_NEXT_COMMAND_VALUE         50033
-#define _APS_NEXT_CONTROL_VALUE         2049
+#define _APS_NEXT_CONTROL_VALUE         2051
 #define _APS_NEXT_SYMED_VALUE           506
 #endif
 #endif

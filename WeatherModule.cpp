@@ -1,6 +1,9 @@
 #include "WeatherModule.h"
 #include "InfoManPreferences.h"
+#include "HyperlinkHandler.h"
+#include "LookupManager.h"
 
+#include <UTF8_Processor.hpp>
 #include <UniversalDataFormat.hpp>
 #include <TextElement.hpp>
 #include <LineBreakElement.hpp>
@@ -150,7 +153,8 @@ DefinitionModel* WeatherExtractFromUDF(const UniversalDataFormat& udf, ulong_t i
     TXT(text);
     free(text); text = NULL;
     LBR();     
-         
+    
+    // TODO: finish weather data transformations      
 /*
        // visibility
         toDisplay.assign(prefixFVisibility).append(weatherData_->getItemText(0,detailedVisibilityInUDF));
@@ -175,4 +179,29 @@ Error:
     free(text);
     delete model;
     return NULL;   
+}
+
+status_t WeatherFetchData()
+{
+    char* url = StringCopy(urlSchemaWeather urlSeparatorSchemaStr);
+    if (NULL == url)
+        return memErrNotEnoughSpace;
+    
+    const WeatherPrefs& prefs = GetPreferences()->weatherPrefs;  
+    char* loc = UTF8_FromNative(prefs.location);
+    if (NULL == loc)
+    {
+        free(url);
+        return memErrNotEnoughSpace;
+    }
+       
+    url = StrAppend(url, -1, loc, -1);
+    free(loc);
+    if (NULL == url)
+        return memErrNotEnoughSpace;
+        
+    LookupManager* lm = GetLookupManager();
+    status_t err = lm->fetchUrl(url);
+    free(url);
+    return err;  
 }

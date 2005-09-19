@@ -57,6 +57,8 @@
 #define urlSchemaStocksValidate            "s+stocksvalidate"
 #define urlSchemaStockName                 "s+stockname"
 
+#define urlSchemaWeather                     "s+weather"
+
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'
 #define urlSeparatorSchemaStr                 ":"

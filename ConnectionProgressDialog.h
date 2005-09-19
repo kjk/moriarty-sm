@@ -30,14 +30,14 @@ protected:
 
     bool handleInitDialog(HWND focus_widget_handle, long init_param);
    
-	long handleCommand(ushort notify_code, ushort id, HWND sender);
+    long handleCommand(ushort notify_code, ushort id, HWND sender);
 
-	long handleResize(UINT sizeType, ushort width, ushort height);
-	
-	long handleExtendedEvent(LPARAM& event);
-	    
-	void handleScreenSizeChange(ulong_t w, ulong_t h);
-	
+    long handleResize(UINT sizeType, ushort width, ushort height);
+
+    long handleExtendedEvent(LPARAM& event);
+
+    void handleScreenSizeChange(ulong_t w, ulong_t h);
+
 };
 
 #endif // INFOMAN_CONNECTION_PROGRESS_DIALOG_H__

@@ -108,7 +108,7 @@ LRESULT BoxOfficeMainDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
     return ModuleDialog::callback(msg, wParam, lParam);
 }
 
-bool BoxOfficeMainDialog::drawListViewItem(const NMLVCUSTOMDRAW& data)
+bool BoxOfficeMainDialog::drawListViewItem(NMLVCUSTOMDRAW& data)
 {
     Rect r;
     ulong_t i = data.nmcd.dwItemSpec;

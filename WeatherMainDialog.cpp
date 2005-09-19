@@ -5,6 +5,7 @@
 #include "LookupManager.h"
 #include "WeatherModule.h"
 #include "InfoManPreferences.h"
+#include "ChangeLocationDialog.h"
 
 #include <SysUtils.hpp>
 #include <UniversalDataFormat.hpp>
@@ -26,29 +27,45 @@ MODULE_DIALOG_CREATE_IMPLEMENT(WeatherMainDialog, IDD_WEATHER_MAIN)
 
 bool WeatherMainDialog::handleInitDialog(HWND wnd, long lp)
 {
-	Rect r;
-	innerBounds(r);
-	
-	list_.create(WS_TABSTOP | LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL, r, handle());
-	list_.setStyleEx(LVS_EX_GRADIENT | LVS_EX_FULLROWSELECT | LVS_EX_ONECLICKACTIVATE);
-	
-	combo_.attachControl(handle(), IDC_WEATHER_DAY);
-	
-	renderer_.create(WS_VISIBLE | WS_TABSTOP, 0, 0, r.width(), r.height() - combo_.height() - SCALEY(5) * 2, handle());
-	renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
-	renderer_.definition.setInteractionBehavior(0);
-	renderer_.definition.setNavOrderOptions(Definition::navOrderFirst);
-	
+    Rect r;
+    innerBounds(r);
+
+    list_.create(WS_TABSTOP | LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL, r, handle());
+    list_.setStyleEx(LVS_EX_GRADIENT | LVS_EX_FULLROWSELECT | LVS_EX_ONECLICKACTIVATE);
+
+    combo_.attachControl(handle(), IDC_WEATHER_DAY);
+
+    renderer_.create(WS_VISIBLE | WS_TABSTOP, 0, 0, r.width(), r.height() - combo_.height() - SCALEY(5) * 2, handle());
+    renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
+    renderer_.definition.setInteractionBehavior(0);
+    renderer_.definition.setNavOrderOptions(Definition::navOrderFirst);
+
     ModuleDialog::handleInitDialog(wnd, lp);
     WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
     if (NULL == prefs.location || 0 == Len(prefs.location))
     {
-        // TODO: show "enter location dialog"
- 
+        char_t* loc = NULL; 
+        if (IDOK == ChangeLocationDialog::showModal(loc, handle()))
+        {
+            free(prefs.location);
+            prefs.location = loc;
+        }
+        else
+        {
+            ModuleRunMain();
+            return false;
+        }
     }   
-    else if (NULL == prefs.udf)
+    
+    if (NULL == prefs.udf)
     {
-        // TODO: fetch actual weather data 
+        status_t err = WeatherFetchData();
+        if (errNone != err)
+        {
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            ModuleRunMain();
+            return false;
+        }
     }   
     else 
     { 
@@ -64,12 +81,64 @@ bool WeatherMainDialog::handleInitDialog(HWND wnd, long lp)
 
 bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
 {
-    
-   return ModuleDialog::handleLookupFinished(event, data); 
+    LookupManager* lm = GetLookupManager();
+    WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+    switch (data->result)
+    {
+        case lookupResultWeatherData:
+            PassOwnership(lm->udf, prefs.udf);
+            assert(NULL != prefs.udf);
+            createListItems();
+            setDisplayMode(showSummary);
+            return true;
+            
+        case lookupResultLocationUnknown:
+            Alert(IDS_ALERT_LOCATION_UNKNOWN);
+            if (NULL == prefs.udf)
+            {
+                char_t* loc = StringCopy(prefs.location); 
+                if (IDOK != ChangeLocationDialog::showModal(loc, handle()))
+                {
+                    free(loc);
+                    ModuleRunMain();
+                    return true;
+                }
+                free(prefs.location);
+                prefs.location = loc;
+                status_t err = WeatherFetchData();
+                if (errNone != err)
+                {
+                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+                    ModuleRunMain();
+                    return true; 
+                }   
+            }
+            return true;
+
+        case lookupResultWeatherMultiselect:
+            // TODO: implement
+            return true;           
+            
+    }      
+    bool res = ModuleDialog::handleLookupFinished(event, data); 
+    if (NULL == prefs.udf)
+        ModuleRunMain();
+    return res;  
 }
 
 long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
+    switch (id) {
+        case IDC_WEATHER_DAY:
+            if (CBN_SELCHANGE == notify_code)
+            {
+                long item = combo_.selection();
+                list_.setSelection(item);
+                prepareWeather(item);
+                return messageHandled;  
+            }
+            break;
+    }
 	return ModuleDialog::handleCommand(notify_code, id, sender);
 }
 
@@ -171,4 +240,27 @@ void WeatherMainDialog::createComboItems()
 Error:
     DumpErrorMessage(GetLastError());
     return;      
+}
+
+void WeatherMainDialog::prepareWeather(ulong_t index)
+{
+    const WeatherPrefs& prefs = GetPreferences()->weatherPrefs; 
+    assert(NULL != prefs.udf); 
+    DefinitionModel* model = WeatherExtractFromUDF(*prefs.udf, index);
+    if (NULL == model)
+    { 
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return;
+    }
+    renderer_.setModel(model, Definition::ownModel);
+}
+
+long WeatherMainDialog::handleListItemActivate(int controlId, const NMLISTVIEW& header)
+{
+    long item = header.iItem;
+    combo_.setSelection(item);
+   
+    prepareWeather(item);
+    setDisplayMode(showDetails);
+    return messageHandled;   
 }

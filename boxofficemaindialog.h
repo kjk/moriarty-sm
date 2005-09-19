@@ -29,7 +29,7 @@ protected:
    
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
    
-    bool drawListViewItem(const NMLVCUSTOMDRAW& data); 
+    bool drawListViewItem(NMLVCUSTOMDRAW& data); 
    
     bool handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data); 
 
