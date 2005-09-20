@@ -6,17 +6,117 @@
 #include "WeatherModule.h"
 #include "InfoManPreferences.h"
 #include "ChangeLocationDialog.h"
+#include "StringListDialog.h"
 
 #include <SysUtils.hpp>
 #include <UniversalDataFormat.hpp>
 #include <Text.hpp>
 #include <UniversalDataHandler.hpp>
 
+class WeatherLocationListModel: public StringListDialogModel {
+    const UniversalDataFormat& udf_;
+public:
+    explicit WeatherLocationListModel(const UniversalDataFormat& udf):
+        udf_(udf)
+    {
+    }
+    
+    ~WeatherLocationListModel()
+    {
+    }
+    
+    ulong_t size() const {
+        return udf_.getItemsCount();
+    }
+    
+    const char_t* operator[](ulong_t i) const {
+        return udf_.getItemText(i, 0);
+    }
+    
+};
+
 using namespace DRA;
+
+static const UINT weatherBitmaps[] = {
+    IDB_WEATHER_SUNNY,
+    IDB_WEATHER_CLOUDS,
+    IDB_WEATHER_RAIN,
+    IDB_WEATHER_SNOW,
+    IDB_WEATHER_STORM,
+    IDB_WEATHER_SUNNY_CLOUDS,
+    IDB_WEATHER_SUNNY_RAIN,
+    IDB_WEATHER_SUNNY_SNOW,
+    IDB_WEATHER_SUNNY_STORM
+};
+
+static const uint_t weatherBitmapSize = 80;
+
+class WeatherBitmap: public Widget {
+
+    WeatherCategory category_;
+    HBITMAP bitmap_;
+    
+    static ATOM registerClass()
+    {
+        static ATOM res = Widget::registerClass(0, GetInstance(), NULL, NULL, HBRUSH(COLOR_WINDOW + 1), _T("WeatherBitmap"));
+        return res;
+    }
+
+public:
+
+    WeatherBitmap():
+        Widget(autoDelete),
+        category_(weatherUnknown),
+        bitmap_(NULL)
+    {
+    }
+
+    bool create(const RECT& r, HWND parent)
+    {
+        return Widget::create(registerClass(), NULL, WS_CHILD, r, parent, NULL, NULL);
+    }
+    
+    void setCategory(WeatherCategory cat)
+    {
+        if (cat == category_)
+            return;
+            
+        category_ = cat;
+        if (NULL != bitmap_)
+        {
+            DeleteObject(bitmap_);
+            bitmap_ = NULL;
+        }
+        
+        if (weatherUnknown != category_)
+        {
+            UINT bmpId = weatherBitmaps[category_];
+            bitmap_ = LoadBitmap(GetInstance(), MAKEINTRESOURCE(bmpId));
+        }
+        
+        invalidate(erase);
+    }
+
+protected:
+
+    long handlePaint(HDC dc, PAINTSTRUCT* ps)
+    {
+        if (NULL != bitmap_)
+        {
+            BITMAP bmp;
+            GetObject(bitmap_, sizeof(bmp), &bmp);
+            assert(weatherBitmapSize == bmp.bmWidth);
+            assert(weatherBitmapSize == bmp.bmHeight);
+            BOOL res = TransparentImage(dc, 0, 0, bmp.bmWidth, bmp.bmHeight, bitmap_, 0, 0, bmp.bmWidth, bmp.bmHeight, RGB(255, 0, 255));
+        }
+        return messageHandled;
+    }
+};
 
 WeatherMainDialog::WeatherMainDialog():
     ModuleDialog(IDR_WEATHER_MENU),
-    displayMode_(showSummary)
+    displayMode_(showSummary),
+    bitmap_(NULL)
 {
 }
 
@@ -37,10 +137,22 @@ bool WeatherMainDialog::handleInitDialog(HWND wnd, long lp)
 
     combo_.attachControl(handle(), IDC_WEATHER_DAY);
 
-    renderer_.create(WS_VISIBLE | WS_TABSTOP, 0, combo_.height() + 2 * SCALEX(5), r.width(), r.height() - combo_.height() - SCALEY(5) * 2, handle());
+    renderer_.create(WS_VISIBLE | WS_TABSTOP, SCALEX(5), combo_.height() + 2 * SCALEX(5), r.width() - 2 * SCALEX(5), r.height() - combo_.height() - SCALEY(5) * 2, handle());
     renderer_.definition.setHyperlinkHandler(GetHyperlinkHandler());
     renderer_.definition.setInteractionBehavior(0);
     renderer_.definition.setNavOrderOptions(Definition::navOrderFirst);
+    
+    WeatherBitmap* bmp = new_nt WeatherBitmap();
+    if (NULL != bmp)
+    {
+        renderer_.bounds(r);
+        r.set(r.x() + r.width() - weatherBitmapSize, r.y() + r.height() - weatherBitmapSize, weatherBitmapSize, weatherBitmapSize);
+        if (bmp->create(r, handle()))
+        {
+            bitmap_ = bmp;
+            SetWindowPos(bmp->handle(), HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+        }
+    }
 
     ModuleDialog::handleInitDialog(wnd, lp);
    
@@ -86,9 +198,10 @@ Fetch:
     }   
     else 
     { 
-    	createComboItems();
+        createComboItems();
         createListItems();
         prepareWeather(0);
+        list_.focusItem(0);
     }
 
     setDisplayMode(displayMode_);
@@ -150,6 +263,8 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
             createComboItems();
             createListItems();
             setDisplayMode(showSummary);
+            combo_.setSelection(0);
+            list_.focusItem(0);
             ModuleTouchRunning();
             return true;
             
@@ -160,7 +275,6 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
                 char_t* loc = StringCopy(prefs.location); 
                 if (IDOK != ChangeLocationDialog::showModal(loc, handle()))
                 {
-                    free(loc);
                     ModuleRunMain();
                     return true;
                 }
@@ -177,24 +291,59 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
             return true;
 
         case lookupResultWeatherMultiselect:
-            // TODO: implement
-            return true;           
-            
-    }      
+        {
+            UniversalDataFormat* udf = NULL;
+            PassOwnership(lm->udf, udf);
+            if (!handleMultiselect(udf) && NULL == prefs.udf)
+                ModuleRunMain();
+            return true;
+        }
+        
+    }
     bool res = ModuleDialog::handleLookupFinished(event, data); 
     if (NULL == prefs.udf)
         ModuleRunMain();
     return res;  
 }
 
+bool WeatherMainDialog::handleMultiselect(UniversalDataFormat* udf)
+{
+    WeatherLocationListModel model(*udf);
+    long sel = StringListDialog::showModal(IDS_CHOOSE_LOCATION, handle(), &model, StringListDialog::ownModelNot);
+    if (-1 == sel)
+    {
+        delete udf;
+        return false;
+    }
+    WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+    char_t* loc = StringCopy(udf->getItemText(sel, 1));
+    if (NULL == loc)
+    {
+        delete udf;
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return false;
+    }
+    free(prefs.location);
+    prefs.location = loc;
+    delete udf;
+    status_t err = WeatherFetchData();
+    if (errNone != err)
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return false;
+    }
+    return true;
+}
+
 long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender)
 {
-    switch (id) {
+    switch (id) 
+    {
         case IDC_WEATHER_DAY:
             if (CBN_SELCHANGE == notify_code)
             {
                 long item = combo_.selection();
-                list_.setSelection(item);
+                list_.focusItem(item);
                 prepareWeather(item);
                 return messageHandled;  
             }
@@ -212,17 +361,60 @@ long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
             return messageHandled; 
         }
+
+        case ID_TEMPERATURE_CELSIUS:
+        case ID_TEMPERATURE_FAHRENHEIT:
+            changeTempScale(ID_TEMPERATURE_CELSIUS == id);
+            return messageHandled;
+            
+        case ID_VIEW_CHANGE_LOCATION:
+            changeLocation();
+            return messageHandled;
     }
-	return ModuleDialog::handleCommand(notify_code, id, sender);
+    return ModuleDialog::handleCommand(notify_code, id, sender);
+}
+
+void WeatherMainDialog::changeLocation()
+{
+    WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+    char_t* loc = StringCopy(prefs.location);
+    if (NULL == loc)
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return;
+    }
+    if (IDOK == ChangeLocationDialog::showModal(loc, handle()))
+    {
+        free(prefs.location);
+        prefs.location = loc;
+        status_t err = WeatherFetchData();
+        if (errNone != err)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+    }
+}
+
+void WeatherMainDialog::changeTempScale(bool celsius)
+{
+    WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+    if (prefs.celsiusMode == celsius)
+        return;
+
+    prefs.celsiusMode = celsius;
+    resyncTempMenu();
+    createListItems();
+    prepareWeather(combo_.selection());
 }
 
 long WeatherMainDialog::handleResize(UINT sizeType, ushort width, ushort height)
 {
     combo_.setBounds(SCALEX(5), SCALEY(5), width - 2 * SCALEX(5), combo_.height(), repaintWidget);
     long hh = 2 * SCALEY(5) + combo_.height();
-    renderer_.anchor(anchorRight, 0, anchorBottom, hh, repaintWidget);
-    list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);  
-	return messageHandled;
+    renderer_.anchor(anchorRight, 2 * SCALEX(5), anchorBottom, hh, repaintWidget);
+    list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+    if (NULL != bitmap_)
+        bitmap_->setBounds(width - SCALEX(5) - weatherBitmapSize, height - SCALEY(5) - weatherBitmapSize, weatherBitmapSize, weatherBitmapSize, repaintWidget);
+
+    return messageHandled;
 }
 
 void WeatherMainDialog::resyncTempMenu()
@@ -246,6 +438,8 @@ void WeatherMainDialog::setDisplayMode(DisplayMode dm)
     switch (displayMode_ = dm)
     {
         case showSummary:
+            if (NULL != bitmap_) 
+                bitmap_->hide();
             renderer_.hide();
             combo_.hide();
             list_.show();
@@ -256,6 +450,8 @@ void WeatherMainDialog::setDisplayMode(DisplayMode dm)
             list_.hide();
             combo_.show();
             renderer_.show();
+            if (NULL != bitmap_)
+                bitmap_->show();
             renderer_.focus();
             CheckMenuRadioItem(menu, ID_VIEW_DETAILED, ID_VIEW_SUMMARY, ID_VIEW_DETAILED, MF_BYCOMMAND);
             break;
@@ -345,6 +541,13 @@ void WeatherMainDialog::prepareWeather(ulong_t index)
         return;
     }
     renderer_.setModel(model, Definition::ownModel);
+
+    if (NULL != bitmap_)
+    {
+        const char* sky = prefs.udf->getItemData(index + 1, dailySkyInUDF);
+        WeatherCategory cat = WeatherGetCategory(sky);
+        ((WeatherBitmap*)bitmap_)->setCategory(cat);
+    }
 }
 
 long WeatherMainDialog::handleListItemActivate(int controlId, const NMLISTVIEW& header)
@@ -356,3 +559,5 @@ long WeatherMainDialog::handleListItemActivate(int controlId, const NMLISTVIEW& 
     setDisplayMode(showDetails);
     return messageHandled;   
 }
+
+

@@ -55,4 +55,19 @@ inline int WeatherFahrenheitToCelsius(int f)
 
 status_t WeatherFetchData();
 
+enum WeatherCategory {
+    weatherSunny,
+    weatherClouds,
+    weatherRain,
+    weatherSnow,
+    weatherStorm,
+    weatherSunnyClouds,
+    weatherSunnyRain,
+    weatherSunnySnow,
+    weatherSunnyStorm,
+    weatherUnknown = uint_t(-1)
+};
+
+WeatherCategory WeatherGetCategory(const char* description);
+
 #endif // INFOMAN_WEATHER_MODULE_H__

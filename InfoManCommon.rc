@@ -78,6 +78,15 @@ IDB_STOCKS_LARGE        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\st
 IDB_STOCKS_SMALL        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\stocks-small-sm-8.bmp"
 IDB_ZODIAC_SIGNS        BITMAP                  ".\\zodiac.bmp"
 IDB_ZODIAC_SIGNS_HIRES  BITMAP                  ".\\zodiac_hires.bmp"
+IDB_WEATHER_SUNNY       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunny-lg-8.bmp"
+IDB_WEATHER_SUNNY_RAIN  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnyrain-lg-8.bmp"
+IDB_WEATHER_SUNNY_CLOUDS BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnyclouds-lg-8.bmp"
+IDB_WEATHER_STORM       BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\storm-lg-8.bmp"
+IDB_WEATHER_RAIN        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\rain-lg-8.bmp"
+IDB_WEATHER_CLOUDS      BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\clouds-lg-8.bmp"
+IDB_WEATHER_SNOW        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\snow-lg-8.bmp"
+IDB_WEATHER_SUNNY_SNOW  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnysnow-lg-8.bmp"
+IDB_WEATHER_SUNNY_STORM BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnystorm-lg-8.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -392,6 +401,8 @@ BEGIN
         MENUITEM "Celsius",                     ID_TEMPERATURE_CELSIUS
         MENUITEM SEPARATOR
         MENUITEM "Update",                      ID_VIEW_UPDATE
+        MENUITEM SEPARATOR
+        MENUITEM "Change Location...",          ID_VIEW_CHANGE_LOCATION
     END
 END
 
@@ -478,6 +489,8 @@ BEGIN
     IDS_MARKET              "Market"
     IDS_INDUSTRY            "Industry"
     IDS_TODAY               "Today"
+    IDS_SELECT_SERVER       "Select Server"
+    IDS_CHOOSE_LOCATION     "InfoMan - Choose Location"
 END
 
 STRINGTABLE 

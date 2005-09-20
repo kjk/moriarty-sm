@@ -16,6 +16,7 @@
 #include <Text.hpp>
 
 #include "InfoManPreferences.h"
+#include "StringListDialog.h"
 
 using namespace DRA;
 
@@ -30,59 +31,6 @@ static const char* servers[] = {
     "infoman.arslexis.com:5012",
     "infoman.arslexis.com:5010",
     "infoman.arslexis.com:5014",
-};
-
-class SelectServerDialog: public MenuDialog {
-    
-    ListBox list_;
-    
-protected:
-    bool handleInitDialog(HWND fw, long ip)
-    {
-        setCaption(_T("Select Server"));
-        list_.create(WS_VSCROLL | WS_TABSTOP | WS_VISIBLE | LBS_NOTIFY, 0, 0, width(), height(), handle(), NULL);
-        
-        MenuDialog::handleInitDialog(fw, ip);
-        
-        for (ulong_t i = 0; i < ARRAY_SIZE(servers); ++i)
-        {
-            const char* server = servers[i];
-            char_t* s = UTF8_ToNative(server);
-            list_.sendMessage(LB_ADDSTRING, 0, (LPARAM)s);
-            free(s);
-        }
-        list_.sendMessage(LB_SETCURSEL, 0, 0);
-        return false;
-    }
-
-    long handleCommand(ushort nc, ushort id, HWND sender)
-    {
-        Preferences& prefs = *GetPreferences();
-        switch (id) {
-            case IDOK:
-            {
-                const char* server = servers[list_.sendMessage(LB_GETCURSEL, 0, 0)];
-                free(prefs.serverAddress);
-                prefs.serverAddress = StringCopy(server);
-            }
-            case IDCANCEL:
-                endModal(id);
-                return messageHandled;
-        }
-        return MenuDialog::handleCommand(nc, id, sender);
-    }
-    long handleResize(UINT, ushort, ushort)
-    {
-        list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
-        return messageHandled;
-    }
-public: 
-
-    SelectServerDialog()
-    {
-        setAutoDelete(autoDeleteNot);
-    }
-
 };
 
 #ifndef WIN32_PLATFORM_WFSP
@@ -102,10 +50,10 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
                 //SHInitDialog(&shidi);
             }
 #endif // SHELL_AYGSHELL
-			{
-				// TextRenderer* r = new_nt TextRenderer(Widget::autoDelete);
-				// r->create(WS_VISIBLE|WS_TABSTOP, 10, 40, 220, 160, hDlg, GetInstance());
-			}
+            {
+                // TextRenderer* r = new_nt TextRenderer(Widget::autoDelete);
+                // r->create(WS_VISIBLE|WS_TABSTOP, 10, 40, 220, 160, hDlg, GetInstance());
+            }
             return (INT_PTR)TRUE;
 
         case WM_COMMAND:
@@ -123,10 +71,10 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 #ifdef _DEVICE_RESOLUTION_AWARE
         case WM_SIZE:
             {
-		//DRA::RelayoutDialog(
-		//	GetInstance(), 
-		//	hDlg, 
-		//	DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
+                //DRA::RelayoutDialog(
+                //	GetInstance(), 
+                //	hDlg, 
+                //	DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
             }
             break;
 #endif
@@ -136,42 +84,42 @@ static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 #endif // !WIN32_PLATFORM_WFSP
  
 MainWindow::MainWindow():
-	Window(autoDelete),
-	lastItemIndex_(0)
+    Window(autoDelete),
+    lastItemIndex_(0)
 {
     setOverrideNavBarText(true);
 }
 
 MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
 {
-	MainWindow* w = new_nt MainWindow();
-	if (NULL == w)
-		return NULL;
+    MainWindow* w = new_nt MainWindow();
+    if (NULL == w)
+        return NULL;
 
-	HINSTANCE instance = GetInstance();
-	static ATOM wc = registerClass(
-		CS_HREDRAW | CS_VREDRAW, 
-		instance, 
-		LoadIcon(instance, MAKEINTRESOURCE(IDI_INFOMAN)), 
-		NULL,
-		(HBRUSH) GetStockObject(WHITE_BRUSH),
-		windowClass);
-	
-	if (NULL == wc)
-		goto Error;
+    HINSTANCE instance = GetInstance();
+    static ATOM wc = registerClass(
+        CS_HREDRAW | CS_VREDRAW, 
+        instance, 
+        LoadIcon(instance, MAKEINTRESOURCE(IDI_INFOMAN)), 
+        NULL,
+        (HBRUSH) GetStockObject(WHITE_BRUSH),
+        windowClass);
 
-	if (!w->Window::create(wc, title, WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, instance))
-		goto Error;
+    if (NULL == wc)
+        goto Error;
+
+    if (!w->Window::create(wc, title, WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, instance))
+        goto Error;
 
 #ifdef WIN32_PLATFORM_PSPC
-	assert(w->menuBar_.valid());
-	w->menuBar_.adjustParentSize();
+    assert(w->menuBar_.valid());
+    w->menuBar_.adjustParentSize();
 #endif
-	
-	return w;
+
+    return w;
 Error:
-	delete w;
-	return NULL;
+    delete w;
+    return NULL;
 }
 
 long MainWindow::handleCreate(const CREATESTRUCT& cs)
@@ -179,14 +127,14 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     extEventHelper_.start(handle());
     
 #ifdef SHELL_MENUBAR
-	if (!menuBar_.create(handle(), 0, IDR_MAIN_MENU))
-	    return createFailed;
+    if (!menuBar_.create(handle(), 0, IDR_MAIN_MENU))
+        return createFailed;
 #endif
 
-	Rect r;
+    Rect r;
     innerBounds(r);  
-	//if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
-	//	return createFailed;
+    //if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
+    //	return createFailed;
 
     if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | /* LVS_AUTOARRANGE | */ LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
@@ -207,11 +155,17 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     // updateListViewFocus();
 
 #ifndef SHIPPING   
-    SelectServerDialog dlg;
-    dlg.showModal(NULL, IDD_EMPTY, handle());
+    NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(servers, ARRAY_SIZE(servers));
+    long server = StringListDialog::showModal(IDS_SELECT_SERVER, handle(), model);
+    if (-1 != server)
+    {
+        Preferences& prefs = *GetPreferences();
+        free(prefs.serverAddress);
+        prefs.serverAddress = StringCopy(servers[server]);
+    }
 #endif
 
-	return Window::handleCreate(cs);
+    return Window::handleCreate(cs);
 }
 
 long MainWindow::handleDestroy()
@@ -267,22 +221,22 @@ int CALLBACK MainWindowListViewSort(LPARAM l1, LPARAM l2, LPARAM l)
 
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
-	//renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
-	listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+    //renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+    listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
     uint_t x = GetSystemMetrics(SM_CXVSCROLL);
     uint_t w = listView_.width(); 
     long iconWidth = (w - x) / ((w - x) / SCALEX(70));
     long iconHeight = height / (height / SCALEY(54));
     ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
-	//if (0 != (LVS_ICON & listView_.style()))
-	//{
+    //if (0 != (LVS_ICON & listView_.style()))
+    //{
     ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
     ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
     listView_.invalidate(erase);
     ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
     //}
-    	
-	return messageHandled;
+
+    return messageHandled;
 }
 
 LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)

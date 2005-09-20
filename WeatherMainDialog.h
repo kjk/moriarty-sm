@@ -5,29 +5,35 @@
 #include <WindowsCE/WinTextRenderer.hpp>
 #include <WindowsCE/Controls.hpp>
 
+struct UniversalDataFormat;
+
 class WeatherMainDialog: public ModuleDialog {
-    
+
     TextRenderer renderer_;
     ListView list_;
-    ComboBox combo_;  
-       
+    ComboBox combo_;
+    Widget* bitmap_;
+
     WeatherMainDialog();
-   
+
     void createListItems(); 
     void createComboItems();
     void createListColumns(); 
-   
+
     enum DisplayMode {
         showDetails,
         showSummary
     } displayMode_;  
-   
+
     void setDisplayMode(DisplayMode dm); 
     void resyncTempMenu(); 
-   
+
     ~WeatherMainDialog(); 
-   
+
     void prepareWeather(ulong_t index); 
+    void changeTempScale(bool celsius);
+    void changeLocation();
+    bool handleMultiselect(UniversalDataFormat* udf);
 
 protected:
     

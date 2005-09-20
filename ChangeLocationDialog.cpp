@@ -21,7 +21,8 @@ bool ChangeLocationDialog::handleInitDialog(HWND fw, long ip)
     edit_.attachControl(handle(), IDC_ZIP_CODE);
     
     MenuDialog::handleInitDialog(fw, ip);
-
+    overrideBackKey();
+    
     if (NULL != location_)
     {
         edit_.setCaption(location_);

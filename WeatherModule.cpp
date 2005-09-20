@@ -127,6 +127,9 @@ DefinitionModel* WeatherExtractFromUDF(const UniversalDataFormat& udf, ulong_t i
     
     if (NULL == (text = StrAppend(text, -1, prefixFTemperature, -1))) goto Error;
     d = udf.getItemNumericValue(0, detailedTemperatureInUDF);
+    if (prefs.celsiusMode)
+        d = WeatherFahrenheitToCelsius(d);
+
     tprintf(buffer, ft, d);
     if (NULL == (text = StrAppend(text, -1, buffer, -1))) goto Error;
     TXT(text);
@@ -135,6 +138,9 @@ DefinitionModel* WeatherExtractFromUDF(const UniversalDataFormat& udf, ulong_t i
     
     if (NULL == (text = StrAppend(text, -1, prefixFFeelsLike, -1))) goto Error;
     d = udf.getItemNumericValue(0, detailedFeelsLikeInUDF);
+    if (prefs.celsiusMode)
+        d = WeatherFahrenheitToCelsius(d);
+
     tprintf(buffer, ft, d);
     if (NULL == (text = StrAppend(text, -1, buffer, -1))) goto Error;
     TXT(text);
@@ -204,4 +210,46 @@ status_t WeatherFetchData()
     status_t err = lm->fetchUrl(url);
     free(url);
     return err;  
+}
+
+#define HAS(text) (-1 != StrFind(desc, len, (text), -1))
+WeatherCategory WeatherGetCategory(const char* desc)
+{
+    long len = Len(desc);
+    bool sun = HAS("Sun");
+    bool rain = (HAS("Rain") || HAS("Showers"));
+    bool snow = HAS("Snow"); 
+    bool storm = (HAS("Storm") || HAS("Thunder"));
+    bool cloud = HAS("Cloud");
+    bool light = (HAS("Isolated") || HAS("Partly") || HAS("Scattered"));
+
+    //analyze this
+    if (snow)
+    {
+        if (light || sun)
+            return weatherSunnySnow;
+        return weatherSnow;
+    }
+    if (storm)
+    {
+        if (light || sun)
+            return weatherSunnyStorm;
+        return weatherStorm;
+    }
+    if (rain)
+    {
+        if (light || sun)
+            return weatherSunnyRain;
+        return weatherRain;
+    }
+    if (cloud)
+    {
+        if (light || sun)
+            return weatherSunnyClouds;
+        return weatherClouds;
+    }
+    if (sun)
+        return weatherSunny;
+
+    return weatherUnknown;
 }

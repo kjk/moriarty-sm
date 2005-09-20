@@ -50,16 +50,16 @@ void LookupManagerDispose()
 }
 
 LookupManager::LookupManager():
-LookupManagerBase(extEventLookupStarted),
-definitionModel(NULL),
-udf(NULL),
-strings(NULL),
-stringsCount(0),
-
-regCodeDaysToExpire(regCodeDaysNotSet),
-clientVersionChecked(false),
-eBookVersion(-1)
-{}
+    LookupManagerBase(extEventLookupStarted),
+    definitionModel(NULL),
+    udf(NULL),
+    strings(NULL),
+    stringsCount(0),
+    regCodeDaysToExpire(regCodeDaysNotSet),
+    clientVersionChecked(false),
+    eBookVersion(-1)
+{
+}
 
 LookupManager::~LookupManager()
 {
