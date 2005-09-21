@@ -203,37 +203,37 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         return 0;
     } 
    
-	LogAddDebuggerLog(eLogAlways);
+    LogAddDebuggerLog(eLogAlways);
 
-	status_t err = DataStoreInit();
-	if (errNone != err)
-	{
-		if (memErrNotEnoughSpace == err)
-			Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-		CleanUp();
-		return FALSE;
-	}
-   
-	if (NULL == GetPreferences() || NULL == GetHyperlinkHandler())
-	{
-		Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-		CleanUp();
-		return FALSE;
-	}
-	
-	StylePrepareStaticStyles();
-	MainWindow* w = MainWindow::create(szTitle, szWindowClass);
-    if (NULL == w)
-	{
-		// TODO: show some alert
-		CleanUp();
+    status_t err = DataStoreInit();
+    if (errNone != err)
+    {
+        if (memErrNotEnoughSpace == err)
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        CleanUp();
         return FALSE;
     }
 
-	w->show(nCmdShow);
-	w->update();
+    if (NULL == GetPreferences() || NULL == GetHyperlinkHandler())
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        CleanUp();
+        return FALSE;
+    }
 
-	RunTests(w->handle());
+    StylePrepareStaticStyles();
+    MainWindow* w = MainWindow::create(szTitle, szWindowClass);
+    if (NULL == w)
+    {
+        // TODO: show some alert
+        CleanUp();
+        return FALSE;
+    }
+
+    w->show(nCmdShow);
+    w->update();
+
+    RunTests(w->handle());
     return TRUE;
 }
 

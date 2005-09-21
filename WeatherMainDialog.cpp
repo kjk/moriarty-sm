@@ -155,8 +155,11 @@ bool WeatherMainDialog::handleInitDialog(HWND wnd, long lp)
     }
 
     ModuleDialog::handleInitDialog(wnd, lp);
-   
+
     createListColumns(); 
+    setDisplayMode(displayMode_);
+    resyncTempMenu(); 
+   
     WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
     if (NULL == prefs.location || 0 == Len(prefs.location))
     {
@@ -190,12 +193,8 @@ Again:
 Fetch:        
         status_t err = WeatherFetchData();
         if (errNone != err)
-        {
             Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-            ModuleRunMain();
-            return false;
-        }
-    }   
+    }
     else 
     { 
         createComboItems();
@@ -203,10 +202,6 @@ Fetch:
         prepareWeather(0);
         list_.focusItem(0);
     }
-
-    setDisplayMode(displayMode_);
-    resyncTempMenu(); 
-   
     return false; 
 }
 
@@ -274,19 +269,14 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
             {
                 char_t* loc = StringCopy(prefs.location); 
                 if (IDOK != ChangeLocationDialog::showModal(loc, handle()))
-                {
-                    ModuleRunMain();
                     return true;
-                }
+
                 free(prefs.location);
                 prefs.location = loc;
                 status_t err = WeatherFetchData();
                 if (errNone != err)
-                {
                     Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-                    ModuleRunMain();
-                    return true; 
-                }   
+
             }
             return true;
 
@@ -294,16 +284,12 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
         {
             UniversalDataFormat* udf = NULL;
             PassOwnership(lm->udf, udf);
-            if (!handleMultiselect(udf) && NULL == prefs.udf)
-                ModuleRunMain();
+            handleMultiselect(udf);
             return true;
         }
         
     }
-    bool res = ModuleDialog::handleLookupFinished(event, data); 
-    if (NULL == prefs.udf)
-        ModuleRunMain();
-    return res;  
+    return ModuleDialog::handleLookupFinished(event, data); 
 }
 
 bool WeatherMainDialog::handleMultiselect(UniversalDataFormat* udf)
@@ -356,6 +342,12 @@ long WeatherMainDialog::handleCommand(ushort notify_code, ushort id, HWND sender
             return messageHandled;
         case ID_VIEW_UPDATE:
         {
+            WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+            if (NULL == prefs.location || 0 == Len(prefs.location))
+            {
+                changeLocation();
+                return messageHandled;
+            }
             status_t err = WeatherFetchData();
             if (errNone != err)
                 Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);

@@ -116,6 +116,17 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
     w->menuBar_.adjustParentSize();
 #endif
 
+#ifndef SHIPPING   
+    NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(servers, ARRAY_SIZE(servers));
+    long server = StringListDialog::showModal(IDS_SELECT_SERVER, w->handle(), model);
+    if (-1 != server)
+    {
+        Preferences& prefs = *GetPreferences();
+        free(prefs.serverAddress);
+        prefs.serverAddress = StringCopy(servers[server]);
+    }
+#endif
+
     return w;
 Error:
     delete w;
@@ -153,17 +164,6 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
         return createFailed; 
 
     // updateListViewFocus();
-
-#ifndef SHIPPING   
-    NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(servers, ARRAY_SIZE(servers));
-    long server = StringListDialog::showModal(IDS_SELECT_SERVER, handle(), model);
-    if (-1 != server)
-    {
-        Preferences& prefs = *GetPreferences();
-        free(prefs.serverAddress);
-        prefs.serverAddress = StringCopy(servers[server]);
-    }
-#endif
 
     return Window::handleCreate(cs);
 }

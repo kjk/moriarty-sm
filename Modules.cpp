@@ -184,15 +184,16 @@ status_t ModuleRun(ModuleID id)
         if (NULL != d)
         {
             runningModule = mod;
-            ModuleDialogSetCurrent(d); 
             d->show();
         }
         else
         {
-            DWORD err = GetLastError();
-            assert(false);
+            // We'll get here when:
+            // 1. Instantiation of module dialog failed for whatever reason
+            // 2. Module dialog called ModuleRunMaing() from within handleInitDialog()
+            // It's not possible to tell exactly the reason, so in a finihed version we should probably
+            // asume it's 2. and ignore it as it's perfectly legal.
             return sysErrParamErr;
-            // TODO: show some alert?!
         }
         
     }   

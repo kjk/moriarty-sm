@@ -180,6 +180,7 @@ ModuleDialog::~ModuleDialog()
 
 bool ModuleDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
 {
+    ModuleDialogSetCurrent(this);
     extEventHelper_.start(handle());
     return MenuDialog::handleInitDialog(focus_widget_handle, init_param); 
 }
@@ -235,7 +236,7 @@ static ModuleDialog* currentModuleDialog = NULL;
 
 void ModuleDialogSetCurrent(ModuleDialog* dialog)
 {
-    ModuleDialogDestroyCurrent();
+    assert(NULL == currentModuleDialog);
     currentModuleDialog = dialog; 
 }
 
