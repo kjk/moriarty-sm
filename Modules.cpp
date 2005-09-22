@@ -7,6 +7,7 @@
 #include "BoxOfficeModule.h"
 #include "DreamsModule.h"
 #include "StocksModule.h"
+#include "CurrencyModule.h"
 
 #ifdef _WIN32
 #include "ModuleDialog.h"
@@ -14,37 +15,11 @@
 
 #include <Text.hpp>
 
-/*
-struct Module {
-    ModuleID id;
-    const char* name;
-    char_t* displayName    
-    uint_t iconId;
-#ifdef _PALM_OS
-    uint_t largeIconId;
-#endif
-    ModuleStarter starter;
-    ModuleDataReader dataReader; 
-    bool free;
-    bool dataReady;
-    bool disabledRemotely;
-    bool disabledByUser;
-    bool tracksUpdateTime;
-    tick_t lastUpdateTime;
-    
-    bool active() const {return !(disabledByUser || disabledRemotely);}    
-   
-    enum {neverUpdated == ulong_t(-1)};     
-};
-*/
-
-
 #ifdef _PALM_OS
 #define MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, free, tracksUpdate) \
 {id, name, dispName, palmIcon, palmLargeIcon, mainFormId, free, false, false, false, tracksUpdate, Module::neverUpdated}
 #endif
 
-// TODO: use commented-out version when data readers are ported to WinCE
 #ifdef _WIN32
 
 #define MOD_ICON_LARGE(name) IDB_ ## name ## _LARGE
@@ -52,7 +27,6 @@ struct Module {
 
 #define  MOD(id, name, dispName, palmIcon, palmLargeIcon, winIcon, mainFormId, starter, free, tracksUpdate) \
 {id, name, dispName, MOD_ICON_SMALL(winIcon), MOD_ICON_LARGE(winIcon), starter, free, false, false, false, tracksUpdate, Module::neverUpdated}
-// {id, name, dispName, winIcon, starter, dataReader, free, false, false, false, tracksUpdate, neverUpdated}
 #endif
 
 static Module modules[] = {
@@ -61,7 +35,7 @@ static Module modules[] = {
     MOD(moduleIdMovies, moviesModuleName, _T("Movie times"), moviesSmallBitmap, frmInvalidObjectId, MOVIES, moviesMainForm, NULL, true, false),
     MOD(moduleIdAmazon, amazonModuleName, _T("Amazon"), amazonSmallBitmap, frmInvalidObjectId, AMAZON, amazonMainForm, NULL, false, false),
     MOD(moduleIdBoxOffice, boxOfficeModuleName, _T("Box office"), boxofficeSmallBitmap, frmInvalidObjectId, BOXOFFICE, boxOfficeMainForm, BoxOfficeStart, true, true),
-    MOD(moduleIdCurrency, currencyModuleName, _T("Currency"), currencySmallBitmap, frmInvalidObjectId, CURRENCY, currencyMainForm, NULL, true, false),
+    MOD(moduleIdCurrency, currencyModuleName, _T("Currency"), currencySmallBitmap, frmInvalidObjectId, CURRENCY, currencyMainForm, CurrencyStart, true, false),
     MOD(moduleIdStocks, stocksModuleName, _T("Stocks"), stocksSmallBitmap, frmInvalidObjectId, STOCKS, stocksMainForm, StocksStart, true, false),
     MOD(moduleIdJokes, jokesModuleName, _T("Jokes"), jokesSmallBitmap, frmInvalidObjectId, JOKES, jokesMainForm, NULL, false, true),
     MOD(moduleIdGasPrices, gasPricesModuleName, _T("Gas prices"), gasPricesSmallBitmap, frmInvalidObjectId, GAS, gasPricesMainForm, NULL, true, false),

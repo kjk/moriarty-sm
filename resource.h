@@ -29,6 +29,7 @@
 #define IDS_TODAY                       116
 #define IDS_SELECT_SERVER               117
 #define IDS_CHOOSE_LOCATION             118
+#define IDS_CURRENCY                    119
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
@@ -120,6 +121,7 @@
 #define IDB_WEATHER_SUNNY               565
 #define IDD_EMPTY                       566
 #define IDB_WEATHER_SUNNY_RAIN          566
+#define IDR_CURRENCY_MENU               566
 #define IDD_WEATHER_MAIN                567
 #define IDB_WEATHER_SUNNY_CLOUDS        567
 #define IDD_CHANGE_LOCATION             568
@@ -128,7 +130,6 @@
 #define IDB_WEATHER_CLOUDS              570
 #define IDB_WEATHER_SNOW                571
 #define IDB_WEATHER_SUNNY_SNOW          572
-#define IDB_WEATHER_SUNNY_SNOW1         573
 #define IDB_WEATHER_SUNNY_STORM         573
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
@@ -155,6 +156,7 @@
 #define IDS_STOCKS_SELECT_TICKER        826
 #define IDS_STOCKS_DETAILS              827
 #define IDS_WEATHER_TITLE               828
+#define IDS_WEATHER_SKY                 829
 #define IDS_WEATHER_DAY                 830
 #define IDS_WEATHER_TEMP                831
 #define IDC_CONNECTION_PROGRESS         2002
@@ -193,6 +195,7 @@
 #define IDM_VIEW                        40004
 #define IDM_STOCK                       40005
 #define IDM_PORTFOLIO                   40006
+#define IDM_CURRENCY                    40007
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
@@ -217,6 +220,9 @@
 #define ID_STOCK_DETAILS                50031
 #define ID_VIEW_CHANGELOCATION          50033
 #define ID_VIEW_CHANGE_LOCATION         50034
+#define ID_CURRENCY_ADD                 50035
+#define ID_CURRENCY_DELETE              50036
+#define ID_CURRENCY_UPDATE              50037
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -224,9 +230,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        566
-#define _APS_NEXT_COMMAND_VALUE         50035
+#define _APS_NEXT_RESOURCE_VALUE        567
+#define _APS_NEXT_COMMAND_VALUE         50038
 #define _APS_NEXT_CONTROL_VALUE         2053
-#define _APS_NEXT_SYMED_VALUE           506
+#define _APS_NEXT_SYMED_VALUE           507
 #endif
 #endif

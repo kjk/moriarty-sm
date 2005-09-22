@@ -446,6 +446,15 @@ BEGIN
     END
 END
 
+IDR_CURRENCY_MENU MENU 
+BEGIN
+    POPUP "Currency"
+    BEGIN
+        MENUITEM "Add...",                      ID_CURRENCY_ADD
+        MENUITEM "Delete",                      ID_CURRENCY_DELETE
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -491,6 +500,7 @@ BEGIN
     IDS_TODAY               "Today"
     IDS_SELECT_SERVER       "Select Server"
     IDS_CHOOSE_LOCATION     "InfoMan - Choose Location"
+    IDS_CURRENCY            "Currency"
 END
 
 STRINGTABLE 
@@ -555,6 +565,7 @@ BEGIN
     IDS_STOCKS_SELECT_TICKER "InfoMan - Select Ticker"
     IDS_STOCKS_DETAILS      "InfoMan - Stock Details"
     IDS_WEATHER_TITLE       "InfoMan - Weather"
+    IDS_WEATHER_SKY         "Sky"
     IDS_WEATHER_DAY         "Day"
     IDS_WEATHER_TEMP        "Temperature"
 END

@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -720,6 +719,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\ars_framework_utf8\Src\Currencies.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\ars_framework_utf8\Src\DataStore.cpp"
 					>
 				</File>
@@ -1140,6 +1143,22 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Currency"
+				>
+				<File
+					RelativePath=".\CurrencyMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CurrencyModule.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Src\CurrencyUtils.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1338,16 +1357,28 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Currency"
+				>
+				<File
+					RelativePath=".\CurrencyMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CurrencyModule.h"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Src\CurrencyUtils.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\clouds-lg-8.bmp"
-				>
-			</File>
 			<File
 				RelativePath=".\InfoMan.ico"
 				>
@@ -1505,39 +1536,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\rain-lg-8.bmp"
-				>
-			</File>
-			<File
 				RelativePath="..\moriarty_palm_utf8\Rsc\recipes-start-page.txt"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\snow-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\storm-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunny-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnyclouds-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnyrain-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnysnow-lg-8.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnystorm-lg-8.bmp"
 				>
 			</File>
 			<Filter
@@ -1566,6 +1565,10 @@
 				</File>
 				<File
 					RelativePath="..\moriarty_palm_utf8\Rsc\boxoffice-small-sm-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\clouds-lg-8.bmp"
 					>
 				</File>
 				<File
@@ -1721,11 +1724,43 @@
 					>
 				</File>
 				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\rain-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\snow-lg-8.bmp"
+					>
+				</File>
+				<File
 					RelativePath="..\moriarty_palm_utf8\Rsc\stocks-small-lg-8.bmp"
 					>
 				</File>
 				<File
 					RelativePath="..\moriarty_palm_utf8\Rsc\stocks-small-sm-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\storm-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunny-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnyclouds-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnyrain-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnysnow-lg-8.bmp"
+					>
+				</File>
+				<File
+					RelativePath="..\moriarty_palm_utf8\Rsc\weather\sunnystorm-lg-8.bmp"
 					>
 				</File>
 				<File

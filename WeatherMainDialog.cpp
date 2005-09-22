@@ -211,8 +211,9 @@ struct WeatherColumnDesc {
 };
 
 static const WeatherColumnDesc weatherColumns[] = {
-    {IDS_WEATHER_DAY, 60},
-    {IDS_WEATHER_TEMP, 40}
+    {IDS_WEATHER_DAY, 30},
+    {IDS_WEATHER_TEMP, 30},
+    {IDS_WEATHER_SKY, 40}
 };  
 
 void WeatherMainDialog::createListColumns()
@@ -265,19 +266,7 @@ bool WeatherMainDialog::handleLookupFinished(Event& event, const LookupFinishedE
             
         case lookupResultLocationUnknown:
             Alert(IDS_ALERT_LOCATION_UNKNOWN);
-            if (NULL == prefs.udf)
-            {
-                char_t* loc = StringCopy(prefs.location); 
-                if (IDOK != ChangeLocationDialog::showModal(loc, handle()))
-                    return true;
-
-                free(prefs.location);
-                prefs.location = loc;
-                status_t err = WeatherFetchData();
-                if (errNone != err)
-                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-
-            }
+            changeLocation();
             return true;
 
         case lookupResultWeatherMultiselect:
@@ -444,7 +433,7 @@ void WeatherMainDialog::setDisplayMode(DisplayMode dm)
             renderer_.show();
             if (NULL != bitmap_)
                 bitmap_->show();
-            renderer_.focus();
+            combo_.focus();
             CheckMenuRadioItem(menu, ID_VIEW_DETAILED, ID_VIEW_SUMMARY, ID_VIEW_DETAILED, MF_BYCOMMAND);
             break;
         default:
@@ -455,11 +444,16 @@ void WeatherMainDialog::setDisplayMode(DisplayMode dm)
 
 void WeatherMainDialog::createListItems()
 {
+    list_.clear(); 
+    WeatherPrefs& prefs = GetPreferences()->weatherPrefs;
+    if (NULL == prefs.udf)
+        return;
+    
+    
     SYSTEMTIME st; 
     GetLocalTime(&st);
-    char_t buffer[64];
+    char_t buffer[32];
     
-    list_.clear(); 
     LVITEM item;
     ZeroMemory(&item, sizeof(item));
     item.mask = LVIF_PARAM | LVIF_TEXT;
@@ -482,9 +476,25 @@ void WeatherMainDialog::createListItems()
         item.iItem = item.lParam = i;
         item.pszText = buffer;
         item.iSubItem = 0;
-        list_.insertItem(item);
-        // TODO: add additional columns   
-                
+        DTEST(-1 != list_.insertItem(item));
+        item.mask = LVIF_TEXT;
+        
+        int d = prefs.udf->getItemNumericValue(i + 1, dailyTemperatureDayInUDF);
+        const char_t* ft = _T("%d\260F");
+        if (prefs.celsiusMode)
+        {
+            d = WeatherFahrenheitToCelsius(d);
+            ft = _T("%d\260C");
+        }
+        tprintf(buffer, ft, d);
+        item.iSubItem = 1;
+        item.pszText = buffer;
+        
+        DTEST(list_.setItem(item));
+        
+        item.iSubItem = 2;
+        item.pszText = const_cast<char_t*>(prefs.udf->getItemText(i + 1, dailySkyInUDF));
+        DTEST(list_.setItem(item));
         
         TimeRollDays(st, 1);
     }  
