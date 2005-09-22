@@ -1,5 +1,9 @@
 #include "CurrencyModule.h"
 
+#include <algorithm>
+#include <UniversalDataFormat.hpp>
+#include <Currencies.hpp>
+
 #ifdef _WIN32
 #include "CurrencyMainDialog.h"
 #endif
@@ -7,12 +11,31 @@
 MODULE_STARTER_DEFINE(Currency);
 
 CurrencyPrefs::CurrencyPrefs():
-    commonCurrenciesCount_(0)
+    commonCurrenciesCount_(0),
+    udf(NULL)
 {
+    uint_t count = CommonCurrenciesCount();
+    ErrTry {
+        selectedCurrencies.reserve(count);
+    }
+    ErrCatch (ex) {
+        (void)ex;
+        return;
+    }
+    
+    for (uint_t i = 0; i < count; ++i)
+    {
+        int index = CurrencyIndex(GetCommonCurrencySymbol(i));
+        assert(-1 != index);
+        selectedCurrencies.push_back(index);
+    }
+    commonCurrenciesCount_ = count;
+
 }
 
 CurrencyPrefs::~CurrencyPrefs()
 {
+    delete udf;
 }
 
 void CurrencyPrefs::serialize(Serializer& ser)
@@ -41,6 +64,53 @@ void CurrencyPrefs::serialize(Serializer& ser)
     }
 }
 
-//status_t selectCurrency(uint_t index);
-//void deselectCurrency(uint_t index);
-//bool isCurrencySelected(uint_t index);
+// TODO: convert functions below to not use iterators
+status_t CurrencyPrefs::selectCurrency(uint_t index)
+{
+    int common = GetCommonCurrencyIndex(index);
+    uint_t pos;
+    if (-1 != common)
+    {
+        for (pos = 0; pos < commonCurrenciesCount_; ++pos)
+        {
+            int i = GetCommonCurrencyIndex(selectedCurrencies[pos]);
+            assert(-1 != i);
+            if (common <= i)
+                break;
+        }
+        ++commonCurrenciesCount_;
+    }
+    else {
+        for (pos = commonCurrenciesCount_; pos < selectedCurrencies.size(); ++pos)
+        {
+            if (index < selectedCurrencies[pos])
+                break;
+        }
+    }
+    ErrTry {
+        selectedCurrencies.insert(selectedCurrencies.begin() + pos, index);
+    }
+    ErrCatch (ex) {
+        return ex;
+    } ErrEndCatch;
+    return errNone;
+}
+
+void CurrencyPrefs::deselectCurrency(uint_t index)
+{
+    bool common = IsCommonCurrency(index);
+    SelectedCurrencies_t::iterator pos = std::find(selectedCurrencies.begin(), selectedCurrencies.end(), index);
+    assert(selectedCurrencies.end() != pos);
+    selectedCurrencies.erase(pos);
+    if (common)
+        --commonCurrenciesCount_;
+}
+
+bool CurrencyPrefs::isCurrencySelected(uint_t index)
+{
+    SelectedCurrencies_t::const_iterator pos = std::find(selectedCurrencies.begin(), selectedCurrencies.end(), index);
+    if (selectedCurrencies.end() != pos)
+        return true;
+    return false;
+}
+

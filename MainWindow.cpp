@@ -170,8 +170,8 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
 
 long MainWindow::handleDestroy()
 {
-	PostQuitMessage(0);
-	return Window::handleDestroy();
+    PostQuitMessage(0);
+    return Window::handleDestroy();
 }
 
 long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
@@ -222,20 +222,23 @@ int CALLBACK MainWindowListViewSort(LPARAM l1, LPARAM l2, LPARAM l)
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
     //renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
+    Rect r1;
+    listView_.bounds(r1);
     listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
-    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-    uint_t w = listView_.width(); 
-    long iconWidth = (w - x) / ((w - x) / SCALEX(70));
-    long iconHeight = height / (height / SCALEY(54));
-    ListView_SetIconSpacing(listView_.handle(), iconWidth, iconHeight);
-    //if (0 != (LVS_ICON & listView_.style()))
-    //{
-    ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
-    ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
-    listView_.invalidate(erase);
-    ListView_RedrawItems(listView_.handle(), 0, listView_.itemCount() - 1);
-    //}
-
+    Rect r2;
+    listView_.bounds(r2);
+    if (r1 != r2)
+    {
+        uint_t x = GetSystemMetrics(SM_CXVSCROLL);
+        uint_t w = listView_.width(); 
+        long iconWidth = (w - x) / ((w - x) / SCALEX(70));
+        long iconHeight = height / (height / SCALEY(54));
+        listView_.setIconSpacing(iconWidth, iconHeight);
+        ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
+        ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
+        listView_.invalidate(erase);
+        listView_.redrawItems(0, listView_.itemCount() - 1);
+    }
     return messageHandled;
 }
 
@@ -513,6 +516,6 @@ void MainWindow::updateListViewFocus()
     if (-1 == l)
         l = lastItemIndex_;
      
-    ListView_SetItemState(listView_.handle(), l, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
+    listView_.focusItem(l);
 }
 ;

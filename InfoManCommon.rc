@@ -207,6 +207,16 @@ BEGIN
     EDITTEXT        IDC_ZIP_CODE,7,26,142,12,ES_AUTOHSCROLL
 END
 
+IDD_CURRENCY_MAIN DIALOGEX 0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Currency"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_CURRENCY_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_TABSTOP,0,0,156,154
+    LTEXT           "Amount:",IDC_AMOUNT_TEXT,5,163,43,8
+    EDITTEXT        IDC_AMOUNT,52,160,98,12,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -578,6 +588,13 @@ BEGIN
                             "Are you sure you want to delete the current portfolio?"
     IDS_INFO_CANT_DELETE_LAST_PORTFOLIO "You can't delete the last portfolio."
     IDS_INFO_CUMULATIVE_INDEX "You can't set quantity for cumulative indexes."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CURRENCY_SYMBOL     "Symbol"
+    IDS_CURRENCY_VALUE      "Value"
+    IDS_CURRENCY_REGION     "Region"
 END
 
 #endif    // English (U.S.) resources

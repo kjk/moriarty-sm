@@ -7,6 +7,7 @@
 #define IDS_CONFIRM                     3
 #define IDS_INFO                        4
 #define IDS_WARNING                     5
+#define IDS_STRING6                     6
 #define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
 #define IDR_MAIN_MENU                   102
@@ -127,6 +128,7 @@
 #define IDD_CHANGE_LOCATION             568
 #define IDB_WEATHER_STORM               568
 #define IDB_WEATHER_RAIN                569
+#define IDD_CURRENCY_MAIN               569
 #define IDB_WEATHER_CLOUDS              570
 #define IDB_WEATHER_SNOW                571
 #define IDB_WEATHER_SUNNY_SNOW          572
@@ -159,6 +161,10 @@
 #define IDS_WEATHER_SKY                 829
 #define IDS_WEATHER_DAY                 830
 #define IDS_WEATHER_TEMP                831
+#define IDS_CURRENCY_SYMBOL             832
+#define IDS_STRING833                   833
+#define IDS_CURRENCY_VALUE              833
+#define IDS_CURRENCY_REGION             834
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -188,6 +194,9 @@
 #define IDC_ZIP_CODE                    2049
 #define IDC_SET_LOCATION_TEXT           2050
 #define IDC_WEATHER_LIST                2051
+#define IDC_CURRENCY_LIST               2053
+#define IDC_AMOUNT                      2054
+#define IDC_AMOUNT_TEXT                 2055
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -232,7 +241,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        567
 #define _APS_NEXT_COMMAND_VALUE         50038
-#define _APS_NEXT_CONTROL_VALUE         2053
+#define _APS_NEXT_CONTROL_VALUE         2056
 #define _APS_NEXT_SYMED_VALUE           507
 #endif
 #endif

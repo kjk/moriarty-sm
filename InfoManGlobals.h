@@ -7,11 +7,11 @@
 #include "InfoMan.h"
 
 enum InfoManExtEvents {
-	extEventLookupStarted,
-	extEventLookupProgress,
-	extEventLookupFinished
+    extEventLookupStarted,
+    extEventLookupProgress,
+    extEventLookupFinished
 };
-	
+
 class Preferences;
 class LookupManager;
 class MainWindow;

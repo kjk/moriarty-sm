@@ -12,6 +12,9 @@ class CurrencyMainDialog: public ModuleDialog {
 
     CurrencyMainDialog();
     ~CurrencyMainDialog();
+    
+    void createListColumns();
+    void createListItems();
 
 protected:
 

@@ -6,6 +6,7 @@
 #include "DreamsModule.h"
 #include "StocksModule.h"
 #include "WeatherModule.h"
+#include "CurrencyModule.h"
 
 #include <Utility.hpp>
 
@@ -19,6 +20,7 @@ public:
     DreamsPrefs dreamsPrefs; 
     StocksPrefs stocksPrefs; 
     WeatherPrefs weatherPrefs; 
+    CurrencyPrefs currencyPrefs;
 
     Preferences();
 
