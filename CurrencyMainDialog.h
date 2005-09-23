@@ -14,7 +14,9 @@ class CurrencyMainDialog: public ModuleDialog {
     ~CurrencyMainDialog();
     
     void createListColumns();
-    void createListItems();
+    void createListItems(bool update = false);
+    
+    bool handleListItemChanged(NMLISTVIEW& lv);
 
 protected:
 
@@ -25,6 +27,8 @@ protected:
     long handleCommand(ushort nc, ushort id, HWND sender);  
      
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
+    
+    long handleNotify(int controlId, const NMHDR& header);
 
 public:
     
