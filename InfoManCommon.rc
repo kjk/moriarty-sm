@@ -207,7 +207,7 @@ BEGIN
     EDITTEXT        IDC_ZIP_CODE,7,26,142,12,ES_AUTOHSCROLL
 END
 
-IDD_CURRENCY_MAIN DIALOGEX 0, 0, 156, 177
+IDD_CURRENCY_MAIN DIALOG  0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Currency"
 FONT 8, "MS Shell Dlg"
@@ -588,6 +588,8 @@ BEGIN
                             "Are you sure you want to delete the current portfolio?"
     IDS_INFO_CANT_DELETE_LAST_PORTFOLIO "You can't delete the last portfolio."
     IDS_INFO_CUMULATIVE_INDEX "You can't set quantity for cumulative indexes."
+    IDS_CONFIRM_CURRENCY_DELETE 
+                            "Are you sure you want to delete the selected currency?"
 END
 
 STRINGTABLE 

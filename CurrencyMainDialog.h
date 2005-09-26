@@ -30,6 +30,10 @@ protected:
     
     long handleNotify(int controlId, const NMHDR& header);
 
+    bool handleContextMenu(WPARAM wParam, LPARAM lParam); 
+    
+    LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
+    
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(CurrencyMainDialog);

@@ -35,6 +35,8 @@ bool CurrencyMainDialog::handleInitDialog(HWND fw, long ip)
     createListColumns();
     createListItems();
     
+    edit_.focus();
+    
     return false;
 }
 
@@ -54,6 +56,23 @@ long CurrencyMainDialog::handleResize(UINT st, ushort w, ushort h)
 
 long CurrencyMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
+    CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+    switch (id)
+    {
+        case ID_CURRENCY_DELETE:
+        {
+            long sel = list_.selection();
+            if (-1 == sel)
+                return messageHandled;
+            if (IDYES != Alert(handle(), IDS_CONFIRM_CURRENCY_DELETE, IDS_CONFIRM, MB_YESNO | MB_ICONQUESTION))
+                return messageHandled;
+            ulong_t index = prefs.selectedCurrencies[sel];
+            prefs.deselectCurrency(index);
+            createListItems();
+            list_.focusItem(0);
+            return messageHandled;
+        }
+    }
     return ModuleDialog::handleCommand(nc, id, sender);
 }
 
@@ -146,8 +165,10 @@ void CurrencyMainDialog::createListItems(bool update)
             if (sel == i)
             {
                 item.mask |= LVIF_STATE;
-                item.state = LVIS_SELECTED;
+                item.state = LVIS_SELECTED | LVIS_FOCUSED;
             }
+            else
+                item.state = 0;
             item.pszText = const_cast<char_t*>(symbol);
             item.iSubItem = 0;
             DTEST(-1 != list_.insertItem(item));
@@ -201,4 +222,64 @@ bool CurrencyMainDialog::handleListItemChanged(NMLISTVIEW &lv)
         
     
     return false;
+}
+
+LRESULT CurrencyMainDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    if (WM_CONTEXTMENU == msg && handleContextMenu(wParam, lParam))
+        return messageHandled;
+
+    return ModuleDialog::callback(msg, wParam, lParam);
+}
+
+bool CurrencyMainDialog::handleContextMenu(WPARAM wParam, LPARAM lParam)
+{
+    if (list_.handle() != (HWND)wParam)
+        return false;
+    
+    HMENU menu = menuBar().subMenu(IDM_CURRENCY); 
+    if (NULL == menu)
+        return false;
+        
+    bool onlyAdd = false;
+
+    Point p(LOWORD(lParam), HIWORD(lParam));
+    if (-1 == p.x && -1 == p.y)
+    {
+        long item = list_.selection();
+        if (-1 == item)
+            return false;
+              
+        Rect rect;
+        if (!list_.itemBounds(item, rect, LVIR_SELECTBOUNDS))
+            return false;
+            
+        ClientToScreen(list_.handle(), rect);
+        rect.center(p);
+    }
+    else
+    {
+        LVHITTESTINFO ht;
+        ht.pt = p;
+        ScreenToClient(list_.handle(), &ht.pt);
+        list_.hitTest(ht);
+        if (0 == (LVHT_ONITEM & ht.flags))
+            onlyAdd = true;
+        else
+            list_.setSelection(ht.iItem);
+    }
+    
+    if (onlyAdd)
+    {
+        EnableMenuItem(menu, ID_CURRENCY_DELETE, MF_GRAYED); 
+    }   
+     
+    TrackPopupMenu(menu, TPM_TOPALIGN | TPM_LEFTALIGN, p.x, p.y, 0, handle(), NULL);
+   
+    if (onlyAdd)
+    {
+        EnableMenuItem(menu, ID_CURRENCY_DELETE, MF_ENABLED); 
+    }
+    
+    return true;
 }

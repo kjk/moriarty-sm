@@ -137,6 +137,7 @@
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
 #define IDS_INFO_CUMULATIVE_INDEX       603
+#define IDS_CONFIRM_CURRENCY_DELETE     604
 #define IDS_ZODIAC0                     800
 #define IDS_ZODIAC1                     801
 #define IDS_ZODIAC2                     802
