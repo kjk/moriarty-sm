@@ -9,6 +9,8 @@ class CurrencyMainDialog: public ModuleDialog {
     Widget label_;
     EditBox edit_;
     ListView list_;
+    double amount_;
+    double baseRate_;
 
     CurrencyMainDialog();
     ~CurrencyMainDialog();
@@ -17,6 +19,8 @@ class CurrencyMainDialog: public ModuleDialog {
     void createListItems(bool update = false);
     
     bool handleListItemChanged(NMLISTVIEW& lv);
+    void updateAmountField();
+    void amountFieldChanged();
 
 protected:
 

@@ -50,6 +50,7 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
 
 static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
+    FURS(Currency, lookupResultCurrency, currencyDataStream, false),
     FURS(CurrentBoxOffice, lookupResultBoxOfficeData, boxOfficeDataStream, false), 
     FURS(Dream, lookupResultDreamData, dreamsDataStream, false), 
     FVRS(Error, lookupResultServerError), 
@@ -63,9 +64,9 @@ static const ResponseFieldDescriptor descriptors[] = {
     FURS(Stock, lookupResultStock, NULL, false), 
     FURS(StocksList, lookupResultStocksList, NULL, false), 
     FURS(StocksListByName, lookupResultStocksListByName, NULL, false), 
-	FVAL(TransactionId),
-	FURS(Weather, lookupResultWeatherData, weatherDataStream, false),
-	FURS(WeatherMultiselect, lookupResultWeatherMultiselect, NULL, false),
+    FVAL(TransactionId),
+    FURS(Weather, lookupResultWeatherData, weatherDataStream, false),
+    FURS(WeatherMultiselect, lookupResultWeatherMultiselect, NULL, false),
     FVAL(EBookVersion),
 };
 

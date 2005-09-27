@@ -77,6 +77,7 @@
 #define IDB_DICTIONARY_SMALL            522
 #define IDS_ALERT_HOST_UNREACHABLE      522
 #define IDB_DREAMS_LARGE                523
+#define IDS_INFO_ONLY_NUMERIC_INPUT_ACCEPTED 523
 #define IDB_DREAMS_SMALL                524
 #define IDB_EBAY_LARGE                  525
 #define IDB_EBAY_SMALL                  526
@@ -130,6 +131,7 @@
 #define IDB_WEATHER_RAIN                569
 #define IDD_CURRENCY_MAIN               569
 #define IDB_WEATHER_CLOUDS              570
+#define IDD_CURRENCY_SELECT             570
 #define IDB_WEATHER_SNOW                571
 #define IDB_WEATHER_SUNNY_SNOW          572
 #define IDB_WEATHER_SUNNY_STORM         573
@@ -198,6 +200,7 @@
 #define IDC_CURRENCY_LIST               2053
 #define IDC_AMOUNT                      2054
 #define IDC_AMOUNT_TEXT                 2055
+#define IDC_LIST1                       2056
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -242,7 +245,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        567
 #define _APS_NEXT_COMMAND_VALUE         50038
-#define _APS_NEXT_CONTROL_VALUE         2056
+#define _APS_NEXT_CONTROL_VALUE         2057
 #define _APS_NEXT_SYMED_VALUE           507
 #endif
 #endif

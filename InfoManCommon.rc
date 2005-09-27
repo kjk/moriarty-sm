@@ -214,7 +214,15 @@ FONT 8, "MS Shell Dlg"
 BEGIN
     CONTROL         "",IDC_CURRENCY_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_TABSTOP,0,0,156,154
     LTEXT           "Amount:",IDC_AMOUNT_TEXT,5,163,43,8
-    EDITTEXT        IDC_AMOUNT,52,160,98,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AMOUNT,52,160,98,12,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_CURRENCY_SELECT DIALOG  0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Add Currency"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_CURRENCY_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
 END
 
 
@@ -546,6 +554,8 @@ BEGIN
     IDS_ALERT_NOT_IMPLEMENTED "This feature is not implemented."
     IDS_ALERT_HOST_UNREACHABLE 
                             "Network connection could not be established.\nPlease verify your connection configuration."
+    IDS_INFO_ONLY_NUMERIC_INPUT_ACCEPTED 
+                            "This field accepts only numeric input.\nPlease correct the entered value."
 END
 
 STRINGTABLE 

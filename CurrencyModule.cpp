@@ -1,4 +1,6 @@
 #include "CurrencyModule.h"
+#include "HyperlinkHandler.h"
+#include "LookupManager.h"
 
 #include <algorithm>
 #include <UniversalDataFormat.hpp>
@@ -114,3 +116,9 @@ bool CurrencyPrefs::isCurrencySelected(uint_t index)
     return false;
 }
 
+status_t CurrencyFetchData()
+{
+    const char* url = urlSchemaCurrency urlSeparatorSchemaStr;
+    LookupManager* lm = GetLookupManager();
+    return lm->fetchUrl(url);
+}

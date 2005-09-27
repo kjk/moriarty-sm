@@ -38,9 +38,11 @@
 #define fieldWeatherMultiselect           "Weather-Multiselect"
 #define fieldLocationUnknown             "Location-Unknown"
 
+#define fieldCurrency                    "Currency-Conversion"
+
 enum ResponseFieldType {
-	fieldTypeValue,
-	fieldTypePayload,
+    fieldTypeValue,
+    fieldTypePayload,
 };
 
 class BinaryIncrementalProcessor;
@@ -56,13 +58,13 @@ struct ResponseFieldDescriptor {
 #if _MSC_VER
 
     union {
-	    const char* name;
-	    ulong_t fillName__;
+        const char* name;
+        ulong_t fillName__;
     };
 
     union {
-	    ResponseFieldType type;
-	    ulong_t fillType__;
+        ResponseFieldType type;
+        ulong_t fillType__;
     };
 
     union {
@@ -70,37 +72,37 @@ struct ResponseFieldDescriptor {
         ulong_t fillValueHandler__[4];
     };
     
-	union {
-	    ResponsePayloadCompletionHandler payloadCompletionHandler;
-	    ulong_t fillPayloadCompletionHandler__[4];
-	};
-
     union {
-	    LookupResult lookupResult;
-	    ulong_t fillLookupResult__;
+        ResponsePayloadCompletionHandler payloadCompletionHandler;
+        ulong_t fillPayloadCompletionHandler__[4];
     };
 
     union {
-	    const char* dataSinkName;
-	    ulong_t fillDataSinkName__;
-	};
-	
-	union {
-	    bool dataSinkIsHistoryCache;
-	    ulong_t fillDataSinkIsHistoryCache__;
+        LookupResult lookupResult;
+        ulong_t fillLookupResult__;
+    };
+
+    union {
+        const char* dataSinkName;
+        ulong_t fillDataSinkName__;
+    };
+
+    union {
+        bool dataSinkIsHistoryCache;
+        ulong_t fillDataSinkIsHistoryCache__;
     };
     
 #else
-	const char* name;
-	ResponseFieldType type;
-	ResponseFieldValueHandler valueHandler;
-	ResponsePayloadCompletionHandler payloadCompletionHandler;
-	LookupResult lookupResult;
-	const char* dataSinkName;
-	bool dataSinkIsHistoryCache;
+    const char* name;
+    ResponseFieldType type;
+    ResponseFieldValueHandler valueHandler;
+    ResponsePayloadCompletionHandler payloadCompletionHandler;
+    LookupResult lookupResult;
+    const char* dataSinkName;
+    bool dataSinkIsHistoryCache;
 #endif
-	
-	bool operator<(const ResponseFieldDescriptor& other) const;
+
+    bool operator<(const ResponseFieldDescriptor& other) const;
 };
 
 const ResponseFieldDescriptor* ResponseFieldFind(const char* name);

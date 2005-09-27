@@ -59,6 +59,8 @@
 
 #define urlSchemaWeather                     "s+weather"
 
+#define urlSchemaCurrency                   "s+currency"
+
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'
 #define urlSeparatorSchemaStr                 ":"

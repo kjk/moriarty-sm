@@ -7,12 +7,161 @@
 #include <Text.hpp>
 #include <Currencies.hpp>
 #include <SysUtils.hpp>
-#include <UniversalDataFormat.hpp>
+#include <UniversalDataHandler.hpp>
 
 using namespace DRA;
 
+class CurrencySelectDialog: public MenuDialog {
+    ListView list_;
+    
+    CurrencySelectDialog():
+        MenuDialog(IDR_DONE_CANCEL_MENU)
+    {
+        setAutoDelete(autoDeleteNot);
+    }
+    
+    ~CurrencySelectDialog()
+    {
+    }
+    
+protected:
+
+    void createListColumns();
+    void createListItems();
+    
+    long handleResize(UINT st, ushort width, ushort height)
+    {
+        list_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
+        return messageHandled;
+    }
+
+    bool handleInitDialog(HWND fw, long ip)
+    {
+        list_.attachControl(handle(), IDC_CURRENCY_LIST);
+        list_.setStyleEx(LVS_EX_FULLROWSELECT | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE);
+        MenuDialog::handleInitDialog(fw, ip);
+        
+        createListColumns();
+        createListItems();
+        
+        return true;
+    }
+    
+    long handleCommand(ushort nc, ushort id, HWND sender)
+    {
+        switch (id) 
+        {
+            case IDCANCEL:
+                endModal(-1);
+                return messageHandled;
+            case IDOK:
+            {
+                long sel = list_.selection();
+                if (-1 == sel)
+                {
+                    list_.focus();
+                    return messageHandled;
+                }
+                LVITEM item = {LVIF_PARAM, sel};
+                DTEST(FALSE != ListView_GetItem(list_.handle(), &item));
+                endModal(item.lParam);
+                return messageHandled;
+            }
+        }
+
+        return MenuDialog::handleCommand(nc, id, sender);
+    }
+    
+    long handleListItemActivate(int controlId, const NMLISTVIEW& header)
+    {
+        LVITEM item = {LVIF_PARAM, header.iItem};
+        DTEST(FALSE != ListView_GetItem(list_.handle(), &item));
+        endModal(item.lParam);
+        return messageHandled;
+    }
+    
+    
+public:
+
+    static long showModal(HWND parent)
+    {
+        CurrencySelectDialog dlg;
+        return dlg.MenuDialog::showModal(NULL, IDD_CURRENCY_SELECT, parent);
+    }
+    
+};
+
+static const struct {
+    UINT textId;
+    uint_t width;
+} currencySelectionColumns[] = {
+    {IDS_CURRENCY_SYMBOL, 15},
+    {IDS_CURRENCY, 35},
+    {IDS_CURRENCY_REGION, 40}
+};
+
+void CurrencySelectDialog::createListColumns()
+{
+    LVCOLUMN col;
+    ZeroMemory(&col, sizeof(col));
+    col.mask = LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH;
+    
+    ulong_t w = list_.width();
+    for (ulong_t i = 0; i < ARRAY_SIZE(currencySelectionColumns); ++i)
+    {
+        char_t* text = LoadString(currencySelectionColumns[i].textId);
+        if (NULL == text)
+            goto Error; 
+        col.iSubItem = i;
+        col.iOrder = i;
+        col.pszText = text;
+        col.cx = (currencySelectionColumns[i].width * w) / 100;
+        int res = list_.insertColumn(i, col);
+        free(text);
+        if (-1 == res)
+            goto Error;
+    }  
+    return; 
+Error: 
+    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY); 
+}
+
+void CurrencySelectDialog::createListItems()
+{
+    ulong_t size = CurrencyCount();
+    LVITEM item;
+    ZeroMemory(&item, sizeof(item));
+    
+    CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+    long lastItem = 0;
+    for (ulong_t i = 0; i < size; ++i)
+    {
+        if (prefs.isCurrencySelected(i))
+            continue;
+            
+        item.mask = LVIF_TEXT | LVIF_PARAM;
+        item.pszText = const_cast<char_t*>(CurrencySymbol(i));
+        item.iItem = lastItem++;
+        item.iSubItem = 0;
+        item.lParam = i;
+        list_.insertItem(item);
+        item.mask = LVIF_TEXT;
+        
+        item.pszText = const_cast<char_t*>(CurrencyName(i));
+        item.iSubItem++;
+        list_.setItem(item);
+        
+        item.pszText = const_cast<char_t*>(CurrencyRegion(i));
+        item.iSubItem++;
+        list_.setItem(item);
+    }
+    list_.focusItem(0);
+}
+
 CurrencyMainDialog::CurrencyMainDialog():
-    ModuleDialog(IDR_CURRENCY_MENU)
+    ModuleDialog(IDR_CURRENCY_MENU),
+    amount_(1.0),
+    baseRate_(1.0)
 {
 }
 
@@ -33,12 +182,62 @@ bool CurrencyMainDialog::handleInitDialog(HWND fw, long ip)
     
     createSipPrefControl();
     createListColumns();
+    
+    CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+    if (NULL == prefs.udf)
+        prefs.udf = UDF_ReadFromStream(currencyDataStream);
+
+    if (NULL == prefs.udf)
+        CurrencyFetchData();
+    
     createListItems();
     
+    updateAmountField();
     edit_.focus();
     
     return false;
 }
+
+void CurrencyMainDialog::updateAmountField()
+{
+    char_t buffer[32];
+    tprintf(buffer, _T("%.2f"), amount_);
+    StrNumberApplyGrouping(buffer, 32);
+    localizeNumberStrInPlace(buffer);
+    edit_.setText(buffer);
+}
+
+void CurrencyMainDialog::amountFieldChanged()
+{
+    char_t* val = edit_.text();
+    if (NULL == val)
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return;
+    }
+    double a = amount_;
+    if (0 == Len(val))
+    {
+        free(val);
+        amount_ = 0;
+    }
+    else {
+        delocalizeNumberStrInPlace(val);
+        double v;
+        if (errNone != numericValue(val, -1, v))
+        {
+            free(val);
+            Alert(handle(), IDS_INFO_CANT_DELETE_LAST_PORTFOLIO, IDS_INFO, MB_ICONEXCLAMATION | MB_OK);
+            updateAmountField();
+            return;
+        }
+        free(val);
+        amount_ = v;
+    }
+    if (amount_ != a)
+        createListItems(true);
+}
+
 
 long CurrencyMainDialog::handleResize(UINT st, ushort w, ushort h)
 {
@@ -59,6 +258,15 @@ long CurrencyMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
     CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
     switch (id)
     {
+        case IDC_AMOUNT:
+            switch (nc)
+            {
+                case EN_CHANGE:
+                    amountFieldChanged();
+                    return messageHandled;
+            }
+            break;
+            
         case ID_CURRENCY_DELETE:
         {
             long sel = list_.selection();
@@ -72,15 +280,45 @@ long CurrencyMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
             list_.focusItem(0);
             return messageHandled;
         }
+        
+        case ID_VIEW_UPDATE:
+        {
+            if (errNone != CurrencyFetchData())
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return messageHandled;
+        }
+        
+        case ID_CURRENCY_ADD:
+        {
+            long index = CurrencySelectDialog::showModal(handle());
+            if (-1 != index)
+            {
+                if (errNone == prefs.selectCurrency(index))
+                    createListItems();
+                else
+                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            }
+            return messageHandled;
+        }
     }
     return ModuleDialog::handleCommand(nc, id, sender);
 }
 
 bool CurrencyMainDialog::handleLookupFinished(Event& event, const LookupFinishedEventData* data)
 {
-    //switch (data->result)
-    //{
-    //}
+    switch (data->result)
+    {
+        case lookupResultCurrency:
+        {
+            LookupManager* lm = GetLookupManager();
+            CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+            PassOwnership(lm->udf, prefs.udf);
+            assert(NULL != prefs.udf);
+            ModuleTouchRunning();
+            createListItems(true);
+            return true;
+        }
+    }
     return ModuleDialog::handleLookupFinished(event, data);
 }
 
@@ -134,22 +372,14 @@ void CurrencyMainDialog::createListItems(bool update)
     CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
 
 
-    double amount = 0.0;
-    char_t* t = edit_.text();
-    if (NULL != t)
-        numericValue(t, -1, amount);
-    free(t);
-    
-    
+    double amount = amount_;
+
     ulong_t size = prefs.selectedCurrencies.size();
 
     if (-1 == sel && 0 != size)
         sel = 0;
-    double baseRate = 0.0;
-    if (-1 != sel && NULL != prefs.udf && ulong_t(sel) < prefs.udf->getItemsCount())
-        baseRate = GetCurrencyRate(*prefs.udf, prefs.selectedCurrencies[sel]);
-    
-    
+    double baseRate = baseRate_;
+
     LVITEM item;
     ZeroMemory(&item, sizeof(item));
     for (ulong_t i = 0; i < size; ++i)
@@ -220,8 +450,23 @@ bool CurrencyMainDialog::handleListItemChanged(NMLISTVIEW &lv)
     if (0 == (LVIS_SELECTED & lv.uNewState))
         return false;
         
+    CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+    ulong_t index = prefs.selectedCurrencies[lv.iItem];
+    double newRate = 0.0;
+    if (NULL != prefs.udf)
+        newRate = GetCurrencyRate(*prefs.udf, index);
     
-    return false;
+    if (0 != baseRate_ && 0 != newRate)
+    {
+        amount_ = amount_ * newRate / baseRate_;
+        baseRate_ = newRate;
+        updateAmountField();
+    }
+    else
+        baseRate_ = newRate;
+
+    createListItems(true);
+    return true;
 }
 
 LRESULT CurrencyMainDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
