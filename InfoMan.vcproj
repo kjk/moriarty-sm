@@ -6,6 +6,7 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
+	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1159,6 +1160,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Jokes"
+				>
+				<File
+					RelativePath=".\JokesMainDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\JokesModule.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -1370,6 +1383,18 @@
 				</File>
 				<File
 					RelativePath="..\moriarty_palm_utf8\Src\CurrencyUtils.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Jokes"
+				>
+				<File
+					RelativePath=".\JokesMainDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\JokesModule.h"
 					>
 				</File>
 			</Filter>

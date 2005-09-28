@@ -14,7 +14,9 @@ MODULE_STARTER_DEFINE(Currency);
 
 CurrencyPrefs::CurrencyPrefs():
     commonCurrenciesCount_(0),
-    udf(NULL)
+    udf(NULL),
+    selectedCurrencyIndex(-1),
+    amount(1.0)
 {
     uint_t count = CommonCurrenciesCount();
     ErrTry {
@@ -40,7 +42,7 @@ CurrencyPrefs::~CurrencyPrefs()
     delete udf;
 }
 
-void CurrencyPrefs::serialize(Serializer& ser)
+void CurrencyPrefs::serializeVersion1(Serializer& ser)
 {
     uint_t count = selectedCurrencies.size();
     uint_t index;
@@ -66,7 +68,21 @@ void CurrencyPrefs::serialize(Serializer& ser)
     }
 }
 
-// TODO: convert functions below to not use iterators
+bool CurrencyPrefs::serializeInFromVersion(Serializer &ser, ulong_t ver)
+{
+    if (1 != ver)
+        return false;
+    serializeVersion1(ser);
+    return true;
+}
+
+void CurrencyPrefs::serialize(Serializer& ser)
+{
+    serializeVersion1(ser);
+    ser(selectedCurrencyIndex);
+    ser(amount);
+}
+
 status_t CurrencyPrefs::selectCurrency(uint_t index)
 {
     int common = GetCommonCurrencyIndex(index);
@@ -98,6 +114,7 @@ status_t CurrencyPrefs::selectCurrency(uint_t index)
     return errNone;
 }
 
+// TODO: convert functions below to not use iterators
 void CurrencyPrefs::deselectCurrency(uint_t index)
 {
     bool common = IsCommonCurrency(index);

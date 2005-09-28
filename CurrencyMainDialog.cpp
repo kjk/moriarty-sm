@@ -189,13 +189,26 @@ bool CurrencyMainDialog::handleInitDialog(HWND fw, long ip)
 
     if (NULL == prefs.udf)
         CurrencyFetchData();
-    
+        
+    long sel = prefs.selectedCurrencyIndex;
     createListItems();
-    
+    if (-1 != sel)
+    {
+        list_.focusItem(sel);
+        amount_ = prefs.amount;
+        createListItems(true);
+    }
     updateAmountField();
     edit_.focus();
     
     return false;
+}
+
+long CurrencyMainDialog::handleDestroy()
+{
+    CurrencyPrefs& prefs = GetPreferences()->currencyPrefs;
+    prefs.amount = amount_;
+    return ModuleDialog::handleDestroy();
 }
 
 void CurrencyMainDialog::updateAmountField()
@@ -465,7 +478,11 @@ bool CurrencyMainDialog::handleListItemChanged(NMLISTVIEW &lv)
     else
         baseRate_ = newRate;
 
+    if (0 != list_.itemCount())
+        prefs.selectedCurrencyIndex = lv.iItem;
+
     createListItems(true);
+
     return true;
 }
 

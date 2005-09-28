@@ -38,6 +38,8 @@ protected:
     
     LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
     
+    long handleDestroy();
+    
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(CurrencyMainDialog);
