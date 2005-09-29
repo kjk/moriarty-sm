@@ -3,12 +3,26 @@
 
 #include "ModuleDialog.h"
 #include <WindowsCE/Controls.hpp>
+#include <WindowsCE/WinTextRenderer.hpp>
 
 class JokesMainDialog: public ModuleDialog {
-
+    
+    TextRenderer renderer_;
+    ListView list_;
 
     JokesMainDialog();
     ~JokesMainDialog();
+    
+    enum DisplayMode {
+        showJoke,
+        showList
+    } displayMode_;
+    
+    void setDisplayMode(DisplayMode dm);
+    
+    void createListColumns();
+    void createListItems();
+    void resyncViewMenu();
 
 protected:
 

@@ -40,6 +40,9 @@
 
 #define fieldCurrency                    "Currency-Conversion"
 
+#define fieldJoke                        "Joke"
+#define fieldJokesList                   "Jokes-List"
+
 enum ResponseFieldType {
     fieldTypeValue,
     fieldTypePayload,

@@ -163,6 +163,7 @@ status_t Preferences::serialize(Serializer& serialize)
         serialize(stocksPrefs, serialIdStocksPreferences);
         serialize(weatherPrefs, serialIdWeatherPreferences);
         serialize(currencyPrefs, serialIdCurrencyPreferences);
+        serialize(jokesPrefs, serialIdJokesPreferences);
     }
     ErrCatch (ex) {
         return ex;

@@ -126,6 +126,7 @@
 #define IDR_CURRENCY_MENU               566
 #define IDD_WEATHER_MAIN                567
 #define IDB_WEATHER_SUNNY_CLOUDS        567
+#define IDR_JOKES_MENU                  567
 #define IDD_CHANGE_LOCATION             568
 #define IDB_WEATHER_STORM               568
 #define IDB_WEATHER_RAIN                569
@@ -133,6 +134,7 @@
 #define IDB_WEATHER_CLOUDS              570
 #define IDD_CURRENCY_SELECT             570
 #define IDB_WEATHER_SNOW                571
+#define IDD_JOKES_MAIN                  571
 #define IDB_WEATHER_SUNNY_SNOW          572
 #define IDB_WEATHER_SUNNY_STORM         573
 #define IDS_CONFIRM_STOCK_DELETE        600
@@ -168,6 +170,8 @@
 #define IDS_STRING833                   833
 #define IDS_CURRENCY_VALUE              833
 #define IDS_CURRENCY_REGION             834
+#define IDS_JOKE_RANDOM                 835
+#define IDS_JOKES_RANDOM                835
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004
@@ -200,7 +204,7 @@
 #define IDC_CURRENCY_LIST               2053
 #define IDC_AMOUNT                      2054
 #define IDC_AMOUNT_TEXT                 2055
-#define IDC_LIST1                       2056
+#define IDC_JOKE_LIST                   2057
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -209,6 +213,7 @@
 #define IDM_STOCK                       40005
 #define IDM_PORTFOLIO                   40006
 #define IDM_CURRENCY                    40007
+#define IDM_JOKES_RANDOM                40008
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
@@ -236,6 +241,11 @@
 #define ID_CURRENCY_ADD                 50035
 #define ID_CURRENCY_DELETE              50036
 #define ID_CURRENCY_UPDATE              50037
+#define ID_VIEW_FINDJOKE                50038
+#define ID_VIEW_JOKELIST                50039
+#define ID_VIEW_JOKE                    50040
+#define ID_VIEW_JOKE_LIST               50041
+#define ID_VIEW_FIND_JOKE               50042
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -243,9 +253,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        567
-#define _APS_NEXT_COMMAND_VALUE         50038
-#define _APS_NEXT_CONTROL_VALUE         2057
-#define _APS_NEXT_SYMED_VALUE           507
+#define _APS_NEXT_RESOURCE_VALUE        568
+#define _APS_NEXT_COMMAND_VALUE         50043
+#define _APS_NEXT_CONTROL_VALUE         2058
+#define _APS_NEXT_SYMED_VALUE           508
 #endif
 #endif

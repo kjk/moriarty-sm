@@ -217,12 +217,20 @@ BEGIN
     EDITTEXT        IDC_AMOUNT,52,160,98,12,ES_AUTOHSCROLL | ES_NUMBER
 END
 
-IDD_CURRENCY_SELECT DIALOG  0, 0, 156, 177
+IDD_CURRENCY_SELECT DIALOGEX 0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Add Currency"
 FONT 8, "MS Shell Dlg"
 BEGIN
     CONTROL         "",IDC_CURRENCY_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
+END
+
+IDD_JOKES_MAIN DIALOGEX 0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Jokes"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_JOKE_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
 END
 
 
@@ -473,6 +481,17 @@ BEGIN
     END
 END
 
+IDR_JOKES_MENU MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "Find Joke...",                ID_VIEW_FIND_JOKE
+        MENUITEM SEPARATOR
+        MENUITEM "Joke List",                   ID_VIEW_JOKE_LIST
+        MENUITEM "Joke",                        ID_VIEW_JOKE
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -607,6 +626,7 @@ BEGIN
     IDS_CURRENCY_SYMBOL     "Symbol"
     IDS_CURRENCY_VALUE      "Value"
     IDS_CURRENCY_REGION     "Region"
+    IDS_JOKES_RANDOM        "Random Joke"
 END
 
 #endif    // English (U.S.) resources

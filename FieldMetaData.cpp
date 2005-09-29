@@ -56,6 +56,8 @@ static const ResponseFieldDescriptor descriptors[] = {
     FVRS(Error, lookupResultServerError), 
     FBRS(GetUrlEBookBrowse, lookupResultEBookBrowse, ebookHistoryCacheName, true), 
     FURS(Horoscope, lookupResultHoroscope, horoscopeDataStream, false), 
+    FURS(Joke, lookupResultJoke, jokesJokeStream, false),
+    FURS(JokesList, lookupResultJokesList, jokesJokesListStream, false),
     FVAL(LatestClientVersion),
     FRES(LocationUnknown, lookupResultLocationUnknown),
     FRES(NoResults, lookupResultNoResults),

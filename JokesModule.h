@@ -6,6 +6,8 @@
 
 MODULE_STARTER_DECLARE(Jokes);
 
+struct UniversalDataFormat;
+
 struct JokesPrefs: public Serializable {
 
     enum {
@@ -25,6 +27,13 @@ struct JokesPrefs: public Serializable {
     ~JokesPrefs();
     
     void serialize(Serializer& ser);
+    
+    UniversalDataFormat* udf;
 };
+
+class DefinitionModel;
+DefinitionModel* JokeExtractFromUDF(const UniversalDataFormat& udf);
+
+status_t JokesFetchRandom();
 
 #endif // JOKES_MODULE_H__
