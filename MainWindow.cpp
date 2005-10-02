@@ -24,13 +24,22 @@ static void test_PropertyPages(HWND wnd);
 
 
 
-static const char* servers[] = {
+static const char* serverNames[] = {
     "192.168.1.2:4000",
     "127.0.0.1:4000",
+    "infoman.arslexis.com:5014 (kjk)",
+    "infoman.arslexis.com:4000 (official)",
+    "infoman.arslexis.com:5012",
+    "infoman.arslexis.com:5010",
+};
+
+static const char* serverAddresses[] = {
+    "192.168.1.2:4000",
+    "127.0.0.1:4000",
+    "infoman.arslexis.com:5014",
     "infoman.arslexis.com:4000",
     "infoman.arslexis.com:5012",
     "infoman.arslexis.com:5010",
-    "infoman.arslexis.com:5014",
 };
 
 #ifndef WIN32_PLATFORM_WFSP
@@ -117,13 +126,13 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
 #endif
 
 #ifndef SHIPPING   
-    NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(servers, ARRAY_SIZE(servers));
+    NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(serverNames, ARRAY_SIZE(serverNames));
     long server = StringListDialog::showModal(IDS_SELECT_SERVER, w->handle(), model);
     if (-1 != server)
     {
         Preferences& prefs = *GetPreferences();
         free(prefs.serverAddress);
-        prefs.serverAddress = StringCopy(servers[server]);
+        prefs.serverAddress = StringCopy(serverAddresses[server]);
     }
 #endif
 
