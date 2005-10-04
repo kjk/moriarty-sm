@@ -6,11 +6,17 @@
 #include <SysUtils.hpp>
 #include <UniversalDataHandler.hpp>
 
+class JokesSearchDialog: public MenuDialog {
+
+    
+};
+
 JokesMainDialog::JokesMainDialog():
     ModuleDialog(IDR_JOKES_MENU),
     displayMode_(showJoke)
 {
     setMenuBarFlags(SHCMBF_HIDESIPBUTTON);
+    renderer_.definition.setInteractionBehavior(Definition::behavUpDownScroll | Definition::behavMouseSelection);
 }
 
 JokesMainDialog::~JokesMainDialog()
@@ -45,7 +51,6 @@ bool JokesMainDialog::handleInitDialog(HWND fw, long ip)
     if (NULL != udf)
     {
         DefinitionModel* model = JokeExtractFromUDF(*udf);
-        delete model;
         if (NULL != model)
         {
             renderer_.setModel(model, Definition::ownModel);
@@ -67,11 +72,20 @@ void JokesMainDialog::setDisplayMode(DisplayMode dm)
         case showJoke:
             list_.hide();
             renderer_.show();
+            renderer_.focus();
             break;
         case showList:
+        {
             renderer_.hide();
             list_.show();
+            list_.focus();
+            long sel = list_.selection();
+            if (-1 == sel)
+                sel = 0;
+            if (0 != list_.itemCount())
+                list_.focusItem(sel);
             break;
+        }
     }
     resyncViewMenu();
 }
@@ -79,7 +93,7 @@ void JokesMainDialog::setDisplayMode(DisplayMode dm)
 void JokesMainDialog::resyncViewMenu()
 {
     HMENU menu = menuBar().subMenu(IDM_VIEW);
-    CheckMenuRadioItem(menu, ID_VIEW_JOKE_LIST, ID_VIEW_JOKE, (showJoke == displayMode_ ? ID_VIEW_JOKE : ID_VIEW_JOKE_LIST), MF_BYCOMMAND);
+    CheckMenuRadioItem(menu, ID_VIEW_JOKE, ID_VIEW_JOKE_LIST, (showJoke == displayMode_ ? ID_VIEW_JOKE : ID_VIEW_JOKE_LIST), MF_BYCOMMAND);
     JokesPrefs& prefs = GetPreferences()->jokesPrefs;
     UINT state = MF_BYCOMMAND | (NULL == prefs.udf ? MF_GRAYED : MF_ENABLED);
     EnableMenuItem(menu, ID_VIEW_JOKE_LIST, state);
@@ -97,6 +111,24 @@ long JokesMainDialog::handleResize(UINT st, ushort w, ushort h)
 
 long JokesMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
+    switch (id) 
+    {
+        case IDM_JOKES_RANDOM:
+            if (errNone != JokesFetchRandom())
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return messageHandled;
+            
+        case ID_VIEW_JOKE:
+            if (showJoke != displayMode_)
+                setDisplayMode(showJoke);
+            return messageHandled;
+
+        case ID_VIEW_JOKE_LIST:
+            if (showList != displayMode_)
+                setDisplayMode(showList);
+            return messageHandled;
+            
+    }
     return ModuleDialog::handleCommand(nc, id, sender);
 }
 

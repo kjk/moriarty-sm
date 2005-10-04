@@ -2,7 +2,12 @@
 #include "LookupManager.h"
 #include "HyperlinkHandler.h"
 
-#include <UniversalDataFormat.hpp>
+
+#include "MoriartyStyles.hpp"
+
+#include <UniversalDataHandler.hpp>
+#include <Definition.hpp>
+#include <DefinitionElement.hpp>
 
 #ifdef _WIN32
 #include "JokesMainDialog.h"
@@ -43,9 +48,43 @@ void JokesPrefs::serialize(Serializer &ser)
     ser(sortOrder);
 }
 
+enum {
+    jokesListItemRankIndex,
+    jokesListItemTitleIndex,
+    jokesListItemRatingIndex,
+    jokesListItemExplicitnessIndex,
+    jokesListItemUrlIndex,
+    jokesListItemElementsCount
+};
+
+enum {
+    jokeTitleIndex,
+    jokeTextIndex,
+    jokeElementsCount
+};
+
 DefinitionModel* JokeExtractFromUDF(const UniversalDataFormat& udf)
 {
-    // TODO: implement JokeExtractFromUDF()
+    DefinitionModel* model = new_nt DefinitionModel();
+    if (NULL == model)
+        return NULL;
+        
+    if (errNone != model->appendText(udf.getItemText(0, jokeTitleIndex)))
+        goto Error;
+    model->last()->setStyle(StyleGetStaticStyle(styleNamePageTitle));
+    model->last()->setJustification(DefinitionElement::justifyCenter);
+  
+    if (errNone != model->appendLineBreak())
+        goto Error;
+    if (errNone != model->appendLineBreak())
+        goto Error;
+
+    if (errNone != DefinitionParseSimple(*model, udf.getItemData(0, jokeTextIndex)))
+        goto Error;
+
+    return model;
+Error:
+    delete model;
     return NULL;
 }
 

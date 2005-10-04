@@ -136,6 +136,7 @@
 #define IDB_WEATHER_SNOW                571
 #define IDD_JOKES_MAIN                  571
 #define IDB_WEATHER_SUNNY_SNOW          572
+#define IDD_JOKES_SEARCH                572
 #define IDB_WEATHER_SUNNY_STORM         573
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
@@ -205,6 +206,40 @@
 #define IDC_AMOUNT                      2054
 #define IDC_AMOUNT_TEXT                 2055
 #define IDC_JOKE_LIST                   2057
+#define IDC_RATING_SLIDER               2059
+#define IDC_COMBO1                      2060
+#define IDC_SORT_COMBO                  2060
+#define IDC_CHECK1                      2061
+#define IDC_CHECK2                      2062
+#define IDC_CHECK3                      2063
+#define IDC_CHECK4                      2064
+#define IDC_CHECK5                      2065
+#define IDC_CHECK6                      2066
+#define IDC_CHECK7                      2067
+#define IDC_CHECK8                      2068
+#define IDC_CHECK9                      2069
+#define IDC_CHECK10                     2070
+#define IDC_CHECK11                     2071
+#define IDC_CHECK12                     2072
+#define IDC_CHECK13                     2073
+#define IDC_CHECK14                     2074
+#define IDC_CHECK15                     2075
+#define IDC_CHECK16                     2076
+#define IDC_CHECK17                     2077
+#define IDC_CHECK18                     2078
+#define IDC_CHECK19                     2079
+#define IDC_CHECK20                     2080
+#define IDC_CHECK21                     2081
+#define IDC_CHECK22                     2082
+#define IDC_CHECK23                     2083
+#define IDC_CHECK24                     2084
+#define IDC_CHECK25                     2085
+#define IDC_CHECK26                     2086
+#define IDC_CHECK27                     2087
+#define IDC_CHECK28                     2088
+#define IDC_CHECK29                     2089
+#define IDC_CHECK30                     2090
+#define IDC_CHECK31                     2091
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -253,9 +288,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        568
+#define _APS_NEXT_RESOURCE_VALUE        573
 #define _APS_NEXT_COMMAND_VALUE         50043
-#define _APS_NEXT_CONTROL_VALUE         2058
+#define _APS_NEXT_CONTROL_VALUE         2092
 #define _APS_NEXT_SYMED_VALUE           508
 #endif
 #endif
