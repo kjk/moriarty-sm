@@ -207,7 +207,6 @@
 #define IDC_AMOUNT_TEXT                 2055
 #define IDC_JOKE_LIST                   2057
 #define IDC_RATING_SLIDER               2059
-#define IDC_COMBO1                      2060
 #define IDC_SORT_COMBO                  2060
 #define IDC_CHECK1                      2061
 #define IDC_CHECK2                      2062
@@ -240,6 +239,10 @@
 #define IDC_CHECK29                     2089
 #define IDC_CHECK30                     2090
 #define IDC_CHECK31                     2091
+#define IDC_CHECK32                     2092
+#define IDC_CHECK33                     2093
+#define IDC_JOKES_RATING_1              2094
+#define IDC_JOKES_RATING_5              2095
 #define IDM_OK                          40000
 #define IDM_HELP                        40001
 #define IDM_HELP_ABOUT                  40002
@@ -290,7 +293,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        573
 #define _APS_NEXT_COMMAND_VALUE         50043
-#define _APS_NEXT_CONTROL_VALUE         2092
+#define _APS_NEXT_CONTROL_VALUE         2096
 #define _APS_NEXT_SYMED_VALUE           508
 #endif
 #endif
