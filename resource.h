@@ -8,6 +8,7 @@
 #define IDS_INFO                        4
 #define IDS_WARNING                     5
 #define IDS_STRING6                     6
+#define IDS_STRING7                     7
 #define IDI_INFOMAN                     101
 #define IDD_CONNECTION_PROGRESS         102
 #define IDR_MAIN_MENU                   102
@@ -31,6 +32,8 @@
 #define IDS_SELECT_SERVER               117
 #define IDS_CHOOSE_LOCATION             118
 #define IDS_CURRENCY                    119
+#define IDS_SORT_RATING                 120
+#define IDS_SORT_RANK                   121
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503

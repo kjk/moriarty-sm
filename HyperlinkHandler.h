@@ -62,6 +62,7 @@
 #define urlSchemaCurrency                   "s+currency"
 
 #define urlSchemaJoke                       "s+joke"
+#define urlSchemaJokesList                  "s+jokeslist"
 
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'

@@ -8,40 +8,38 @@
 
 class MainWindow: public Window
 {
-	MainWindow();
+    MainWindow();
     ExtEventHelper extEventHelper_;
-    
+
 #ifdef SHELL_MENUBAR
-	CommandBar menuBar_;
+    CommandBar menuBar_;
 #endif
-	
-	// TextRenderer renderer_;
-	ListView listView_;
-	long lastItemIndex_;
-	void updateListViewFocus();
-	
+
+    // TextRenderer renderer_;
+    ListView listView_;
+    long lastItemIndex_;
+    void updateListViewFocus();
+
 public:
 
-	static MainWindow* create(const char_t* title, const char_t* windowClass);
-	
+    static MainWindow* create(const char_t* title, const char_t* windowClass);
+
     bool createModuleItems();
-	
+
 protected:
-	
-	long handleCreate(const CREATESTRUCT& cs);
-	
-	long handleDestroy();
-	
-	long handleCommand(ushort notify_code, ushort id, HWND sender);
-	
-	long handleResize(UINT sizeType, ushort width, ushort height);
-	
-	LRESULT callback(UINT msg, WPARAM wParam, LPARAM lParam);
-	
-	long handleNotify(int controlId, const NMHDR& header);
-	
-	long handleActivate(ushort action, bool minimized, HWND prev);
-	
+
+    long handleCreate(const CREATESTRUCT& cs);
+
+    long handleDestroy();
+
+    long handleCommand(ushort notify_code, ushort id, HWND sender);
+
+    long handleResize(UINT sizeType, ushort width, ushort height);
+
+    long handleNotify(int controlId, const NMHDR& header);
+
+    long handleActivate(ushort action, bool minimized, HWND prev);
+
 };
 
 #endif

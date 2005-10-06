@@ -2,18 +2,21 @@
 #include "LookupManager.h"
 #include "InfoMan.h"
 #include "InfoManPreferences.h"
+#include "JokesModule.h"
 
 #include <SysUtils.hpp>
 #include <UniversalDataHandler.hpp>
 #include <Utility.hpp>
+#include <Text.hpp>
+#include <UTF8_Processor.hpp>
 
 enum {
     jokesCategoriesStart = IDC_CHECK1,
-    jokesCategoriesCount = 24,
+    jokesCategoriesCount = JokesPrefs::categoryCount,
     jokesExplicitnessStart = jokesCategoriesStart + jokesCategoriesCount,
-    jokesExplicitnessCount = 3,
+    jokesExplicitnessCount = JokesPrefs::explicitnessCategoryCount,
     jokesTypesStart = jokesExplicitnessStart + jokesExplicitnessCount,
-    jokesTypesCount = 6
+    jokesTypesCount = JokesPrefs::typeCount
 };
 
 class JokesSearchDialog: public MenuDialog {
@@ -36,6 +39,10 @@ class JokesSearchDialog: public MenuDialog {
     {
         free(query_);
     }
+    
+    void loadSearchPrefs();
+    void storeSearchPrefs();
+    void prepareQuery();
 
 protected:
     
@@ -56,6 +63,12 @@ protected:
         
         MenuDialog::handleInitDialog(fw, ip);
         
+        sort_.addString(IDS_SORT_RATING);
+        sort_.addString(IDS_SORT_RANK);
+
+
+        loadSearchPrefs();
+        term_.focus();
         return false;
     }
     
@@ -63,8 +76,11 @@ protected:
     {
         switch (id) 
         {
-            case IDCANCEL:
             case IDOK:
+                storeSearchPrefs();
+                prepareQuery();
+                // Intentional fall-through
+            case IDCANCEL:
                 endModal(id);
                 return messageHandled;
         }
@@ -73,9 +89,10 @@ protected:
     
     long handleResize(UINT, ushort, ushort)
     {
+#ifdef WIN32_PLATFORM_PSPC
         if (-1 != clientHeight_)
         {
-            
+
             SCROLLINFO si = {sizeof(si)};
             si.fMask = SIF_RANGE | SIF_PAGE;
             si.nPage = 120;
@@ -83,16 +100,18 @@ protected:
             si.nMax = clientHeight_;
             SetScrollInfo(handle(), SB_VERT, &si, TRUE);
         }
-        
+#else
         sendMessage(DM_RESETSCROLL, FALSE, TRUE);
+#endif
         return messageHandled;
     }
     
+#ifdef WIN32_PLATFORM_PSPC
     LRESULT callback(UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         switch (uMsg) 
         {
-            case WM_VSCROLL:
+        case WM_VSCROLL:
             {
                 int code = LOWORD(wParam);
                 int nPos = (short int)HIWORD(wParam);
@@ -102,39 +121,39 @@ protected:
                 int newPos = si.nPos;
                 switch (code) 
                 {
-                    case SB_BOTTOM:
-                        newPos = si.nMax - si.nPage;
-                        break;
-                    case SB_TOP:
-                        newPos = si.nMin;
-                        break;
-                    
-                    case SB_THUMBTRACK:
-                        newPos  = si.nTrackPos;
-                        break;
-                        
-                    case SB_THUMBPOSITION:
-                        newPos = nPos + si.nMin;
-                        break;
-                    
-                    case SB_LINEDOWN:
-                        newPos += 10;
-                        break;
-                    
-                    case SB_LINEUP:
-                        newPos -= 10;
-                        break;
-                    
-                    case SB_PAGEDOWN:
-                        newPos += si.nPage;
-                        break;
-                    
-                    case SB_PAGEUP:
-                        newPos -= si.nPage;
-                        break;
+                case SB_BOTTOM:
+                    newPos = si.nMax - si.nPage;
+                    break;
+                case SB_TOP:
+                    newPos = si.nMin;
+                    break;
+
+                case SB_THUMBTRACK:
+                    newPos  = si.nTrackPos;
+                    break;
+
+                case SB_THUMBPOSITION:
+                    newPos = nPos + si.nMin;
+                    break;
+
+                case SB_LINEDOWN:
+                    newPos += 10;
+                    break;
+
+                case SB_LINEUP:
+                    newPos -= 10;
+                    break;
+
+                case SB_PAGEDOWN:
+                    newPos += si.nPage;
+                    break;
+
+                case SB_PAGEUP:
+                    newPos -= si.nPage;
+                    break;
                 }
                 if (newPos < 0) newPos = 0;
-                if (newPos > si.nMax - si.nPage) newPos = si.nMax - si.nPage;
+                if (newPos > si.nMax - int(si.nPage)) newPos = si.nMax - si.nPage;
                 si.fMask = SIF_POS;
                 if (si.nPos != newPos)
                 {
@@ -148,16 +167,90 @@ protected:
         }
         return MenuDialog::callback(uMsg, wParam, lParam);
     }
-    
+#endif 
+
 public:
     
-    static long showModal(HWND parent) 
+    static long showModal(HWND parent, char*& query) 
     {
-        JokesSearchDialog dlg;
-        return dlg.MenuDialog::showModal(GetInstance(), IDD_JOKES_SEARCH, parent);
+        JokesSearchDialog* dlg = new_nt JokesSearchDialog();
+        if (NULL == dlg)
+        {
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return IDCANCEL;
+        }
+        long res = dlg->MenuDialog::showModal(GetInstance(), IDD_JOKES_SEARCH, parent);
+        if (IDOK == res)
+        {
+            free(query);
+            query = dlg->query_;
+            dlg->query_ = NULL;
+        }
+        delete dlg;
+        return res;
     }
     
 };
+
+
+void JokesSearchDialog::storeSearchPrefs()
+{
+    JokesPrefs& prefs = GetPreferences()->jokesPrefs;
+    bool check;
+    for (ulong_t i = 0; i < jokesCategoriesCount; ++i)
+    {
+        check = (BST_CHECKED == SendMessage(child(jokesCategoriesStart + i), BM_GETCHECK, 0, 0));
+        prefs.categories[i] = check;
+    }
+    for (ulong_t i = 0; i < jokesExplicitnessCount; ++i)
+    {
+        check = (BST_CHECKED == SendMessage(child(jokesExplicitnessStart + i), BM_GETCHECK, 0, 0));
+        prefs.explicitnessCategories[i] = check;
+    }
+    for (ulong_t i = 0; i < jokesTypesCount; ++i)
+    {
+        check = (BST_CHECKED == SendMessage(child(jokesTypesStart + i), BM_GETCHECK, 0, 0));
+        prefs.types[i] = check;
+    }
+    
+    prefs.minimumRating = rating_.position() - 1;
+    prefs.sortOrder = sort_.selection();
+}
+
+void JokesSearchDialog::loadSearchPrefs()
+{
+    JokesPrefs& prefs = GetPreferences()->jokesPrefs;
+    rating_.setPosition(prefs.minimumRating + 1, repaintWidget);
+    sort_.setSelection(prefs.sortOrder);
+    for (ulong_t i = 0; i < jokesCategoriesCount; ++i)
+        SendMessage(child(jokesCategoriesStart + i), BM_SETCHECK, prefs.categories[i] ? BST_CHECKED : BST_UNCHECKED, 0);
+
+    for (ulong_t i = 0; i < jokesExplicitnessCount; ++i)
+        SendMessage(child(jokesExplicitnessStart + i), BM_SETCHECK, prefs.explicitnessCategories[i] ? BST_CHECKED : BST_UNCHECKED, 0);
+
+
+    for (ulong_t i = 0; i < jokesTypesCount; ++i)
+        SendMessage(child(jokesTypesStart + i), BM_SETCHECK, prefs.types[i] ? BST_CHECKED : BST_UNCHECKED, 0);
+}
+
+void JokesSearchDialog::prepareQuery()
+{
+    free(query_);
+    query_ = NULL;
+    char_t* q = term_.text();
+    if (NULL == q)
+        return;
+
+    ulong_t l = Len(q);
+    for (ulong_t i = 0; i < l; ++i)
+        if (_T(';') == q[i])
+            q[i] = _T(' ');
+
+    query_ = UTF8_FromNative(q);
+    free(q);
+    if (NULL == query_)
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+}
 
 JokesMainDialog::JokesMainDialog():
     ModuleDialog(IDR_JOKES_MENU),
@@ -277,8 +370,19 @@ long JokesMainDialog::handleCommand(ushort nc, ushort id, HWND sender)
             return messageHandled;
         
         case ID_VIEW_FIND_JOKE:
-            JokesSearchDialog::showModal(handle());
+        {
+            char* query = NULL;
+            long res = JokesSearchDialog::showModal(handle(), query);
+            sipPreference(SIP_FORCEDOWN);
+            if (IDOK == res)
+            {
+                status_t err = JokesFetchQuery(query);
+                free(query);
+                if (errNone != err)
+                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            }
             return messageHandled;
+        }
     }
     return ModuleDialog::handleCommand(nc, id, sender);
 }

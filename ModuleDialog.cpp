@@ -7,17 +7,17 @@
 #include <Text.hpp>
 
 MenuDialog::MenuDialog(AdvancedOption, bool inputDialog, DWORD initDialogFlags):
-    Dialog(autoDelete, inputDialog, initDialogFlags),
-    menuBarId_(menuBarNone),
-    menuBarFlags_(0) 
+Dialog(autoDelete, inputDialog, initDialogFlags),
+menuBarId_(menuBarNone),
+menuBarFlags_(0) 
 {
     setOverrideNavBarText(true);
 }
 
 MenuDialog::MenuDialog(UINT menuBarId, bool inputDialog):
-    Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN),
-    menuBarId_(menuBarId),
-    menuBarFlags_(0) 
+Dialog(autoDelete, inputDialog, SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN),
+menuBarId_(menuBarId),
+menuBarFlags_(0) 
 {
     setOverrideNavBarText(true);
 }
@@ -50,14 +50,14 @@ bool MenuDialog::handleInitDialog(HWND focus_widget_handle, long init_param)
         flags |= SHCMBF_EMPTYBAR;
     }
 #endif 
-        
+
     if (!menuBar_.create(handle(), flags, mb))
     {  
         DWORD err = GetLastError();
         assert(false);
     }  
 #endif // SHELL_MENUBAR
-    
+
     return Dialog::handleInitDialog(focus_widget_handle, init_param); 
 }
 
@@ -69,12 +69,12 @@ LRESULT MenuDialog::callback(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
     {
-        case WM_MEASUREITEM:
-            return handleMeasureItem(wParam, *(MEASUREITEMSTRUCT*)lParam);
+    case WM_MEASUREITEM:
+        return handleMeasureItem(wParam, *(MEASUREITEMSTRUCT*)lParam);
 
-        case WM_HOTKEY:
-            if (HIWORD(lParam) == VK_TBACK && handleBackKey(uMsg, wParam, lParam))
-                return messageHandled;
+    case WM_HOTKEY:
+        if (HIWORD(lParam) == VK_TBACK && handleBackKey(uMsg, wParam, lParam))
+            return messageHandled;
     }
     return Dialog::callback(uMsg, wParam, lParam);   
 }
@@ -93,7 +93,7 @@ bool MenuDialog::handleBackKey(UINT msg, WPARAM wParam, LPARAM lParam)
         else
             return true;
     }
-        
+
     char_t name[8];
     int res = GetClassName(wnd, name, 5);
     if (0 == res || !(equalsIgnoreCase(name, WINDOW_CLASS_EDITBOX) || equalsIgnoreCase(name, _T("CAPEDIT"))))
@@ -118,15 +118,15 @@ bool MenuDialog::handleBackKey(UINT msg, WPARAM wParam, LPARAM lParam)
 
 void MenuDialog::overrideBackKey()
 {
-	LPARAM lparam = MAKELPARAM(SHMBOF_NODEFAULT | SHMBOF_NOTIFY, SHMBOF_NODEFAULT | SHMBOF_NOTIFY);
-	menuBar_.sendMessage(SHCMBM_OVERRIDEKEY, VK_TBACK, lparam);
+    LPARAM lparam = MAKELPARAM(SHMBOF_NODEFAULT | SHMBOF_NOTIFY, SHMBOF_NODEFAULT | SHMBOF_NOTIFY);
+    menuBar_.sendMessage(SHCMBM_OVERRIDEKEY, VK_TBACK, lparam);
 }
 
 long MenuDialog::handleNotify(int controlId, const NMHDR& header)
 {
     switch (header.code)
     {
-        case NM_CUSTOMDRAW:
+    case NM_CUSTOMDRAW:
         {
             NMLVCUSTOMDRAW& h = (NMLVCUSTOMDRAW&)header;
             if (CDDS_PREPAINT == h.nmcd.dwDrawStage)
@@ -138,8 +138,8 @@ long MenuDialog::handleNotify(int controlId, const NMHDR& header)
             }
             return CDRF_DODEFAULT;
         }
-        
-        case LVN_ITEMACTIVATE:
+
+    case LVN_ITEMACTIVATE:
         {
             const NMLISTVIEW& h = (const NMLISTVIEW&)header;
             return handleListItemActivate(controlId, h);
@@ -165,12 +165,12 @@ bool MenuDialog::handleMeasureItem(UINT controlId, MEASUREITEMSTRUCT& data)
 
 
 ModuleDialog::ModuleDialog(AdvancedOption adv, bool inputDialog, DWORD initDialogFlags):
-    MenuDialog(adv, inputDialog, initDialogFlags)
+MenuDialog(adv, inputDialog, initDialogFlags)
 {
 }
 
 ModuleDialog::ModuleDialog(UINT menuBarId, bool inputDialog):
-    MenuDialog(menuBarId, inputDialog)
+MenuDialog(menuBarId, inputDialog)
 {
 }   
 
@@ -194,7 +194,7 @@ long ModuleDialog::showModal(UINT resourceId)
 {
     return MenuDialog::showModal(GetInstance(), resourceId, ExtEventGetWindow());
 }
-    
+
 LRESULT ModuleDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam) && handleLookupFinished(lParam, LookupFinishedData(lParam)))
@@ -218,10 +218,10 @@ long ModuleDialog::handleCommand(ushort nc, ushort id, HWND sender)
 {
     switch (id) 
     {
-        case IDOK:
-        case IDCANCEL:
-            ModuleRunMain();
-            return messageHandled;
+    case IDOK:
+    case IDCANCEL:
+        ModuleRunMain();
+        return messageHandled;
     }
     return MenuDialog::handleCommand(nc, id, sender);   
 }

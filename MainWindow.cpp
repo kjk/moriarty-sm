@@ -1,6 +1,3 @@
-#include "stdafx.h"
-#include <windows.h>
-#include <commctrl.h>
 
 #include "InfoMan.h"
 #include "InfoManGlobals.h"
@@ -29,8 +26,8 @@ static const char* serverNames[] = {
     "127.0.0.1:4000",
     "infoman.arslexis.com:5014 (kjk)",
     "infoman.arslexis.com:4000 (official)",
-    "infoman.arslexis.com:5012",
-    "infoman.arslexis.com:5010",
+    "infoman.arslexis.com:5012 (andrzej)",
+    "infoman.arslexis.com:5010 (szymon)",
 };
 
 static const char* serverAddresses[] = {
@@ -106,7 +103,7 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
         return NULL;
 
     HINSTANCE instance = GetInstance();
-    static ATOM wc = registerClass(
+    ATOM wc = registerClass(
         CS_HREDRAW | CS_VREDRAW, 
         instance, 
         LoadIcon(instance, MAKEINTRESOURCE(IDI_INFOMAN)), 
@@ -156,23 +153,20 @@ long MainWindow::handleCreate(const CREATESTRUCT& cs)
     //if (!renderer_.create(WS_TABSTOP, SCALEX(1), SCALEY(1), r.width() - SCALEX(2), r.height() - SCALEY(2), handle(), cs.hInstance))
     //	return createFailed;
 
-    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | /* LVS_AUTOARRANGE | */ LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
+    if (!listView_.create(WS_VISIBLE | WS_TABSTOP | LVS_SINGLESEL | LVS_ICON, 0, 0, r.width(), r.height(), handle(), cs.hInstance)) //, LVS_EX_DOUBLEBUFFER
         return createFailed;
         
-    listView_.setStyleEx(/* LVS_EX_DOUBLEBUFFER | */ LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
+    listView_.setStyleEx(LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE | LVS_EX_NOHSCROLL);
     listView_.setTextBkColor(CLR_NONE);
 
     HMENU menu = menuBar_.subMenu(IDM_VIEW);
     
     CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_ICONS, MF_BYCOMMAND);  
-    //CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
-    //CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
-    
 
     if (!createModuleItems())
         return createFailed; 
 
-    // updateListViewFocus();
+    updateListViewFocus();
 
     return Window::handleCreate(cs);
 }
@@ -193,16 +187,12 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
             listView_.modifyStyle(LVS_ICON, LVS_LIST);
             menu = menuBar_.subMenu(IDM_VIEW);
             CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_ICONS, MF_BYCOMMAND);  
-            //CheckMenuItem(menu, ID_VIEW_LIST, MF_UNCHECKED);
-            //CheckMenuItem(menu, ID_VIEW_ICONS, MF_CHECKED);
             return messageHandled;
         
         case ID_VIEW_LIST:
             listView_.modifyStyle(LVS_LIST, LVS_ICON);
             menu = menuBar_.subMenu(IDM_VIEW);
             CheckMenuRadioItem(menu, ID_VIEW_LIST, ID_VIEW_ICONS, ID_VIEW_LIST, MF_BYCOMMAND);  
-            //CheckMenuItem(menu, ID_VIEW_ICONS, MF_UNCHECKED);
-            //CheckMenuItem(menu, ID_VIEW_LIST, MF_CHECKED);
             return messageHandled;
 
         case IDCLOSE:
@@ -214,7 +204,7 @@ long MainWindow::handleCommand(ushort notify_code, ushort id, HWND sender)
 #endif // !WIN32_PLATFORM_WFSP
             return messageHandled;
             
-	}
+    }
     return Window::handleCommand(notify_code, id, sender);
 }
 
@@ -231,41 +221,21 @@ int CALLBACK MainWindowListViewSort(LPARAM l1, LPARAM l2, LPARAM l)
 long MainWindow::handleResize(UINT sizeType, ushort width, ushort height)
 {
     //renderer_.anchor(anchorRight, SCALEX(2), anchorBottom, SCALEY(2), repaintWidget);
-    Rect r1;
-    listView_.bounds(r1);
+    Rect r;
+    listView_.bounds(r);
     listView_.anchor(anchorRight, 0, anchorBottom, 0, repaintWidget);
-    Rect r2;
-    listView_.bounds(r2);
-    if (r1 != r2)
-    {
-        uint_t x = GetSystemMetrics(SM_CXVSCROLL);
-        uint_t w = listView_.width(); 
-        long iconWidth = (w - x) / ((w - x) / SCALEX(70));
-        long iconHeight = height / (height / SCALEY(54));
-        listView_.setIconSpacing(iconWidth, iconHeight);
-        ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
-        ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
-        listView_.invalidate(erase);
-        listView_.redrawItems(0, listView_.itemCount() - 1);
-    }
+
+    uint_t x = GetSystemMetrics(SM_CXVSCROLL);
+    uint_t w = listView_.width(); 
+    long iconWidth = (w - x) / ((w - x) / SCALEX(70));
+    long iconHeight = height / (height / SCALEY(54));
+    listView_.setIconSpacing(iconWidth, iconHeight);
+    ListView_Arrange(listView_.handle(), LVA_SNAPTOGRID); 
+    ListView_SortItems(listView_.handle(), MainWindowListViewSort, 0);
+    listView_.invalidate(erase);
+    listView_.redrawItems(0, listView_.itemCount() - 1);
+
     return messageHandled;
-}
-
-LRESULT MainWindow::callback(UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    //if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam))
-    //{
-    //    LookupManager* lm = GetLookupManager();
-    //    if (lm->handleLookupFinishedInForm(lParam))
-    //        return messageHandled;
-    //        
-    //    const LookupFinishedEventData* data = LookupFinishedData(lParam);
-    //    if (lookupResultEBookBrowse == data->result)
-    //        renderer_.setModel(lm->releaseDefinitionModel(), Definition::ownModel);
-
-    //    return messageHandled;
-    //} 
-    return Window::callback(msg, wParam, lParam); 
 }
 
 /*
@@ -527,4 +497,3 @@ void MainWindow::updateListViewFocus()
      
     listView_.focusItem(l);
 }
-;

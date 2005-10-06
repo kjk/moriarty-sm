@@ -3,6 +3,7 @@
 
 #include <Text.hpp>
 #include <UTF8_Processor.hpp>
+#include <SysUtils.hpp>
 
 StringListDialogModel::~StringListDialogModel()
 {
@@ -96,8 +97,15 @@ void StringListDialog::fillList()
 
 long StringListDialog::showModal(UINT formTitleId, HWND parent, StringListDialogModel *model, StringListDialog::ModelOwner modelOwner)
 {
-    StringListDialog dlg(formTitleId, model, modelOwner);
-    long res = dlg.MenuDialog::showModal(NULL, IDD_EMPTY, parent);
+    StringListDialog* dlg = new_nt StringListDialog(formTitleId, model, modelOwner);
+    if (NULL == dlg)
+    {
+        delete model;
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        return -1;
+    }
+    long res = dlg->MenuDialog::showModal(NULL, IDD_EMPTY, parent);
+    delete dlg;
     return res;
 }
 
