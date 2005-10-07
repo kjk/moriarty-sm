@@ -43,6 +43,17 @@ class DefinitionModel;
 DefinitionModel* JokeExtractFromUDF(const UniversalDataFormat& udf);
 
 status_t JokesFetchRandom();
+status_t JokesFetchUrl(const char* url);
 status_t JokesFetchQuery(const char* query);
+
+enum JokesUDFIndexes {
+    jokesListItemRankIndex,
+    jokesListItemTitleIndex,
+    jokesListItemRatingIndex,
+    jokesListItemExplicitnessIndex,
+    jokesListItemUrlIndex,
+    jokesListItemElementsCount
+};
+
 
 #endif // JOKES_MODULE_H__

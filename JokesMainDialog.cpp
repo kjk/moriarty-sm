@@ -63,8 +63,8 @@ protected:
         
         MenuDialog::handleInitDialog(fw, ip);
         
-        sort_.addString(IDS_SORT_RATING);
-        sort_.addString(IDS_SORT_RANK);
+        sort_.addString(IDS_JOKES_RATING);
+        sort_.addString(IDS_JOKES_RANK);
 
 
         loadSearchPrefs();
@@ -272,8 +272,10 @@ bool JokesMainDialog::handleInitDialog(HWND fw, long ip)
     innerBounds(r);
     renderer_.create(WS_TABSTOP, r, handle(), NULL);
     list_.attachControl(handle(), IDC_JOKE_LIST);
+    list_.setStyleEx(LVS_EX_FULLROWSELECT | LVS_EX_GRADIENT | LVS_EX_ONECLICKACTIVATE);
 
     ModuleDialog::handleInitDialog(fw, ip);
+    createListColumns();
     setDisplayMode(displayMode_);
     
     bool empty = true;
@@ -295,6 +297,7 @@ bool JokesMainDialog::handleInitDialog(HWND fw, long ip)
         if (NULL != model)
         {
             renderer_.setModel(model, Definition::ownModel);
+            createListItems();
             setDisplayMode(showJoke);
             empty = false;
         }
@@ -420,10 +423,99 @@ bool JokesMainDialog::handleLookupFinished(Event& event, const LookupFinishedEve
     return ModuleDialog::handleLookupFinished(event, data);
 }
 
+static struct {
+    UINT textId;
+    uint_t width;
+} jokesColumns[] = {
+    {IDS_JOKES_TITLE, 50},
+    {IDS_JOKES_RANK, 15},
+    {IDS_JOKES_RATING, 10},
+    {IDS_JOKES_EXPLICITNESS, 25}
+};
+
 void JokesMainDialog::createListColumns()
 {
+    LVCOLUMN col;
+    ZeroMemory(&col, sizeof(col));
+    ulong_t w = list_.width();
+    for (ulong_t i = 0; i < ARRAY_SIZE(jokesColumns); ++i)
+    {
+        col.mask = LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH;
+        if (1 == i || 2 == i)
+        {
+            col.mask |= LVCF_FMT;
+            col.fmt = LVCFMT_RIGHT;
+        }
+        char_t* text = LoadString(jokesColumns[i].textId);
+        if (NULL == text)
+            goto Error; 
+        col.iSubItem = i;
+        col.iOrder = i;
+        col.pszText = text;
+        col.cx = (jokesColumns[i].width * w) / 100;
+        int res = list_.insertColumn(i, col);
+        free(text);
+        if (-1 == res)
+            goto Error;
+    }  
+    return; 
+Error: 
+    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY); 
 }
 
 void JokesMainDialog::createListItems()
 {
+    list_.clear();
+    JokesPrefs& prefs = GetPreferences()->jokesPrefs;
+    LVITEM item;
+    ZeroMemory(&item, sizeof(item));
+    
+    if (NULL == prefs.udf)
+        return;
+    
+    char_t buffer[32];
+    ulong_t size = prefs.udf->getItemsCount();
+    for (ulong_t i = 0; i < size; ++i)
+    {
+        item.mask = LVIF_TEXT | LVIF_PARAM;
+        item.pszText = const_cast<char_t*>(prefs.udf->getItemText(i, jokesListItemTitleIndex));
+        item.iItem = item.lParam = i;
+        item.iSubItem = 0;
+        list_.insertItem(item);
+        item.mask = LVIF_TEXT;
+        
+        tprintf(buffer, _T("%s"), prefs.udf->getItemText(i, jokesListItemRankIndex));
+        localizeNumberStrInPlace(buffer);
+        item.pszText = buffer;
+        item.iSubItem++;
+        list_.setItem(item);
+        
+        tprintf(buffer, _T("%s"), prefs.udf->getItemText(i, jokesListItemRatingIndex));
+        localizeNumberStrInPlace(buffer);
+        item.pszText = buffer;
+        item.iSubItem++;
+        list_.setItem(item);
+
+        item.pszText = const_cast<char_t*>(prefs.udf->getItemText(i, jokesListItemExplicitnessIndex));
+        item.iSubItem++;
+        list_.setItem(item);
+    }
+    list_.focusItem(0);
+}
+
+long JokesMainDialog::handleListItemActivate(int controlId, const NMLISTVIEW& header)
+{
+    JokesPrefs& prefs = GetPreferences()->jokesPrefs;
+    if (NULL == prefs.udf)
+        return messageHandled;
+    
+    ulong_t i = header.iItem;
+    if (i >= prefs.udf->getItemsCount())
+        return messageHandled;
+
+    const char* url = prefs.udf->getItemData(i, jokesListItemUrlIndex);
+    status_t err = JokesFetchUrl(url);
+    if (errNone != err)
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+    return messageHandled;
 }

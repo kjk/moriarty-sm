@@ -174,8 +174,11 @@
 #define IDS_STRING833                   833
 #define IDS_CURRENCY_VALUE              833
 #define IDS_CURRENCY_REGION             834
-#define IDS_JOKE_RANDOM                 835
 #define IDS_JOKES_RANDOM                835
+#define IDS_JOKES_TITLE                 836
+#define IDS_JOKES_RATING                837
+#define IDS_JOKES_RANK                  838
+#define IDS_JOKES_EXPLICITNESS          839
 #define IDC_CONNECTION_PROGRESS         2002
 #define IDC_PROGRESS_TEXT               2003
 #define IDC_PROGRESS_BYTES              2004

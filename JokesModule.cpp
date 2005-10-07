@@ -77,15 +77,6 @@ ulong_t JokesPrefs::schemaVersion() const
 }
 
 enum {
-    jokesListItemRankIndex,
-    jokesListItemTitleIndex,
-    jokesListItemRatingIndex,
-    jokesListItemExplicitnessIndex,
-    jokesListItemUrlIndex,
-    jokesListItemElementsCount
-};
-
-enum {
     jokeTitleIndex,
     jokeTextIndex,
     jokeElementsCount
@@ -116,11 +107,26 @@ Error:
     return NULL;
 }
 
-status_t JokesFetchRandom()
+status_t JokesFetchUrl(const char* u)
 {
     LookupManager* lm = GetLookupManager();
-    const char* url = urlSchemaJoke urlSeparatorSchemaStr "random";
-    return lm->fetchUrl(url);
+    char* url = StringCopy(urlSchemaJoke urlSeparatorSchemaStr);
+    if (NULL == url)
+        return memErrNotEnoughSpace;
+
+    url = StrAppend(url, -1, u, -1);
+    if (NULL == url)
+        return memErrNotEnoughSpace;
+        
+    status_t err = lm->fetchUrl(url);
+    free(url);
+    return err;
+}
+
+
+status_t JokesFetchRandom()
+{
+    return JokesFetchUrl("random");
 }
 
 static const char* jokesCategories[]={
@@ -183,7 +189,7 @@ status_t JokesFetchQuery(const char* query)
 
     JokesPrefs& prefs = GetPreferences()->jokesPrefs;
     char buffer[16];
-    StrPrintF(buffer, "%d", prefs.minimumRating);
+    StrPrintF(buffer, "%d", prefs.minimumRating + 1);
     if (NULL == (url = StrAppend(url, -1, buffer, -1, "; ", -1)))
         return memErrNotEnoughSpace;
 

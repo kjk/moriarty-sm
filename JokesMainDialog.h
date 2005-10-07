@@ -32,8 +32,10 @@ protected:
    
     long handleCommand(ushort nc, ushort id, HWND sender);  
      
-    bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
-
+    bool handleLookupFinished(Event& event, const LookupFinishedEventData* data);
+    
+    long handleListItemActivate(int controlId, const NMLISTVIEW& header);
+    
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(JokesMainDialog);

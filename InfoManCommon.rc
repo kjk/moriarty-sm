@@ -233,7 +233,7 @@ BEGIN
     CONTROL         "",IDC_JOKE_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
 END
 
-IDD_JOKES_SEARCH DIALOG  0, 0, 156, 492
+IDD_JOKES_SEARCH DIALOGEX 0, 0, 156, 492
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_VSCROLL | WS_SYSMENU
 CAPTION "InfoMan - Jokes"
 FONT 8, "MS Shell Dlg"
@@ -602,8 +602,6 @@ BEGIN
     IDS_SELECT_SERVER       "Select Server"
     IDS_CHOOSE_LOCATION     "InfoMan - Choose Location"
     IDS_CURRENCY            "Currency"
-    IDS_SORT_RATING         "rating"
-    IDS_SORT_RANK           "rank"
 END
 
 STRINGTABLE 
@@ -693,6 +691,10 @@ BEGIN
     IDS_CURRENCY_VALUE      "Value"
     IDS_CURRENCY_REGION     "Region"
     IDS_JOKES_RANDOM        "Random Joke"
+    IDS_JOKES_TITLE         "Title"
+    IDS_JOKES_RATING        "Rating"
+    IDS_JOKES_RANK          "Rank"
+    IDS_JOKES_EXPLICITNESS  "Explicitness"
 END
 
 #endif    // English (U.S.) resources
