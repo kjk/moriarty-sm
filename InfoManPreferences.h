@@ -34,6 +34,7 @@ public:
     char* cookie;
     char* regCode;
     char* lastClientVersion;
+    char_t* moviesLocation;
 
     status_t serialize(Serializer& ser);
 

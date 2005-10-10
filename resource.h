@@ -33,7 +33,9 @@
 #define IDS_CHOOSE_LOCATION             118
 #define IDS_CURRENCY                    119
 #define IDS_SORT_RATING                 120
+#define IDS_MOVIES                      120
 #define IDS_SORT_RANK                   121
+#define IDS_THEATERS                    121
 #define IDS_ALERT_UNKNOWN_SERVER_ERROR  501
 #define IDS_ALERT_SERVER_FAILURE        502
 #define IDS_ALERT_DEVICE_UNSUPPORTED    503
@@ -82,8 +84,11 @@
 #define IDB_DREAMS_LARGE                523
 #define IDS_INFO_ONLY_NUMERIC_INPUT_ACCEPTED 523
 #define IDB_DREAMS_SMALL                524
+#define IDS_ALERT_JOKES_NO_CATEGORIES   524
 #define IDB_EBAY_LARGE                  525
+#define IDS_ALERT_JOKES_NO_EXPLICITNESS 525
 #define IDB_EBAY_SMALL                  526
+#define IDS_ALERT_JOKES_NO_TYPES        526
 #define IDB_EBOOKS_LARGE                527
 #define IDB_EBOOKS_SMALL                528
 #define IDB_ENCYCLOPEDIA_LARGE          529
@@ -141,6 +146,8 @@
 #define IDB_WEATHER_SUNNY_SNOW          572
 #define IDD_JOKES_SEARCH                572
 #define IDB_WEATHER_SUNNY_STORM         573
+#define IDD_MOVIES_MAIN                 573
+#define IDR_MOVIES_MENU                 573
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -258,6 +265,8 @@
 #define IDM_PORTFOLIO                   40006
 #define IDM_CURRENCY                    40007
 #define IDM_JOKES_RANDOM                40008
+#define IDM_MOVIES_MOVIES               40009
+#define IDM_MOVIES_THEATERS             40010
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
@@ -290,6 +299,10 @@
 #define ID_VIEW_JOKE                    50040
 #define ID_VIEW_JOKE_LIST               50041
 #define ID_VIEW_FIND_JOKE               50042
+#define ID_VIEW_MOVIES                  50043
+#define ID_VIEW_THEATERS                50044
+#define ID_VIEW_UPDATE50045             50045
+#define ID_VIEW_CHANGELOCATION50046     50046
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -297,9 +310,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        573
-#define _APS_NEXT_COMMAND_VALUE         50043
-#define _APS_NEXT_CONTROL_VALUE         2096
-#define _APS_NEXT_SYMED_VALUE           508
+#define _APS_NEXT_RESOURCE_VALUE        574
+#define _APS_NEXT_COMMAND_VALUE         50047
+#define _APS_NEXT_CONTROL_VALUE         2097
+#define _APS_NEXT_SYMED_VALUE           510
 #endif
 #endif

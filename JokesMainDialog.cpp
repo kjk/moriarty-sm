@@ -41,6 +41,7 @@ class JokesSearchDialog: public MenuDialog {
     }
     
     void loadSearchPrefs();
+    bool validate() const;
     void storeSearchPrefs();
     void prepareQuery();
 
@@ -77,6 +78,8 @@ protected:
         switch (id) 
         {
             case IDOK:
+                if (!validate())
+                    return messageHandled;
                 storeSearchPrefs();
                 prepareQuery();
                 // Intentional fall-through
@@ -215,6 +218,47 @@ void JokesSearchDialog::storeSearchPrefs()
     
     prefs.minimumRating = rating_.position() - 1;
     prefs.sortOrder = sort_.selection();
+}
+
+bool JokesSearchDialog::validate() const
+{
+    bool one = false;
+    for (ulong_t i = 0; i < jokesCategoriesCount; ++i)
+        if (BST_CHECKED == SendMessage(child(jokesCategoriesStart + i), BM_GETCHECK, 0, 0))
+            one = true;
+
+    if (!one)
+    {
+        Alert(handle(), IDS_ALERT_JOKES_NO_CATEGORIES, IDS_INFO, MB_OK | MB_APPLMODAL | MB_ICONINFORMATION);
+        SetFocus(child(jokesCategoriesStart));
+        return false;
+    }
+    
+    one = false;
+    for (ulong_t i = 0; i < jokesExplicitnessCount; ++i)
+        if (BST_CHECKED == SendMessage(child(jokesExplicitnessStart + i), BM_GETCHECK, 0, 0))
+            one = true;
+
+    if (!one)
+    {
+        Alert(handle(), IDS_ALERT_JOKES_NO_EXPLICITNESS, IDS_INFO, MB_OK | MB_APPLMODAL | MB_ICONINFORMATION);
+        SetFocus(child(jokesExplicitnessStart));
+        return false;
+    }
+
+    one = false;
+    for (ulong_t i = 0; i < jokesTypesCount; ++i)
+        if (BST_CHECKED == SendMessage(child(jokesTypesStart + i), BM_GETCHECK, 0, 0))
+            one = true;
+
+    if (!one)
+    {
+        Alert(handle(), IDS_ALERT_JOKES_NO_TYPES, IDS_INFO, MB_OK | MB_APPLMODAL | MB_ICONINFORMATION);
+        SetFocus(child(jokesTypesStart));
+        return false;
+    }
+    
+    return true;
 }
 
 void JokesSearchDialog::loadSearchPrefs()

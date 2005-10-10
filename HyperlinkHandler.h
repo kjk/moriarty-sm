@@ -129,8 +129,12 @@ private:
     void handleRunModule(const char* hyperlink, ulong_t len, const Point* point);
     void handleHttp(const char* hyperlink, ulong_t len, const Point* point);
     void handleDream(const char* hyperlink, ulong_t len, const Point* point);
+    
+    // Implemented in MoviesModule.cpp
     void handleMovie(const char* hyperlink, ulong_t len, const Point* point);
     void handleTheatre(const char* hyperlink, ulong_t len, const Point* point);
+    
+    
     void handleLyricsForm(const char* hyperlink, ulong_t len, const Point* point);
     void handleDictForm(const char* hyperlink, ulong_t len, const Point* point);
     void handleMenu(const char* hyperlink, ulong_t len, const Point* point);

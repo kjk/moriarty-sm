@@ -88,7 +88,8 @@ Preferences::Preferences():
     serverAddress(StringCopy(SERVER_ADDRESS)),
     cookie(StringCopy("")),
     regCode(StringCopy("")),
-    lastClientVersion(NULL)
+    lastClientVersion(NULL),
+    moviesLocation(NULL)
 {}
 
 Preferences::~Preferences()
@@ -97,6 +98,7 @@ Preferences::~Preferences()
     free(cookie);
     free(regCode);
     free(lastClientVersion);
+    free(moviesLocation);
 }
 
 
@@ -157,6 +159,7 @@ status_t Preferences::serialize(Serializer& serialize)
     ErrTry {
         serialize.narrow(cookie, NULL, serialIdCookie);
         serialize.narrow(regCode, NULL, serialIdRegCode);
+        serialize.text(moviesLocation, NULL, serialIdMoviesLocation);
         serialize(recipesPrefs, serialIdRecipesPreferences);
         serialize(horoscopesPrefs, serialIdHoroscopesPreferences);
         serialize(dreamsPrefs, serialIdDreamsPreferences);

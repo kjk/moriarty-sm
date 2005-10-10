@@ -233,7 +233,7 @@ BEGIN
     CONTROL         "",IDC_JOKE_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
 END
 
-IDD_JOKES_SEARCH DIALOGEX 0, 0, 156, 492
+IDD_JOKES_SEARCH DIALOG  0, 0, 156, 492
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_VSCROLL | WS_SYSMENU
 CAPTION "InfoMan - Jokes"
 FONT 8, "MS Shell Dlg"
@@ -282,6 +282,14 @@ BEGIN
     CONTROL         "Sketches",IDC_CHECK31,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,453,45,10
     CONTROL         "Stories",IDC_CHECK32,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,464,38,10
     CONTROL         "Lists && ""Top Ten""",IDC_CHECK33,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,476,70,10
+END
+
+IDD_MOVIES_MAIN DIALOG  0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Movies"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_LIST | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_TABSTOP,0,0,155,177
 END
 
 
@@ -556,6 +564,19 @@ BEGIN
     END
 END
 
+IDR_MOVIES_MENU MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "Movies",                      ID_VIEW_MOVIES
+        MENUITEM "Theaters",                    ID_VIEW_THEATERS
+        MENUITEM SEPARATOR
+        MENUITEM "Update",                      ID_VIEW_UPDATE50045
+        MENUITEM SEPARATOR
+        MENUITEM "Change Location...",          ID_VIEW_CHANGELOCATION50046
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -602,6 +623,8 @@ BEGIN
     IDS_SELECT_SERVER       "Select Server"
     IDS_CHOOSE_LOCATION     "InfoMan - Choose Location"
     IDS_CURRENCY            "Currency"
+    IDS_MOVIES              "Movies"
+    IDS_THEATERS            "Theaters"
 END
 
 STRINGTABLE 
@@ -639,6 +662,10 @@ BEGIN
                             "Network connection could not be established.\nPlease verify your connection configuration."
     IDS_INFO_ONLY_NUMERIC_INPUT_ACCEPTED 
                             "This field accepts only numeric input.\nPlease correct the entered value."
+    IDS_ALERT_JOKES_NO_CATEGORIES "Please select at least one joke category."
+    IDS_ALERT_JOKES_NO_EXPLICITNESS 
+                            "Please select at least one explicitness category."
+    IDS_ALERT_JOKES_NO_TYPES "Please select at least one joke type."
 END
 
 STRINGTABLE 
