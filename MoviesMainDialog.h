@@ -27,6 +27,9 @@ class MoviesMainDialog: public ModuleDialog {
     } displayMode_;
     
     void setDisplayMode(DisplayMode dm);
+    void prepareMoviesList();
+    void prepareTheatresList();
+    void clearMovies();
 
 protected:
 

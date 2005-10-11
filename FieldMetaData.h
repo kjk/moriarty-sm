@@ -3,45 +3,50 @@
 
 #include "LookupManager.h"
 
-#define prefixFieldGetUrl                         "Get-Url-"
+#define prefixFieldGetUrl                       "Get-Url-"
 
-#define fieldVerifyRegCode                     "Verify-Registration-Code"
-#define fieldGetRegCodeDaysToExpire    "Get-Reg-Code-Days-To-Expire"
-#define fieldGetLatestClientVersion          "Get-Latest-Client-Version"
-#define fieldGetUrl                                  "Get-Url"
-#define fieldClientInfo                             clientInfoField
-#define fieldRegistrationCode                  regCodeField
+#define fieldVerifyRegCode                      "Verify-Registration-Code"
+#define fieldGetRegCodeDaysToExpire             "Get-Reg-Code-Days-To-Expire"
+#define fieldGetLatestClientVersion             "Get-Latest-Client-Version"
+#define fieldGetUrl                             "Get-Url"
+#define fieldClientInfo                         clientInfoField
+#define fieldRegistrationCode                   regCodeField
 #define fieldProtocolVersion                    protocolVersionField
-#define fieldGetCookie                           getCookieField
-#define fieldCurrentBoxOffice                 "Current-Box-Office"
+#define fieldGetCookie                          getCookieField
+#define fieldCurrentBoxOffice                   "Current-Box-Office"
 
-#define fieldError                               "Error"
-#define fieldCookie                            cookieField
-#define fieldEBookVersion                  "eBook-Version"
-#define fieldLatestClientVersion           "Latest-Client-Version"
-#define fieldTransactionId                   transactionIdField
-#define fieldNoResults                        "No-Results"
+#define fieldError                              "Error"
+#define fieldCookie                             cookieField
+#define fieldEBookVersion                       "eBook-Version"
+#define fieldLatestClientVersion                "Latest-Client-Version"
+#define fieldTransactionId                      transactionIdField
+#define fieldNoResults                          "No-Results"
 
 
-#define fieldHoroscope                       "Horoscope"
-#define fieldDream                            "Dream-Interpretation"
-#define fieldGetUrlEBookBrowse          prefixFieldGetUrl "eBook-browse"
+#define fieldHoroscope                          "Horoscope"
+#define fieldDream                              "Dream-Interpretation"
+#define fieldGetUrlEBookBrowse                  prefixFieldGetUrl "eBook-browse"
 
-#define fieldRecipesList                      "Recipes-List"
-#define fieldRecipe                            "Recipe"
+#define fieldRecipesList                        "Recipes-List"
+#define fieldRecipe                             "Recipe"
 
-#define fieldStocksList                        "Stocks-List"
-#define fieldStocksListByName            "Stocks-List-By-Name"
+#define fieldStocksList                         "Stocks-List"
+#define fieldStocksListByName                   "Stocks-List-By-Name"
 #define fieldStock                              "Stock"
 
-#define fieldWeather                          "Weather"
-#define fieldWeatherMultiselect           "Weather-Multiselect"
-#define fieldLocationUnknown             "Location-Unknown"
+#define fieldWeather                            "Weather"
+#define fieldWeatherMultiselect                 "Weather-Multiselect"
 
-#define fieldCurrency                    "Currency-Conversion"
+#define fieldCurrency                           "Currency-Conversion"
 
-#define fieldJoke                        "Joke"
-#define fieldJokesList                   "Jokes-List"
+#define fieldJoke                               "Joke"
+#define fieldJokesList                          "Jokes-List"
+
+#define fieldMoviesData                         "Movies-Data"
+
+
+#define fieldLocationAmbiguous                  "Location-Ambiguous"
+#define fieldLocationUnknown                    "Location-Unknown"
 
 enum ResponseFieldType {
     fieldTypeValue,

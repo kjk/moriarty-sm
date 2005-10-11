@@ -23,81 +23,82 @@ static BOOL InitInstance(HINSTANCE hInstance, int nCmdShow);
 
 void CleanUp()
 {
-	LookupManagerDispose();
-	StyleDisposeStaticStyles();
-	HyperlinkHandlerDispose();
-	PrefsDispose();
-	DataStore::dispose();
-	DeinitLogging();
+    LookupManagerDispose();
+    StyleDisposeStaticStyles();
+    HyperlinkHandlerDispose();
+    PrefsDispose();
+    DataStore::dispose();
+    DeinitLogging();
+    ArsLexis::cleanAllocationLogging();
 }
 
 char_t* GetStorePath(const char_t* name)
 {
-	char_t* path = GetAppDataPath();
-	if (NULL == path)
-		return NULL;
-		
-	path = StrAppend(path, -1, TEXT("\\InfoMan"), -1);
-	if (NULL == path)
-		return NULL;
-	
-	BOOL res = CreateDirectory(path, NULL);
-	if (!res && ERROR_ALREADY_EXISTS != GetLastError())
-	{
-		free(path);
-		return NULL;
-	}
-	
-	path = StrAppend(path, -1, TEXT("\\"), 1);
-	if (NULL == path)
-		return NULL;
-	
-	path = StrAppend(path, -1, name, -1);
-	if (NULL == path)
-		return NULL;
-	
-	path = StrAppend(path, -1, TEXT(".dat"), -1);
-	if (NULL == path)
-		return NULL;
-    
+    char_t* path = GetAppDataPath();
+    if (NULL == path)
+        return NULL;
+
+    path = StrAppend(path, -1, TEXT("\\InfoMan"), -1);
+    if (NULL == path)
+        return NULL;
+
+    BOOL res = CreateDirectory(path, NULL);
+    if (!res && ERROR_ALREADY_EXISTS != GetLastError())
+    {
+        free(path);
+        return NULL;
+    }
+
+    path = StrAppend(path, -1, TEXT("\\"), 1);
+    if (NULL == path)
+        return NULL;
+
+    path = StrAppend(path, -1, name, -1);
+    if (NULL == path)
+        return NULL;
+
+    path = StrAppend(path, -1, TEXT(".dat"), -1);
+    if (NULL == path)
+        return NULL;
+
     return path; 
 }
 
 status_t DataStoreInit()
 {
-	char_t* path = GetStorePath(TEXT("AppData"));
-	if (NULL == path)
-		return memErrNotEnoughSpace;
-	
-	status_t err = DataStore::initialize(path);
-	free(path);
-	return err;
+    char_t* path = GetStorePath(TEXT("AppData"));
+    if (NULL == path)
+        return memErrNotEnoughSpace;
+
+    status_t err = DataStore::initialize(path);
+    free(path);
+    return err;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmdLine, int nCmdShow)
 {
-	// Perform application initialization:
-	if (!InitInstance(hInstance, nCmdShow)) 
-		return FALSE;
-	
-//#ifndef NDEBUG
-//	test_ExtEventSend();
-//#endif	
+    // Perform application initialization:
+    if (!InitInstance(hInstance, nCmdShow)) 
+        return FALSE;
+
+    //#ifndef NDEBUG
+    //	test_ExtEventSend();
+    //#endif	
 
 #ifndef WIN32_PLATFORM_WFSP
-	HACCEL hAccelTable;
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_INFOMAN));
+    HACCEL hAccelTable;
+    hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_INFOMAN));
 #endif // !WIN32_PLATFORM_WFSP
 
-	// Main message loop:
-	LookupManager* lm = GetLookupManager();
-	if (NULL == lm)
-	{
-		Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-		CleanUp();
-		return memErrNotEnoughSpace;
-	}
-    
+    // Main message loop:
+    LookupManager* lm = GetLookupManager();
+    if (NULL == lm)
+    {
+        Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+        CleanUp();
+        return memErrNotEnoughSpace;
+    }
+
     HANDLE managerThread = lm->connectionManager().startManagerThread();
     if (NULL == managerThread)
     {
@@ -105,64 +106,65 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmd
         CleanUp();
         return -1; 
     }  
-    
-	MSG msg;
-	status_t err;
-	while (true) 
-	{
-/*
-		err = lm->connectionManager().waitForMessage(msg, 20);
-		if (errNone != err)
-			break;
- */
+
+    MSG msg;
+    status_t err;
+    while (true) 
+    {
+        /*
+        err = lm->connectionManager().waitForMessage(msg, 20);
+        if (errNone != err)
+        break;
+        */
         BOOL res = GetMessage(&msg, NULL, 0, 0);
         if (-1 == res)
         {
             err = GetLastError();
             break;
         }			
-        
-		if (WM_QUIT == msg.message)
-		{
-			err = msg.wParam;
-			break;
-		}
-		
-		//if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
-		HWND fw = GetForegroundWindow();
-		if (NULL != fw && IsDialogMessage(fw, &msg))
-		{
-		    //OutputDebugString(_T("IsDialogMessage(): "));
-		    //DumpMessage(msg.message, msg.wParam, msg.lParam);
-		    continue;
+
+        if (WM_QUIT == msg.message)
+        {
+            err = msg.wParam;
+            break;
         }
-		
+
+        //if (NULL != ModuleDialogGetCurrent() && IsDialogMessage(ModuleDialogGetCurrent()->handle(), &msg))
+        HWND fw = GetForegroundWindow();
+        if (NULL != fw && IsDialogMessage(fw, &msg))
+        {
+            //OutputDebugString(_T("IsDialogMessage(): "));
+            //DumpMessage(msg.message, msg.wParam, msg.lParam);
+            goto ExtEventCheck;
+        }
+
 #ifndef WIN32_PLATFORM_WFSP
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
+        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 #endif // !WIN32_PLATFORM_WFSP
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		if (extEvent == msg.message)
-		{
-//#ifndef NDEBUG
-//			test_ExtEventReceive(msg.lParam);
-//#endif	
-			lm->handleLookupEvent(msg.lParam);
-			ExtEventFree(msg.lParam);
-		}
-	}
-	lm->connectionManager().stop();
-	if (WAIT_TIMEOUT == WaitForSingleObject(managerThread, 1000))
-	{
-	    assert(false);
-	    TerminateThread(managerThread, -1);
-	}
-	
-	PrefsSave();
-	CleanUp();
-	return err;
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+ExtEventCheck:
+        if (extEvent == msg.message)
+        {
+            //#ifndef NDEBUG
+            //			test_ExtEventReceive(msg.lParam);
+            //#endif	
+            lm->handleLookupEvent(msg.lParam);
+            ExtEventFree(msg.lParam);
+        }
+    }
+    lm->connectionManager().stop();
+    if (WAIT_TIMEOUT == WaitForSingleObject(managerThread, 1000))
+    {
+        assert(false);
+        TerminateThread(managerThread, -1);
+    }
+
+    PrefsSave();
+    CleanUp();
+    return err;
 }
 
 //

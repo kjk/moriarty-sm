@@ -47,6 +47,12 @@ static ResponseFieldDescriptor CreateDescriptor(const char* name, ResponseFieldT
 
 #define FURS(name, result, dataSink, sinkIsHistoryCache) \
     FIELD_UDF_RESULT(FIELD_NAME(name), result, dataSink, sinkIsHistoryCache) 
+    
+#define FIELD_STRING_LIST_RESULT(name, result) \
+    {(name), fieldTypePayload, FIELD_HANDLER(StringList), &InfoManConnection::completeStringListField, (result), NULL, false}
+
+#define FSLR(name, res) \
+    FIELD_STRING_LIST_RESULT(FIELD_NAME(name), (res))
 
 static const ResponseFieldDescriptor descriptors[] = {
     FVAL(Cookie),
@@ -59,7 +65,9 @@ static const ResponseFieldDescriptor descriptors[] = {
     FURS(Joke, lookupResultJoke, jokesJokeStream, false),
     FURS(JokesList, lookupResultJokesList, jokesJokesListStream, false),
     FVAL(LatestClientVersion),
+    FSLR(LocationAmbiguous, lookupResultLocationAmbiguous),
     FRES(LocationUnknown, lookupResultLocationUnknown),
+    FURS(MoviesData, lookupResultMoviesData, moviesDataStream, false),
     FRES(NoResults, lookupResultNoResults),
     FURS(Recipe, lookupResultRecipe, recipesItemStream, false), 
     FURS(RecipesList, lookupResultRecipesList, recipesListStream, false), 
@@ -75,22 +83,22 @@ static const ResponseFieldDescriptor descriptors[] = {
 
 bool ResponseFieldDescriptor::operator <(const ResponseFieldDescriptor& other) const
 {
-	using namespace std;
-	return strcmp(name, other.name) < 0;
+    using namespace std;
+    return strcmp(name, other.name) < 0;
 }
 
 const ResponseFieldDescriptor* ResponseFieldFind(const char* name)
 {
-	ResponseFieldDescriptor desc = {name};
-	const ResponseFieldDescriptor* end = descriptors + ARRAY_SIZE(descriptors);
-	const ResponseFieldDescriptor* res = std::lower_bound(descriptors, end, desc);
-	if (res == end)
-		return NULL;
-	
-	if (!StrEquals(name, res->name))
-		return NULL;
-	
-	return res;
+    ResponseFieldDescriptor desc = {name};
+    const ResponseFieldDescriptor* end = descriptors + ARRAY_SIZE(descriptors);
+    const ResponseFieldDescriptor* res = std::lower_bound(descriptors, end, desc);
+    if (res == end)
+        return NULL;
+
+    if (!StrEquals(name, res->name))
+        return NULL;
+
+    return res;
 }
 
 #ifndef NDEBUG

@@ -345,6 +345,7 @@ bool JokesMainDialog::handleInitDialog(HWND fw, long ip)
             setDisplayMode(showJoke);
             empty = false;
         }
+        delete udf;
     }
     
     if (empty && errNone != JokesFetchRandom())

@@ -37,7 +37,7 @@ StocksEntry::~StocksEntry()
 {
     free(symbol); 
     free(data);
-    free(url);  
+    free(url);
 }  
 
 StocksPortfolio::StocksPortfolio():
@@ -378,6 +378,7 @@ bool StocksUpdateFromUDF(const UniversalDataFormat& udf)
         StocksEntry& e = p.entry(i);
         assert(udf.getItemElementsCount(i) >= 2);
         
+        free(e.url);
         e.url = StringCopy(udf.getItemData(i, stocksListItemUrlIndex));
         if (NULL == e.url)
             return false;

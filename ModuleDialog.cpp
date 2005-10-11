@@ -197,8 +197,9 @@ long ModuleDialog::showModal(UINT resourceId)
 
 LRESULT ModuleDialog::callback(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam) && handleLookupFinished(lParam, LookupFinishedData(lParam)))
-        return messageHandled;
+    if (extEvent == msg && extEventLookupFinished == ExtEventGetID(lParam))
+        handleLookupFinished(lParam, LookupFinishedData(lParam));
+        
     return MenuDialog::callback(msg, wParam, lParam); 
 }
 

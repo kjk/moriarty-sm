@@ -261,15 +261,15 @@ protected:
     {
         switch (id)
         {
-            case IDCANCEL:
-            case IDOK:
-                extHelper_.stop();
-                endModal(id);
-                return messageHandled;
-            case ID_VIEW_UPDATE:
-                if (errNone != StocksFetchDetails(entry_.url, (entry_.statusReady == entry_.status || entry_.statusUnknown == entry_.status)))
-                    Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
-                return messageHandled;  
+        case IDCANCEL:
+        case IDOK:
+            extHelper_.stop();
+            endModal(id);
+            return messageHandled;
+        case ID_VIEW_UPDATE:
+            if (errNone != StocksFetchDetails(entry_.url, (entry_.statusReady == entry_.status || entry_.statusUnknown == entry_.status)))
+                Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return messageHandled;  
         }
         return MenuDialog::handleCommand(nc, id, sender);  
     }   
@@ -278,11 +278,12 @@ protected:
     {
         switch (ExtEventGetID(event))
         {
-            case extEventLookupFinished:
-                extHelper_.stop();
-                endModal(IDCANCEL);
-                ExtEventRepost(event);  
-                break; 
+        case extEventLookupFinished:
+            extHelper_.stop();
+            ExtEventRepost(event);
+            MenuDialog::handleExtendedEvent(event);
+            endModal(IDCANCEL);
+            return messageHandled;
         }
         return MenuDialog::handleExtendedEvent(event); 
     }  

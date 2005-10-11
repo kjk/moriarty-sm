@@ -64,6 +64,8 @@
 #define urlSchemaJoke                       "s+joke"
 #define urlSchemaJokesList                  "s+jokeslist"
 
+#define urlSchemaMoviesGet                  "s+movies"
+
 #define urlSeparatorSchema                    ':'
 #define urlSeparatorFlags                     '+'
 #define urlSeparatorSchemaStr                 ":"
