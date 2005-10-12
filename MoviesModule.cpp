@@ -18,6 +18,7 @@
 
 MODULE_STARTER_DEFINE(Movies);
 
+#ifdef _PALM_OS
 void HyperlinkHandler::handleMovie(const char* link,  ulong_t length, const Point*)
 {
     //MoriartyApplication& app = MoriartyApplication::instance();
@@ -62,7 +63,38 @@ void HyperlinkHandler::handleTheatre(const char* link,  ulong_t length, const Po
     //assert(-1 != theatre);
     //sendEvent(MoriartyApplication::appSelectTheatreEvent, MoriartyApplication::SelectItemEventData(theatre));
 }
+#endif
 
+#ifdef _WIN32
+
+MoviesMainDialog* MoviesFindWindow()
+{
+    const char_t* name = _T("InfoMan - Movies");
+    HWND wnd = FindWindow(_T("DIALOG"), name);
+    if (NULL == wnd)
+        return NULL;
+
+    Widget* w = Widget::fromHandle(wnd);
+    return static_cast<MoviesMainDialog*>(w);
+}
+
+void HyperlinkHandler::handleMovie(const char* link, ulong_t length, const Point*)
+{
+    MoviesMainDialog* m = MoviesFindWindow();
+    if (NULL == m)
+        return;
+
+    
+}
+
+void HyperlinkHandler::handleTheatre(const char* link, ulong_t length, const Point*)
+{
+    MoviesMainDialog* m = MoviesFindWindow();
+    if (NULL == m)
+        return;
+
+}
+#endif
 
 #define TXT(t) if (errNone != model->appendText(t)) goto Error
 #define LBR() if (errNone != model->appendLineBreak()) goto Error

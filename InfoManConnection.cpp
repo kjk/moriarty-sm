@@ -130,10 +130,17 @@ status_t InfoManConnection::notifyProgress()
     if (errNone != error)
         return error;
     lookupManager_.setStatusText(_T("Retrieving data..."));
-    uint_t progress = LookupManager::percentProgressDisabled;
     if (inPayload_)
-        progress=((payloadLength()-payloadLengthLeft()) * 100L)/payloadLength();
-    lookupManager_.setPercentProgress(progress);
+    {
+        uint_t progress = ((payloadLength()-payloadLengthLeft()) * 100L)/payloadLength();
+        lookupManager_.setPercentProgress(progress);
+    }
+    else
+    {
+        if (lookupManager_.percentProgress() == lookupManager_.percentProgressDisabled)
+            lookupManager_.setBytesProgress(totalReceived());
+    }
+        
     return ExtEventSendEmpty(extEventLookupProgress);
 }
 

@@ -289,7 +289,6 @@
 #define ID_STOCK_SET_QUANTITY           50029
 #define ID_UPDATE                       50030
 #define ID_STOCK_DETAILS                50031
-#define ID_VIEW_CHANGELOCATION          50033
 #define ID_VIEW_CHANGE_LOCATION         50034
 #define ID_CURRENCY_ADD                 50035
 #define ID_CURRENCY_DELETE              50036
@@ -301,8 +300,6 @@
 #define ID_VIEW_FIND_JOKE               50042
 #define ID_VIEW_MOVIES                  50043
 #define ID_VIEW_THEATERS                50044
-#define ID_VIEW_UPDATE50045             50045
-#define ID_VIEW_CHANGELOCATION50046     50046
 #define IDC_STATIC                      -1
 
 // Next default values for new objects

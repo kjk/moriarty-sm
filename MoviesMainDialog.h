@@ -30,6 +30,8 @@ class MoviesMainDialog: public ModuleDialog {
     void prepareMoviesList();
     void prepareTheatresList();
     void clearMovies();
+    void showMovie(ulong_t index);
+    void showTheatre(ulong_t index);
 
 protected:
 
@@ -40,11 +42,15 @@ protected:
     long handleCommand(ushort nc, ushort id, HWND sender);  
      
     bool handleLookupFinished(Event& event, const LookupFinishedEventData* data); 
+    
+    long handleListItemActivate(int controlId, const NMLISTVIEW& h);
 
 public:
     
     MODULE_DIALOG_CREATE_DECLARE(MoviesMainDialog);
 
+
+    friend class HyperlinkHandler;
 };
 
 #endif // MOVIES_MAIN_DIALOG_H__

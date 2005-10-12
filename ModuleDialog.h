@@ -47,11 +47,11 @@ public:
     enum {menuBarNone = UINT(-1)}; 
     enum AdvancedOption {advanced}; 
 
-	explicit MenuDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
-	
-	explicit MenuDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
-	
-	~MenuDialog();
+    explicit MenuDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
+
+    explicit MenuDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
+
+    ~MenuDialog();
 
 
 };
@@ -71,12 +71,12 @@ protected:
    
 public:
     
-	explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
-	
-	explicit ModuleDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
-	
-	~ModuleDialog();
-    
+    explicit ModuleDialog(AdvancedOption, bool inputDialog = false, DWORD initDialogFlags = SHIDIF_DONEBUTTON | SHIDIF_SIZEDLGFULLSCREEN);
+
+    explicit ModuleDialog(UINT menuBarId = menuBarNone, bool inputDialog = false);
+
+    ~ModuleDialog();
+
     bool create(UINT resourceId); 
    
     long showModal(UINT resourceId); 

@@ -93,6 +93,8 @@ long ConnectionProgressDialog::handleResize(UINT sizeType, ushort width, ushort 
 
 long ConnectionProgressDialog::handleExtendedEvent(LPARAM& event)
 {
+    LookupManager* lm = GetLookupManager();
+    lm->handleLookupEvent(event);
     switch (ExtEventGetID(event))
     {
         case extEventLookupStarted:
@@ -125,7 +127,7 @@ void ConnectionProgressDialog::updateProgress()
             progressBytesText_.hide();
         else
         {
-            tprintf(buffer, TEXT("Downloading: %ul bytes."), lookupManager_.bytesProgress());
+            tprintf(buffer, TEXT("Progress: %lu bytes."), lookupManager_.bytesProgress());
             progressBytesText_.setCaption(buffer);
             progressBytesText_.show();
         }
@@ -140,6 +142,7 @@ void ConnectionProgressDialog::updateProgress()
         SetDlgItemText(handle(), IDC_PROGRESS_TEXT, TEXT("Please wait..."));
     else
         SetDlgItemText(handle(), IDC_PROGRESS_TEXT, lookupManager_.statusText);
+    update();
 }
 
 void ConnectionProgressDialog::handleScreenSizeChange(ulong_t w, ulong_t h)
