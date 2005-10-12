@@ -11,6 +11,7 @@
 #include <UniversalDataFormat.hpp>
 #include <UTF8_Processor.hpp>
 #include <Text.hpp>
+#include <SysUtils.hpp>
 
 #ifdef _WIN32
 #include "MoviesMainDialog.h"
@@ -84,7 +85,38 @@ void HyperlinkHandler::handleMovie(const char* link, ulong_t length, const Point
     if (NULL == m)
         return;
 
+    link = hyperlinkData(link, length);
+    char_t* title = UTF8_ToNative(link, length);
+    if (NULL == title)
+        return;
+        
+    Movies_t& movies = m->movies_;
+    if (0 == movies.size())
+    {
+        if (NULL == m->udf_)
+            return;
     
+        if (errNone != MoviesFromTheatres(movies, *m->udf_))
+        {
+            Alert(IDS_ALERT_NOT_ENOUGH_MEMORY);
+            return;
+        }
+    }
+
+    long index = -1;
+    for (ulong_t i = 0; i < movies.size(); ++i)
+    {
+        if (StrEquals(movies[i]->title, title))
+        {
+            index = i;
+            break;
+        }
+    }
+    free(title);
+    if (-1 == index)
+        return;
+    
+    m->showMovie(index);
 }
 
 void HyperlinkHandler::handleTheatre(const char* link, ulong_t length, const Point*)
@@ -93,6 +125,24 @@ void HyperlinkHandler::handleTheatre(const char* link, ulong_t length, const Poi
     if (NULL == m)
         return;
 
+    if (NULL == m->udf_)
+        return;
+
+    link = hyperlinkData(link, length);
+    ulong_t size = m->udf_->getItemsCount() / 2;
+    long index = -1;
+    for (ulong_t i = 0; i < size; ++i)
+    {
+        if (StrEquals(link, length, m->udf_->getItemData(i * 2, theatreNameIndex)))
+        {
+            index = i;
+            break;
+        }
+    }
+    if (-1 == index)
+        return;
+
+    m->showTheatre(index);
 }
 #endif
 
