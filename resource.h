@@ -148,6 +148,8 @@
 #define IDB_WEATHER_SUNNY_STORM         573
 #define IDD_MOVIES_MAIN                 573
 #define IDR_MOVIES_MENU                 573
+#define IDB_BITMAP1                     574
+#define IDB_MOVIES                      574
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -307,7 +309,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        574
+#define _APS_NEXT_RESOURCE_VALUE        575
 #define _APS_NEXT_COMMAND_VALUE         50047
 #define _APS_NEXT_CONTROL_VALUE         2097
 #define _APS_NEXT_SYMED_VALUE           510

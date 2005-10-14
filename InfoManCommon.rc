@@ -87,6 +87,7 @@ IDB_WEATHER_CLOUDS      BITMAP                  "..\\moriarty_palm_utf8\\rsc\\we
 IDB_WEATHER_SNOW        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\snow-lg-8.bmp"
 IDB_WEATHER_SUNNY_SNOW  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnysnow-lg-8.bmp"
 IDB_WEATHER_SUNNY_STORM BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnystorm-lg-8.bmp"
+IDB_MOVIES              BITMAP                  "movies.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -284,7 +285,7 @@ BEGIN
     CONTROL         "Lists && ""Top Ten""",IDC_CHECK33,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,476,70,10
 END
 
-IDD_MOVIES_MAIN DIALOG  0, 0, 156, 177
+IDD_MOVIES_MAIN DIALOGEX 0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Movies"
 FONT 8, "MS Shell Dlg"

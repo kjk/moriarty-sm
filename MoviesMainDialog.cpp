@@ -41,6 +41,9 @@ bool MoviesMainDialog::handleInitDialog(HWND fw, long ip)
     col.mask = LVCF_TEXT;
     col.pszText = _T("");
     list_.insertColumn(0, col);
+    HIMAGELIST il = ImageList_LoadBitmap(GetInstance(), MAKEINTRESOURCE(IDB_MOVIES), 17, 1, RGB(255, 255, 255));
+    if (NULL != il)
+        list_.setImageList(il, LVSIL_SMALL);
     
     Rect r;
     innerBounds(r);
@@ -222,8 +225,9 @@ void MoviesMainDialog::prepareTheatresList()
     ZeroMemory(&item, sizeof(item));
     for (ulong_t i = 0; i < size; ++i)
     {
-        item.mask = LVIF_TEXT;
+        item.mask = LVIF_TEXT | LVIF_IMAGE;
         item.iItem = i;
+        item.iImage = 1;
         const char_t* text = udf_->getItemText(i * 2, theatreNameIndex);
         item.pszText = const_cast<char_t*>(text);
         list_.insertItem(item);
@@ -241,8 +245,9 @@ void MoviesMainDialog::prepareMoviesList()
     ZeroMemory(&item, sizeof(item));
     for (ulong_t i = 0; i < size; ++i)
     {
-        item.mask = LVIF_TEXT;
+        item.mask = LVIF_TEXT | LVIF_IMAGE;
         item.iItem = i;
+        item.iImage = 0;
         const char_t* text = movies_[i]->title;
         item.pszText = const_cast<char_t*>(text);
         list_.insertItem(item);

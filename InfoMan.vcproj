@@ -6,7 +6,6 @@
 	ProjectGUID="{F5151533-EE4F-47EE-86CD-2E042BBCF475}"
 	RootNamespace="InfoMan"
 	Keyword="Win32Proj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
@@ -1461,6 +1460,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath="..\moriarty_palm_utf8\Rsc\bitmap1.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\InfoMan.ico"
 				>
 			</File>
@@ -1614,6 +1617,10 @@
 			</File>
 			<File
 				RelativePath=".\InfoMansp.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\movies.bmp"
 				>
 			</File>
 			<File
