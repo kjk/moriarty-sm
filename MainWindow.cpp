@@ -110,7 +110,7 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
         NULL,
         (HBRUSH) GetStockObject(WHITE_BRUSH),
         windowClass);
-
+	
     if (NULL == wc)
         goto Error;
 
@@ -123,6 +123,7 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
 #endif
 
 #ifndef SHIPPING   
+	{
     NarrowStringArrayModel* model = new_nt NarrowStringArrayModel(serverNames, ARRAY_SIZE(serverNames));
     long server = StringListDialog::showModal(IDS_SELECT_SERVER, w->handle(), model);
     if (-1 != server)
@@ -131,6 +132,7 @@ MainWindow* MainWindow::create(const char_t* title, const char_t* windowClass)
         free(prefs.serverAddress);
         prefs.serverAddress = StringCopy(serverAddresses[server]);
     }
+	}
 #endif
 
     return w;

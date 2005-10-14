@@ -63,9 +63,8 @@ struct InfoManModule {
 #endif
 
 #ifdef _WIN32
-    long long lastUpdateTime;
-    typedef long long Time_t; 
-    enum {neverUpdated = Time_t(-1)};
+    time_t lastUpdateTime;
+    enum {neverUpdated = time_t(-1)};
 #endif      
     
     bool active() const {return !(disabledByUser || disabledRemotely);}    

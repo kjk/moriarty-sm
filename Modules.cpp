@@ -209,6 +209,10 @@ void ModuleTouchRunning()
 #endif
 
 #ifdef _WIN32
+#if _MSC_VER >= 1400
     _time64(&runningModule->lastUpdateTime);
+#else
+    time(&runningModule->lastUpdateTime);
+#endif
 #endif 
 }

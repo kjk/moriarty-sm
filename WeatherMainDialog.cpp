@@ -182,7 +182,11 @@ Again:
         const InfoManModule* m = ModuleGetById(moduleIdWeather);
         if (m->neverUpdated != m->lastUpdateTime)
         {
-            Module::Time_t t = _time64(NULL);
+#if _MSC_VER >= 1400
+            time_t t = _time64(NULL);
+#else
+            time_t t = time(NULL);
+#endif
             t -= m->lastUpdateTime;
             if (t > 24 * 60 * 60)
                 goto Fetch;

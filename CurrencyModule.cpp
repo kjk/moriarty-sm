@@ -13,19 +13,13 @@
 MODULE_STARTER_DEFINE(Currency);
 
 CurrencyPrefs::CurrencyPrefs():
-    commonCurrenciesCount_(0),
-    udf(NULL),
-    selectedCurrencyIndex(-1),
-    amount(1.0)
+commonCurrenciesCount_(0),
+udf(NULL),
+selectedCurrencyIndex(-1),
+amount(1.0)
 {
     uint_t count = CommonCurrenciesCount();
-    ErrTry {
-        selectedCurrencies.reserve(count);
-    }
-    ErrCatch (ex) {
-        (void)ex;
-        return;
-    }
+    selectedCurrencies.reserve(count);
     
     for (uint_t i = 0; i < count; ++i)
     {

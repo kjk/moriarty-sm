@@ -153,6 +153,7 @@ void HyperlinkHandler::handleTheatre(const char* link, ulong_t length, const Poi
 DefinitionModel* MoviesPrepareMovie(const Movies_t& movies, ulong_t index)
 {
     status_t err = errNone;
+	ulong_t size;
     assert(index < movies.size());
     const Movie& mv=*(movies[index]);
     
@@ -165,7 +166,7 @@ DefinitionModel* MoviesPrepareMovie(const Movies_t& movies, ulong_t index)
 
     LBR();
 
-    ulong_t size = mv.theatres.size();
+    size = mv.theatres.size();
     for (ulong_t i = 0; i < size; ++i)
     {
         const TheatreByMovie& th=*mv.theatres[i];
@@ -205,25 +206,27 @@ Error:
 DefinitionModel* MoviesPrepareTheatre(const UniversalDataFormat& theatres, ulong_t index)
 {
     uint_t theatreRow = 2 * index;
-    assert(theatreRow < theatres.getItemsCount());
+    uint_t moviesCount, moviesRow;
+	assert(theatreRow < theatres.getItemsCount());
     
     DefinitionModel* model = new_nt DefinitionModel();
     if (NULL == model)
         return NULL;
         
     const char_t* theatreName = theatres.getItemText(theatreRow, theatreNameIndex);
+	const char_t* theatreAddress;
     TXT(theatreName);
     model->last()->setStyle(StyleGetStaticStyle(styleNamePageTitle));
 
-    const char_t* theatreAddress = theatres.getItemText(theatreRow, theatreAddressIndex);
+    theatreAddress = theatres.getItemText(theatreRow, theatreAddressIndex);
     if (0 != Len(theatreAddress))
     {
         LBR();
         TXT(theatreAddress);
     }
     LBR();
-    const uint_t moviesRow = theatreRow + 1;
-    const uint_t moviesCount = theatres.getItemElementsCount(moviesRow) / 2;
+    moviesRow = theatreRow + 1;
+    moviesCount = theatres.getItemElementsCount(moviesRow) / 2;
     for (uint_t i = 0; i<moviesCount; ++i)
     {   
         status_t err;

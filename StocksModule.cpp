@@ -490,10 +490,11 @@ DefinitionModel* StocksDetailsFromUDF(const UniversalDataFormat& stock)
     if (NULL == model)
         return NULL;
         
+	ulong_t size;
     if (1 != stock.getItemsCount())
         goto Error;
 
-    ulong_t size = stock.getItemElementsCount(0);
+    size = stock.getItemElementsCount(0);
     for (ulong_t i=0; i < size && i < stocksStockElementsCount; i++)
     {
         switch (i)
