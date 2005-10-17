@@ -196,6 +196,8 @@ bool CurrencyMainDialog::handleInitDialog(HWND fw, long ip)
     {
         list_.focusItem(sel);
         amount_ = prefs.amount;
+        if (NULL != prefs.udf)
+            baseRate_ = GetCurrencyRate(*prefs.udf, prefs.selectedCurrencies[sel]);
         createListItems(true);
     }
     updateAmountField();

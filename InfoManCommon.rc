@@ -88,6 +88,7 @@ IDB_WEATHER_SNOW        BITMAP                  "..\\moriarty_palm_utf8\\rsc\\we
 IDB_WEATHER_SUNNY_SNOW  BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnysnow-lg-8.bmp"
 IDB_WEATHER_SUNNY_STORM BITMAP                  "..\\moriarty_palm_utf8\\rsc\\weather\\sunnystorm-lg-8.bmp"
 IDB_MOVIES              BITMAP                  "movies.bmp"
+IDB_STOCKS              BITMAP                  "stocks.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -285,12 +286,30 @@ BEGIN
     CONTROL         "Lists && ""Top Ten""",IDC_CHECK33,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,476,70,10
 END
 
-IDD_MOVIES_MAIN DIALOGEX 0, 0, 156, 177
+IDD_MOVIES_MAIN DIALOG  0, 0, 156, 177
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "InfoMan - Movies"
 FONT 8, "MS Shell Dlg"
 BEGIN
     CONTROL         "",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | WS_TABSTOP,0,0,155,177
+END
+
+IDD_AMAZON_MAIN DIALOGEX 0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Amazon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+END
+
+IDD_AMAZON_MAIN1 DIALOGEX 0, 0, 156, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoMan - Amazon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Static",IDC_STATIC,2,2,78,8
+    PUSHBUTTON      "<",ID_VIEW_BACK,112,2,13,12
+    PUSHBUTTON      ">",ID_VIEW_FORWARD,126,2,13,12
+    PUSHBUTTON      "H",ID_VIEW_HISTORY,140,2,13,12
 END
 
 
@@ -578,6 +597,20 @@ BEGIN
     END
 END
 
+IDR_AMAZON_MENU MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "Find Wishlist...",            ID_VIEW_FIND_WISHLIST
+        MENUITEM SEPARATOR
+        MENUITEM "Home",                        ID_VIEW_HOME
+        MENUITEM "Back",                        ID_VIEW_BACK
+        MENUITEM "Forward",                     ID_VIEW_FORWARD
+        MENUITEM SEPARATOR
+        MENUITEM "History",                     ID_VIEW_HISTORY
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -585,6 +618,8 @@ END
 //
 
 IDR_RECIPES_START       RCDATA                  "..\\moriarty_palm_utf8\\rsc\\recipes-start-page.txt"
+IDR_AMAZON_START        RCDATA                  "..\\moriarty_palm_utf8\\rsc\\amazon-start-page.txt"
+IDR_AMAZON_START_SMALL  RCDATA                  "..\\moriarty_palm_utf8\\rsc\\amazon-start-page-small.txt"
 
 /////////////////////////////////////////////////////////////////////////////
 //

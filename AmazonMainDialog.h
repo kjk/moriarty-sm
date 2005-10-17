@@ -3,9 +3,14 @@
 
 #include "ModuleDialog.h"
 #include <WindowsCE/Controls.hpp>
+#include <WindowsCE/WinTextRenderer.hpp>
+
+class HistorySupport;
 
 class AmazonMainDialog: public ModuleDialog {
 
+    HistorySupport* history_;
+    TextRenderer renderer_;
 
     AmazonMainDialog();
     ~AmazonMainDialog();

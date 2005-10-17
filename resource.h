@@ -150,6 +150,13 @@
 #define IDR_MOVIES_MENU                 573
 #define IDB_BITMAP1                     574
 #define IDB_MOVIES                      574
+#define IDD_AMAZON_MAIN                 574
+#define IDB_STOCKS                      575
+#define IDD_AMAZON_MAIN1                575
+#define IDR_AMAZON_MENU                 576
+#define IDR_AMAZON_START                577
+#define IDR_RCDATA1                     578
+#define IDR_AMAZON_START_SMALL          578
 #define IDS_CONFIRM_STOCK_DELETE        600
 #define IDS_CONFIRM_PORTFOLIO_DELETE    601
 #define IDS_INFO_CANT_DELETE_LAST_PORTFOLIO 602
@@ -269,6 +276,7 @@
 #define IDM_JOKES_RANDOM                40008
 #define IDM_MOVIES_MOVIES               40009
 #define IDM_MOVIES_THEATERS             40010
+#define IDM_SEARCH                      40011
 #define ID_VIEW_DETAILED                50004
 #define ID_VIEW_SUMMARY                 50005
 #define ID_TEMPERATURE_FAHRENHEIT       50007
@@ -302,6 +310,12 @@
 #define ID_VIEW_FIND_JOKE               50042
 #define ID_VIEW_MOVIES                  50043
 #define ID_VIEW_THEATERS                50044
+#define ID_VIEW_FINDWISHLIST            50047
+#define ID_VIEW_FIND_WISHLIST           50048
+#define ID_VIEW_HOME                    50049
+#define ID_VIEW_BACK                    50050
+#define ID_VIEW_FORWARD                 50051
+#define ID_VIEW_HISTORY                 50052
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -309,9 +323,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        575
-#define _APS_NEXT_COMMAND_VALUE         50047
-#define _APS_NEXT_CONTROL_VALUE         2097
-#define _APS_NEXT_SYMED_VALUE           510
+#define _APS_NEXT_RESOURCE_VALUE        579
+#define _APS_NEXT_COMMAND_VALUE         50053
+#define _APS_NEXT_CONTROL_VALUE         2098
+#define _APS_NEXT_SYMED_VALUE           511
 #endif
 #endif

@@ -687,11 +687,11 @@ struct StocksColumnHeader {
   
 static const StocksColumnHeader columnNameIds[] = 
 {
-    {IDS_STOCK_SYMBOL, 20},
+    {IDS_STOCK_SYMBOL, 24},
     {IDS_STOCK_QUANTITY, 10},
-    {IDS_STOCK_TRADE, 24},
-    {IDS_STOCK_CHANGE, 23},
-    {IDS_STOCK_PERCENT_CHANGE, 23},
+    {IDS_STOCK_TRADE, 22},
+    {IDS_STOCK_CHANGE, 22},
+    {IDS_STOCK_PERCENT_CHANGE, 22},
 };
 
 static StaticAssert<scCount_ == ARRAY_SIZE(columnNameIds)> column_descs_valid;
@@ -721,6 +721,11 @@ void StocksMainDialog::createColumns()
         if (-1 == res)
             goto Error;
     }  
+    
+    HIMAGELIST il = ::ImageList_LoadBitmap(GetInstance(), MAKEINTRESOURCE(IDB_STOCKS), 17, 1, RGB(255,255,255));
+    if (NULL != il)
+        list_.setImageList(il, LVSIL_SMALL);
+        
     return; 
 Error: 
     Alert(IDS_ALERT_NOT_ENOUGH_MEMORY); 
@@ -753,7 +758,6 @@ void StocksMainDialog::resyncPortfolio()
    
     LVITEM item;
     ZeroMemory(&item, sizeof(item));
-    item.mask = LVIF_TEXT;
     
     char_t buffer[64];
     double value = 0; 
@@ -768,6 +772,15 @@ void StocksMainDialog::resyncPortfolio()
         item.iItem = i;
         for (ulong_t j = 0; j < ARRAY_SIZE(columnNameIds); ++j)
         {
+            item.mask = LVIF_TEXT;
+            if (0 == j)
+            {
+                item.mask |= LVIF_IMAGE;
+                if (!StrStartsWith(e.symbol, _T("^")))
+                    item.iImage = 0;
+                else
+                    item.iImage = 1;
+            }
             switch (j) 
             {
                 // This probably could be bold
